@@ -40,8 +40,10 @@ public class RefereeJdbc implements RefereeDao {
 		System.out.println(sql);
 	}
 	
-	public void loadAppier(Referee referee){
+	public void loadApplier(Referee referee){
 		Map<String, Object> params =new HashMap<>();
 		params.put("uid",referee.getUid());
+		String sql="select applier.id from applier where owner=?";
+		List<applierJdbc> appliers=jdbcTemplateObject.query(sql, referee.getUid(),);
 	}
 }

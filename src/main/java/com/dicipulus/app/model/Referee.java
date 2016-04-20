@@ -11,8 +11,6 @@ public class Referee extends Person {
 	private String telephone;
 	
 	private String address;
-	
-	private Set<Applier> appliers;
 
 	public String getRole() {
 		return role;
@@ -46,25 +44,4 @@ public class Referee extends Person {
 		this.address = address;
 	}
 
-	public Set<Applier> getAppliers() {
-		return appliers;
-	}
-
-	public void setAppliers(Set<Applier> appliers) {
-		this.appliers = appliers;
-	}
-	
-	public void addApplier(Applier applier){
-		getAppliers().add(applier);
-		applier.setOwner(this);
-	}
-	
-	public Applier getApplier(String uid){
-		for(Applier applier:getAppliers()){
-			if(applier.getUid().equals(uid)){
-				return applier;
-			}
-		}
-		return null;
-	}
 }

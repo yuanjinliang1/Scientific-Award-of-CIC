@@ -10,6 +10,7 @@
 <h1>
 	Create Dicipulus 
 </h1>
+<c:out value="${person.name }"></c:out>
 <table>
 	<tr>
 		<td>Id</td>

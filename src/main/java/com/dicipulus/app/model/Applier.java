@@ -4,9 +4,19 @@ public class Applier extends Person {
 	
 	String role="applier";
 	
-	Referee owner;
-	
+	String owner;
+
 	String group;
+	
+	int year;
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
 
 	public String getRole() {
 		return role;
@@ -16,20 +26,20 @@ public class Applier extends Person {
 		this.role = role;
 	}
 
-	public Referee getOwner() {
-		return owner;
-	}
-
-	public void setOwner(Referee owner) {
-		this.owner = owner;
-	}
-
 	public String getGroup() {
 		return group;
 	}
 
 	public void setGroup(String group) {
 		this.group = group;
+	}
+
+	public String getOwner() {
+		return owner;
+	}
+	
+	public void setOwner(String owner) {
+		this.owner = owner;
 	}
 	
 }

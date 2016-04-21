@@ -26,19 +26,35 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @Controller
 @SessionAttributes("person")
 public class RefereeManagedByAdminController{
 	private static final Logger logger=LoggerFactory.getLogger(SelfController.class);
-	@RequestMapping(value="/referee-managed-by-admin",method=RequestMethod.GET)
+	
+	@RequestMapping(value="/referee-viewed-by-admin",method=RequestMethod.GET)
 	public ModelAndView showRefereeList(ModelAndView modelAndView){
 		logger.info("showRefereeList()");
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 		RefereeJdbc refereeJdbc=(RefereeJdbc)context.getBean("refereeJdbc");
+		((ConfigurableApplicationContext)context).close();//close application context
+		
 		modelAndView.setViewName("refereeManagedByAdmin");
 		modelAndView.addObject("referees",refereeJdbc.getReferees());
 		return modelAndView;
+	}
+	
+	@RequestMapping(value="/referee-created-by-admin", method=RequestMethod.POST)
+	public String createReferee(String uid, String name){
+		logger.info("createReferee("+name+")");
+		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		RefereeJdbc refereeJdbc=(RefereeJdbc)context.getBean("refereeJdbc");
+		((ConfigurableApplicationContext)context).close();//close application context
+		
+		refereeJdbc.createReferee(uid, name);
+		
+		return "redirect:referee-viewed-by-admin";
 	}
 }

@@ -40,9 +40,34 @@ public class RefereeJdbc {
 		System.out.println(sql);
 	}
 	
+	public void resetPassword(String uid){
+		String newPassword=getRandomPassword();
+		String sql="update referee set password=? where uid=?";
+		jdbcTemplateObject.update(sql, newPassword ,uid);
+	}
+	
 	public List<Referee> getReferees(){
 		String sql="Select * from referee";
 		List<Referee> referees=jdbcTemplateObject.query(sql, BeanPropertyRowMapper.newInstance(Referee.class));
 		return referees;
+	}
+	
+	public void createReferee(String uid, String name){//for admin
+		
+		String password=getRandomPassword();
+		String category=""+uid.charAt(0);
+		
+		String sql="insert into referee (uid, password, name, category) values (?,?,?,?)";
+		jdbcTemplateObject.update(sql, uid, password, name, category);
+		
+		System.out.println(sql);
+		System.out.println(name);
+	}
+	
+	private String getRandomPassword(){
+		Random rand= new Random();
+		int passwordInt=rand.nextInt(99999999)+100000000;
+		String password=Integer.toString(passwordInt).substring(1);//subString(1) is for delete the first "1" char, in order to get "00209976" sort of strings 
+		return password;
 	}
 }

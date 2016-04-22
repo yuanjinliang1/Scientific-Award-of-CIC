@@ -38,6 +38,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class ApplierManagedByRefereeController{
 	private static final Logger logger=LoggerFactory.getLogger(RefereeManagedByAdminController.class);
 	
+	private Person getPersonInRequest(HttpServletRequest request){
+		HttpSession session= request.getSession();
+		Person person =(Person) session.getAttribute("person");
+		return person;
+	}
+	
 	private ApplierJdbc initApplierJdbc(){
 		AbstractApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 		ApplierJdbc applierJdbc=(ApplierJdbc)context.getBean("applierJdbc");
@@ -48,8 +54,7 @@ public class ApplierManagedByRefereeController{
 	
 	//only when session and ownerUid in url match with each other, authentication is granted
 	private boolean isAuthenticated(HttpServletRequest request, String ownerUid){
-		HttpSession session= request.getSession();
-		Person person =(Person) session.getAttribute("person");
+		Person person = getPersonInRequest(request);
 		logger.debug("session uid="+person.getUid()+", "+"ownerUid="+ownerUid);
 		if(person.getUid().equals(ownerUid)){
 			return true;
@@ -66,7 +71,6 @@ public class ApplierManagedByRefereeController{
 		
 		try{
 			if(isAuthenticated(request, ownerUid)==false){
-				//if(1==0){
 					modelAndView.setViewName("login");
 					logger.info("authentication denied!");
 					return modelAndView;
@@ -84,8 +88,15 @@ public class ApplierManagedByRefereeController{
 			modelAndView.setViewName("login");
 			return modelAndView;
 		}
-		
-		
+	}
+	
+	@RequestMapping(value="/applier-managed-by-referee/applier-create", method=RequestMethod.POST)
+	public String createApplier(HttpServletRequest request){
+		logger.info("createReferee()");
+		Person person =getPersonInRequest(request);
+		ApplierJdbc applierJdbc=initApplierJdbc();
+		applierJdbc.createApplierForReferee(person.getUid());
+		return "redirect:applier-view/"+person.getUid();
 	}
 	
 }

@@ -1,6 +1,8 @@
 package com.dicipulus.app.JDBC;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 import javax.sql.DataSource;
 
@@ -47,6 +49,41 @@ public class ApplierJdbc extends Applier {
 		jdbcTemplateObject.update(sql, password,uid);
 		logger.info("SQL: "+sql);
 		logger.info("uid:"+uid+", password:"+password);
-		System.out.println(sql);
+	}
+	
+	public void createApplierForReferee(String refereeUid){
+		List<Applier> appliers=getAppliers(refereeUid);
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		String newUidString;
+		if(appliers.isEmpty()){
+			newUidString= refereeUid+year+"001";
+			logger.info("applier is empty!");
+		}
+		else{//newUid is one number bigger than the biggest applier uid. *note that applier uids under the same referee are continuous
+			int newUidInt=0;
+			for(Applier applier:appliers){
+				if(Integer.parseInt(applier.getUid())>newUidInt){
+					newUidInt=Integer.parseInt(applier.getUid());
+				}
+			}
+			newUidInt++;
+			newUidString=""+newUidInt;
+			logger.info("newUidString;"+newUidString);
+		}
+		
+		String sql="insert into applier (uid, password, name, owner,year) values(?,?,?,?,?)";
+		String yearString=""+year;
+		String password=getRandomPassword();
+		
+		jdbcTemplateObject.update(sql, newUidString, password, "ÏîÄ¿×é", refereeUid, yearString);
+		logger.info("SQL: "+sql);
+		logger.info("uid:"+newUidString+", password:"+password+"refereeUid:"+refereeUid);
+	}
+	
+	private String getRandomPassword(){
+		Random rand= new Random();
+		int passwordInt=rand.nextInt(99999999)+100000000;
+		String password=Integer.toString(passwordInt).substring(1);//subString(1) is for delete the first "1" char, in order to get "00209976" sort of strings 
+		return password;
 	}
 }

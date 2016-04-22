@@ -66,7 +66,6 @@ request.setCharacterEncoding("UTF-8");
 </table>	
 </form>
 	
-</table>
 
 </body>
 </html>

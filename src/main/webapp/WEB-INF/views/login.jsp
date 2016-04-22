@@ -10,7 +10,6 @@
 <h1>
 	Login Prototype
 </h1>
-<c:out value="${person.name }"></c:out>
 
 <form action="/app/login" method="POST" modelAttribute="loginAttr">
 	<tr>

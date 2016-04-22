@@ -52,7 +52,7 @@ public class SelfController{
 			AdminJdbc adminJdbc=(AdminJdbc)context.getBean("adminJdbc");
 			String password= adminJdbc.getAdmin().getPassword();
 			if(password.equals(person.getPassword())){
-				modelAndView.setViewName("home");
+				modelAndView.setViewName("refereeManagedByAdmin");
 				modelAndView.addObject("person",adminJdbc.getAdmin());
 			}
 			else{
@@ -64,7 +64,8 @@ public class SelfController{
 			RefereeJdbc refereeJdbc=(RefereeJdbc)context.getBean("refereeJdbc");
 			Referee referee=refereeJdbc.getRefereeByUid(person.getUid());
 			if(referee.getPassword().equals(person.getPassword())){
-				modelAndView.setViewName("home");
+				String viewName="redirect:/applier-managed-by-referee/applier-view/"+person.getUid();
+				modelAndView.setViewName(viewName);
 				modelAndView.addObject("person", referee);
 			}
 			else {

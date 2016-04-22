@@ -16,55 +16,51 @@ request.setCharacterEncoding("UTF-8");
 </head>
 <body>
 <h1>
-	Referee Management Prototype
+	User Management Prototype
 </h1>
 <c:out value="${person.name }"></c:out>
 
-<form action="/app/referee-managed-by-admin/referee-create" method="POST" >
+<form action="/app/applier-managed-by-referee/applier-create" method="POST" >
 <table>
 	<tr>
-		<td><label>用户id</label></td>
-		<td><input type="text" name="uid" /></td>
-		<td><label>用户名称</label></td>
-		<td><input type="text" name="name" /></td>
-		<td><input type="submit" value="添加用户" name="create"/></td>
+		<td><input type="hidden" value="${person }" name="person" /> </td>
+		<td><input type="submit" value="添加项目组" name="create"/></td>
 	</tr>
 </table>
 </form>
-<form action="/app/referee-managed-by-admin/" method="POST">
+<form action="/app/applier-managed-by-referee/" method="POST">
 <table>
 	<tr>
 		<td>选择</td>
-		<td>用户id</td>
-		<td>用户名称</td>
+		<td>项目组id</td>
+		<td>项目组名称</td>
 		<td>密码</td>
 		<td>操作</td>
 		<td>操作</td>
 	</tr>
-	<c:forEach var="referee" items="${referees }">
+	<c:forEach var="applier" items="${appliers }">
 		<tr>
 			<td><input type="checkbox"/> </td>
-			<td>${referee.uid } </td>
-			<td>${referee.name }</td>
-			<td>${referee.password}</td>
+			<td>${applier.uid } </td>
+			<td>${applier.name }</td>
+			<td>${applier.password}</td>
 			
 			<td>
-				<c:url value="/referee-managed-by-admin/reset-password" var="resetURL">
-					<c:param name="uid" value="${referee.uid }"></c:param>
+				<c:url value="/applier-managed-by-referee/reset-password" var="resetURL">
+					<c:param name="uid" value="${applier.uid }"></c:param>
 				</c:url>
 				<a id="resetPassword" href="${fn:escapeXml(resetURL)}">重置密码</a>
 			</td>
 			<td>
-				<c:url value="/referee-managed-by-admin/delete-referee" var="deleteURL">
-					<c:param name="uid" value="${referee.uid }"></c:param>
+				<c:url value="/applier-managed-by-referee/delete-applier" var="deleteURL">
+					<c:param name="uid" value="${applier.uid }"></c:param>
 				</c:url>
-				<a id="deleteReferee" href="${fn:escapeXml(deleteURL)}">删除用户</a>
+				<a id="deleteApplier" href="${fn:escapeXml(deleteURL)}">删除用户</a>
 			</td>
 		</tr>
 	</c:forEach>
 </table>	
 </form>
-	
 
 </body>
 </html>

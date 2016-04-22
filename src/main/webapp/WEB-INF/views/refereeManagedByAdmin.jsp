@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page session="true" %>
 <!-- Set charset encoding to utf-8  -->
 <%
@@ -19,7 +20,7 @@ request.setCharacterEncoding("UTF-8");
 </h1>
 <c:out value="${person.name }"></c:out>
 
-<form action="/app//referee-created-by-admin" method="POST" >
+<form action="/app/referee-managed-by-admin/referee-create" method="POST" >
 <table>
 	<tr>
 		<td><label>用户id</label></td>
@@ -31,13 +32,14 @@ request.setCharacterEncoding("UTF-8");
 	</tr>
 </table>
 </form>
-<form action="/app/referee-managed-by-admin" method="POST">
+<form action="/app/referee-managed-by-admin/" method="POST">
 <table>
 	<tr>
 		<td>选择</td>
 		<td>用户id</td>
 		<td>用户名称</td>
 		<td>密码</td>
+		<td>操作</td>
 		<td>操作</td>
 	</tr>
 	<c:forEach var="referee" items="${referees }">
@@ -46,7 +48,19 @@ request.setCharacterEncoding("UTF-8");
 			<td>${referee.uid } </td>
 			<td>${referee.name }</td>
 			<td>${referee.password}</td>
-			<td><a id="resetPassword" href="<c:url value="/app/userManageForAdmin/resetPassword" />">重置密码</a></td>
+			
+			<td>
+				<c:url value="/referee-managed-by-admin/reset-password" var="resetURL">
+					<c:param name="uid" value="${referee.uid }"></c:param>
+				</c:url>
+				<a id="resetPassword" href="${fn:escapeXml(resetURL)}">重置密码</a>
+			</td>
+			<td>
+				<c:url value="/referee-managed-by-admin/delete-referee" var="deleteURL">
+					<c:param name="uid" value="${referee.uid }"></c:param>
+				</c:url>
+				<a id="deleteReferee" href="${fn:escapeXml(deleteURL)}">删除用户</a>
+			</td>
 		</tr>
 	</c:forEach>
 </table>	

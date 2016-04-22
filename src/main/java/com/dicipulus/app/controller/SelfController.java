@@ -52,7 +52,7 @@ public class SelfController{
 			AdminJdbc adminJdbc=(AdminJdbc)context.getBean("adminJdbc");
 			String password= adminJdbc.getAdmin().getPassword();
 			if(password.equals(person.getPassword())){
-				modelAndView.setViewName("refereeManagedByAdmin");
+				modelAndView.setViewName("redirect:/referee-managed-by-admin/referee-view");
 				modelAndView.addObject("person",adminJdbc.getAdmin());
 			}
 			else{

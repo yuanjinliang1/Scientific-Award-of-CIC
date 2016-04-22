@@ -12,6 +12,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.http.HttpRequest;
 
 @Controller
 @SessionAttributes("person")
@@ -46,14 +48,41 @@ public class RefereeManagedByAdminController{
 		return refereeJdbc;
 	}
 	
+	//only when session and ownerUid in url match with each other, authentication is granted
+		private boolean isAuthenticated(HttpServletRequest request){
+			HttpSession session= request.getSession();
+			Person person =(Person) session.getAttribute("person");
+			logger.debug("session uid="+person.getUid());
+			if(person.getUid().contains("admin")){
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	
 	@RequestMapping(value="/referee-managed-by-admin/referee-view",method=RequestMethod.GET)
-	public ModelAndView showRefereeList(ModelAndView modelAndView){
+	public ModelAndView showRefereeList(ModelAndView modelAndView,HttpServletRequest request){
 		logger.info("showRefereeList()");
-		RefereeJdbc refereeJdbc=initRefereeJdbc();
+		try{
+			if(isAuthenticated(request)==false){
+				modelAndView.setViewName("login");
+				logger.info("authentication denied!");
+				return modelAndView;
+			}
+			else{
+				logger.info("authentication confirmed!");
+				RefereeJdbc refereeJdbc=initRefereeJdbc();
+				modelAndView.setViewName("refereeManagedByAdmin");
+				modelAndView.addObject("referees",refereeJdbc.getReferees());
+				return modelAndView;
+			}
+		}
+		catch(NullPointerException e){
+			modelAndView.setViewName("login");
+			return modelAndView;
+		}
 		
-		modelAndView.setViewName("refereeManagedByAdmin");
-		modelAndView.addObject("referees",refereeJdbc.getReferees());
-		return modelAndView;
 	}
 	
 	@RequestMapping(value="/referee-managed-by-admin/referee-create", method=RequestMethod.POST)

@@ -85,7 +85,7 @@ public class ApplierManagedByRefereeController{
 				}
 		}
 		catch(NullPointerException e){
-			modelAndView.setViewName("login");
+			modelAndView.setViewName("redirect:/login");
 			return modelAndView;
 		}
 	}

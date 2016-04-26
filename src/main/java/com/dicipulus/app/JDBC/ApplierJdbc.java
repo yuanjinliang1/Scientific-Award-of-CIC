@@ -54,9 +54,10 @@ public class ApplierJdbc extends Applier {
 	public void createApplierForReferee(String refereeUid){
 		List<Applier> appliers=getAppliers(refereeUid);
 		int year = Calendar.getInstance().get(Calendar.YEAR);
+		int yearTwoDigit=year-2000;
 		String newUidString;
 		if(appliers.isEmpty()){
-			newUidString= refereeUid+year+"001";
+			newUidString= refereeUid+yearTwoDigit+"001";
 			logger.info("applier is empty!");
 		}
 		else{//newUid is one number bigger than the biggest applier uid. *note that applier uids under the same referee are continuous
@@ -77,7 +78,7 @@ public class ApplierJdbc extends Applier {
 		
 		jdbcTemplateObject.update(sql, newUidString, password, "ÏîÄ¿×é", refereeUid, yearString);
 		logger.info("SQL: "+sql);
-		logger.info("uid:"+newUidString+", password:"+password+"refereeUid:"+refereeUid);
+		logger.info("uid:"+newUidString+", password:"+password+"refereeUid:"+refereeUid+"year:"+yearString);
 	}
 	
 	private String getRandomPassword(){

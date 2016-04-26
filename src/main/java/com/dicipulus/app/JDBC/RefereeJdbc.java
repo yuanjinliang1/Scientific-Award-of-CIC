@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
 
 
 
-import com.dicipulus.app.controller.SelfController;
 import com.dicipulus.app.model.*;
 
 @Repository

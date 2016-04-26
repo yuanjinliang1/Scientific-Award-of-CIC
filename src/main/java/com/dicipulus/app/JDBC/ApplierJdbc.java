@@ -102,4 +102,11 @@ public class ApplierJdbc extends Applier {
 		logger.info("SQL: "+sql);
 		logger.info("uid:"+uid+", password:"+newPassword);
 	}
+	
+	public void changeName(String uid, String name){
+		String sql="update applier set name=? where uid=?";
+		jdbcTemplateObject.update(sql,name,uid);
+		logger.info("SQL: "+sql);
+		logger.info("uid:"+uid+", new name:"+name);
+	}
 }

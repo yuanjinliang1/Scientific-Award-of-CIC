@@ -31,8 +31,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @Controller
 @SessionAttributes("person")
-public class SelfController{
-	private static final Logger logger=LoggerFactory.getLogger(SelfController.class);
+public class LoginController{
+	private static final Logger logger=LoggerFactory.getLogger(LoginController.class);
 	
 	//ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 	//private final SystemService systemService=(SystemService)context.getBean("systemService");
@@ -77,7 +77,8 @@ public class SelfController{
 			ApplierJdbc applierJdbc=(ApplierJdbc)context.getBean("applierJdbc");
 			Applier applier=applierJdbc.getApplierByUid(person.getUid());
 			if(applier.getPassword().equals(person.getPassword())){
-				modelAndView.setViewName("home");
+				String viewName="redirect:/self-managed-by-applier/"+person.getUid();
+				modelAndView.setViewName(viewName);
 				modelAndView.addObject("person", applier);
 			}
 			else {

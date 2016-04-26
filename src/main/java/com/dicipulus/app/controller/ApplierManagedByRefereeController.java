@@ -71,7 +71,7 @@ public class ApplierManagedByRefereeController{
 		
 		try{
 			if(isAuthenticated(request, ownerUid)==false){
-					modelAndView.setViewName("login");
+					modelAndView.setViewName("redirect:/login");
 					logger.info("authentication denied!");
 					return modelAndView;
 				}
@@ -99,4 +99,23 @@ public class ApplierManagedByRefereeController{
 		return "redirect:applier-view/"+person.getUid();
 	}
 	
+	@RequestMapping(value="/applier-managed-by-referee/delete-applier", method=RequestMethod.GET)
+	public String deleteApplier(HttpServletRequest request, @RequestParam String uid){
+		logger.info("deleteApplier()");
+		Person person =getPersonInRequest(request);
+		ApplierJdbc applierJdbc=initApplierJdbc();
+		
+		applierJdbc.deleteApplier(uid);
+		return "redirect:applier-view/"+person.getUid();
+	}
+	
+	@RequestMapping(value="/applier-managed-by-referee/reset-password", method=RequestMethod.GET)
+	public String resetPassword(HttpServletRequest request, @RequestParam String uid){
+		logger.info("resetPassword()");
+		Person person =getPersonInRequest(request);
+		ApplierJdbc applierJdbc=initApplierJdbc();
+		
+		applierJdbc.resetPassword(uid);
+		return "redirect:applier-view/"+person.getUid();
+	}
 }

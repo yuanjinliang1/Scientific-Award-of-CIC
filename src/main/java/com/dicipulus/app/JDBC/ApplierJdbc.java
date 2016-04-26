@@ -86,4 +86,19 @@ public class ApplierJdbc extends Applier {
 		String password=Integer.toString(passwordInt).substring(1);//subString(1) is for delete the first "1" char, in order to get "00209976" sort of strings 
 		return password;
 	}
+	
+	public void deleteApplier(String uid){
+		String sql="delete from applier where uid=?";
+		jdbcTemplateObject.update(sql,uid);
+		logger.info("SQL: "+sql);
+		logger.info("uid:"+uid);
+	}
+	
+	public void resetPassword(String uid){
+		String newPassword=getRandomPassword();
+		String sql="update applier set password=? where uid=?";
+		jdbcTemplateObject.update(sql, newPassword ,uid);
+		logger.info("SQL: "+sql);
+		logger.info("uid:"+uid+", password:"+newPassword);
+	}
 }

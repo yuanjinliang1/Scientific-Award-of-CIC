@@ -17,27 +17,10 @@
 <title>SelfManagement</title>
 </head>
 <body>
-	<h1>Self Managed By Applier Prototype</h1>
+	<h1>Self Managed By Referee Prototype</h1>
 	<c:out value="${person.name }"></c:out>
 
-
-	<form action="/app/self-managed-by-applier/change-name" method="POST">
-		<table>
-			<tr>
-				<td>修改名称</td>
-			</tr>
-			<tr>
-				<td>原名称:</td>
-				<td><c:out value="${person.name }"></c:out></td>
-			</tr>
-			<tr>
-				<td>新名称:<input type="hidden" value="${person }" name="person" /></td>
-				<td><input type="text" name="name" /></td>
-				<td><input type="submit" value="修改名称" /></td>
-			</tr>
-		</table>
-	</form>
-	<form action="/app/self-managed-by-applier/change-password"
+	<form action="/app/self-managed-by-referee/change-password"
 		method="POST">
 		<table>
 			<tr>
@@ -59,7 +42,5 @@
 			</tr>
 		</table>
 	</form>
-
-
 </body>
 </html>

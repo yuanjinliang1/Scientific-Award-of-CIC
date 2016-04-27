@@ -8,8 +8,23 @@ public class EconomicBenefit {
 	String year;
 	String newsaleroom;//新增销售额
 	String newBenefit;
+	String otherNewsaleroom;
+	String otherNewBenefit;
 	String mainEconomyIndicateIntroduction;
 	String otherEconomyIndicateIntroduction;
+	
+	public String getOtherNewsaleroom() {
+		return otherNewsaleroom;
+	}
+	public void setOtherNewsaleroom(String otherNewsaleroom) {
+		this.otherNewsaleroom = otherNewsaleroom;
+	}
+	public String getOtherNewBenefit() {
+		return otherNewBenefit;
+	}
+	public void setOtherNewBenefit(String otherNewBenefit) {
+		this.otherNewBenefit = otherNewBenefit;
+	}
 	public String getYear() {
 		return year;
 	}

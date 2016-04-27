@@ -1,5 +1,9 @@
 package com.dicipulus.app.form;
 
+/**
+ * @author chenyouqi
+ *ÂÛÎÄÖø×÷
+ */
 public class PaperMonograph {
 	protected String name;
 	protected float influenceFactor;

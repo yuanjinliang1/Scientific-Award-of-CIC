@@ -37,9 +37,12 @@ public class Applier extends Person {
 	public String getOwner() {
 		return owner;
 	}
-	
+
 	public void setOwner(String owner) {
 		this.owner = owner;
 	}
+
+
+	
 	
 }

@@ -5,10 +5,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.dicipulus.app.DAO.AdminDao;
 import com.dicipulus.app.model.Admin;
 
-public class AdminJdbc implements AdminDao {
+public class AdminJdbc {
 	
 	@Autowired
 	private DataSource dataSource;

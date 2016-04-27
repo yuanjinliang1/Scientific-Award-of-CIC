@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page session="true"%>
 <!-- Set charset encoding to utf-8  -->
 <%
@@ -20,6 +21,9 @@
 	<h1>Self Managed By Applier Prototype</h1>
 	<c:out value="${person.name }"></c:out>
 
+<spring:url value="/edit-initialize-application" var="editURL">
+</spring:url>
+<a id="editAddress" href="${fn:escapeXml(editURL)}">建立项目</a>
 
 	<form action="/app/self-managed-by-applier/change-name" method="POST">
 		<table>

@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page session="true" %>
 <!-- Set charset encoding to utf-8  -->
 <%
@@ -19,6 +20,11 @@ request.setCharacterEncoding("UTF-8");
 	Referee Management Prototype
 </h1>
 <c:out value="${person.name }"></c:out>
+
+<spring:url value="/self-managed-by-admin" var="selfManageURL">
+</spring:url>
+
+<a id="selfManage" href="${fn:escapeXml(selfManageURL)}">个人管理</a>
 
 <form action="/app/referee-managed-by-admin/referee-create" method="POST" >
 <table>

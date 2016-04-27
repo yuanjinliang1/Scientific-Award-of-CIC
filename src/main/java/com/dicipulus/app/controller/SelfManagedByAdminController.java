@@ -37,9 +37,10 @@ import org.springframework.http.HttpRequest;
 
 @Controller
 @SessionAttributes("person")
-public class SelfManagedByRefereeController {
+public class SelfManagedByAdminController {
+	
 	private static final Logger logger = LoggerFactory
-			.getLogger(SelfManagedByRefereeController.class);
+			.getLogger(SelfManagedByAdminController.class);
 	
 	private Person getPersonInRequest(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -47,30 +48,30 @@ public class SelfManagedByRefereeController {
 		return person;
 	}
 	
-	private RefereeJdbc initRefereeJdbc(){
+	private AdminJdbc initAdminJdbc(){
 		AbstractApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-		RefereeJdbc refereeJdbc=(RefereeJdbc)context.getBean("refereeJdbc");
+		AdminJdbc adminJdbc=(AdminJdbc)context.getBean("adminJdbc");
 		context.registerShutdownHook();//shutdown application context, from tutorialpoints.com
 		//((ConfigurableApplicationContext)context).close();//close application context
-		return refereeJdbc;
+		return adminJdbc;
 	}
 	
-	private boolean isAuthenticated(HttpServletRequest request, String refereeUid) {
-		Person person = getPersonInRequest(request);
-		logger.info("session uid=" + person.getUid() + ", " + "refereeUid="
-				+ refereeUid);
-		if (person.getUid().equals(refereeUid)) {
+	//only when session and ownerUid in url match with each other, authentication is granted
+	private boolean isAuthenticated(HttpServletRequest request){
+		HttpSession session= request.getSession();
+		Person person =(Person) session.getAttribute("person");
+		logger.debug("session uid="+person.getUid());
+		if(person.getUid().contains("admin")){
 			return true;
-		} else {
+		}
+		else {
 			return false;
 		}
 	}
 	
-
-	
-	private boolean passwordCheck(String password, String refereeUid){
-		RefereeJdbc refereeJdbc= initRefereeJdbc();
-		if(refereeJdbc.getRefereeByUid(refereeUid).getPassword().equals(password)){
+	private boolean passwordCheck(String password){
+		AdminJdbc adminJdbc= initAdminJdbc();
+		if(adminJdbc.getAdmin().getPassword().equals(password)){
 			return true;
 		}
 		else{
@@ -78,24 +79,23 @@ public class SelfManagedByRefereeController {
 		}
 	}
 	
-	
-	@RequestMapping(value="/self-managed-by-referee/{refereeUid}",method=RequestMethod.GET)
-	public ModelAndView selfManagedByReferee(ModelAndView modelAndView,@PathVariable("refereeUid") String refereeUid,HttpServletRequest request){
+	@RequestMapping(value="/self-managed-by-admin",method=RequestMethod.GET)
+	public ModelAndView selfManagedByAdmin(ModelAndView modelAndView, HttpServletRequest request){
 		
-		logger.info("selfManagedByReferee()");
+		logger.info("selfManagedByAdmin()");
 		
 		try{
-			if(isAuthenticated(request, refereeUid)==false){
+			if(isAuthenticated(request)==false){
 					modelAndView.setViewName("redirect:/login");
 					logger.info("authentication denied!");
 					return modelAndView;
 				}
 				else{
 					logger.info("authentication confirmed!");
-					RefereeJdbc refereeJdbc=initRefereeJdbc();
+					AdminJdbc adminJdbc=initAdminJdbc();
 					
-					modelAndView.setViewName("selfManagedByReferee");
-					modelAndView.addObject("person",refereeJdbc.getRefereeByUid(refereeUid));
+					modelAndView.setViewName("selfManagedByAdmin");
+					modelAndView.addObject("person",adminJdbc.getAdmin());
 					return modelAndView;
 				}
 		}
@@ -106,20 +106,20 @@ public class SelfManagedByRefereeController {
 		}
 	}
 	
-	@RequestMapping(value="/self-managed-by-referee/change-password",method=RequestMethod.POST)
+	@RequestMapping(value="/self-managed-by-admin/change-password",method=RequestMethod.POST)
 	public String changepassword(HttpServletRequest request, String passwordOld,
 			String passwordNew1, String passwordNew2,Person person){
 		logger.info("changePassword()");
 		Person personSession =getPersonInRequest(request);
-		if(isAuthenticated(request, person.getUid())&&passwordCheck(passwordOld,person.getUid())){
+		if(isAuthenticated(request)&&passwordCheck(passwordOld)){
 			if(passwordNew1.equals(passwordNew2)){
-				RefereeJdbc refereeJdbc=initRefereeJdbc();
-				refereeJdbc.changePassword(person.getUid(), passwordNew2);
+				AdminJdbc adminJdbc=initAdminJdbc();
+				adminJdbc.changePassword(passwordNew2);
 			}
 			else{
 				//do nothing
 			}
-			return "redirect:/self-managed-by-referee/"+personSession.getUid();
+			return "redirect:/self-managed-by-admin";
 		}
 		else{
 			return "redirect:/login";

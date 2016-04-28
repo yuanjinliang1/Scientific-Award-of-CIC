@@ -7,6 +7,7 @@ import com.dicipulus.app.applicationModel.*;
 import com.dicipulus.app.form.*;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,6 +21,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,10 +34,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpRequest;
 @Controller
 @SessionAttributes("person")
@@ -84,7 +89,18 @@ public class EditApplicationController {
 			return true;
 		}
 	}
+	/*@InitBinder     
+	public void initBinder(WebDataBinder binder){
+	     binder.registerCustomEditor(       Date.class,     
+	                         new CustomDateEditor(new SimpleDateFormat("mm/dd/yyyy"), true, 10));   
+	}*/
 	
+	/**
+	 * 选择申请表的类型页面
+	 * @param modelAndView
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/edit-initialize-application",method=RequestMethod.GET)
 	public ModelAndView editInitializeApplicationGet(ModelAndView modelAndView, HttpServletRequest request){
 		logger.info("editInitializeApplication()");
@@ -110,6 +126,12 @@ public class EditApplicationController {
 		}
 	}
 	
+	/**
+	 * 选择申请表类型的提交
+	 * @param request
+	 * @param applicationType
+	 * @return
+	 */
 	@RequestMapping(value="/edit-initialize-application",method=RequestMethod.POST)
 	public String editInitializeApplicationPost(HttpServletRequest request, String applicationType){
 		logger.info("editInitializeApplicationPost()");
@@ -128,6 +150,12 @@ public class EditApplicationController {
 		}
 	}
 	
+	/**
+	 * 科技进步奖第一个页面：项目基本情况表的浏览
+	 * @param modelAndView
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/edit-first-project-basic-situationTA",method=RequestMethod.GET)
 	public ModelAndView editFirstProjectBasicSituationTAGet(ModelAndView modelAndView, HttpServletRequest request){
 		logger.info("editFirstProjectBasicSituationTAGet()");
@@ -147,6 +175,9 @@ public class EditApplicationController {
 				modelAndView.addObject("person2",applierJdbc.getApplierByUid(person.getUid()));
 				modelAndView.addObject("firstForm",firstForm);
 				modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);
+				modelAndView.addObject("economicFields",Constants.ECONOMICFIELDS);
+				modelAndView.addObject("nationalFocusFields",Constants.NATIONALFOCUSFIELDS);
+				modelAndView.addObject("taskSources",Constants.TASKSOURCES);
 				return modelAndView;
 			}
 		}
@@ -159,8 +190,15 @@ public class EditApplicationController {
 	
 	
 	
+	/**
+	 * 科技进步奖第一个页面：项目基本情况表的提交处理
+	 * @param request
+	 * @param firstForm
+	 * @return
+	 */
 	@RequestMapping(value="/save-first-project-basic-situation-TA",method=RequestMethod.POST)
-	public String saveFirstProjectBasicSituationTA(HttpServletRequest request,@ModelAttribute("firstFormAttr")FirstProjectBasicSituationTA firstForm){
+	public String saveFirstProjectBasicSituationTA(HttpServletRequest request,
+			@ModelAttribute("firstFormAttr") FirstProjectBasicSituationTA firstForm){
 		logger.info("saveFirstProjectBasicSituationTA()");
 		/*
 		 * 准备工作

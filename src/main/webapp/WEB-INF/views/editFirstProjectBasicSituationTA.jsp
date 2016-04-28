@@ -16,7 +16,7 @@ request.setCharacterEncoding("UTF-8");
 	<title>一、项目基本情况</title>
 </head>
 <body>
-<form action="/app/save-first-project-basic-situation-TA" method="POST" modelAttribute="firstFormAttr">
+<form id="firstFormer" action="/app/save-first-project-basic-situation-TA" method="POST" modelAttribute="firstFormAttr">
 	<table border="1">
 		<tr>
 			<td>推荐单位（盖章）或推荐专家</td>
@@ -28,15 +28,15 @@ request.setCharacterEncoding("UTF-8");
 		</tr>
 		<tr>
 			<td>主要完成人</td>
-			<td></td>
+			<td>${firstForm.majorContributorNames }</td>
 		</tr>
 		<tr>
 			<td>主要完成单位</td>
-			<td></td>
+			<td>${firstForm.majorContributingOrgNames }</td>
 		</tr>
 		<tr>
 			<td>项目密级</td>
-			<td>非密</td>
+			<td>${firstForm.secretLevel }</td>
 		</tr>
 		<tr>
 			<td>学科分类名称1</td>
@@ -71,6 +71,91 @@ request.setCharacterEncoding("UTF-8");
 				</select>
 			</td>
 		</tr>
+		<tr>
+			<td>所属国民经济行业</td>
+			<td>
+				<select name="economicField">
+					<option value="${firstForm.economicField}">${firstForm.economicField}</option>
+					<c:forEach items="${economicFields }" var="economicField">
+						<option value="${economicField }">${economicField }</option>
+					</c:forEach>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>所属国家重点发展领域</td>
+			<td>
+				<select name="nationalFocusField">
+					<option value="${firstForm.nationalFocusField}">${firstForm.nationalFocusField}</option>
+					<c:forEach items="${nationalFocusFields }" var="nationalFocusField">
+						<option value="${nationalFocusField }">${nationalFocusField }</option>
+					</c:forEach>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>任务来源</td>
+			<td>
+				<select name="taskSource">
+					<option value="${firstForm.taskSource}">${firstForm.taskSource}</option>
+					<c:forEach items="${taskSources }" var="taskSource">
+						<option value="${taskSource }">${taskSource }</option>
+					</c:forEach>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>具体计划、基金的名称和编号</td>
+			<!-- Don't break this line. It's textarea. -->
+			<td><textarea rows="5" cols="100" name="nameAndCodeOfPlansOrFundations" form="firstFormer">${firstForm.nameAndCodeOfPlansOrFundations }</textarea></td>
+		</tr>
+		<tr>
+			<td>已呈交的科技报告编号</td>
+			<!-- Don't break this line. It's textarea. -->
+			<td><textarea rows="3" cols="100" name="technicalReportNumber" form="firstFormer">${firstForm.technicalReportNumber }</textarea></td>
+		</tr>
+		<tr>
+			<td>授权发明专利项数</td>
+			<td><input type="text" name="numOfInventionPatent" value="${firstForm.numOfInventionPatent }" /></td>
+		</tr>
+		<tr>
+			<td>授权的其它知识产权项数</td>
+			<td><input type="text" name="numOfOtherIntellectualProperty" value="${firstForm.numOfOtherIntellectualProperty }" /></td>
+		</tr>
+		<tr>
+			<td>项目开始时间</td>
+			<td><input type="date" name="startDate" value="${firstForm.startDate }" /></td>
+		</tr>
+		<tr>
+			<td>项目完成时间</td>
+			<td><input type="date" name="finishDate" value="${firstForm.finishDate }" /></td>
+		</tr>
+		<tr>
+			<td>推荐单位联系人</td>
+			<td><input type="text" name="refereeContactName" value="${firstForm.refereeContactName }" /></td>
+		</tr>
+		<tr>
+			<td>推荐单位联系人电话</td>
+			<td><input type="text" name="refereeContactPhone" value="${firstForm.refereeContactPhone }" /></td>
+		</tr>
+		<tr>
+			<td>推荐单位联系人邮箱</td>
+			<td><input type="text" name="refereeContactEmail" value="${firstForm.refereeContactEmail }" /></td>
+		</tr>
+		<tr>
+			<td>项目联系人</td>
+			<td><input type="text" name="applierContactName" value="${firstForm.applierContactName }" /></td>
+		</tr>
+		<tr>
+			<td>项目联系人电话</td>
+			<td><input type="text" name="applierContactPhone" value="${firstForm.applierContactPhone }" /></td>
+		</tr>
+		<tr>
+			<td>项目联系人邮箱</td>
+			<td><input type="text" name="applierContactEmail" value="${firstForm.applierContactEmail }" /></td>
+		</tr>
+		
+		
 		<tr>
 			<td><input type="submit" value="next-page" />下一页</td>
 		</tr>

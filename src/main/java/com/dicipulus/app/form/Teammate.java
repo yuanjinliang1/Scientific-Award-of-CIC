@@ -1,8 +1,8 @@
 package com.dicipulus.app.form;
 
-import com.dicipulus.app.form.Constants.Degree;
-import com.dicipulus.app.form.Constants.EducationBackground;
-import com.dicipulus.app.form.Constants.Gender;
+import com.dicipulus.app.applicationModel.Constants.Degree;
+import com.dicipulus.app.applicationModel.Constants.EducationBackground;
+import com.dicipulus.app.applicationModel.Constants.Gender;
 
 /**
  * @author chenyouqi

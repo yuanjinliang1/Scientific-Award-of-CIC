@@ -1,12 +1,9 @@
 package com.dicipulus.app.applicationModel;
 
 import com.dicipulus.app.applicationModel.*;
-/*
- * 主要完成人情况表
- */
-import com.dicipulus.app.form.Constants.Degree;
-import com.dicipulus.app.form.Constants.EducationBackground;
-import com.dicipulus.app.form.Constants.Gender;
+import com.dicipulus.app.applicationModel.Constants.Degree;
+import com.dicipulus.app.applicationModel.Constants.EducationBackground;
+import com.dicipulus.app.applicationModel.Constants.Gender;
 
 
 public class MajorContributor {

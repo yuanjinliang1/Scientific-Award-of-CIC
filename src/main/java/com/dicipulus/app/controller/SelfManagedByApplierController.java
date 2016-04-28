@@ -125,6 +125,7 @@ public class SelfManagedByApplierController {
 	public String changepassword(HttpServletRequest request, String passwordOld,
 			String passwordNew1, String passwordNew2,Person person){
 		logger.info("changePassword()");
+		logger.info("old2="+passwordOld);
 		Person personSession =getPersonInRequest(request);
 		if(isAuthenticated(request, person.getUid())&&passwordCheck(passwordOld,person.getUid())){
 			if(passwordNew1.equals(passwordNew2)){

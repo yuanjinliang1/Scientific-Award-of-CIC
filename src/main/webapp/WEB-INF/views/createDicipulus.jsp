@@ -28,8 +28,8 @@
 
 <form action="/app/enroll" method="POST" modelAttribute="studentAttr">
 	<tr>
-		<td><label >id</label></td>
-		<td><input type="text" name="id" value="${freshman2.id }"></input></td>
+		<td></td>
+		<td><input type="text" name="id" value="12"></input></td>
 	</tr>
 	<tr>
 		<td><label >name</label></td>

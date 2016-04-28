@@ -16,15 +16,15 @@ request.setCharacterEncoding("UTF-8");
 	<title>一、项目基本情况</title>
 </head>
 <body>
-<form action="/app/first-project-basic-situation" method="POST">
-	<table>
+<form action="/app/save-first-project-basic-situation-TA" method="POST" modelAttribute="firstFormAttr">
+	<table border="1">
 		<tr>
 			<td>推荐单位（盖章）或推荐专家</td>
-			<td>"${person.owner}"</td>
+			<td>${firstForm.refereeString}</td>
 		</tr>
 		<tr>
 			<td>项目名称</td>
-			<td><input type="text" name="projectName" /></td>
+			<td><input type="text" name="projectName" value="${firstForm.projectName }" /></td>
 		</tr>
 		<tr>
 			<td>主要完成人</td>
@@ -41,8 +41,8 @@ request.setCharacterEncoding("UTF-8");
 		<tr>
 			<td>学科分类名称1</td>
 			<td>
-				<select name="subjectCategory1">
-					<option value="nothing">请选择学科</option>
+				<select name="subjectCategoryName1">
+					<option value="${firstForm.subjectCategoryName1}">${firstForm.subjectCategoryName1}</option>
 					<c:forEach items="${subjectCategories }" var="subjectCategory">
 						<option value="${subjectCategory }">${subjectCategory }</option>
 					</c:forEach>
@@ -52,8 +52,8 @@ request.setCharacterEncoding("UTF-8");
 		<tr>
 			<td>学科分类名称2</td>
 			<td>
-				<select name="subjectCategory2">
-					<option value="nothing">请选择学科</option>
+				<select name="subjectCategoryName2">
+					<option value="${firstForm.subjectCategoryName2}">${firstForm.subjectCategoryName2}</option>
 					<c:forEach items="${subjectCategories }" var="subjectCategory">
 						<option value="${subjectCategory }">${subjectCategory }</option>
 					</c:forEach>
@@ -63,8 +63,8 @@ request.setCharacterEncoding("UTF-8");
 		<tr>
 			<td>学科分类名称3</td>
 			<td>
-				<select name="subjectCategory3">
-					<option value="nothing">请选择学科</option>
+				<select name="subjectCategoryName3">
+					<option value="${firstForm.subjectCategoryName3}">${firstForm.subjectCategoryName3}</option>
 					<c:forEach items="${subjectCategories }" var="subjectCategory">
 						<option value="${subjectCategory }">${subjectCategory }</option>
 					</c:forEach>

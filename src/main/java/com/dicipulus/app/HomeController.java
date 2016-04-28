@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * Handles requests for the application home page.
@@ -70,15 +71,13 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/enroll",method=RequestMethod.POST)
-	public ModelAndView enrollStudentPost(@ModelAttribute("studentAttr") Dicipulus student, BindingResult result, ModelAndView mav){
-		if(result.hasErrors()){
-			mav.setViewName("home");
-			return mav;
-		}
+	public ModelAndView enrollStudentPost(@ModelAttribute("studentAttr") Dicipulus student, ModelAndView mav){
+		
 		logger.info("processing enrollment of "+student.getName() );
 		
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		AbstractApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 		DicipulusJDBC studentJDBC =(DicipulusJDBC)context.getBean("studentJDBC");
+		context.registerShutdownHook();
 		studentJDBC.create(student.getName(),student.getId(),student.getPhone());
 		mav.setViewName("createDicipulus");
 		mav.addObject("freshman",student);

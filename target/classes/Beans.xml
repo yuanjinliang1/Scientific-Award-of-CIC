@@ -30,4 +30,8 @@
 	      class="com.dicipulus.app.JDBC.ApplierJdbc">
 	      <property name="dataSource"  ref="dataSource" />     
 	   </bean> 
+	   <bean id="firstProjectBasicSituationTAJdbc" 
+	      class="com.dicipulus.app.JDBC.FirstProjectBasicSituationTAJdbc">
+	      <property name="dataSource"  ref="dataSource" />     
+	   </bean> 
 </beans>

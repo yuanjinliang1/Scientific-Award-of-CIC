@@ -1,5 +1,7 @@
 package com.dicipulus.app.form;
 
+import com.dicipulus.app.applicationModel.Constants;
+
 /**
  * @author chenyouqi
  *ÍÆ¼öµ¥Î»

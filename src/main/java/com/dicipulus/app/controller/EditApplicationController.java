@@ -3,9 +3,11 @@ package com.dicipulus.app.controller;
 import com.dicipulus.app.*;
 import com.dicipulus.app.JDBC.*;
 import com.dicipulus.app.model.*;
+import com.dicipulus.app.applicationModel.*;
 import com.dicipulus.app.form.*;
 
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -56,7 +58,23 @@ public class EditApplicationController {
 		// context
 		return applierJdbc;
 	}
-	
+	private RefereeJdbc initRefereeJdbc(){
+		AbstractApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		RefereeJdbc refereeJdbc=(RefereeJdbc)context.getBean("refereeJdbc");
+		context.registerShutdownHook();//shutdown application context, from tutorialpoints.com
+		//((ConfigurableApplicationContext)context).close();//close application context
+		return refereeJdbc;
+	}
+	private FirstProjectBasicSituationTAJdbc initFirstProjectBasicSituationTAJdbc() {
+		AbstractApplicationContext context = new ClassPathXmlApplicationContext(
+				"Beans.xml");
+		FirstProjectBasicSituationTAJdbc firstProjectBasicSituationTAJdbc = (FirstProjectBasicSituationTAJdbc) context.getBean("firstProjectBasicSituationTAJdbc");
+		context.registerShutdownHook();// shutdown application context, from
+										// tutorialpoints.com
+		// ((ConfigurableApplicationContext)context).close();//close application
+		// context
+		return firstProjectBasicSituationTAJdbc;
+	}
 	private boolean isAuthenticated(HttpServletRequest request) {
 		Person person = getPersonInRequest(request);
 		logger.info("session uid=" + person.getUid());
@@ -122,9 +140,12 @@ public class EditApplicationController {
 			else{
 				logger.info("authentication confirmed!");
 				ApplierJdbc applierJdbc=initApplierJdbc();
-				modelAndView.setViewName("editFirstProjectBasicSituationTA");
+				FirstProjectBasicSituationTAJdbc firstProjectBasicSituationTAJdbc=initFirstProjectBasicSituationTAJdbc();
 				Person person = getPersonInRequest(request);
-				modelAndView.addObject("person",applierJdbc.getApplierByUid(person.getUid()));
+				FirstProjectBasicSituationTA firstForm=firstProjectBasicSituationTAJdbc.getFirstProjectBasicSituationTA(person.getUid());
+				modelAndView.setViewName("editFirstProjectBasicSituationTA");
+				modelAndView.addObject("person2",applierJdbc.getApplierByUid(person.getUid()));
+				modelAndView.addObject("firstForm",firstForm);
 				modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);
 				return modelAndView;
 			}
@@ -134,6 +155,32 @@ public class EditApplicationController {
 			logger.info("null session!");
 			return modelAndView;
 		}
-		
+	}
+	
+	
+	
+	@RequestMapping(value="/save-first-project-basic-situation-TA",method=RequestMethod.POST)
+	public String saveFirstProjectBasicSituationTA(HttpServletRequest request,@ModelAttribute("firstFormAttr")FirstProjectBasicSituationTA firstForm){
+		logger.info("saveFirstProjectBasicSituationTA()");
+		/*
+		 * 准备工作
+		 */
+		Person personSession =getPersonInRequest(request);
+		ApplierJdbc applierJdbc= initApplierJdbc();
+		Applier applier=applierJdbc.getApplierByUid(personSession.getUid());
+		FirstProjectBasicSituationTAJdbc firstProjectBasicSituationTAJdbc=initFirstProjectBasicSituationTAJdbc();
+		RefereeJdbc refereeJdbc=initRefereeJdbc();
+		Referee referee=refereeJdbc.getRefereeByUid(applier.getOwner());
+		/*
+		 * 为Form补全属性
+		 */
+		firstForm.setApplierUid(personSession.getUid());
+		firstForm.setYearCreated(Calendar.getInstance().get(Calendar.YEAR));
+		firstForm.setRefereeString(referee.getName());
+		/*
+		 * 调用JDBC将Form写入数据库
+		 */
+		firstProjectBasicSituationTAJdbc.setFirstProjectBasicSituationTA(firstForm, personSession.getUid());
+		return "redirect:/edit-first-project-basic-situationTA";
 	}
 }

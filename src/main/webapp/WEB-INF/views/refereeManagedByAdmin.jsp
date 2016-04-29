@@ -23,7 +23,6 @@ request.setCharacterEncoding("UTF-8");
 
 <spring:url value="/self-managed-by-admin" var="selfManageURL">
 </spring:url>
-
 <a id="selfManage" href="${fn:escapeXml(selfManageURL)}">个人管理</a>
 
 <form action="/app/referee-managed-by-admin/referee-create" method="POST" >

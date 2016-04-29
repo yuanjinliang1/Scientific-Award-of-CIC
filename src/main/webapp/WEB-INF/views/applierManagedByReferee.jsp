@@ -20,10 +20,11 @@ request.setCharacterEncoding("UTF-8");
 	User Management Prototype
 </h1>
 <c:out value="${person.name }"></c:out>
-<spring:url value="/self-managed-by-referee/{refereeUid}" var="selfManageURL">
-<spring:param name="refereeUid" value="${person.uid}"></spring:param>
-</spring:url>
 
+<!-- 跳转到个人管理 -->
+<spring:url value="/self-managed-by-referee/{refereeUid}" var="selfManageURL">
+	<spring:param name="refereeUid" value="${person.uid}"></spring:param>
+</spring:url>
 <a id="selfManage" href="${fn:escapeXml(selfManageURL)}">个人管理</a>
 
 <form action="/app/applier-managed-by-referee/applier-create" method="POST" >
@@ -41,6 +42,7 @@ request.setCharacterEncoding("UTF-8");
 		<td>项目组id</td>
 		<td>项目组名称</td>
 		<td>密码</td>
+		<td>操作</td>
 		<td>操作</td>
 		<td>操作</td>
 	</tr>
@@ -62,6 +64,13 @@ request.setCharacterEncoding("UTF-8");
 					<c:param name="uid" value="${applier.uid }"></c:param>
 				</c:url>
 				<a id="deleteApplier" href="${fn:escapeXml(deleteURL)}">删除用户</a>
+			</td>
+			<td>
+				<!-- 填写与查看推荐书 -->
+				<spring:url value="/edit-referee-unit-opinion/{applierUid}" var="editOpinionURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a id="editOpinion" href="${fn:escapeXml(editOpinionURL)}">填写推荐书</a>
 			</td>
 		</tr>
 	</c:forEach>

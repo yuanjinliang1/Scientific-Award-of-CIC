@@ -48,7 +48,7 @@ public class RefereeJdbc {
 		String sql="update referee set password=? where uid=?";
 		jdbcTemplateObject.update(sql, newPassword ,uid);
 		logger.info("SQL: "+sql);
-		logger.info("uid:"+uid+", password:"+newPassword);
+		//logger.info("uid:"+uid+", password:"+newPassword);
 	}
 	
 	public List<Referee> getReferees(){
@@ -66,14 +66,14 @@ public class RefereeJdbc {
 		jdbcTemplateObject.update(sql, uid, password, name, category);
 		
 		logger.info("SQL: "+sql);
-		logger.info("uid:"+uid+", name:"+name);
+		//logger.info("uid:"+uid+", name:"+name);
 	}
 	
 	public void deleteReferee(String uid){
 		String sql="delete from referee where uid=?";
 		jdbcTemplateObject.update(sql,uid);
 		logger.info("SQL: "+sql);
-		logger.info("uid:"+uid);
+		//logger.info("uid:"+uid);
 	}
 	
 	private String getRandomPassword(){

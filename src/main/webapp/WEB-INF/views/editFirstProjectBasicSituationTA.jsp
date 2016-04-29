@@ -157,7 +157,15 @@ request.setCharacterEncoding("UTF-8");
 		
 		
 		<tr>
-			<td><input type="submit" value="next-page" />下一页</td>
+			<td><input type="submit" value="next-page" />保存&查看</td>
+		</tr>
+		<tr>
+			<td>
+				<c:url value="/referee-managed-by-admin/reset-password" var="resetURL">
+					<c:param name="uid" value="${referee.uid }"></c:param>
+				</c:url>
+				<a id="resetPassword" href="${fn:escapeXml(resetURL)}">下一页（未完工）</a>
+			</td>
 		</tr>
 	</table>
 

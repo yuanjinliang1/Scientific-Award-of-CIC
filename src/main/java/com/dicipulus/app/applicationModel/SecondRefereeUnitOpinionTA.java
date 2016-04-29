@@ -12,6 +12,7 @@ public class SecondRefereeUnitOpinionTA {
 	protected String fax;//´«Õæ
 	protected String recommendOpinion;//<==600
 	protected String declaration=Constants.REFEREEUNITOPINIONDECLARATIONS;//ÉùÃ÷
+	protected String referingScienceTechnologyAwardRank;
 	
 	public String getRefereeUnitName() {
 		return refereeUnitName;
@@ -60,6 +61,14 @@ public class SecondRefereeUnitOpinionTA {
 	}
 	public void setRecommendOpinion(String recommendOpinion) {
 		this.recommendOpinion = recommendOpinion;
+	}
+	
+	public String getReferingScienceTechnologyAwardRank() {
+		return referingScienceTechnologyAwardRank;
+	}
+	public void setReferingScienceTechnologyAwardRank(
+			String referingScienceTechnologyAwardRank) {
+		this.referingScienceTechnologyAwardRank = referingScienceTechnologyAwardRank;
 	}
 	public String getDeclaration() {
 		return declaration;

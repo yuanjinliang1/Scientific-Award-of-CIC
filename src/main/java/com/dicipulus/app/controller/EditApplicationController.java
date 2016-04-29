@@ -4,8 +4,6 @@ import com.dicipulus.app.*;
 import com.dicipulus.app.JDBC.*;
 import com.dicipulus.app.model.*;
 import com.dicipulus.app.applicationModel.*;
-import com.dicipulus.app.applicationModel.Constants;
-import com.dicipulus.app.applicationModel.SecondRefereeUnitOpinionTA;
 import com.dicipulus.app.form.*;
 
 import java.text.DateFormat;
@@ -88,7 +86,7 @@ public class EditApplicationController {
 		// context
 		return firstProjectBasicSituationTAJdbc;
 	}
-	private boolean isAuthenticated(HttpServletRequest request) {
+	/*private boolean isAuthenticated(HttpServletRequest request) {
 		Person person = getPersonInRequest(request);
 		logger.info("session uid=" + person.getUid());
 		if (person==null||person.getUid().isEmpty()) {
@@ -96,12 +94,15 @@ public class EditApplicationController {
 		} else {
 			return true;
 		}
-	}
-	/*@InitBinder     
-	public void initBinder(WebDataBinder binder){
-	     binder.registerCustomEditor(       Date.class,     
-	                         new CustomDateEditor(new SimpleDateFormat("mm/dd/yyyy"), true, 10));   
 	}*/
+	private boolean isAuthenticated(Applier applier, Person refereePerson){
+		if(applier.getOwner().equals(refereePerson.getUid())){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	
 	/**
 	 * 选择申请表的类型页面
@@ -113,19 +114,13 @@ public class EditApplicationController {
 	public ModelAndView editInitializeApplicationGet(ModelAndView modelAndView, HttpServletRequest request){
 		logger.info("editInitializeApplication()");
 		try{
-			if(isAuthenticated(request)==false){
-				modelAndView.setViewName("redirect:/login");
-				logger.info("authentication denied!");
-				return modelAndView;
-			}
-			else{
-				logger.info("authentication confirmed!");
-				ApplierJdbc applierJdbc=initApplierJdbc();
-				modelAndView.setViewName("editInitializeApplication");
-				Person person = getPersonInRequest(request);
-				modelAndView.addObject("person",applierJdbc.getApplierByUid(person.getUid()));
-				return modelAndView;
-			}
+			
+			logger.info("authentication confirmed!");
+			ApplierJdbc applierJdbc=initApplierJdbc();
+			modelAndView.setViewName("editInitializeApplication");
+			Person person = getPersonInRequest(request);
+			modelAndView.addObject("person",applierJdbc.getApplierByUid(person.getUid()));
+			return modelAndView;
 		}
 		catch(NullPointerException e){
 			modelAndView.setViewName("redirect:/login");
@@ -168,26 +163,19 @@ public class EditApplicationController {
 	public ModelAndView editFirstProjectBasicSituationTAGet(ModelAndView modelAndView, HttpServletRequest request){
 		logger.info("editFirstProjectBasicSituationTAGet()");
 		try{
-			if(isAuthenticated(request)==false){
-				modelAndView.setViewName("redirect:/login");
-				logger.info("authentication denied!");
-				return modelAndView;
-			}
-			else{
-				logger.info("authentication confirmed!");
-				ApplierJdbc applierJdbc=initApplierJdbc();
-				FirstProjectBasicSituationTAJdbc firstProjectBasicSituationTAJdbc=initFirstProjectBasicSituationTAJdbc();
-				Person person = getPersonInRequest(request);
-				FirstProjectBasicSituationTA firstForm=firstProjectBasicSituationTAJdbc.getFirstProjectBasicSituationTA(person.getUid());
-				modelAndView.setViewName("editFirstProjectBasicSituationTA");
-				modelAndView.addObject("person2",applierJdbc.getApplierByUid(person.getUid()));
-				modelAndView.addObject("firstForm",firstForm);
-				modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);
-				modelAndView.addObject("economicFields",Constants.ECONOMICFIELDS);
-				modelAndView.addObject("nationalFocusFields",Constants.NATIONALFOCUSFIELDS);
-				modelAndView.addObject("taskSources",Constants.TASKSOURCES);
-				return modelAndView;
-			}
+			logger.info("authentication confirmed!");
+			ApplierJdbc applierJdbc=initApplierJdbc();
+			FirstProjectBasicSituationTAJdbc firstProjectBasicSituationTAJdbc=initFirstProjectBasicSituationTAJdbc();
+			Person person = getPersonInRequest(request);
+			FirstProjectBasicSituationTA firstForm=firstProjectBasicSituationTAJdbc.getFirstProjectBasicSituationTA(person.getUid());
+			modelAndView.setViewName("editFirstProjectBasicSituationTA");
+			modelAndView.addObject("person2",applierJdbc.getApplierByUid(person.getUid()));
+			modelAndView.addObject("firstForm",firstForm);
+			modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);
+			modelAndView.addObject("economicFields",Constants.ECONOMICFIELDS);
+			modelAndView.addObject("nationalFocusFields",Constants.NATIONALFOCUSFIELDS);
+			modelAndView.addObject("taskSources",Constants.TASKSOURCES);
+			return modelAndView;
 		}
 		catch(NullPointerException e){
 			modelAndView.setViewName("redirect:/login");
@@ -230,45 +218,72 @@ public class EditApplicationController {
 		return "redirect:/edit-first-project-basic-situationTA";
 	}
 	
-	@RequestMapping(value="/edit-referee-unit-opinion",method=RequestMethod.POST)
-	public String editSecondRefereeUnitOpinion(@ModelAttribute("secondFormAttri")SecondRefereeUnitOpinionTA secondRefereeUnitOpinionTA,Model model){
+	/**
+	 * 推荐人编辑某一项目的推荐书POST
+	 * @param secondRefereeUnitOpinionTA
+	 * @param applierUid
+	 * @return
+	 */
+	@RequestMapping(value="/edit-referee-unit-opinion-post/{applierUid}",method=RequestMethod.POST)
+	public String editSecondRefereeUnitOpinion(HttpServletRequest request,
+			@ModelAttribute("secondFormAttri")SecondRefereeUnitOpinionTA secondRefereeUnitOpinionTA,@PathVariable("applierUid") String applierUid){
 		logger.info("editSecondRefereeUnitOpinionPost()");
-		SecondRefereeUnitOpinionTAJdbc secondRefereeUnitOpinionJdbc=initSecondRefereeUitOpinionTA();
+		
 		try{
-		secondRefereeUnitOpinionJdbc.updateSecondRefereeUnitOpinionTA(secondRefereeUnitOpinionTA, 1);
+			Person person=getPersonInRequest(request);
+			ApplierJdbc applierJdbc=initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			if(isAuthenticated(applier, person)==false){
+				logger.info("No authentication to this applier!");
+				return "redirect:/login";
+			}
+			else{
+				SecondRefereeUnitOpinionTAJdbc secondRefereeUnitOpinionJdbc=initSecondRefereeUitOpinionTA();
+				secondRefereeUnitOpinionJdbc.updateSecondRefereeUnitOpinionTA(secondRefereeUnitOpinionTA, applierUid);
+				return "redirect:/edit-referee-unit-opinion/"+applier.getUid();
+			}
 		}
-		catch(Exception e){
-			logger.info("update fail!");
-			return "redirect:/edit-referee-unit-opinion";
+		catch(NullPointerException e){
+			logger.info("null session!");
+			return "redirect:/login";
 		}
-		return "redirect:/edit-referee-unit-opinion";
 	}
 	
 	
 	
-	@RequestMapping(value="/edit-referee-unit-opinion",method=RequestMethod.GET)
-	public ModelAndView initSecondRefereeUnitOpinionForm(HttpServletRequest request,ModelAndView modelAndView){
+	/**
+	 * 推荐人编辑某一项目的推荐书GET
+	 * @param request
+	 * @param modelAndView
+	 * @param ownerUid
+	 * @return
+	 */
+	@RequestMapping(value="/edit-referee-unit-opinion/{applierUid}",method=RequestMethod.GET)
+	public ModelAndView initSecondRefereeUnitOpinionForm(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info("initSecondRefereeUnitOpinionForm");
 		try{
-			Person person=(Person)request.getSession().getAttribute("person");
-		
-		String applierUid=person.getUid();
-		if(applierUid.equals("")){
+			Person person=getPersonInRequest(request);
+			ApplierJdbc applierJdbc=initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			if(isAuthenticated(applier, person)==false){
+				modelAndView.setViewName("redirect:/login");
+				logger.info("No authentication to this applier!");
+				return modelAndView;
+			}
+			else{
+				SecondRefereeUnitOpinionTAJdbc secondRefereeUnitOpinionTAJdbc=initSecondRefereeUitOpinionTA();
+				SecondRefereeUnitOpinionTA secondRefereeUnitOpinionTA=secondRefereeUnitOpinionTAJdbc.getSecondRefereeUnitOpinionTA(applierUid);
+				modelAndView.setViewName("editSecondRefereeOpinion");
+				modelAndView.addObject("secondForm",secondRefereeUnitOpinionTA);
+				modelAndView.addObject("applier",applier);//明确推荐单位正在编辑的推荐书是谁的
+				modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
+				return modelAndView;
+			}
+		}
+		catch(NullPointerException e){
 			modelAndView.setViewName("redirect:/login");
-			logger.info("session is null!");
+			logger.info("null session!");
 			return modelAndView;
 		}
-		logger.info("session confirm!");
-		SecondRefereeUnitOpinionTAJdbc secondRefereeUnitOpinionTAJdbc=initSecondRefereeUitOpinionTA();
-		SecondRefereeUnitOpinionTA secondRefereeUnitOpinionTA=secondRefereeUnitOpinionTAJdbc.getSecondRefereeUnitOpinionTA(applierUid);
-		modelAndView.setViewName("editSecondRefereeOpinion");
-		modelAndView.addObject("secondForm",secondRefereeUnitOpinionTA);
-		}
-		catch(Exception e){
-			logger.info("Exception");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-		return modelAndView;
 	}
 }

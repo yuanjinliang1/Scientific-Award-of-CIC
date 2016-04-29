@@ -33,7 +33,7 @@ public class ApplierJdbc extends Applier {
 		
 		Applier applier=jdbcTemplateObject.queryForObject(sql, new Object[]{uid}, BeanPropertyRowMapper.newInstance(Applier.class));
 		logger.info("SQL: "+sql);
-		logger.info("uid:"+uid);
+		//logger.info("uid:"+uid);
 		return applier;
 	}
 	
@@ -48,7 +48,7 @@ public class ApplierJdbc extends Applier {
 		
 		jdbcTemplateObject.update(sql, password,uid);
 		logger.info("SQL: "+sql);
-		logger.info("uid:"+uid+", password:"+password);
+		//logger.info("uid:"+uid+", password:"+password);
 	}
 	
 	public void createApplierForReferee(String refereeUid){
@@ -78,7 +78,7 @@ public class ApplierJdbc extends Applier {
 		
 		jdbcTemplateObject.update(sql, newUidString, password, "ÏîÄ¿×é", refereeUid, yearString);
 		logger.info("SQL: "+sql);
-		logger.info("uid:"+newUidString+", password:"+password+"refereeUid:"+refereeUid+"year:"+yearString);
+		//logger.info("uid:"+newUidString+", password:"+password+"refereeUid:"+refereeUid+"year:"+yearString);
 	}
 	
 	private String getRandomPassword(){
@@ -92,7 +92,7 @@ public class ApplierJdbc extends Applier {
 		String sql="delete from applier where uid=?";
 		jdbcTemplateObject.update(sql,uid);
 		logger.info("SQL: "+sql);
-		logger.info("uid:"+uid);
+		//logger.info("uid:"+uid);
 	}
 	
 	public void resetPassword(String uid){
@@ -100,13 +100,13 @@ public class ApplierJdbc extends Applier {
 		String sql="update applier set password=? where uid=?";
 		jdbcTemplateObject.update(sql, newPassword ,uid);
 		logger.info("SQL: "+sql);
-		logger.info("uid:"+uid+", password:"+newPassword);
+		//logger.info("uid:"+uid+", password:"+newPassword);
 	}
 	
 	public void changeName(String uid, String name){
 		String sql="update applier set name=? where uid=?";
 		jdbcTemplateObject.update(sql,name,uid);
 		logger.info("SQL: "+sql);
-		logger.info("uid:"+uid+", new name:"+name);
+		//logger.info("uid:"+uid+", new name:"+name);
 	}
 }

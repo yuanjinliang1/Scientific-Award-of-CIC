@@ -73,12 +73,12 @@ public class ApplierJdbc extends Applier {
 		}
 		
 		String sql="insert into applier (uid, password, name, owner,year) values(?,?,?,?,?)";
-		String yearString=""+year;
+		String yearString=""+yearTwoDigit;
 		String password=getRandomPassword();
 		
 		jdbcTemplateObject.update(sql, newUidString, password, "ÏîÄ¿×é", refereeUid, yearString);
 		logger.info("SQL: "+sql);
-		//logger.info("uid:"+newUidString+", password:"+password+"refereeUid:"+refereeUid+"year:"+yearString);
+		logger.info("uid:"+newUidString+", password:"+password+"refereeUid:"+refereeUid+"year:"+yearString);
 	}
 	
 	private String getRandomPassword(){
@@ -108,5 +108,11 @@ public class ApplierJdbc extends Applier {
 		jdbcTemplateObject.update(sql,name,uid);
 		logger.info("SQL: "+sql);
 		//logger.info("uid:"+uid+", new name:"+name);
+	}
+	
+	public void setApplicationType(String uid,String applicationType){
+		String sql="update applier set applicationType=? where uid=?;";
+		jdbcTemplateObject.update(sql,applicationType,uid);
+		logger.info("SQL: "+sql);
 	}
 }

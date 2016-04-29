@@ -9,6 +9,8 @@ public class Applier extends Person {
 	String group;
 	
 	int year;
+	
+	String applicationType;
 
 	public int getYear() {
 		return year;
@@ -42,7 +44,15 @@ public class Applier extends Person {
 		this.owner = owner;
 	}
 
+	public String getApplicationType() {
+		return applicationType;
+	}
 
+	public void setApplicationType(String applicationType) {
+		this.applicationType = applicationType;
+	}
+
+	
 	
 	
 }

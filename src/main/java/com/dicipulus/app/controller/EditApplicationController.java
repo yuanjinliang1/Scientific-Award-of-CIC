@@ -64,16 +64,24 @@ public class EditApplicationController {
 		return applierJdbc;
 	}
 	
+	private CreateFormsJdbc initCreateFormsJdbc(){
+		AbstractApplicationContext context = new ClassPathXmlApplicationContext(
+				"Beans.xml");
+		CreateFormsJdbc createFormsJdbc = (CreateFormsJdbc) context.getBean("createFormsJdbc");
+		context.registerShutdownHook();
+		return createFormsJdbc;
+	}
+	
 	private SecondRefereeUnitOpinionTAJdbc initSecondRefereeUitOpinionTA(){
 		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
 		SecondRefereeUnitOpinionTAJdbc secondRefereeUnitOpinionTAJdbc=(SecondRefereeUnitOpinionTAJdbc) context.getBean("secondRefereeUnitOpinionTAJdbc");
+		context.registerShutdownHook();
 		return secondRefereeUnitOpinionTAJdbc;
 	}
 	private RefereeJdbc initRefereeJdbc(){
 		AbstractApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 		RefereeJdbc refereeJdbc=(RefereeJdbc)context.getBean("refereeJdbc");
-		context.registerShutdownHook();//shutdown application context, from tutorialpoints.com
-		//((ConfigurableApplicationContext)context).close();//close application context
+		context.registerShutdownHook();
 		return refereeJdbc;
 	}
 	private FirstProjectBasicSituationTAJdbc initFirstProjectBasicSituationTAJdbc() {
@@ -86,15 +94,6 @@ public class EditApplicationController {
 		// context
 		return firstProjectBasicSituationTAJdbc;
 	}
-	/*private boolean isAuthenticated(HttpServletRequest request) {
-		Person person = getPersonInRequest(request);
-		logger.info("session uid=" + person.getUid());
-		if (person==null||person.getUid().isEmpty()) {
-			return false;
-		} else {
-			return true;
-		}
-	}*/
 	private boolean isAuthenticated(Applier applier, Person refereePerson){
 		if(applier.getOwner().equals(refereePerson.getUid())){
 			return true;
@@ -114,8 +113,6 @@ public class EditApplicationController {
 	public ModelAndView editInitializeApplicationGet(ModelAndView modelAndView, HttpServletRequest request){
 		logger.info("editInitializeApplication()");
 		try{
-			
-			logger.info("authentication confirmed!");
 			ApplierJdbc applierJdbc=initApplierJdbc();
 			modelAndView.setViewName("editInitializeApplication");
 			Person person = getPersonInRequest(request);
@@ -138,18 +135,30 @@ public class EditApplicationController {
 	@RequestMapping(value="/edit-initialize-application",method=RequestMethod.POST)
 	public String editInitializeApplicationPost(HttpServletRequest request, String applicationType){
 		logger.info("editInitializeApplicationPost()");
-		if(applicationType.equals("自然科学类")){
-			return "redirect:/edit-first-project-basic-situationNS";
+		try{
+			Person person = getPersonInRequest(request);
+			ApplierJdbc applierJdbc=initApplierJdbc();
+			CreateFormsJdbc createFormsJdbc=initCreateFormsJdbc();
+			applierJdbc.setApplicationType(person.getUid(),applicationType);
+			Applier applier=applierJdbc.getApplierByUid(person.getUid());
+			createFormsJdbc.createAllForms(applier);//初始化所有表
+			if(applicationType.equals("自然科学类")){
+				return "redirect:/edit-first-project-basic-situationNS";
+			}
+			else if(applicationType.equals("科技进步类") ){
+				return "redirect:/edit-first-project-basic-situationTA";
+			}
+			else if(applicationType.equals("技术发明类")){
+				return "redirect:/edit-first-project-basic-situationTI";
+			}
+			else{
+				logger.info(applicationType);
+				return "redirect:/error";
+			}
 		}
-		else if(applicationType.equals("科技进步类") ){
-			return "redirect:/edit-first-project-basic-situationTA";
-		}
-		else if(applicationType.equals("技术发明类")){
-			return "redirect:/edit-first-project-basic-situationTI";
-		}
-		else{
-			logger.info(applicationType);
-			return "redirect:/error";
+		catch(NullPointerException e){
+			logger.info("null session!");
+			return "redirect:/login";
 		}
 	}
 	
@@ -286,4 +295,6 @@ public class EditApplicationController {
 			return modelAndView;
 		}
 	}
+	
+	
 }

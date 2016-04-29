@@ -98,13 +98,20 @@ public class ApplierManagedByRefereeController{
 		return "redirect:applier-view/"+person.getUid();
 	}
 	
+	/**
+	 * 删除项目组的同时也要删除所有数据表中该项目组的记录
+	 * @param request
+	 * @param uid
+	 * @return
+	 */
 	@RequestMapping(value="/applier-managed-by-referee/delete-applier", method=RequestMethod.GET)
 	public String deleteApplier(HttpServletRequest request, @RequestParam String uid){
 		logger.info("deleteApplier()");
 		Person person =getPersonInRequest(request);
 		ApplierJdbc applierJdbc=initApplierJdbc();
-		
-		applierJdbc.deleteApplier(uid);
+		DeleteFormsJdbc deleteFormsJdbc=InitJdbc.initDeleteFormsJdbc();
+		deleteFormsJdbc.deleteAllForms(applierJdbc.getApplierByUid(uid));//先删表
+		applierJdbc.deleteApplier(uid);//再删记录
 		return "redirect:applier-view/"+person.getUid();
 	}
 	

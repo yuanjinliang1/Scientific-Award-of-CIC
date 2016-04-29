@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class FirstProjectBasicSituationTAJdbc{
-	private static final Logger logger=LoggerFactory.getLogger(RefereeJdbc.class);
+	private static final Logger logger=LoggerFactory.getLogger(FirstProjectBasicSituationTAJdbc.class);
 	private DataSource dataSource;
 	
 	private JdbcTemplate jdbcTemplateObject;
@@ -49,12 +49,6 @@ public class FirstProjectBasicSituationTAJdbc{
 				+ " `refereeContactEmail`=?, `applierContactName`=?, `applierContactPhone`=?, `applierContactEmail`=? "
 				+ "WHERE `applierUid`=?;";
 		
-		/*String sql="update project_major "
-				+ "set yearCreated=?,refereeString=?,projectName=?,"
-				+ "subjectCategoryName1=?,subjectCategoryId1=?,"
-				+ "subjectCategoryName2=?,subjectCategoryId2=?,"
-				+ "subjectCategoryName3=?,subjectCategoryId3=? "
-				+ "where applierUid=?";*/
 		jdbcTemplateObject.update(sql,firstForm.getYearCreated(),firstForm.getRefereeString(),firstForm.getProjectName(),
 				firstForm.getMajorContributorNames(),firstForm.getMajorContributingOrgNames(),firstForm.getSecretLevel(),
 				firstForm.getSubjectCategoryName1(),firstForm.getSubjectCategoryId1(),

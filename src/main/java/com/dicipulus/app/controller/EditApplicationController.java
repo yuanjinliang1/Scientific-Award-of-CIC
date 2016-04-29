@@ -96,6 +96,7 @@ public class EditApplicationController {
 		// context
 		return firstProjectBasicSituationTAJdbc;
 	}
+<<<<<<< HEAD
 	private ThirdProjectBriefIntroductionJdbc initThirdProjectBriefInroductionJdbc(){
 		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
 		ThirdProjectBriefIntroductionJdbc thirdProjectBriefInroductionJdbc=(ThirdProjectBriefIntroductionJdbc)context.getBean("thirdProjectBriefIntroductionJdbc");
@@ -108,6 +109,8 @@ public class EditApplicationController {
 		FifthObjectiveEvaluationJdbc fifthObjectiveEvaluation=(FifthObjectiveEvaluationJdbc) context.getBean("fifthObjectiveEvaluationJdbc");
 		return fifthObjectiveEvaluation;
 	}  
+=======
+>>>>>>> refs/remotes/origin/dai
 	private boolean isAuthenticated(Applier applier, Person refereePerson){
 		if(applier.getOwner().equals(refereePerson.getUid())){
 			return true;
@@ -153,7 +156,11 @@ public class EditApplicationController {
 			Person person = getPersonInRequest(request);
 			ApplierJdbc applierJdbc=initApplierJdbc();
 			CreateFormsJdbc createFormsJdbc=initCreateFormsJdbc();
+<<<<<<< HEAD
 			applierJdbc.setApplicationType(applicationType);
+=======
+			applierJdbc.setApplicationType(person.getUid(),applicationType);
+>>>>>>> refs/remotes/origin/dai
 			Applier applier=applierJdbc.getApplierByUid(person.getUid());
 			createFormsJdbc.createAllForms(applier);//初始化所有表
 			if(applicationType.equals("自然科学类")){
@@ -173,10 +180,13 @@ public class EditApplicationController {
 		catch(NullPointerException e){
 			logger.info("null session!");
 			return "redirect:/login";
+<<<<<<< HEAD
 		}
 		catch(DuplicateKeyException e){
 			logger.info("already have forms!");
 			return "redirect:/edit-first-project-basic-situationTA";
+=======
+>>>>>>> refs/remotes/origin/dai
 		}
 	}
 	
@@ -319,6 +329,7 @@ public class EditApplicationController {
 			return modelAndView;
 		}
 	}
+<<<<<<< HEAD
 	@RequestMapping(value="/edit-brief-introduction",method=RequestMethod.GET)
 	public ModelAndView initThirdProjectBriefIntroduction(HttpServletRequest request,ModelAndView modelAndView){
 		logger.info("initThirdProjectBriefIntroduction");
@@ -393,5 +404,8 @@ public class EditApplicationController {
 			return "redirect:/login";
 		}
 	}
+=======
+	
+>>>>>>> refs/remotes/origin/dai
 	
 }

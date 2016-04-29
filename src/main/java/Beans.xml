@@ -45,11 +45,14 @@
 	   <bean id="secondRefereeUnitOpinionTAJdbc"
 	   class="com.dicipulus.app.JDBC.SecondRefereeUnitOpinionTAJdbc">
 	   <property name="dataSource" ref="dataSource"></property>
+<<<<<<< HEAD
 	   </bean>
 	   <bean id="thirdProjectBriefIntroductionJdbc" class="com.dicipulus.app.JDBC.ThirdProjectBriefIntroductionJdbc">
 	   	<property name="dataSource" ref="dataSource"></property>
 	   </bean>
 	   <bean id="fifthObjectiveEvaluationJdbc" class="com.dicipulus.app.JDBC.FifthObjectiveEvaluationJdbc">
 	   	<property name="dataSource" ref="dataSource"></property>
+=======
+>>>>>>> refs/remotes/origin/dai
 	   </bean>
 </beans>

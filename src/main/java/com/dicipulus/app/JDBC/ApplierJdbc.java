@@ -115,4 +115,10 @@ public class ApplierJdbc extends Applier {
 		jdbcTemplateObject.update(sql,applicationType,uid);
 		logger.info("SQL: "+sql);
 	}
+	
+	public void setApplicationType(String uid,String applicationType){
+		String sql="update applier set applicationType=? where uid=?;";
+		jdbcTemplateObject.update(sql,applicationType,uid);
+		logger.info("SQL: "+sql);
+	}
 }

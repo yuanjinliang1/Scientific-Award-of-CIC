@@ -2,7 +2,7 @@ package com.dicipulus.app.applicationModel;
 /*
  *科技进步奖  二、推荐单位意见
  */
-public class SecondRefereeUnitOpinionTA {
+public class SecondRefereeUnitOpinion {
 	protected String refereeUnitName;//推荐单位名称
 	protected String postAddress;//通讯地址
 	protected String zipCode;//邮编

@@ -4,7 +4,9 @@ import com.dicipulus.app.*;
 import com.dicipulus.app.JDBC.*;
 import com.dicipulus.app.model.*;
 import com.dicipulus.app.applicationModel.Constants;
-import com.dicipulus.app.applicationModel.SecondRefereeUnitOpinionTA;
+import com.dicipulus.app.applicationModel.FifthObjectiveEvaluation;
+import com.dicipulus.app.applicationModel.SecondRefereeUnitOpinion;
+import com.dicipulus.app.applicationModel.ThirdProjectBriefIntroduction;
 import com.dicipulus.app.form.*;
 
 import java.text.DateFormat;
@@ -59,11 +61,27 @@ public class EditApplicationController {
 		return applierJdbc;
 	}
 	
-	private SecondRefereeUnitOpinionTAJdbc initSecondRefereeUitOpinionTA(){
+	
+	
+	private SecondRefereeUnitOpinionJdbc initSecondRefereeUitOpinion(){
 		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
-		SecondRefereeUnitOpinionTAJdbc secondRefereeUnitOpinionTAJdbc=(SecondRefereeUnitOpinionTAJdbc) context.getBean("secondRefereeUnitOpinionTAJdbc");
-		return secondRefereeUnitOpinionTAJdbc;
+		SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=(SecondRefereeUnitOpinionJdbc) context.getBean("secondRefereeUnitOpinionJdbc");
+		return secondRefereeUnitOpinionJdbc;
 	}
+	
+	private ThirdProjectBriefIntroductionJdbc initThirdProjectBriefInroductionJdbc(){
+		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+		ThirdProjectBriefIntroductionJdbc thirdProjectBriefInroductionJdbc=(ThirdProjectBriefIntroductionJdbc)context.getBean("thirdProjectBriefIntroductionJdbc");
+		return thirdProjectBriefInroductionJdbc;
+		
+	}
+	
+	private FifthObjectiveEvaluationJdbc initFifthObjectiveEvaluationJdbc(){
+		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+		FifthObjectiveEvaluationJdbc fifthObjectiveEvaluation=(FifthObjectiveEvaluationJdbc) context.getBean("fifthObjectiveEvaluationJdbc");
+		return fifthObjectiveEvaluation;
+	}  
+	
 	
 	private boolean isAuthenticated(HttpServletRequest request) {
 		Person person = getPersonInRequest(request);
@@ -146,13 +164,13 @@ public class EditApplicationController {
 	}
 	
 	@RequestMapping(value="/edit-referee-unit-opinion",method=RequestMethod.POST)
-	public String editSecondRefereeUnitOpinion(@ModelAttribute("secondFormAttri")SecondRefereeUnitOpinionTA secondRefereeUnitOpinionTA,Model model){
+	public String editSecondRefereeUnitOpinion(@ModelAttribute("secondFormAttri")SecondRefereeUnitOpinion secondRefereeUnitOpinion,Model model){
 		logger.info("editSecondRefereeUnitOpinionPost()");
-		SecondRefereeUnitOpinionTAJdbc secondRefereeUnitOpinionJdbc=initSecondRefereeUitOpinionTA();
+		SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=initSecondRefereeUitOpinion();
 		try{
-		secondRefereeUnitOpinionJdbc.updateSecondRefereeUnitOpinionTA(secondRefereeUnitOpinionTA, 1);
+		secondRefereeUnitOpinionJdbc.updateSecondRefereeUnitOpinionTA(secondRefereeUnitOpinion, 1);
 		}
-		catch(Exception e){
+		catch(NullPointerException e){
 			logger.info("update fail!");
 			return "redirect:/edit-referee-unit-opinion";
 		}
@@ -174,16 +192,92 @@ public class EditApplicationController {
 			return modelAndView;
 		}
 		logger.info("session confirm!");
-		SecondRefereeUnitOpinionTAJdbc secondRefereeUnitOpinionTAJdbc=initSecondRefereeUitOpinionTA();
-		SecondRefereeUnitOpinionTA secondRefereeUnitOpinionTA=secondRefereeUnitOpinionTAJdbc.getSecondRefereeUnitOpinionTA(applierUid);
+		SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=initSecondRefereeUitOpinion();
+		SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinionTA(applierUid);
 		modelAndView.setViewName("editSecondRefereeOpinion");
-		modelAndView.addObject("secondForm",secondRefereeUnitOpinionTA);
+		modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
 		}
-		catch(Exception e){
+		catch(NullPointerException e){
 			logger.info("Exception");
 			modelAndView.setViewName("redirect:/login");
 			return modelAndView;
 		}
 		return modelAndView;
 	}
+	
+	@RequestMapping(value="/edit-brief-introduction",method=RequestMethod.GET)
+	public ModelAndView initThirdProjectBriefIntroduction(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info("initThirdProjectBriefIntroduction");
+		try{
+			Person person=(Person) request.getSession().getAttribute("person");
+			String applierUid=person.getUid();
+			if(applierUid.equals("")){
+				modelAndView.setViewName("redirect:/login");
+				return modelAndView;
+			}
+			logger.info("applierUid confirm!");
+			ThirdProjectBriefIntroductionJdbc thirdProjectBriefIntroductionJdbc=initThirdProjectBriefInroductionJdbc();
+			ThirdProjectBriefIntroduction thirdProjectBriefIntroduction=thirdProjectBriefIntroductionJdbc.getThirdProjectBriefIntroduction("100116001");//测试数据，完成后改成applierUid
+			modelAndView.setViewName("editThirdBriefIntroduction");
+			modelAndView.addObject("briefIntroductionForm", thirdProjectBriefIntroduction);
+		}
+		catch(NullPointerException e){
+			logger.info("get exception!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/edit-brief-introduction",method=RequestMethod.POST)
+	public String editThirdProjectBriefIntroduction(@ModelAttribute("briefIntroduction")ThirdProjectBriefIntroduction thirdProjectBriefIntroduction,HttpServletRequest request,Model nodel){
+		try{
+			Person person=(Person) request.getSession().getAttribute("person");
+			String applierUid=person.getUid();
+			ThirdProjectBriefIntroductionJdbc thirdProjectBriefInroductionJdbc=initThirdProjectBriefInroductionJdbc();
+			logger.info(thirdProjectBriefIntroduction.getBriefIntroduction()+"!!!");
+			thirdProjectBriefInroductionJdbc.updateThirdProjectBriefIntroduction(thirdProjectBriefIntroduction, "100116001");////测试数据，完成后改为applierUid
+		}
+		catch(NullPointerException e){
+			logger.info("edit briefIntroduction exception!");
+			return "redirect:/login";
+		}
+		return "redirect:/edit-brief-introduction";
+	}
+	@RequestMapping(value="/edit-objective-evaluation",method=RequestMethod.GET)
+	public ModelAndView initFifthObjectiveEvaluation(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info("enter initFIfthObjectiveEvaluation");
+		try{
+			Person person=(Person) request.getSession().getAttribute("person");
+			String applierUid=person.getUid();
+			FifthObjectiveEvaluationJdbc fifthObjectiveEvaluationJdbc=initFifthObjectiveEvaluationJdbc();
+			FifthObjectiveEvaluation fifthObjectiveEvaluation=fifthObjectiveEvaluationJdbc.getFifthObjectiveEvaluation(applierUid);
+			logger.info(fifthObjectiveEvaluation.getObjectiveEvaluation());
+			modelAndView.setViewName("editFifthObjectiveEvaluation");
+			modelAndView.addObject("objectiveEvaluationForm", fifthObjectiveEvaluation);
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("login");
+			return modelAndView;
+		}
+	}
+	
+	
+	@RequestMapping(value="/edit-objective-evaluation",method=RequestMethod.POST)
+	public String editFifthObjectiveEvaluation(@ModelAttribute("objectiveEvaluation")FifthObjectiveEvaluation fifthObjectiveEvaluation,HttpServletRequest request){
+		try{
+			Person person=(Person)request.getSession().getAttribute("person");
+			String applierUid=person.getUid();
+			FifthObjectiveEvaluationJdbc fifthObjectiveEvaluationJdbc=initFifthObjectiveEvaluationJdbc();
+			fifthObjectiveEvaluationJdbc.updateFifthObjective(fifthObjectiveEvaluation, applierUid);
+			return "redirect:/edit-objective-evaluation";
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			return "redirect:/login";
+		}
+	}
 }
+	

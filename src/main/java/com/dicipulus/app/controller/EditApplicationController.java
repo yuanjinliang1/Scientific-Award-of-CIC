@@ -39,6 +39,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpRequest;
 @Controller
@@ -151,7 +153,7 @@ public class EditApplicationController {
 			Person person = getPersonInRequest(request);
 			ApplierJdbc applierJdbc=initApplierJdbc();
 			CreateFormsJdbc createFormsJdbc=initCreateFormsJdbc();
-			applierJdbc.setApplicationType(person.getUid(),applicationType);
+			applierJdbc.setApplicationType(applicationType);
 			Applier applier=applierJdbc.getApplierByUid(person.getUid());
 			createFormsJdbc.createAllForms(applier);//初始化所有表
 			if(applicationType.equals("自然科学类")){
@@ -171,6 +173,10 @@ public class EditApplicationController {
 		catch(NullPointerException e){
 			logger.info("null session!");
 			return "redirect:/login";
+		}
+		catch(DuplicateKeyException e){
+			logger.info("already have forms!");
+			return "redirect:/edit-first-project-basic-situationTA";
 		}
 	}
 	
@@ -304,6 +310,12 @@ public class EditApplicationController {
 		catch(NullPointerException e){
 			modelAndView.setViewName("redirect:/login");
 			logger.info("null session!");
+			return modelAndView;
+		}
+		catch(EmptyResultDataAccessException e2){
+			logger.info("forms have not been created!");
+			Person person=getPersonInRequest(request);
+			modelAndView.setViewName("redirect:/applier-managed-by-referee/applier-view/"+person.getUid());
 			return modelAndView;
 		}
 	}

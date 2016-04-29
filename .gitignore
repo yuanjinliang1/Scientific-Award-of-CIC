@@ -1,6 +1,11 @@
-/target/
+/target
 target
-target/*
 /target/*
-.classpath
+target/*
+
 /.classpath
+.classpath
+
+/.settings
+.settings
+/bin/

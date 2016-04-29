@@ -30,7 +30,14 @@
 	      class="com.dicipulus.app.JDBC.ApplierJdbc">
 	      <property name="dataSource"  ref="dataSource" />     
 	   </bean> 
-
+		<bean id="createFormsJdbc" 
+	      class="com.dicipulus.app.JDBC.CreateFormsJdbc">
+	      <property name="dataSource"  ref="dataSource" />     
+	   </bean> 
+	   <bean id="deleteFormsJdbc" 
+	      class="com.dicipulus.app.JDBC.DeleteFormsJdbc">
+	      <property name="dataSource"  ref="dataSource" />     
+	   </bean> 
 	   <bean id="firstProjectBasicSituationTAJdbc" 
 	      class="com.dicipulus.app.JDBC.FirstProjectBasicSituationTAJdbc">
 	      <property name="dataSource"  ref="dataSource" />     

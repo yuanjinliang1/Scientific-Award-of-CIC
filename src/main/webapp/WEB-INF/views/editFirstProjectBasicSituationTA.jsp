@@ -44,7 +44,9 @@ request.setCharacterEncoding("UTF-8");
 				<select name="subjectCategoryName1">
 					<option value="${firstForm.subjectCategoryName1}">${firstForm.subjectCategoryName1}</option>
 					<c:forEach items="${subjectCategories }" var="subjectCategory">
-						<option value="${subjectCategory }">${subjectCategory }</option>
+						<c:if test="${firstForm.subjectCategoryName1!=subjectCategory}">
+							<option value="${subjectCategory }">${subjectCategory }</option>
+						</c:if>
 					</c:forEach>
 				</select>
 			</td>
@@ -55,7 +57,9 @@ request.setCharacterEncoding("UTF-8");
 				<select name="subjectCategoryName2">
 					<option value="${firstForm.subjectCategoryName2}">${firstForm.subjectCategoryName2}</option>
 					<c:forEach items="${subjectCategories }" var="subjectCategory">
-						<option value="${subjectCategory }">${subjectCategory }</option>
+						<c:if test="${firstForm.subjectCategoryName2!=subjectCategory}">
+							<option value="${subjectCategory }">${subjectCategory }</option>
+						</c:if>
 					</c:forEach>
 				</select>
 			</td>
@@ -66,7 +70,9 @@ request.setCharacterEncoding("UTF-8");
 				<select name="subjectCategoryName3">
 					<option value="${firstForm.subjectCategoryName3}">${firstForm.subjectCategoryName3}</option>
 					<c:forEach items="${subjectCategories }" var="subjectCategory">
-						<option value="${subjectCategory }">${subjectCategory }</option>
+						<c:if test="${firstForm.subjectCategoryName3!=subjectCategory}">
+							<option value="${subjectCategory }">${subjectCategory }</option>
+						</c:if>
 					</c:forEach>
 				</select>
 			</td>
@@ -77,7 +83,9 @@ request.setCharacterEncoding("UTF-8");
 				<select name="economicField">
 					<option value="${firstForm.economicField}">${firstForm.economicField}</option>
 					<c:forEach items="${economicFields }" var="economicField">
-						<option value="${economicField }">${economicField }</option>
+						<c:if test="${firstForm.economicField!=economicField}">
+							<option value="${economicField }">${economicField }</option>
+						</c:if>
 					</c:forEach>
 				</select>
 			</td>
@@ -88,7 +96,9 @@ request.setCharacterEncoding("UTF-8");
 				<select name="nationalFocusField">
 					<option value="${firstForm.nationalFocusField}">${firstForm.nationalFocusField}</option>
 					<c:forEach items="${nationalFocusFields }" var="nationalFocusField">
-						<option value="${nationalFocusField }">${nationalFocusField }</option>
+						<c:if test="${firstForm.nationalFocusField!=nationalFocusField}">
+							<option value="${nationalFocusField }">${nationalFocusField }</option>
+						</c:if>
 					</c:forEach>
 				</select>
 			</td>
@@ -99,7 +109,9 @@ request.setCharacterEncoding("UTF-8");
 				<select name="taskSource">
 					<option value="${firstForm.taskSource}">${firstForm.taskSource}</option>
 					<c:forEach items="${taskSources }" var="taskSource">
-						<option value="${taskSource }">${taskSource }</option>
+						<c:if test="${firstForm.taskSource!=taskSource}">
+							<option value="${taskSource }">${taskSource }</option>
+						</c:if>
 					</c:forEach>
 				</select>
 			</td>

@@ -62,7 +62,9 @@ request.setCharacterEncoding("UTF-8");
 				<select name="referingScienceTechnologyAwardRank">
 					<option value="${secondForm.referingScienceTechnologyAwardRank}">${secondForm.referingScienceTechnologyAwardRank}</option>
 					<c:forEach items="${nominatedAwards }" var="nominatedAward">
-						<option value="${nominatedAward }">${nominatedAward }</option>
+						<c:if test="${secondForm.referingScienceTechnologyAwardRank!=nominatedAward}">
+							<option value="${nominatedAward }">${nominatedAward }</option>
+						</c:if>
 					</c:forEach>
 				</select>
 				等奖。

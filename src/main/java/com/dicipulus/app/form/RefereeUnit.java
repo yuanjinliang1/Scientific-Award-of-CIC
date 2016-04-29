@@ -15,7 +15,7 @@ public class RefereeUnit {
 	String email;
 	String faxAddress;
 	String referRecommend;
-	String declaration=Constants.DECLARATIONS;
+	//String declaration=Constants.DECLARATIONS;
 	public String getRefereeUnit() {
 		return refereeUnit;
 	}
@@ -64,11 +64,11 @@ public class RefereeUnit {
 	public void setReferRecommend(String referRecommend) {
 		this.referRecommend = referRecommend;
 	}
-	public String getDeclaration() {
-		return declaration;
-	}
-	public void setDeclaration(String declaration) {
-		this.declaration = declaration;
-	}
+//	public String getDeclaration() {
+//		return declaration;
+//	}
+//	public void setDeclaration(String declaration) {
+//		this.declaration = declaration;
+//	}
 	
 }

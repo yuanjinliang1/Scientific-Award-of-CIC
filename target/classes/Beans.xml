@@ -34,4 +34,8 @@
 	      class="com.dicipulus.app.JDBC.FirstProjectBasicSituationTAJdbc">
 	      <property name="dataSource"  ref="dataSource" />     
 	   </bean> 
+	   <bean id="secondRefereeUnitOpinionTAJdbc"
+	   class="com.dicipulus.app.JDBC.SecondRefereeUnitOpinionTAJdbc">
+	   <property name="dataSource" ref="dataSource"></property>
+	   </bean>
 </beans>

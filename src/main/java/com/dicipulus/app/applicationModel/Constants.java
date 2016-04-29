@@ -12,4 +12,5 @@ public class Constants {
 	public static String[] ECONOMICFIELDS={"互联网接入及相关服务","通信系统设备制造","数据处理和存储服务","软件开发","光电子器件及其他电子器件制造","无"};
 	public static String[] NATIONALFOCUSFIELDS={"信息产业及现代服务业","无"};
 	public static String[] TASKSOURCES={"973计划","部位计划","国家自然科学基金","其他基金","863计划","国家科技重大专项","省、市、自治区计划","企业","国际合作","国家计划","自选","国家科技攻关计划","其他",};
+
 }

@@ -16,7 +16,7 @@ request.setCharacterEncoding("UTF-8");
 	<title>一、项目基本情况</title>
 </head>
 <body>
-<form id="firstFormer" action="/app/save-first-project-basic-situation-TA" method="POST" modelAttribute="firstFormAttr">
+<form id="firstFormer" action="/app/save-first-project-basic-situation" method="POST" modelAttribute="firstFormAttr">
 	<table border="1">
 		<tr>
 			<td>推荐单位（盖章）或推荐专家</td>
@@ -77,32 +77,52 @@ request.setCharacterEncoding("UTF-8");
 				</select>
 			</td>
 		</tr>
-		<tr>
-			<td>所属国民经济行业</td>
-			<td>
-				<select name="economicField">
-					<option value="${firstForm.economicField}">${firstForm.economicField}</option>
-					<c:forEach items="${economicFields }" var="economicField">
-						<c:if test="${firstForm.economicField!=economicField}">
-							<option value="${economicField }">${economicField }</option>
-						</c:if>
-					</c:forEach>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>所属国家重点发展领域</td>
-			<td>
-				<select name="nationalFocusField">
-					<option value="${firstForm.nationalFocusField}">${firstForm.nationalFocusField}</option>
-					<c:forEach items="${nationalFocusFields }" var="nationalFocusField">
-						<c:if test="${firstForm.nationalFocusField!=nationalFocusField}">
-							<option value="${nationalFocusField }">${nationalFocusField }</option>
-						</c:if>
-					</c:forEach>
-				</select>
-			</td>
-		</tr>
+		<c:if test="${applier.applicationType=='科技进步类'||applier.applicationType=='技术发明类' }">
+			<tr>
+				<td>所属国民经济行业</td>
+				<td>
+					<select name="economicField">
+						<option value="${firstForm.economicField}">${firstForm.economicField}</option>
+						<c:forEach items="${economicFields }" var="economicField">
+							<c:if test="${firstForm.economicField!=economicField}">
+								<option value="${economicField }">${economicField }</option>
+							</c:if>
+						</c:forEach>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>所属国家重点发展领域</td>
+				<td>
+					<select name="nationalFocusField">
+						<option value="${firstForm.nationalFocusField}">${firstForm.nationalFocusField}</option>
+						<c:forEach items="${nationalFocusFields }" var="nationalFocusField">
+							<c:if test="${firstForm.nationalFocusField!=nationalFocusField}">
+								<option value="${nationalFocusField }">${nationalFocusField }</option>
+							</c:if>
+						</c:forEach>
+					</select>
+				</td>
+			</tr>
+			<input type="hidden" name="technologicalField" value="NEVER" />
+		</c:if>
+		<c:if test="${applier.applicationType=='自然科学类' }">
+			<tr>
+				<td>所属科学技术领域</td>
+				<td>
+					<input type="hidden" name="economicField" value="NEVER" />
+					<input type="hidden" name="nationalFocusField" value="NEVER" />
+					<select name="technologicalField">
+						<option value="${firstForm.technologicalField}">${firstForm.technologicalField}</option>
+						<c:forEach items="${technologicalFields }" var="technologicalField">
+							<c:if test="${firstForm.technologicalField!=technologicalField}">
+								<option value="${technologicalField }">${technologicalField }</option>
+							</c:if>
+						</c:forEach>
+					</select>
+				</td>
+			</tr>
+		</c:if>
 		<tr>
 			<td>任务来源</td>
 			<td>
@@ -126,14 +146,20 @@ request.setCharacterEncoding("UTF-8");
 			<!-- Don't break this line. It's textarea. -->
 			<td><textarea rows="3" cols="100" name="technicalReportNumber" form="firstFormer">${firstForm.technicalReportNumber }</textarea></td>
 		</tr>
-		<tr>
-			<td>授权发明专利项数</td>
-			<td><input type="text" name="numOfInventionPatent" value="${firstForm.numOfInventionPatent }" /></td>
-		</tr>
-		<tr>
-			<td>授权的其它知识产权项数</td>
-			<td><input type="text" name="numOfOtherIntellectualProperty" value="${firstForm.numOfOtherIntellectualProperty }" /></td>
-		</tr>
+		<c:if test="${applier.applicationType=='科技进步类'||applier.applicationType=='技术发明类' }">
+			<tr>
+				<td>授权发明专利项数</td>
+				<td><input type="text" name="numOfInventionPatent" value="${firstForm.numOfInventionPatent }" /></td>
+			</tr>
+			<tr>
+				<td>授权的其它知识产权项数</td>
+				<td><input type="text" name="numOfOtherIntellectualProperty" value="${firstForm.numOfOtherIntellectualProperty }" /></td>
+			</tr>
+		</c:if>
+		<c:if test="${applier.applicationType=='自然科学类' }">
+			<input type="hidden" name="numOfInventionPatent" value="-1" />
+			<input type="hidden" name="numOfOtherIntellectualProperty" value="-1" />	
+		</c:if>
 		<tr>
 			<td>项目开始时间</td>
 			<td><input type="date" name="startDate" value="${firstForm.startDate }" /></td>
@@ -171,7 +197,7 @@ request.setCharacterEncoding("UTF-8");
 		<tr>
 			<td><input type="submit" value="保存并查看" /></td>
 			<td>
-				<input type="button" onclick="location.href='edit-first-project-basic-situationTA';" value="第一页">
+				<input type="button" onclick="location.href='edit-first-project-basic-situation';" value="第一页">
 				<input type="button" onclick="location.href='edit-brief-introduction';" value="第三页">
 				<input type="button" onclick="location.href='edit-fourth-form';" value="第四页">
 				<input type="button" onclick="location.href='edit-objective-evaluation';" value="第五页">

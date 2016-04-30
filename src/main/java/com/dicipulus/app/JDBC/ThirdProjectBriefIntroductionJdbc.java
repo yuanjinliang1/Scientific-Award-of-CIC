@@ -28,7 +28,7 @@ public class ThirdProjectBriefIntroductionJdbc {
 	public ThirdProjectBriefIntroduction getThirdProjectBriefIntroduction(String applierUid){
 		String sql="select projectBriefIntroduction from project_major where applierUid=?";		
 		ThirdProjectBriefIntroduction thirdProjectBriefIntroduction=new ThirdProjectBriefIntroduction();
-		String briefIntroduction=jdbcTemplate.queryForObject(sql,new Object[] {"100116001"},java.lang.String.class);
+		String briefIntroduction=jdbcTemplate.queryForObject(sql,new Object[] {applierUid},java.lang.String.class);
 		thirdProjectBriefIntroduction.setBriefIntroduction(briefIntroduction);
 		logger.info(thirdProjectBriefIntroduction.getBriefIntroduction()+"!!!");
 		return thirdProjectBriefIntroduction;

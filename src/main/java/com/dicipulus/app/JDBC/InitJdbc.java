@@ -6,7 +6,6 @@ import java.util.Random;
 
 import javax.sql.DataSource;
 
-import com.dicipulus.app.applicationModel.FirstProjectBasicSituationTA;
 import com.dicipulus.app.applicationModel.*;
 import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Referee;
@@ -67,12 +66,12 @@ public final class InitJdbc{
 		return deleteFormsJdbc;
 	}
 	
-	public static FirstProjectBasicSituationTAJdbc initFirstProjectBasicSituationTAJdbc() {
+	public static FirstProjectBasicSituationJdbc initFirstProjectBasicSituationJdbc() {
 		AbstractApplicationContext context = new ClassPathXmlApplicationContext(
 				"Beans.xml");
-		FirstProjectBasicSituationTAJdbc firstProjectBasicSituationTAJdbc = (FirstProjectBasicSituationTAJdbc) context.getBean("firstProjectBasicSituationTAJdbc");
+		FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc = (FirstProjectBasicSituationJdbc) context.getBean("firstProjectBasicSituationJdbc");
 		context.registerShutdownHook();
-		return firstProjectBasicSituationTAJdbc;
+		return firstProjectBasicSituationJdbc;
 	}
 	
 	public static SecondRefereeUnitOpinionJdbc initSecondRefereeUitOpinionJdbc(){

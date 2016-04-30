@@ -86,16 +86,6 @@ public class EditApplicationController {
 		context.registerShutdownHook();
 		return refereeJdbc;
 	}
-	private FirstProjectBasicSituationTAJdbc initFirstProjectBasicSituationTAJdbc() {
-		AbstractApplicationContext context = new ClassPathXmlApplicationContext(
-				"Beans.xml");
-		FirstProjectBasicSituationTAJdbc firstProjectBasicSituationTAJdbc = (FirstProjectBasicSituationTAJdbc) context.getBean("firstProjectBasicSituationTAJdbc");
-		context.registerShutdownHook();// shutdown application context, from
-										// tutorialpoints.com
-		// ((ConfigurableApplicationContext)context).close();//close application
-		// context
-		return firstProjectBasicSituationTAJdbc;
-	}
 	private ThirdProjectBriefIntroductionJdbc initThirdProjectBriefInroductionJdbc(){
 		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
 		ThirdProjectBriefIntroductionJdbc thirdProjectBriefInroductionJdbc=(ThirdProjectBriefIntroductionJdbc)context.getBean("thirdProjectBriefIntroductionJdbc");
@@ -153,22 +143,10 @@ public class EditApplicationController {
 			Person person = getPersonInRequest(request);
 			ApplierJdbc applierJdbc=initApplierJdbc();
 			CreateFormsJdbc createFormsJdbc=initCreateFormsJdbc();
-			applierJdbc.setApplicationType(applicationType);
+			applierJdbc.setApplicationType(person.getUid(),applicationType);
 			Applier applier=applierJdbc.getApplierByUid(person.getUid());
 			createFormsJdbc.createAllForms(applier);//初始化所有表
-			if(applicationType.equals("自然科学类")){
-				return "redirect:/edit-first-project-basic-situationNS";
-			}
-			else if(applicationType.equals("科技进步类") ){
-				return "redirect:/edit-first-project-basic-situationTA";
-			}
-			else if(applicationType.equals("技术发明类")){
-				return "redirect:/edit-first-project-basic-situationTI";
-			}
-			else{
-				logger.info(applicationType);
-				return "redirect:/error";
-			}
+			return "redirect:/edit-first-project-basic-situation";
 		}
 		catch(NullPointerException e){
 			logger.info("null session!");
@@ -176,32 +154,35 @@ public class EditApplicationController {
 		}
 		catch(DuplicateKeyException e){
 			logger.info("already have forms!");
-			return "redirect:/edit-first-project-basic-situationTA";
+			return "redirect:/edit-first-project-basic-situation";
 
 		}
 	}
-	
+	/*
+	 * WITHOUT TA
+	 */
 	/**
 	 * 科技进步奖第一个页面：项目基本情况表的浏览
 	 * @param modelAndView
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="/edit-first-project-basic-situationTA",method=RequestMethod.GET)
-	public ModelAndView editFirstProjectBasicSituationTAGet(ModelAndView modelAndView, HttpServletRequest request){
-		logger.info("editFirstProjectBasicSituationTAGet()");
+	@RequestMapping(value="/edit-first-project-basic-situation",method=RequestMethod.GET)
+	public ModelAndView editFirstProjectBasicSituationGet(ModelAndView modelAndView, HttpServletRequest request){
+		logger.info("editFirstProjectBasicSituationGet()");
 		try{
 			logger.info("authentication confirmed!");
 			ApplierJdbc applierJdbc=initApplierJdbc();
-			FirstProjectBasicSituationTAJdbc firstProjectBasicSituationTAJdbc=initFirstProjectBasicSituationTAJdbc();
+			FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
 			Person person = getPersonInRequest(request);
-			FirstProjectBasicSituationTA firstForm=firstProjectBasicSituationTAJdbc.getFirstProjectBasicSituationTA(person.getUid());
-			modelAndView.setViewName("editFirstProjectBasicSituationTA");
-			modelAndView.addObject("person2",applierJdbc.getApplierByUid(person.getUid()));
+			FirstProjectBasicSituation firstForm=firstProjectBasicSituationJdbc.getFirstProjectBasicSituation(person.getUid());
+			modelAndView.setViewName("editFirstProjectBasicSituation");
+			modelAndView.addObject("applier",applierJdbc.getApplierByUid(person.getUid()));
 			modelAndView.addObject("firstForm",firstForm);
 			modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);
 			modelAndView.addObject("economicFields",Constants.ECONOMICFIELDS);
 			modelAndView.addObject("nationalFocusFields",Constants.NATIONALFOCUSFIELDS);
+			modelAndView.addObject("technologicalFields",Constants.TECHNOLOGICALFIELDS);
 			modelAndView.addObject("taskSources",Constants.TASKSOURCES);
 			return modelAndView;
 		}
@@ -220,17 +201,17 @@ public class EditApplicationController {
 	 * @param firstForm
 	 * @return
 	 */
-	@RequestMapping(value="/save-first-project-basic-situation-TA",method=RequestMethod.POST)
-	public String saveFirstProjectBasicSituationTA(HttpServletRequest request,
-			@ModelAttribute("firstFormAttr") FirstProjectBasicSituationTA firstForm){
-		logger.info("saveFirstProjectBasicSituationTA()");
+	@RequestMapping(value="/save-first-project-basic-situation",method=RequestMethod.POST)
+	public String saveFirstProjectBasicSituation(HttpServletRequest request,
+			@ModelAttribute("firstFormAttr") FirstProjectBasicSituation firstForm){
+		logger.info("saveFirstProjectBasicSituation()");
 		/*
 		 * 准备工作
 		 */
 		Person personSession =getPersonInRequest(request);
 		ApplierJdbc applierJdbc= initApplierJdbc();
 		Applier applier=applierJdbc.getApplierByUid(personSession.getUid());
-		FirstProjectBasicSituationTAJdbc firstProjectBasicSituationTAJdbc=initFirstProjectBasicSituationTAJdbc();
+		FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
 		RefereeJdbc refereeJdbc=initRefereeJdbc();
 		Referee referee=refereeJdbc.getRefereeByUid(applier.getOwner());
 		/*
@@ -242,9 +223,13 @@ public class EditApplicationController {
 		/*
 		 * 调用JDBC将Form写入数据库
 		 */
-		firstProjectBasicSituationTAJdbc.setFirstProjectBasicSituationTA(firstForm, personSession.getUid());
-		return "redirect:/edit-first-project-basic-situationTA";
+		firstProjectBasicSituationJdbc.setFirstProjectBasicSituation(firstForm, personSession.getUid());
+		return "redirect:/edit-first-project-basic-situation";
 	}
+	
+	
+	
+	
 	
 	/**
 	 * 推荐人编辑某一项目的推荐书POST
@@ -339,7 +324,7 @@ public class EditApplicationController {
 			}
 			logger.info("applierUid confirm!");
 			ThirdProjectBriefIntroductionJdbc thirdProjectBriefIntroductionJdbc=initThirdProjectBriefInroductionJdbc();
-			ThirdProjectBriefIntroduction thirdProjectBriefIntroduction=thirdProjectBriefIntroductionJdbc.getThirdProjectBriefIntroduction("100116001");//测试数据，完成后改成applierUid
+			ThirdProjectBriefIntroduction thirdProjectBriefIntroduction=thirdProjectBriefIntroductionJdbc.getThirdProjectBriefIntroduction(person.getUid());
 			modelAndView.setViewName("editThirdBriefIntroduction");
 			modelAndView.addObject("briefIntroductionForm", thirdProjectBriefIntroduction);
 		}
@@ -361,11 +346,10 @@ public class EditApplicationController {
 	@RequestMapping(value="/edit-brief-introduction",method=RequestMethod.POST)
 	public String editThirdProjectBriefIntroduction(@ModelAttribute("briefIntroduction")ThirdProjectBriefIntroduction thirdProjectBriefIntroduction,HttpServletRequest request,Model nodel){
 		try{
-			Person person=(Person) request.getSession().getAttribute("person");
-			String applierUid=person.getUid();
+			Person person=getPersonInRequest(request);
 			ThirdProjectBriefIntroductionJdbc thirdProjectBriefInroductionJdbc=initThirdProjectBriefInroductionJdbc();
 			logger.info(thirdProjectBriefIntroduction.getBriefIntroduction()+"!!!");
-			thirdProjectBriefInroductionJdbc.updateThirdProjectBriefIntroduction(thirdProjectBriefIntroduction, "100116001");////测试数据，完成后改为applierUid
+			thirdProjectBriefInroductionJdbc.updateThirdProjectBriefIntroduction(thirdProjectBriefIntroduction, person.getUid());
 		}
 		catch(NullPointerException e){
 			logger.info("edit briefIntroduction exception!");

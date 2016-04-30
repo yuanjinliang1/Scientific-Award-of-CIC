@@ -24,7 +24,7 @@ request.setCharacterEncoding("UTF-8");
 			<tr>
 				<td>
 					<input type="submit" value="保存并查看" />
-					<input type="button" onclick="location.href='edit-first-project-basic-situationTA';" value="第一页">
+					<input type="button" onclick="location.href='edit-first-project-basic-situation';" value="第一页">
 					<input type="button" onclick="location.href='edit-brief-introduction';" value="第三页">
 					<input type="button" onclick="location.href='edit-fourth-form';" value="第四页">
 					<input type="button" onclick="location.href='edit-objective-evaluation';" value="第五页">

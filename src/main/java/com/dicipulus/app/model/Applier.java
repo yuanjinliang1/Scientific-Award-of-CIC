@@ -50,14 +50,5 @@ public class Applier extends Person {
 
 	public void setApplicationType(String applicationType) {
 		this.applicationType = applicationType;
-<<<<<<< HEAD
 	}
 }
-=======
-	}
-
-	
-	
-	
-}
->>>>>>> refs/remotes/origin/dai

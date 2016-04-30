@@ -124,8 +124,4 @@ public class ApplierManagedByRefereeController{
 		applierJdbc.resetPassword(uid);
 		return "redirect:applier-view/"+person.getUid();
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> refs/remotes/origin/dai

@@ -20,15 +20,17 @@ public class SecondRefereeUnitOpinionJdbc {
 		this.jdbcTemplateObject=new JdbcTemplate(dataSource);
 	}
 	
-	public void updateSecondRefereeUnitOpinionTA(SecondRefereeUnitOpinion secondRefereeUnitOpinion,int applierUid){
-		String sql="update secondrefereeunitopinion set refereeUnitName=?, postAddress=?,zipCode=?,contact=?,phoneNumber=?,email=?,fax=?,recommendOpinion=? where applierUid=? ";
+	public void updateSecondRefereeUnitOpinion(SecondRefereeUnitOpinion secondRefereeUnitOpinion,String applierUid){
+		String sql="update secondrefereeunitopinion set refereeUnitName=?, postAddress=?,zipCode=?,contact=?,phoneNumber=?,email=?,fax=?,recommendOpinion=?,referingScienceTechnologyAwardRank=? where applierUid=? ";
 		jdbcTemplateObject.update(sql, new Object[] {secondRefereeUnitOpinion.getRefereeUnitName(),secondRefereeUnitOpinion.getPostAddress(),secondRefereeUnitOpinion.getZipCode(),
-				secondRefereeUnitOpinion.getContact(),secondRefereeUnitOpinion.getPhoneNumber(),secondRefereeUnitOpinion.getEmail(),secondRefereeUnitOpinion.getFax(),secondRefereeUnitOpinion.getRecommendOpinion(),applierUid});
-		
+				secondRefereeUnitOpinion.getContact(),secondRefereeUnitOpinion.getPhoneNumber(),secondRefereeUnitOpinion.getEmail(),secondRefereeUnitOpinion.getFax(),
+				secondRefereeUnitOpinion.getRecommendOpinion(),secondRefereeUnitOpinion.getReferingScienceTechnologyAwardRank(),applierUid});
+		logger.info(sql);
 	}
-	public SecondRefereeUnitOpinion getSecondRefereeUnitOpinionTA(String applierUid){
+	public SecondRefereeUnitOpinion getSecondRefereeUnitOpinion(String applierUid){
 		String sql="select * from secondrefereeunitopinion where applierUid=?";
-		SecondRefereeUnitOpinion secondRefereeUnitOpinionTA=jdbcTemplateObject.queryForObject(sql, new Object[] {applierUid},BeanPropertyRowMapper.newInstance(SecondRefereeUnitOpinion.class));
-		return secondRefereeUnitOpinionTA;
+		SecondRefereeUnitOpinion secondRefereeUnitOpinion=jdbcTemplateObject.queryForObject(sql, new Object[] {applierUid},BeanPropertyRowMapper.newInstance(SecondRefereeUnitOpinion.class));
+		logger.info(sql);
+		return secondRefereeUnitOpinion;
 	}
 }

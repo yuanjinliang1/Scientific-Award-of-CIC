@@ -75,11 +75,11 @@ public final class InitJdbc{
 		return firstProjectBasicSituationTAJdbc;
 	}
 	
-	public static SecondRefereeUnitOpinionTAJdbc initSecondRefereeUitOpinionTAJdbc(){
+	public static SecondRefereeUnitOpinionJdbc initSecondRefereeUitOpinionJdbc(){
 		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
-		SecondRefereeUnitOpinionTAJdbc secondRefereeUnitOpinionTAJdbc=(SecondRefereeUnitOpinionTAJdbc) context.getBean("secondRefereeUnitOpinionTAJdbc");
+		SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=(SecondRefereeUnitOpinionJdbc) context.getBean("secondRefereeUnitOpinionJdbc");
 		context.registerShutdownHook();
-		return secondRefereeUnitOpinionTAJdbc;
+		return secondRefereeUnitOpinionJdbc;
 	}
 	
 	public static ThirdProjectBriefIntroductionJdbc initThirdProjectBriefIntroductioJdbcn(){

@@ -74,11 +74,11 @@ public class EditApplicationController {
 		return createFormsJdbc;
 	}
 	
-	private SecondRefereeUnitOpinionTAJdbc initSecondRefereeUitOpinionTA(){
+	private SecondRefereeUnitOpinionJdbc initSecondRefereeUitOpinion(){
 		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
-		SecondRefereeUnitOpinionTAJdbc secondRefereeUnitOpinionTAJdbc=(SecondRefereeUnitOpinionTAJdbc) context.getBean("secondRefereeUnitOpinionTAJdbc");
+		SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=(SecondRefereeUnitOpinionJdbc) context.getBean("secondRefereeUnitOpinionJdbc");
 		context.registerShutdownHook();
-		return secondRefereeUnitOpinionTAJdbc;
+		return secondRefereeUnitOpinionJdbc;
 	}
 	private RefereeJdbc initRefereeJdbc(){
 		AbstractApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
@@ -248,13 +248,13 @@ public class EditApplicationController {
 	
 	/**
 	 * 推荐人编辑某一项目的推荐书POST
-	 * @param secondRefereeUnitOpinionTA
+	 * @param secondRefereeUnitOpinion
 	 * @param applierUid
 	 * @return
 	 */
 	@RequestMapping(value="/edit-referee-unit-opinion-post/{applierUid}",method=RequestMethod.POST)
 	public String editSecondRefereeUnitOpinion(HttpServletRequest request,
-			@ModelAttribute("secondFormAttri")SecondRefereeUnitOpinionTA secondRefereeUnitOpinionTA,@PathVariable("applierUid") String applierUid){
+			@ModelAttribute("secondFormAttri")SecondRefereeUnitOpinion secondRefereeUnitOpinion,@PathVariable("applierUid") String applierUid){
 		logger.info("editSecondRefereeUnitOpinionPost()");
 		
 		try{
@@ -266,8 +266,8 @@ public class EditApplicationController {
 				return "redirect:/login";
 			}
 			else{
-				SecondRefereeUnitOpinionTAJdbc secondRefereeUnitOpinionJdbc=initSecondRefereeUitOpinionTA();
-				secondRefereeUnitOpinionJdbc.updateSecondRefereeUnitOpinionTA(secondRefereeUnitOpinionTA, applierUid);
+				SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=initSecondRefereeUitOpinion();
+				secondRefereeUnitOpinionJdbc.updateSecondRefereeUnitOpinion(secondRefereeUnitOpinion, applierUid);
 				return "redirect:/edit-referee-unit-opinion/"+applier.getUid();
 			}
 		}
@@ -299,10 +299,10 @@ public class EditApplicationController {
 				return modelAndView;
 			}
 			else{
-				SecondRefereeUnitOpinionTAJdbc secondRefereeUnitOpinionTAJdbc=initSecondRefereeUitOpinionTA();
-				SecondRefereeUnitOpinionTA secondRefereeUnitOpinionTA=secondRefereeUnitOpinionTAJdbc.getSecondRefereeUnitOpinionTA(applierUid);
+				SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUitOpinionJdbc();
+				SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
 				modelAndView.setViewName("editSecondRefereeOpinion");
-				modelAndView.addObject("secondForm",secondRefereeUnitOpinionTA);
+				modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
 				modelAndView.addObject("applier",applier);//明确推荐单位正在编辑的推荐书是谁的
 				modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
 				return modelAndView;
@@ -404,6 +404,12 @@ public class EditApplicationController {
 		}
 	}
 	
+	/**
+	 * 项目组编辑第四个表POST
+	 * @param fourthForm
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/edit-fourth-form",method=RequestMethod.POST)
 	public String editFourthForm(@ModelAttribute("fourthFormAttr")FourthForm fourthForm,HttpServletRequest request){
 		logger.info("editFourthForm");

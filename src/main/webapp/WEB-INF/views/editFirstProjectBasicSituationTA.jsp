@@ -164,19 +164,16 @@ request.setCharacterEncoding("UTF-8");
 		</tr>
 		<tr>
 			<td>项目联系人邮箱</td>
-			<td><input type="text" name="applierContactEmail" value="${firstForm.applierContactEmail }" /></td>
+			<td><inp type="text" name="applierContactEmail" value="${firstForm.applierContactEmail }" /></td>
 		</tr>
 		
 		
 		<tr>
-			<td><input type="submit" value="next-page" />保存&查看</td>
-		</tr>
-		<tr>
+			<td><input type="submit" value="保存并查看" /></td>
 			<td>
-				<c:url value="/referee-managed-by-admin/reset-password" var="resetURL">
-					<c:param name="uid" value="${referee.uid }"></c:param>
-				</c:url>
-				<a id="resetPassword" href="${fn:escapeXml(resetURL)}">下一页（未完工）</a>
+				<input type="button" onclick="location.href='edit-first-project-basic-situationTA';" value="第一页">
+				<input type="button" onclick="location.href='edit-brief-introduction';" value="第三页">
+				<input type="button" onclick="location.href='edit-objective-evaluation';" value="第五页">
 			</td>
 		</tr>
 	</table>

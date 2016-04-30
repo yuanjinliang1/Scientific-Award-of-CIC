@@ -7,8 +7,10 @@ import java.util.Random;
 import javax.sql.DataSource;
 
 import com.dicipulus.app.applicationModel.FirstProjectBasicSituationTA;
+import com.dicipulus.app.applicationModel.*;
 import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Referee;
+import com.dicipulus.app.model.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,21 +67,39 @@ public final class InitJdbc{
 		return deleteFormsJdbc;
 	}
 	
-	public static SecondRefereeUnitOpinionTAJdbc initSecondRefereeUitOpinionTA(){
+	public static FirstProjectBasicSituationTAJdbc initFirstProjectBasicSituationTAJdbc() {
+		AbstractApplicationContext context = new ClassPathXmlApplicationContext(
+				"Beans.xml");
+		FirstProjectBasicSituationTAJdbc firstProjectBasicSituationTAJdbc = (FirstProjectBasicSituationTAJdbc) context.getBean("firstProjectBasicSituationTAJdbc");
+		context.registerShutdownHook();
+		return firstProjectBasicSituationTAJdbc;
+	}
+	
+	public static SecondRefereeUnitOpinionTAJdbc initSecondRefereeUitOpinionTAJdbc(){
 		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
 		SecondRefereeUnitOpinionTAJdbc secondRefereeUnitOpinionTAJdbc=(SecondRefereeUnitOpinionTAJdbc) context.getBean("secondRefereeUnitOpinionTAJdbc");
 		context.registerShutdownHook();
 		return secondRefereeUnitOpinionTAJdbc;
 	}
 	
-	public static FirstProjectBasicSituationTAJdbc initFirstProjectBasicSituationTAJdbc() {
-		AbstractApplicationContext context = new ClassPathXmlApplicationContext(
-				"Beans.xml");
-		FirstProjectBasicSituationTAJdbc firstProjectBasicSituationTAJdbc = (FirstProjectBasicSituationTAJdbc) context.getBean("firstProjectBasicSituationTAJdbc");
-		context.registerShutdownHook();// shutdown application context, from
-										// tutorialpoints.com
-		// ((ConfigurableApplicationContext)context).close();//close application
-		// context
-		return firstProjectBasicSituationTAJdbc;
+	public static ThirdProjectBriefIntroductionJdbc initThirdProjectBriefIntroductioJdbcn(){
+		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+		ThirdProjectBriefIntroductionJdbc thirdProjectBriefIntroductionJdbc=(ThirdProjectBriefIntroductionJdbc) context.getBean("thirdProjectBriefIntroductionJdbc");
+		context.registerShutdownHook();
+		return thirdProjectBriefIntroductionJdbc;
+	}
+	
+	public static FourthFormJdbc initFourthFormJdbc(){
+		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+		FourthFormJdbc fourthFormJdbc=(FourthFormJdbc) context.getBean("fourthFormJdbc");
+		context.registerShutdownHook();
+		return fourthFormJdbc;
+	}
+	
+	public static FifthObjectiveEvaluationJdbc initFifthObjectiveEvaluationJdbc(){
+		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+		FifthObjectiveEvaluationJdbc fifthObjectiveEvaluationJdbc=(FifthObjectiveEvaluationJdbc) context.getBean("fifthObjectiveEvaluationJdbc");
+		context.registerShutdownHook();
+		return fifthObjectiveEvaluationJdbc;
 	}
 }

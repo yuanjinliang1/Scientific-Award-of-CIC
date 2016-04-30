@@ -30,7 +30,7 @@ public class FourthFormJdbc{
 	}
 	
 	public FourthForm getFourthForm(String applierUid){
-		String sql="select * form project_major where applierUid=?;";
+		String sql="select * from project_major where applierUid=?;";
 		FourthForm fourthForm=jdbcTemplateObject.queryForObject(sql, new Object[]{applierUid},
 				BeanPropertyRowMapper.newInstance(FourthForm.class));
 		logger.info("SQL: "+sql);

@@ -14,7 +14,7 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>推荐单位意见</title>
+<title>二、推荐单位意见</title>
 <h1>项目组名称: ${applier.name }</h1>
 <h1>项目组ID: ${applier.uid }</h1>
 </head>
@@ -24,7 +24,9 @@ request.setCharacterEncoding("UTF-8");
 		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
 	</spring:url>
 	<form id="secondFormer" action="${fn:escapeXml(editOpinionURL)}" method="POST" modelAttribute="secondFormAttr">
-		<table><tr>
+		<table>
+		<tr><td>二、推荐单位意见</td></tr>
+		<tr>
 			<td>推荐单位名称</td>
 			<td><input type="text" name="refereeUnitName" value="${secondForm.refereeUnitName}"/></td>
 		</tr>

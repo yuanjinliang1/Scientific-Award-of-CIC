@@ -9,7 +9,7 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>客观评价</title>
+<title>五、客观评价</title>
 </head>
 <body>
 	<form id="fifthFormer" action="/app/edit-objective-evaluation" method="POST" modelAttribute="objectiveEvaluation">
@@ -26,6 +26,7 @@ request.setCharacterEncoding("UTF-8");
 					<input type="submit" value="保存并查看" />
 					<input type="button" onclick="location.href='edit-first-project-basic-situationTA';" value="第一页">
 					<input type="button" onclick="location.href='edit-brief-introduction';" value="第三页">
+					<input type="button" onclick="location.href='edit-fourth-form';" value="第四页">
 					<input type="button" onclick="location.href='edit-objective-evaluation';" value="第五页">
 				</td>
 			</tr>

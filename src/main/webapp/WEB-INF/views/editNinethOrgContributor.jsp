@@ -71,7 +71,7 @@ request.setCharacterEncoding("UTF-8");
 				</tr>
 				<tr>
 					<td>团体会员证书号</td>
-					<td><input type="text" name="OrgMemberIDOfCIC" value="${ninethForm.OrgMemberIDOfCIC}" /></td>
+					<td><input type="text" name="orgMemberIDOfCIC" value="${ninethForm.orgMemberIDOfCIC}" /></td>
 				</tr>
 			</c:if>
 			<tr>

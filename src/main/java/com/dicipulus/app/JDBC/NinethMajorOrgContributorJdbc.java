@@ -58,13 +58,13 @@ public class NinethMajorOrgContributorJdbc{
 	public void updateNinethMajorOrgContributor(NinethMajorOrgContributor ninethForm){
 		String sql="UPDATE `dicipulus`.`major_org_contributor` SET `nameOfOrg`=?, `rankOfOrg`=?, "
 				+ "`legalRepresentative`=?, `locationOfOrg`=?, `typeOfOrg`=?, `faxOfOrg`=?, "
-				+ "`zipCodeOfOrg`=?, `isOrgMemberOfCIC`=?, `OrgMemberIDOfCIC`=?, `addressOfOrg`=?, "
+				+ "`zipCodeOfOrg`=?, `isOrgMemberOfCIC`=?, `orgMemberIDOfCIC`=?, `addressOfOrg`=?, "
 				+ "`contactNameOfOrg`=?, `contactPhoneOfOrg`=?, `mobileOfOrg`=?, `emailOfOrg`=?, "
 				+ "`contributionToProject`=? "
 				+ "WHERE `idOfNinethForm`=?;";
 		jdbcTemplateObject.update(sql,ninethForm.getNameOfOrg(),ninethForm.getRankOfOrg(),
 				ninethForm.getLegalRepresentative(),ninethForm.getLocationOfOrg(),ninethForm.getTypeOfOrg(),ninethForm.getFaxOfOrg(),
-				ninethForm.getZipCodeOfOrg(),ninethForm.getIsOrgMemberOfCIC(),ninethForm.getOrgMemberIDOfCIC(),ninethForm.getAddressOfOrg(),
+				ninethForm.getZipCodeOfOrg(),ninethForm.getIsOrgMemberOfCIC(),ninethForm.getorgMemberIDOfCIC(),ninethForm.getAddressOfOrg(),
 				ninethForm.getContactNameOfOrg(),ninethForm.getContactPhoneOfOrg(),ninethForm.getMobileOfOrg(),ninethForm.getEmailOfOrg(),
 				ninethForm.getContributionToProject(),ninethForm.getIdOfNinethForm());
 		logger.info(sql);

@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -45,7 +46,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpRequest;
 @Controller
 @SessionAttributes("person")
-public class EditApplicationController {
+public class EditApplicationController<ModleAndView> {
 	private static final Logger logger = LoggerFactory
 			.getLogger(EditApplicationController.class);
 	
@@ -149,7 +150,7 @@ public class EditApplicationController {
 			return "redirect:/edit-first-project-basic-situation";
 		}
 		catch(NullPointerException e){
-			logger.info("null session!");
+			logger.info(e.toString());
 			return "redirect:/login";
 		}
 		catch(DuplicateKeyException e){
@@ -168,13 +169,13 @@ public class EditApplicationController {
 	 * @return
 	 */
 	@RequestMapping(value="/edit-first-project-basic-situation",method=RequestMethod.GET)
-	public ModelAndView editFirstProjectBasicSituationGet(ModelAndView modelAndView, HttpServletRequest request){
+	public ModelAndView editFirstProjectBasicSituationGet(ModelAndView modelAndView, HttpServletRequest request,FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc){
 		logger.info("editFirstProjectBasicSituationGet()");
-		try{
+//		try{
 			logger.info("authentication confirmed!");
 			ApplierJdbc applierJdbc=initApplierJdbc();
-			FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
 			Person person = getPersonInRequest(request);
+			logger.info(person.getUid());
 			FirstProjectBasicSituation firstForm=firstProjectBasicSituationJdbc.getFirstProjectBasicSituation(person.getUid());
 			modelAndView.setViewName("editFirstProjectBasicSituation");
 			modelAndView.addObject("applier",applierJdbc.getApplierByUid(person.getUid()));
@@ -185,12 +186,12 @@ public class EditApplicationController {
 			modelAndView.addObject("technologicalFields",Constants.TECHNOLOGICALFIELDS);
 			modelAndView.addObject("taskSources",Constants.TASKSOURCES);
 			return modelAndView;
-		}
-		catch(NullPointerException e){
-			modelAndView.setViewName("redirect:/login");
-			logger.info("null session!");
-			return modelAndView;
-		}
+//		}
+//		catch(NullPointerException e){
+//			modelAndView.setViewName("redirect:/login");
+//			logger.info(e.toString());
+//			return modelAndView;
+//		}
 	}
 	
 	
@@ -458,5 +459,27 @@ public class EditApplicationController {
 		}
 	}
 
-	
+	@RequestMapping(value="/manage-nineth-major-org-contributor",method=RequestMethod.GET)
+	public ModelAndView manageNinethMajorOrgContributor(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info("manageNinethMajorOrgContributor");
+		try{
+			Person person=getPersonInRequest(request);
+			
+			ApplierJdbc applierJdbc=initApplierJdbc();
+			Applier applier= applierJdbc.getApplierByUid(person.getUid());
+			modelAndView.addObject("applier",applier);
+			
+			NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
+			List<NinethMajorOrgContributor>  ninethMajorOrgContributors = ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(person.getUid());
+			modelAndView.addObject("ninethForms", ninethMajorOrgContributors);
+			
+			modelAndView.setViewName("manageNinethOrgContributor");
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("login");
+			return modelAndView;
+		}
+	}
 }

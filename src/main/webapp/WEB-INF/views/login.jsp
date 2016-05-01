@@ -14,11 +14,11 @@
 <form action="/app/login" method="POST" modelAttribute="loginAttr">
 	<tr>
 		<td><label>uid</label></td>
-		<td><input type="text" name="uid" /> </td>
+		<td><input type="text" name="uid" value="100116001" /> </td>
 	</tr>
 	<tr>
 		<td><label>password</label></td>
-		<td><input type="text" name="password" /> </td>
+		<td><input type="text" name="password" value="8888"/> </td>
 	</tr>
 	<tr>
 		<input type="submit" value="提交"/>

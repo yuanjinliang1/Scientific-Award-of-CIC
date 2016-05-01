@@ -201,6 +201,7 @@ request.setCharacterEncoding("UTF-8");
 				<input type="button" onclick="location.href='edit-brief-introduction';" value="第三页">
 				<input type="button" onclick="location.href='edit-fourth-form';" value="第四页">
 				<input type="button" onclick="location.href='edit-objective-evaluation';" value="第五页">
+				<input type="button" onclick="location.href='manage-nineth-major-org-contributor';" value="第九页">
 			</td>
 		</tr>
 	</table>

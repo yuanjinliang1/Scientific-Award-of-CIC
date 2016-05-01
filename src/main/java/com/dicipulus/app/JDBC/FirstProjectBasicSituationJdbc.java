@@ -30,8 +30,7 @@ public class FirstProjectBasicSituationJdbc{
 	}
 	
 	public FirstProjectBasicSituation getFirstProjectBasicSituation(String applierUid){
-		String sql="select * from project_major where applierUid=?";
-		logger.info(applierUid);
+		String sql="select * from dicipulus.project_major where applierUid=?";
 		FirstProjectBasicSituation firstProjectBasicSituation=
 				jdbcTemplateObject.queryForObject(sql, new Object[]{applierUid},BeanPropertyRowMapper.newInstance(FirstProjectBasicSituation.class));
 		logger.info("SQL: "+sql);

@@ -169,13 +169,13 @@ public class EditApplicationController<ModleAndView> {
 	 * @return
 	 */
 	@RequestMapping(value="/edit-first-project-basic-situation",method=RequestMethod.GET)
-	public ModelAndView editFirstProjectBasicSituationGet(ModelAndView modelAndView, HttpServletRequest request,FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc){
+	public ModelAndView editFirstProjectBasicSituationGet(ModelAndView modelAndView, HttpServletRequest request){
 		logger.info("editFirstProjectBasicSituationGet()");
-//		try{
+		try{
 			logger.info("authentication confirmed!");
 			ApplierJdbc applierJdbc=initApplierJdbc();
+			FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
 			Person person = getPersonInRequest(request);
-			logger.info(person.getUid());
 			FirstProjectBasicSituation firstForm=firstProjectBasicSituationJdbc.getFirstProjectBasicSituation(person.getUid());
 			modelAndView.setViewName("editFirstProjectBasicSituation");
 			modelAndView.addObject("applier",applierJdbc.getApplierByUid(person.getUid()));
@@ -186,12 +186,12 @@ public class EditApplicationController<ModleAndView> {
 			modelAndView.addObject("technologicalFields",Constants.TECHNOLOGICALFIELDS);
 			modelAndView.addObject("taskSources",Constants.TASKSOURCES);
 			return modelAndView;
-//		}
-//		catch(NullPointerException e){
-//			modelAndView.setViewName("redirect:/login");
-//			logger.info(e.toString());
-//			return modelAndView;
-//		}
+		}
+		catch(NullPointerException e){
+			modelAndView.setViewName("redirect:/login");
+			logger.info("null session!");
+			return modelAndView;
+		}
 	}
 	
 	

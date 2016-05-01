@@ -25,6 +25,10 @@
 </spring:url>
 <a id="editAddress" href="${fn:escapeXml(editURL)}">建立项目</a>
 
+<spring:url value="/edit-first-project-basic-situation" var="fisrtEditURL">
+</spring:url>
+<a id="firstEditAddress" href="${fn:escapeXml(fisrtEditURL)}">第一张表</a>
+
 	<form action="/app/self-managed-by-applier/change-name" method="POST">
 		<table>
 			<tr>

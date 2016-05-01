@@ -21,19 +21,17 @@ request.setCharacterEncoding("UTF-8");
 </h1>
 <c:out value="${person.name }"></c:out>
 
-<form action="/app/create-nineth-org-contributor" method="POST" >
+<form action="/app/create-nineth-major-org-contributor" method="POST" >
 <table>
 	<tr>
-		<td><input type="hidden" value="${person }" name="person" /> </td>
 		<td><input type="submit" value="添加主要完成单位" name="create"/></td>
 	</tr>
 </table>
 </form>
-<table>
+<table border="1">
 	<tr>
 		<td>排名</td>
 		<td>单位名称</td>
-		<td>操作</td>
 		<td>操作</td>
 		<td>操作</td>
 	</tr>
@@ -45,13 +43,13 @@ request.setCharacterEncoding("UTF-8");
 				<spring:url value="/edit-nineth-major-org-contributor/{idOfNinethForm}" var="editFormURL">
 					<spring:param name="idOfNinethForm" value="${ninethForm.idOfNinethForm }"></spring:param>
 				</spring:url>
-				<a id="editOpinion" href="${fn:escapeXml(editFormURL)}">填写主要完成单位情况表</a>
+				<a id="editOpinion" href="${fn:escapeXml(editFormURL)}">填写</a>
 			</td>
 			<td>
 				<c:url value="/delete-nineth-major-org-contributor" var="deleteURL">
 					<c:param name="idOfNinethForm" value="${ninethForm.idOfNinethForm }"></c:param>
 				</c:url>
-				<a id="deleteApplier" href="${fn:escapeXml(deleteURL)}">删除主要完成单位情况表</a>
+				<a id="deleteApplier" href="${fn:escapeXml(deleteURL)}">删除</a>
 			</td>
 			
 		</tr>

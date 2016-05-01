@@ -49,7 +49,13 @@ public class NinethMajorOrgContributorJdbc{
 		logger.info(sql);
 	}
 	
-	public void updateNinethMajorOrgContributor(int idOfNinethForm,NinethMajorOrgContributor ninethForm){
+	public void createNinethMajorOrgContributor(String applierUid,int rankOfOrg,String nameOfOrg){
+		String sql="insert into major_org_contributor (applierUid,nameOfOrg,rankOfOrg,contributionToProject) values(?,?,?,?);";
+		jdbcTemplateObject.update(sql,applierUid,nameOfOrg,rankOfOrg,"²»³¬¹ý600×Ö¡£");
+		logger.info(sql);
+	}
+	
+	public void updateNinethMajorOrgContributor(NinethMajorOrgContributor ninethForm){
 		String sql="UPDATE `dicipulus`.`major_org_contributor` SET `nameOfOrg`=?, `rankOfOrg`=?, "
 				+ "`legalRepresentative`=?, `locationOfOrg`=?, `typeOfOrg`=?, `faxOfOrg`=?, "
 				+ "`zipCodeOfOrg`=?, `isOrgMemberOfCIC`=?, `OrgMemberIDOfCIC`=?, `addressOfOrg`=?, "
@@ -63,5 +69,11 @@ public class NinethMajorOrgContributorJdbc{
 				ninethForm.getContributionToProject(),ninethForm.getIdOfNinethForm());
 		logger.info(sql);
 		logger.info(ninethForm.toString());
+	}
+	
+	public void deleteNinethMajorOrgContributor(int idOfNinethForm){
+		String sql="DELETE FROM `dicipulus`.`major_org_contributor` WHERE `idOfNinethForm`=?;";
+		jdbcTemplateObject.update(sql,idOfNinethForm);
+		logger.info(sql);
 	}
 }

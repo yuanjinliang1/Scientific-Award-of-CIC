@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page session="true" %>
 <!-- Set charset encoding to utf-8  -->
@@ -162,11 +163,13 @@ request.setCharacterEncoding("UTF-8");
 		</c:if>
 		<tr>
 			<td>项目开始时间</td>
-			<td><input type="date" name="startDate" value="${firstForm.startDate }" /></td>
+			<fmt:formatDate pattern="yyyy-MM-dd"  value="${firstForm.startDate }" var="startDateVar" />
+			<td><input type="date" name="startDate" value="${startDateVar}" /></td>
 		</tr>
 		<tr>
 			<td>项目完成时间</td>
-			<td><input type="date" name="finishDate" value="${firstForm.finishDate }" /></td>
+			<fmt:formatDate pattern="yyyy-MM-dd"  value="${firstForm.finishDate }" var="finishDateVar" />
+			<td><input type="date"  name="finishDate" value="${finishDateVar }" /></td>
 		</tr>
 		<tr>
 			<td>推荐单位联系人</td>
@@ -190,7 +193,7 @@ request.setCharacterEncoding("UTF-8");
 		</tr>
 		<tr>
 			<td>项目联系人邮箱</td>
-			<td><inp type="text" name="applierContactEmail" value="${firstForm.applierContactEmail }" /></td>
+			<td><input type="text" name="applierContactEmail" value="${firstForm.applierContactEmail }" /></td>
 		</tr>
 		
 		

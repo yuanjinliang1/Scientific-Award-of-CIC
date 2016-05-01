@@ -14,7 +14,7 @@ public class NinethMajorOrgContributor{
 	private String zipCodeOfOrg;
 	
 	private String isOrgMemberOfCIC;//TI, NS
-	private String OrgMemberIDOfCIC;//TI, NS
+	private String orgMemberIDOfCIC;//TI, NS
 	
 	private String addressOfOrg;
 	private String contactNameOfOrg;
@@ -84,11 +84,11 @@ public class NinethMajorOrgContributor{
 	public void setIsOrgMemberOfCIC(String isOrgMemberOfCIC) {
 		this.isOrgMemberOfCIC = isOrgMemberOfCIC;
 	}
-	public String getOrgMemberIDOfCIC() {
-		return OrgMemberIDOfCIC;
+	public String getorgMemberIDOfCIC() {
+		return orgMemberIDOfCIC;
 	}
-	public void setOrgMemberIDOfCIC(String orgMemberIDOfCIC) {
-		OrgMemberIDOfCIC = orgMemberIDOfCIC;
+	public void setorgMemberIDOfCIC(String orgMemberIDOfCIC) {
+		this.orgMemberIDOfCIC = orgMemberIDOfCIC;
 	}
 	public String getAddressOfOrg() {
 		return addressOfOrg;
@@ -135,7 +135,7 @@ public class NinethMajorOrgContributor{
 				+ ", locationOfOrg=" + locationOfOrg + ", typeOfOrg="
 				+ typeOfOrg + ", faxOfOrg=" + faxOfOrg + ", zipCodeOfOrg="
 				+ zipCodeOfOrg + ", isOrgMemberOfCIC=" + isOrgMemberOfCIC
-				+ ", OrgMemberIDOfCIC=" + OrgMemberIDOfCIC + ", addressOfOrg="
+				+ ", orgMemberIDOfCIC=" + orgMemberIDOfCIC + ", addressOfOrg="
 				+ addressOfOrg + ", contactNameOfOrg=" + contactNameOfOrg
 				+ ", contactPhoneOfOrg=" + contactPhoneOfOrg + ", mobileOfOrg="
 				+ mobileOfOrg + ", emailOfOrg=" + emailOfOrg

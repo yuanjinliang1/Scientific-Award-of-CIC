@@ -1,7 +1,13 @@
 package com.dicipulus.app.applicationModel;
 
+
+
 import java.util.Date;
 import java.util.List;
+
+
+
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -44,9 +50,9 @@ public class FirstProjectBasicSituation {
 	protected int numOfInventionPatent;// 授权发明专利项数,TA,TI
 	protected int numOfOtherIntellectualProperty;// 授权的其它知识产权项数,TA,TI
 	
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@DateTimeFormat(pattern = "yyy-MM-dd")
 	protected Date startDate;// 项目开始时间
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@DateTimeFormat(pattern = "yyy-MM-dd")
 	protected Date finishDate;// 项目完成时间
 	protected String refereeContactName;// 推荐单位联系人，包括姓名、电话、邮箱等
 	protected String refereeContactPhone;

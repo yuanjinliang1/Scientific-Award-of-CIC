@@ -102,6 +102,13 @@ public final class InitJdbc{
 		return fifthObjectiveEvaluationJdbc;
 	}
 	
+	public static EighthMajorContributorJdbc initEighthMajorContributorJdbc(){
+		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+		EighthMajorContributorJdbc eighthMajorContributorJdbc=(EighthMajorContributorJdbc) context.getBean("eighthMajorContributorJdbc");
+		context.registerShutdownHook();
+		return eighthMajorContributorJdbc;
+	}
+	
 	public static NinethMajorOrgContributorJdbc initNinethMajorOrgContributorJdbc(){
 		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
 		NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=(NinethMajorOrgContributorJdbc) context.getBean("ninethMajorOrgContributorJdbc");

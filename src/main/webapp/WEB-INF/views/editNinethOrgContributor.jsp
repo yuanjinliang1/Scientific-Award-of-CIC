@@ -56,7 +56,7 @@ request.setCharacterEncoding("UTF-8");
 			</tr>
 			<c:if test="${applier.applicationType!='科技进步类' }">
 				<tr>
-					<td>中国通信学会会员</td>
+					<td>中国通信学会团体会员</td>
 					<td>
 						<select name="isOrgMemberOfCIC">
 							<option value="${ninethForm.isOrgMemberOfCIC}">${ninethForm.isOrgMemberOfCIC}</option>

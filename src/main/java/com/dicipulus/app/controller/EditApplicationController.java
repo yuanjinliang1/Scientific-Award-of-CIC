@@ -458,6 +458,136 @@ public class EditApplicationController<ModleAndView> {
 			return "redirect:/login";
 		}
 	}
+	
+	/**
+	 * 项目组编辑第八个表LIST GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/manage-eighth-major-contributor",method=RequestMethod.GET)
+	public ModelAndView manageEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info("manageEighthMajorContributor");
+		try{
+			Person person=getPersonInRequest(request);
+			
+			ApplierJdbc applierJdbc=initApplierJdbc();
+			Applier applier= applierJdbc.getApplierByUid(person.getUid());
+			modelAndView.addObject("applier",applier);
+			
+			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
+			List<EighthMajorContributor>  eighthMajorContributors = eighthMajorContributorJdbc.getEighthMajorContributors(person.getUid());
+			modelAndView.addObject("eighthForms", eighthMajorContributors);
+			
+			modelAndView.setViewName("manageEighthMajorContributor");
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
+	/**
+	 * 项目组建立第八个表 POST
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/create-eighth-major-contributor",method=RequestMethod.POST)
+	public String createEighthMajorContributor(HttpServletRequest request,EighthMajorContributor eighthMajorContributor){
+		logger.info("createEighthMajorContributor");
+		try{
+			Person person=getPersonInRequest(request);
+			
+			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
+			List<EighthMajorContributor>  eighthMajorContributors = eighthMajorContributorJdbc.getEighthMajorContributors(person.getUid());
+			int rankOf =eighthMajorContributors.size()+1;
+			eighthMajorContributorJdbc.createEighthMajorContributor(person.getUid(), rankOf);
+			
+			return "redirect:/manage-eighth-major-contributor";
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			return "redirect:/login";
+		}
+	}
+	
+	/**
+	 * 项目组删除第八个表LIST GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/delete-eighth-major-contributor",method=RequestMethod.GET)
+	public String deleteEighthMajorContributor(HttpServletRequest request, int idOfEighthForm){
+		logger.info("deleteEighthMajorContributor");
+		try{
+			Person person=getPersonInRequest(request);
+			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
+			eighthMajorContributorJdbc.deleteEighthMajorContributor(idOfEighthForm);
+			
+			return "redirect:/manage-eighth-major-contributor";
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			return "redirect:/login";
+		}
+	}
+	
+	/**
+	 * 项目组编辑第八个表 GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/edit-eighth-major-contributor/{idOfEighthForm}",method=RequestMethod.GET)
+	public ModelAndView editEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfEighthForm") int idOfEighthForm){
+		logger.info("editEighthMajorContributor");
+		try{
+			Person person=getPersonInRequest(request);
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(person.getUid());
+			modelAndView.addObject("applier", applier);
+			
+			
+			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
+			EighthMajorContributor eighthMajorContributor=eighthMajorContributorJdbc.getEighthMajorContributor(idOfEighthForm);
+			modelAndView.addObject("eighthForm",eighthMajorContributor);
+			
+			modelAndView.setViewName("editEighthMajorContributor");
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
+	/**
+	 * 项目组编辑第八个表 POST
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/save-eighth-major-contributor/{idOfEighthForm}",method=RequestMethod.POST)
+	public String saveEighthMajorContributor(HttpServletRequest request,@ModelAttribute("eighthFormAttr") EighthMajorContributor eighthForm,
+			@PathVariable("idOfEighthForm") int idOfEighthForm){
+		logger.info("saveEighthMajorContributor");
+		try{
+			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
+			eighthMajorContributorJdbc.updateEighthMajorContributor(eighthForm);
+			
+			return "redirect:/edit-eighth-major-contributor/"+eighthForm.getIdOfEighthForm();
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			return "redirect:/login";
+		}
+	}
 
 	/**
 	 * 项目组编辑第九个表LIST GET
@@ -578,8 +708,6 @@ public class EditApplicationController<ModleAndView> {
 			@PathVariable("idOfNinethForm") int idOfNinethForm){
 		logger.info("saveNinethMajorOrgContributor");
 		try{
-			Person person=getPersonInRequest(request);
-			
 			NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
 			ninethMajorOrgContributorJdbc.updateNinethMajorOrgContributor(ninethForm);
 			
@@ -590,5 +718,7 @@ public class EditApplicationController<ModleAndView> {
 			return "redirect:/login";
 		}
 	}
+	
+	
 	
 }

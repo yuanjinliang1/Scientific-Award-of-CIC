@@ -55,6 +55,9 @@
 	   <bean id="fifthObjectiveEvaluationJdbc" class="com.dicipulus.app.JDBC.FifthObjectiveEvaluationJdbc">
 	   	<property name="dataSource" ref="dataSource"></property>
 	   </bean>
+	   <bean id="seventhIntellectualPropertyDocJdbc" class="com.dicipulus.app.JDBC.SeventhIntellectualPropertyDocJdbc">
+	   	<property name="dataSource" ref="dataSource"></property>
+	   </bean>
 	   <bean id="eighthMajorContributorJdbc" class="com.dicipulus.app.JDBC.EighthMajorContributorJdbc">
 	   	<property name="dataSource" ref="dataSource"></property>
 	   </bean>

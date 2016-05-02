@@ -460,6 +460,105 @@ public class EditApplicationController<ModleAndView> {
 	}
 	
 	/**
+	 * 项目组编辑第七知识产权表LIST GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/manage-seventh-ip-doc",method=RequestMethod.GET)
+	public ModelAndView manageSeventhIntellectualPropertyDoc(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info("manageSeventhIntellectualPropertyDoc");
+		try{
+			Person person=getPersonInRequest(request);
+			
+			ApplierJdbc applierJdbc=initApplierJdbc();
+			Applier applier= applierJdbc.getApplierByUid(person.getUid());
+			modelAndView.addObject("applier",applier);
+			
+			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
+			List<SeventhIntellectualPropertyDoc>  seventhIntellectualPropertyDocs = seventhIntellectualPropertyDocJdbc.getSeventhIntellectualPropertyDocs(person.getUid());
+			modelAndView.addObject("seventhIPForms", seventhIntellectualPropertyDocs);
+			
+			modelAndView.setViewName("manageSeventhIPDoc");
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
+	/**
+	 * 项目组建立第七知识产权表 POST
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/create-seventh-ip-doc",method=RequestMethod.POST)
+	public String createSeventhIntellectualPropertyDoc(HttpServletRequest request,SeventhIntellectualPropertyDoc seventhIntellectualPropertyDoc){
+		logger.info("createSeventhIntellectualPropertyDoc");
+		try{
+			Person person=getPersonInRequest(request);
+			
+			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
+			List<SeventhIntellectualPropertyDoc>  seventhIntellectualPropertyDocs = seventhIntellectualPropertyDocJdbc.getSeventhIntellectualPropertyDocs(person.getUid());
+			int rankOfOrg =seventhIntellectualPropertyDocs.size()+1;
+			seventhIntellectualPropertyDocJdbc.createSeventhIntellectualPropertyDoc(person.getUid(), rankOfOrg);
+			
+			return "redirect:/manage-seventh-ip-doc";
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			return "redirect:/login";
+		}
+	}
+	
+	/**
+	 * 项目组删除第七知识产权表LIST GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/delete-seventh-ip-doc",method=RequestMethod.GET)
+	public String deleteSeventhIntellectualPropertyDoc(HttpServletRequest request, int idOfSeventhIPForm){
+		logger.info("deleteSeventhIntellectualPropertyDoc");
+		try{
+			Person person=getPersonInRequest(request);
+			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
+			seventhIntellectualPropertyDocJdbc.deleteSeventhIntellectualPropertyDoc(idOfSeventhIPForm);
+			
+			return "redirect:/manage-seventh-ip-doc";
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			return "redirect:/login";
+		}
+	}
+	
+	/**
+	 * 项目组编辑第七知识产权表POST
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/save-seventh-ip-doc/{idOfSeventhIPForm}",method=RequestMethod.POST)
+	public String saveSeventhIntellectualPropertyDoc(HttpServletRequest request,@ModelAttribute("seventhIPFormAttr") SeventhIntellectualPropertyDoc seventhIPForm,
+			@PathVariable("idOfSeventhIPForm") int idOfSeventhIPForm){
+		logger.info("saveSeventhIntellectualPropertyDoc");
+		try{
+			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
+			seventhIntellectualPropertyDocJdbc.updateSeventhIntellectualPropertyDoc(seventhIPForm);
+			
+			return "redirect:/manage-seventh-ip-doc";
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			return "redirect:/login";
+		}
+	}
+	
+	/**
 	 * 项目组编辑第八个表LIST GET
 	 * @param request
 	 * @param modelAndView
@@ -503,8 +602,8 @@ public class EditApplicationController<ModleAndView> {
 			
 			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
 			List<EighthMajorContributor>  eighthMajorContributors = eighthMajorContributorJdbc.getEighthMajorContributors(person.getUid());
-			int rankOf =eighthMajorContributors.size()+1;
-			eighthMajorContributorJdbc.createEighthMajorContributor(person.getUid(), rankOf);
+			int rankOfContributor =eighthMajorContributors.size()+1;
+			eighthMajorContributorJdbc.createEighthMajorContributor(person.getUid(), rankOfContributor);
 			
 			return "redirect:/manage-eighth-major-contributor";
 		}

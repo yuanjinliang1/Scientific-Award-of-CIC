@@ -51,6 +51,12 @@ public class DeleteFormsJdbc{
 		logger.info(sql);
 	}
 	
+	public void deleteSeventhIntellectualPropertyDoc(Applier applier){
+		String sql="delete from intellectual_property_doc where applierUid=? ";
+		jdbcTemplateObject.update(sql,applier.getUid());
+		logger.info(sql);
+	}
+	
 	public void deleteEighthMajorContributor(Applier applier){
 		String sql="delete from major_contributor where applierUid=? ";
 		jdbcTemplateObject.update(sql,applier.getUid());

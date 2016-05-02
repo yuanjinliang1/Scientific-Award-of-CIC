@@ -102,6 +102,13 @@ public final class InitJdbc{
 		return fifthObjectiveEvaluationJdbc;
 	}
 	
+	public static SeventhPaperCitedByOthersJdbc initSeventhPaperCitedByOthersJdbc(){
+		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+		SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=(SeventhPaperCitedByOthersJdbc) context.getBean("seventhPaperCitedByOthersJdbc");
+		context.registerShutdownHook();
+		return seventhPaperCitedByOthersJdbc;
+	}
+	
 	public static SeventhIntellectualPropertyDocJdbc initSeventhIntellectualPropertyDocJdbc(){
 		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
 		SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=(SeventhIntellectualPropertyDocJdbc) context.getBean("seventhIntellectualPropertyDocJdbc");

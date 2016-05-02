@@ -40,7 +40,7 @@ public class SeventhIntellectualPropertyDocJdbc{
 	}
 	////
 	public void createSeventhIntellectualPropertyDoc(String applierUid,int rankOfIP){
-		String sql="insert into intellectual_property_doc (applierUid,rankOfIP,nameOfIp) values(?,?,?);";
+		String sql="insert into intellectual_property_doc (applierUid,rankOfIP,nameOfIP) values(?,?,?);";
 		jdbcTemplateObject.update(sql,applierUid,rankOfIP,"新建知识产权证明");
 		logger.info(sql);
 	}

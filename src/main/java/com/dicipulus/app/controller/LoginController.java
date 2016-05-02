@@ -26,6 +26,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 
 @Controller
@@ -46,7 +47,7 @@ public class LoginController{
 	public ModelAndView processLoginForm(Person person,ModelAndView modelAndView){
 		logger.info("uid= "+person.getUid()+" password="+person.getPassword()+" role="+person.getRole());
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-		
+		try{
 		if(person.getUid().contains("admin")||person.getUid().startsWith("0",0)){//admin:001
 			AdminJdbc adminJdbc=(AdminJdbc)context.getBean("adminJdbc");
 			String password= adminJdbc.getAdmin().getPassword();
@@ -89,5 +90,11 @@ public class LoginController{
 		}
 		
 		return modelAndView;
+		}
+		catch(EmptyResultDataAccessException e){
+			logger.info(e.toString());
+			modelAndView.setViewName("login");
+			return modelAndView;
+		}
 	}
 }

@@ -465,6 +465,106 @@ public class EditApplicationController<ModleAndView> {
 	 * @param modelAndView
 	 * @return
 	 */
+	@RequestMapping(value="/manage-seventh-paper-cited-by-others",method=RequestMethod.GET)
+	public ModelAndView manageSeventhPaperCitedByOthers(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info("manageSeventhPaperCitedByOthers");
+		try{
+			Person person=getPersonInRequest(request);
+			
+			ApplierJdbc applierJdbc=initApplierJdbc();
+			Applier applier= applierJdbc.getApplierByUid(person.getUid());
+			modelAndView.addObject("applier",applier);
+			
+			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
+			List<SeventhPaperCitedByOthers>  seventhPaperCitedByOtherss = seventhPaperCitedByOthersJdbc.getSeventhPaperCitedByOtherss(person.getUid());
+			modelAndView.addObject("seventhPaperForms", seventhPaperCitedByOtherss);
+			
+			modelAndView.setViewName("manageSeventhPaperCitedByOthers");
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
+	/**
+	 * 项目组建立第七论文被引用表 POST
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/create-seventh-paper-cited-by-others",method=RequestMethod.POST)
+	public String createSeventhPaperCitedByOthers(HttpServletRequest request,SeventhPaperCitedByOthers seventhPaperCitedByOthers){
+		logger.info("createSeventhPaperCitedByOthers");
+		try{
+			Person person=getPersonInRequest(request);
+			
+			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
+			List<SeventhPaperCitedByOthers>  seventhPaperCitedByOtherss = seventhPaperCitedByOthersJdbc.getSeventhPaperCitedByOtherss(person.getUid());
+			int rankOfOrg =seventhPaperCitedByOtherss.size()+1;
+			seventhPaperCitedByOthersJdbc.createSeventhPaperCitedByOthers(person.getUid(), rankOfOrg);
+			
+			return "redirect:/manage-seventh-paper-cited-by-others";
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			return "redirect:/login";
+		}
+	}
+	
+	/**
+	 * 项目组删除第七论文被引用表LIST GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/delete-seventh-paper-cited-by-others",method=RequestMethod.GET)
+	public String deleteSeventhPaperCitedByOthers(HttpServletRequest request, int idOfSeventhPaperForm){
+		logger.info("deleteSeventhPaperCitedByOthers");
+		try{
+			Person person=getPersonInRequest(request);
+			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
+			seventhPaperCitedByOthersJdbc.deleteSeventhPaperCitedByOthers(idOfSeventhPaperForm);
+			
+			return "redirect:/manage-seventh-paper-cited-by-others";
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			return "redirect:/login";
+		}
+	}
+	
+	/**
+	 * 项目组编辑第七论文被引用表POST
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/save-seventh-paper-cited-by-others/{idOfSeventhPaperForm}",method=RequestMethod.POST)
+	public String saveSeventhPaperCitedByOthers(HttpServletRequest request,@ModelAttribute("seventhPaperFormAttr") SeventhPaperCitedByOthers seventhPaperForm,
+			@PathVariable("idOfSeventhPaperForm") int idOfSeventhPaperForm){
+		logger.info("saveSeventhPaperCitedByOthers");
+		try{
+			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
+			seventhPaperCitedByOthersJdbc.updateSeventhPaperCitedByOthers(seventhPaperForm);
+			
+			return "redirect:/manage-seventh-paper-cited-by-others";
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			return "redirect:/login";
+		}
+	}
+	
+	///////////////////////////////////////////////////////////////////
+	/**
+	 * 项目组编辑第七知识产权表LIST GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
 	@RequestMapping(value="/manage-seventh-ip-doc",method=RequestMethod.GET)
 	public ModelAndView manageSeventhIntellectualPropertyDoc(HttpServletRequest request,ModelAndView modelAndView){
 		logger.info("manageSeventhIntellectualPropertyDoc");

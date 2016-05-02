@@ -35,6 +35,8 @@ public class DeleteFormsJdbc{
 	public void deleteAllForms(Applier applier){
 		deleteProjectMajor(applier);
 		deleteSecondRefereeUnitOpinion(applier);
+		deleteSeventhPaperCitedByOthers(applier);
+		deleteSeventhIntellectualPropertyDoc(applier);
 		deleteEighthMajorContributor(applier);
 		deleteNinethMajorOrgContributor(applier);
 	}
@@ -47,6 +49,12 @@ public class DeleteFormsJdbc{
 	
 	public void deleteSecondRefereeUnitOpinion(Applier applier){
 		String sql="delete from secondrefereeunitopinion where applierUid=? ";
+		jdbcTemplateObject.update(sql,applier.getUid());
+		logger.info(sql);
+	}
+	
+	public void deleteSeventhPaperCitedByOthers(Applier applier){
+		String sql="delete from paper_cited_by_others where applierUid=? ";
 		jdbcTemplateObject.update(sql,applier.getUid());
 		logger.info(sql);
 	}

@@ -4,7 +4,6 @@ import com.dicipulus.app.*;
 import com.dicipulus.app.JDBC.*;
 import com.dicipulus.app.model.*;
 import com.dicipulus.app.applicationModel.*;
-import com.dicipulus.app.form.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -120,7 +119,7 @@ public class EditApplicationController<ModleAndView> {
 		logger.info("editInitializeApplication()");
 		try{
 			ApplierJdbc applierJdbc=initApplierJdbc();
-			modelAndView.setViewName("editInitializeApplication");
+			modelAndView.setViewName("edit/editInitializeApplication");
 			Person person = getPersonInRequest(request);
 			modelAndView.addObject("person",applierJdbc.getApplierByUid(person.getUid()));
 			return modelAndView;
@@ -178,7 +177,7 @@ public class EditApplicationController<ModleAndView> {
 			FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
 			Person person = getPersonInRequest(request);
 			FirstProjectBasicSituation firstForm=firstProjectBasicSituationJdbc.getFirstProjectBasicSituation(person.getUid());
-			modelAndView.setViewName("editFirstProjectBasicSituation");
+			modelAndView.setViewName("edit/editFirstProjectBasicSituation");
 			modelAndView.addObject("applier",applierJdbc.getApplierByUid(person.getUid()));
 			modelAndView.addObject("firstForm",firstForm);
 			modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);
@@ -288,7 +287,7 @@ public class EditApplicationController<ModleAndView> {
 			else{
 				SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUitOpinionJdbc();
 				SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
-				modelAndView.setViewName("editSecondRefereeOpinion");
+				modelAndView.setViewName("edit/editSecondRefereeOpinion");
 				modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
 				modelAndView.addObject("applier",applier);//明确推荐单位正在编辑的推荐书是谁的
 				modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
@@ -327,7 +326,7 @@ public class EditApplicationController<ModleAndView> {
 			logger.info("applierUid confirm!");
 			ThirdProjectBriefIntroductionJdbc thirdProjectBriefIntroductionJdbc=initThirdProjectBriefInroductionJdbc();
 			ThirdProjectBriefIntroduction thirdProjectBriefIntroduction=thirdProjectBriefIntroductionJdbc.getThirdProjectBriefIntroduction(person.getUid());
-			modelAndView.setViewName("editThirdBriefIntroduction");
+			modelAndView.setViewName("edit/editThirdBriefIntroduction");
 			modelAndView.addObject("briefIntroductionForm", thirdProjectBriefIntroduction);
 		}
 		catch(NullPointerException e){
@@ -380,7 +379,7 @@ public class EditApplicationController<ModleAndView> {
 			FourthForm fourthForm=fourthFormJdbc.getFourthForm(person.getUid());
 			modelAndView.addObject("fourthForm",fourthForm);
 			
-			modelAndView.setViewName("editFourthForm");
+			modelAndView.setViewName("edit/editFourthForm");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -426,7 +425,7 @@ public class EditApplicationController<ModleAndView> {
 			FifthObjectiveEvaluationJdbc fifthObjectiveEvaluationJdbc=initFifthObjectiveEvaluationJdbc();
 			FifthObjectiveEvaluation fifthObjectiveEvaluation=fifthObjectiveEvaluationJdbc.getFifthObjectiveEvaluation(applierUid);
 			logger.info(fifthObjectiveEvaluation.getObjectiveEvaluation());
-			modelAndView.setViewName("editFifthObjectiveEvaluation");
+			modelAndView.setViewName("edit/editFifthObjectiveEvaluation");
 			modelAndView.addObject("objectiveEvaluationForm", fifthObjectiveEvaluation);
 			return modelAndView;
 		}
@@ -473,7 +472,7 @@ public class EditApplicationController<ModleAndView> {
 			String applierUid=person.getUid();
 			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
 			List<SixthPaperMonographNT> sixthPaperMonographNT=sixthPaperMonographNTJdbc.getAllSixthPaperMonographNT(applierUid);
-			modelAndView.setViewName("manageSixthPaperMonographNT");
+			modelAndView.setViewName("edit/manageSixthPaperMonographNT");
 			modelAndView.addObject("sixthPaperMonographForms", sixthPaperMonographNT);
 			return modelAndView;
 		}
@@ -539,7 +538,7 @@ public class EditApplicationController<ModleAndView> {
 			String applierUid=person.getUid();
 			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
 			SixthPaperMonographNT sixthPaperMonographNT=sixthPaperMonographNTJdbc.getSixthPaperMonographNT(idOfPaperMonograph);
-			modelAndView.setViewName("editSixthPaperMonographNT");
+			modelAndView.setViewName("edit/editSixthPaperMonographNT");
 			modelAndView.addObject("sixthPaperMonograph", sixthPaperMonographNT);
 			return modelAndView;
 		}
@@ -591,7 +590,7 @@ public class EditApplicationController<ModleAndView> {
 			modelAndView.addObject("sixthEconomicAndSocialBenefitForms", sixthEconomicAndSocialBenefit);
 			modelAndView.addObject("sixthApplyUnitSituationForms", sixthApplyUnitSituation);
 			modelAndView.addObject("person", person);
-			modelAndView.setViewName("manageSixthApplyUnitSituation");
+			modelAndView.setViewName("edit/manageSixthApplyUnitSituation");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -679,7 +678,7 @@ public class EditApplicationController<ModleAndView> {
 			SixthApplyUnitSituationJdbc sixthApplyUnitSituationJdbc=InitJdbc.initSixthApplyUnitSituationJdbc();
 			SixthApplyUnitSituation sixthApplyUnitSituation=sixthApplyUnitSituationJdbc.getSixthApplyUnitSituation(idOfApplyUnit);
 			modelAndView.addObject("sixthApplyUnitSituationForm", sixthApplyUnitSituation);
-			modelAndView.setViewName("editSixthApplyUnitSituation");
+			modelAndView.setViewName("edit/editSixthApplyUnitSituation");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -731,7 +730,7 @@ public class EditApplicationController<ModleAndView> {
 			List<SeventhPaperCitedByOthers>  seventhPaperCitedByOtherss = seventhPaperCitedByOthersJdbc.getSeventhPaperCitedByOtherss(person.getUid());
 			modelAndView.addObject("seventhPaperForms", seventhPaperCitedByOtherss);
 			
-			modelAndView.setViewName("manageSeventhPaperCitedByOthers");
+			modelAndView.setViewName("edit/manageSeventhPaperCitedByOthers");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -831,7 +830,7 @@ public class EditApplicationController<ModleAndView> {
 			List<SeventhIntellectualPropertyDoc>  seventhIntellectualPropertyDocs = seventhIntellectualPropertyDocJdbc.getSeventhIntellectualPropertyDocs(person.getUid());
 			modelAndView.addObject("seventhIPForms", seventhIntellectualPropertyDocs);
 			
-			modelAndView.setViewName("manageSeventhIPDoc");
+			modelAndView.setViewName("edit/manageSeventhIPDoc");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -930,7 +929,7 @@ public class EditApplicationController<ModleAndView> {
 			List<EighthMajorContributor>  eighthMajorContributors = eighthMajorContributorJdbc.getEighthMajorContributors(person.getUid());
 			modelAndView.addObject("eighthForms", eighthMajorContributors);
 			
-			modelAndView.setViewName("manageEighthMajorContributor");
+			modelAndView.setViewName("edit/manageEighthMajorContributor");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -995,7 +994,7 @@ public class EditApplicationController<ModleAndView> {
 	 */
 	@RequestMapping(value="/edit-eighth-major-contributor/{idOfEighthForm}",method=RequestMethod.GET)
 	public ModelAndView editEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfEighthForm") int idOfEighthForm){
-		logger.info("editEighthMajorContributor");
+		logger.info("edit/editEighthMajorContributor");
 		try{
 			Person person=getPersonInRequest(request);
 			
@@ -1008,7 +1007,7 @@ public class EditApplicationController<ModleAndView> {
 			EighthMajorContributor eighthMajorContributor=eighthMajorContributorJdbc.getEighthMajorContributor(idOfEighthForm);
 			modelAndView.addObject("eighthForm",eighthMajorContributor);
 			
-			modelAndView.setViewName("editEighthMajorContributor");
+			modelAndView.setViewName("edit/editEighthMajorContributor");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -1060,7 +1059,7 @@ public class EditApplicationController<ModleAndView> {
 			List<NinethMajorOrgContributor>  ninethMajorOrgContributors = ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(person.getUid());
 			modelAndView.addObject("ninethForms", ninethMajorOrgContributors);
 			
-			modelAndView.setViewName("manageNinethOrgContributor");
+			modelAndView.setViewName("edit/manageNinethOrgContributor");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -1138,7 +1137,7 @@ public class EditApplicationController<ModleAndView> {
 			NinethMajorOrgContributor ninethMajorOrgContributor=ninethMajorOrgContributorJdbc.getNinethMajorOrgContributor(idOfNinethForm);
 			modelAndView.addObject("ninethForm",ninethMajorOrgContributor);
 			
-			modelAndView.setViewName("editNinethOrgContributor");
+			modelAndView.setViewName("edit/editNinethOrgContributor");
 			return modelAndView;
 		}
 		catch(NullPointerException e){

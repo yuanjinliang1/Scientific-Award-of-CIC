@@ -2,6 +2,7 @@ package com.dicipulus.app.controller;
 
 import com.dicipulus.app.*;
 import com.dicipulus.app.JDBC.*;
+import com.dicipulus.app.formController.FormControllerUlti;
 import com.dicipulus.app.model.*;
 
 import java.text.DateFormat;
@@ -55,7 +56,7 @@ public class SelfManagedByRefereeController {
 	}
 	
 	private boolean isAuthenticated(HttpServletRequest request, String refereeUid) {
-		Person person = getPersonInRequest(request);
+		Person person = FormControllerUlti.getPersonInRequest(request);
 		logger.info("session uid=" + person.getUid() + ", " + "refereeUid="
 				+ refereeUid);
 		if (person.getUid().equals(refereeUid)) {
@@ -91,7 +92,7 @@ public class SelfManagedByRefereeController {
 				}
 				else{
 					logger.info("authentication confirmed!");
-					RefereeJdbc refereeJdbc=initRefereeJdbc();
+					RefereeJdbc refereeJdbc=InitJdbc.initRefereeJdbc();
 					
 					modelAndView.setViewName("selfManagedByReferee");
 					modelAndView.addObject("person",refereeJdbc.getRefereeByUid(refereeUid));
@@ -109,10 +110,10 @@ public class SelfManagedByRefereeController {
 	public String changepassword(HttpServletRequest request, String passwordOld,
 			String passwordNew1, String passwordNew2,Person person){
 		logger.info("changePassword()");
-		Person personSession =getPersonInRequest(request);
+		Person personSession =FormControllerUlti.getPersonInRequest(request);
 		if(isAuthenticated(request, person.getUid())&&passwordCheck(passwordOld,person.getUid())){
 			if(passwordNew1.equals(passwordNew2)){
-				RefereeJdbc refereeJdbc=initRefereeJdbc();
+				RefereeJdbc refereeJdbc=InitJdbc.initRefereeJdbc();
 				refereeJdbc.changePassword(person.getUid(), passwordNew2);
 			}
 			else{

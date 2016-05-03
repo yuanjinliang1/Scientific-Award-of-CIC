@@ -43,7 +43,7 @@ public final class InitJdbc{
 		context.registerShutdownHook();
 		return refereeJdbc;
 	}
-	private static AdminJdbc initAdminJdbc(){
+	public static AdminJdbc initAdminJdbc(){
 		AbstractApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 		AdminJdbc adminJdbc=(AdminJdbc)context.getBean("adminJdbc");
 		context.registerShutdownHook();//shutdown application context, from tutorialpoints.com
@@ -74,14 +74,14 @@ public final class InitJdbc{
 		return firstProjectBasicSituationJdbc;
 	}
 	
-	public static SecondRefereeUnitOpinionJdbc initSecondRefereeUitOpinionJdbc(){
+	public static SecondRefereeUnitOpinionJdbc initSecondRefereeUnitOpinionJdbc(){
 		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
 		SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=(SecondRefereeUnitOpinionJdbc) context.getBean("secondRefereeUnitOpinionJdbc");
 		context.registerShutdownHook();
 		return secondRefereeUnitOpinionJdbc;
 	}
 	
-	public static ThirdProjectBriefIntroductionJdbc initThirdProjectBriefIntroductioJdbcn(){
+	public static ThirdProjectBriefIntroductionJdbc initThirdProjectBriefIntroductionJdbc(){
 		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
 		ThirdProjectBriefIntroductionJdbc thirdProjectBriefIntroductionJdbc=(ThirdProjectBriefIntroductionJdbc) context.getBean("thirdProjectBriefIntroductionJdbc");
 		context.registerShutdownHook();

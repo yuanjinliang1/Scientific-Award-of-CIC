@@ -1,4 +1,4 @@
-package com.dicipulus.app.controller;
+package com.dicipulus.app.formController;
 
 import com.dicipulus.app.*;
 import com.dicipulus.app.JDBC.*;
@@ -93,7 +93,7 @@ public class ConfirmApplicationController{
 	}
 	
 	private void setRefereeInformationForFirstForm(String applierUid){
-		SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUitOpinionJdbc();
+		SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
 		SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
 		
 		FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
@@ -104,7 +104,7 @@ public class ConfirmApplicationController{
 	public String confirmWholeApplicationByApplier(HttpServletRequest request){
 		logger.info("confirmWholeApplicationByApplier");
 		try{
-			Person person=getPersonInRequest(request);
+			Person person=FormControllerUlti.getPersonInRequest(request);
 			setMajorContributorsForFirstForm(person.getUid());
 			setMajorContributingOrgNamesForFirstForm(person.getUid());
 			return "redirect:/read-first-project-basic-situation/"+person.getUid();
@@ -119,7 +119,7 @@ public class ConfirmApplicationController{
 	public String confirmRefereeUnitOpinionByReferee(HttpServletRequest request, String applierUid){
 		logger.info("confirmRefereeUnitOpinionByReferee");
 		try{
-			Person person=getPersonInRequest(request);
+			Person person=FormControllerUlti.getPersonInRequest(request);
 			setRefereeInformationForFirstForm(applierUid);
 			return "redirect:/read-referee-unit-opinion/"+applierUid;
 		}

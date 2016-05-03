@@ -2,6 +2,7 @@ package com.dicipulus.app.controller;
 
 import com.dicipulus.app.*;
 import com.dicipulus.app.JDBC.*;
+import com.dicipulus.app.formController.FormControllerUlti;
 import com.dicipulus.app.model.*;
 
 import java.text.DateFormat;
@@ -55,7 +56,6 @@ public class SelfManagedByAdminController {
 		return adminJdbc;
 	}
 	
-	//only when session and ownerUid in url match with each other, authentication is granted
 	private boolean isAuthenticated(HttpServletRequest request){
 		HttpSession session= request.getSession();
 		Person person =(Person) session.getAttribute("person");
@@ -91,7 +91,7 @@ public class SelfManagedByAdminController {
 				}
 				else{
 					logger.info("authentication confirmed!");
-					AdminJdbc adminJdbc=initAdminJdbc();
+					AdminJdbc adminJdbc=InitJdbc.initAdminJdbc();
 					
 					modelAndView.setViewName("selfManagedByAdmin");
 					modelAndView.addObject("person",adminJdbc.getAdmin());
@@ -109,10 +109,10 @@ public class SelfManagedByAdminController {
 	public String changepassword(HttpServletRequest request, String passwordOld,
 			String passwordNew1, String passwordNew2,Person person){
 		logger.info("changePassword()");
-		Person personSession =getPersonInRequest(request);
+		Person personSession =FormControllerUlti.getPersonInRequest(request);
 		if(isAuthenticated(request)&&passwordCheck(passwordOld)){
 			if(passwordNew1.equals(passwordNew2)){
-				AdminJdbc adminJdbc=initAdminJdbc();
+				AdminJdbc adminJdbc=InitJdbc.initAdminJdbc();
 				adminJdbc.changePassword(passwordNew2);
 			}
 			else{

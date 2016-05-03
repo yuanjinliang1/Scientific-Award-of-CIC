@@ -71,7 +71,7 @@ public class RefereeManagedByAdminController{
 			}
 			else{
 				logger.info("authentication confirmed!");
-				RefereeJdbc refereeJdbc=initRefereeJdbc();
+				RefereeJdbc refereeJdbc=InitJdbc.initRefereeJdbc();
 				modelAndView.setViewName("refereeManagedByAdmin");
 				modelAndView.addObject("referees",refereeJdbc.getReferees());
 				return modelAndView;
@@ -87,7 +87,7 @@ public class RefereeManagedByAdminController{
 	@RequestMapping(value="/referee-managed-by-admin/referee-create", method=RequestMethod.POST)
 	public String createReferee(String uid, String name){
 		logger.info("createReferee("+name+")");
-		RefereeJdbc refereeJdbc=initRefereeJdbc();
+		RefereeJdbc refereeJdbc=InitJdbc.initRefereeJdbc();
 		
 		refereeJdbc.createReferee(uid, name);
 		return "redirect:referee-view";
@@ -96,7 +96,7 @@ public class RefereeManagedByAdminController{
 	@RequestMapping(value="/referee-managed-by-admin/reset-password", method=RequestMethod.GET)
 	public String resetPassword( @RequestParam String uid){
 		logger.info("resetPassword()");
-		RefereeJdbc refereeJdbc=initRefereeJdbc();
+		RefereeJdbc refereeJdbc=InitJdbc.initRefereeJdbc();
 		
 		refereeJdbc.resetPassword(uid);
 		return "redirect:/referee-managed-by-admin/referee-view";
@@ -105,7 +105,7 @@ public class RefereeManagedByAdminController{
 	@RequestMapping(value="/referee-managed-by-admin/delete-referee", method=RequestMethod.GET)
 	public String deleteReferee( @RequestParam String uid){
 		logger.info("deleteReferee()");
-		RefereeJdbc refereeJdbc=initRefereeJdbc();
+		RefereeJdbc refereeJdbc=InitJdbc.initRefereeJdbc();
 		
 		refereeJdbc.deleteReferee(uid);
 		return "redirect:/referee-managed-by-admin/referee-view";

@@ -2,6 +2,7 @@ package com.dicipulus.app.controller;
 
 import com.dicipulus.app.*;
 import com.dicipulus.app.JDBC.*;
+import com.dicipulus.app.formController.FormControllerUlti;
 import com.dicipulus.app.model.*;
 
 import java.text.DateFormat;
@@ -60,7 +61,7 @@ public class SelfManagedByApplierController {
 	// only when session and ownerUid in url match with each other,
 	// authentication is granted
 	private boolean isAuthenticated(HttpServletRequest request, String applierUid) {
-		Person person = getPersonInRequest(request);
+		Person person = FormControllerUlti.getPersonInRequest(request);
 		logger.info("session uid=" + person.getUid() + ", " + "applierUid="
 				+ applierUid);
 		if (person.getUid().equals(applierUid)) {
@@ -71,7 +72,7 @@ public class SelfManagedByApplierController {
 	}
 	
 	private boolean passwordCheck(String password, String applierUid){
-		ApplierJdbc applierJdbc= initApplierJdbc();
+		ApplierJdbc applierJdbc= InitJdbc.initApplierJdbc();
 		if(applierJdbc.getApplierByUid(applierUid).getPassword().equals(password)){
 			return true;
 		}
@@ -93,7 +94,7 @@ public class SelfManagedByApplierController {
 				}
 				else{
 					logger.info("authentication confirmed!");
-					ApplierJdbc applierJdbc=initApplierJdbc();
+					ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 					
 					modelAndView.setViewName("selfManagedByApplier");
 					modelAndView.addObject("person",applierJdbc.getApplierByUid(applierUid));
@@ -110,9 +111,9 @@ public class SelfManagedByApplierController {
 	@RequestMapping(value="/self-managed-by-applier/change-name",method=RequestMethod.POST)
 	public String changeName(HttpServletRequest request, String name,Person person){
 		logger.info("changeName()");
-		Person personSession =getPersonInRequest(request);
+		Person personSession =FormControllerUlti.getPersonInRequest(request);
 		if(isAuthenticated(request, person.getUid())){
-			ApplierJdbc applierJdbc=initApplierJdbc();
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			applierJdbc.changeName(personSession.getUid(),name);
 			return "redirect:/self-managed-by-applier/"+personSession.getUid();
 		}
@@ -125,10 +126,10 @@ public class SelfManagedByApplierController {
 	public String changepassword(HttpServletRequest request, String passwordOld,
 			String passwordNew1, String passwordNew2,Person person){
 		logger.info("changePassword()");
-		Person personSession =getPersonInRequest(request);
+		Person personSession =FormControllerUlti.getPersonInRequest(request);
 		if(isAuthenticated(request, person.getUid())&&passwordCheck(passwordOld,person.getUid())){
 			if(passwordNew1.equals(passwordNew2)){
-				ApplierJdbc applierJdbc=initApplierJdbc();
+				ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 				applierJdbc.changePassword(person.getUid(), passwordNew2);
 			}
 			else{

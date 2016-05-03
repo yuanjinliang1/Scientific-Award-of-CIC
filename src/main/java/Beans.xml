@@ -61,4 +61,13 @@
 	   <bean id="ninethMajorOrgContributorJdbc" class="com.dicipulus.app.JDBC.NinethMajorOrgContributorJdbc">
 	   	<property name="dataSource" ref="dataSource"></property>
 	   </bean>
+	   <bean id="sixthApplyUnitSituationJdbc" class="com.dicipulus.app.JDBC.SixthApplyUnitSituationJdbc">
+	   	<property name="dataSource" ref="dataSource"></property>
+	   </bean>
+	   <bean id="sixthEconomicAndSocialBenefitJdbc" class="com.dicipulus.app.JDBC.SixthEconomicAndSocialBenefitJdbc">
+	   	<property name="dataSource" ref="dataSource"></property>
+	   </bean>
+	   <bean id="sixthPaperMonographNTJdbc" class="com.dicipulus.app.JDBC.SixthPaperMonographNTJdbc">
+	   	<property name="dataSource" ref="dataSource"></property>
+	   </bean>
 </beans>

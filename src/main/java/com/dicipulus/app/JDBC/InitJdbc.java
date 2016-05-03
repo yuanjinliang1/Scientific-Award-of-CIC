@@ -102,6 +102,28 @@ public final class InitJdbc{
 		return fifthObjectiveEvaluationJdbc;
 	}
 	
+
+	public static SixthApplyUnitSituationJdbc initSixthApplyUnitSituationJdbc(){
+		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+		SixthApplyUnitSituationJdbc sixthAppliedUnitSituation=(SixthApplyUnitSituationJdbc) context.getBean("sixthApplyUnitSituationJdbc");
+		context.registerShutdownHook();
+		return sixthAppliedUnitSituation;
+	}
+	
+	public static SixthEconomicAndSocialBenefitJdbc initSixthEconomicAndSocialBenefitJdbc(){
+		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+		SixthEconomicAndSocialBenefitJdbc sixthEconomicAndSocialBenefitJdbc=(SixthEconomicAndSocialBenefitJdbc) context.getBean("sixthEconomicAndSocialBenefitJdbc");
+		context.registerShutdownHook();
+		return sixthEconomicAndSocialBenefitJdbc;
+	}
+	
+	public static SixthPaperMonographNTJdbc initSixthPaperMonographNTJdbc(){
+		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+		SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=(SixthPaperMonographNTJdbc) context.getBean("sixthPaperMonographNTJdbc");
+		context.registerShutdownHook();
+		return sixthPaperMonographNTJdbc;
+	}
+
 	public static SeventhPaperCitedByOthersJdbc initSeventhPaperCitedByOthersJdbc(){
 		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
 		SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=(SeventhPaperCitedByOthersJdbc) context.getBean("seventhPaperCitedByOthersJdbc");

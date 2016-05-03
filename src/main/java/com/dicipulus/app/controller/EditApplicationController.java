@@ -702,7 +702,7 @@ public class EditApplicationController<ModleAndView> {
 			String applierUid=person.getUid();
 			SixthApplyUnitSituationJdbc sixthApplyUnitSituationJdbc=InitJdbc.initSixthApplyUnitSituationJdbc();
 			sixthApplyUnitSituationJdbc.updateSixthApplyUnitSituation(sixthApplyUnitSituation, idOfApplyUnit);
-			return "redirect:/edit-sixth-apply-unit-situation"+sixthApplyUnitSituation.getIdOfApplyUnit();
+			return "redirect:/edit-sixth-apply-unit-situation/"+sixthApplyUnitSituation.getIdOfApplyUnit();
 		}
 		catch(NullPointerException e){
 			logger.info("session null pointer!");

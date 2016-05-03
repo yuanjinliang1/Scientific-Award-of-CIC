@@ -43,8 +43,8 @@ public class SixthApplyUnitSituationJdbc {
 		
 	}
 	public void updateSixthApplyUnitSituation(SixthApplyUnitSituation sixthApplyUnitSituation,int idOfApplyUnit){
-		String sql="update apply_unit_situation set applyTechnology=?,startDate=?,contactAndPhoneNumber=?,applySituation=? where idOfApplyUnit=?";
-		jdbcTemplate.update(sql, new Object[] {sixthApplyUnitSituation.getApplyTechnology(),sixthApplyUnitSituation.getStartDate(),sixthApplyUnitSituation.getContactAndPhoneNumber(),sixthApplyUnitSituation.getApplySituation(),idOfApplyUnit});
+		String sql="update apply_unit_situation set unitName=?,applyTechnology=?,startDate=?,contactAndPhoneNumber=?,applySituation=? where idOfApplyUnit=?";
+		jdbcTemplate.update(sql, new Object[] {sixthApplyUnitSituation.getUnitName(),sixthApplyUnitSituation.getApplyTechnology(),sixthApplyUnitSituation.getStartDate(),sixthApplyUnitSituation.getContactAndPhoneNumber(),sixthApplyUnitSituation.getApplySituation(),idOfApplyUnit});
 		logger.info(sql+" success!");
 	}
 	

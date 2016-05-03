@@ -207,7 +207,7 @@ request.setCharacterEncoding("UTF-8");
 				<c:if test="${applier.applicationType=='科技进步类'||applier.applicationType=='技术发明类' }">
 					<input type="button" onclick="location.href='manage-seventh-ip-doc';" value="第七页">
 				</c:if>
-				<c:if test="${applier.applicationType=='科技进步类'||applier.applicationType=='自然科学类' }">
+				<c:if test="${applier.applicationType=='自然科学类' }">
 					<input type="button" onclick="location.href='manage-seventh-paper-cited-by-others';" value="第七页">
 				</c:if>
 				<input type="button" onclick="location.href='manage-eighth-major-contributor';" value="第八页">

@@ -7,6 +7,7 @@ import java.util.Random;
 import javax.sql.DataSource;
 
 import com.dicipulus.app.applicationModel.FirstProjectBasicSituation;
+import com.dicipulus.app.applicationModel.SecondRefereeUnitOpinion;
 import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Referee;
 
@@ -61,5 +62,24 @@ public class FirstProjectBasicSituationJdbc{
 				firstForm.getApplierUid());
 		logger.info(sql);
 		logger.info(firstForm.toString());
+	}
+	
+	public void setMajorContributorNames(String majorContributorNames,String applierUid ){
+		String sql="update project_major set majorContributorNames=? where applierUid=?";
+		jdbcTemplateObject.update(sql,majorContributorNames,applierUid);
+		logger.info(sql);
+		logger.info("majorContributorNames:"+majorContributorNames);
+	}
+	
+	public void setMajorContributingOrgNames(String majorContributingOrgNames, String applierUid){
+		String sql="update project_major set majorContributingOrgNames=? where applierUid=?";
+		jdbcTemplateObject.update(sql,majorContributingOrgNames,applierUid);
+		logger.info(sql);
+		logger.info("majorContributingOrgNames:"+majorContributingOrgNames);
+	}
+	
+	public void setRefereeInformation(SecondRefereeUnitOpinion secondForm,String applierUid){
+		String sql="update project_major set refereeString=?,refereeContactName=?,refereeContactPhone=?,RefereeContactEmail=? where applierUid=?";
+		jdbcTemplateObject.update(sql,secondForm.getRefereeUnitName(),secondForm.getContact(),secondForm.getPhoneNumber(),secondForm.getEmail(),applierUid);
 	}
 }

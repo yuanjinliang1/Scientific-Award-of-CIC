@@ -75,6 +75,11 @@ request.setCharacterEncoding("UTF-8");
 		<tr><td><input type="submit" value="保存"/></td></tr>
 	</table>
 	</form>
+				<c:url value="/confirm-referee-unit-opinion-by-referee" var="submitURL">
+					<c:param name="applierUid" value="${secondForm.applierUid }"></c:param>
+				</c:url>
+	
+				<input type="button" onclick="location.href='${submitURL}';" value="确认提交">
 	
 	
 </body>

@@ -3,6 +3,8 @@ package com.dicipulus.app.applicationModel;
  *科技进步奖  二、推荐单位意见
  */
 public class SecondRefereeUnitOpinion {
+	private String applierUid;
+	
 	protected String refereeUnitName;//推荐单位名称
 	protected String postAddress;//通讯地址
 	protected String zipCode;//邮编
@@ -14,6 +16,12 @@ public class SecondRefereeUnitOpinion {
 	protected String declaration=Constants.REFEREEUNITOPINIONDECLARATIONS;//声明
 	protected String referingScienceTechnologyAwardRank;
 	
+	public String getApplierUid() {
+		return applierUid;
+	}
+	public void setApplierUid(String applierUid) {
+		this.applierUid = applierUid;
+	}
 	public String getRefereeUnitName() {
 		return refereeUnitName;
 	}

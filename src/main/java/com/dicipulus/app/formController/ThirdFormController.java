@@ -1,5 +1,6 @@
 package com.dicipulus.app.formController;
 
+import javax.security.sasl.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -7,14 +8,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dicipulus.app.JDBC.ApplierJdbc;
 import com.dicipulus.app.JDBC.InitJdbc;
 import com.dicipulus.app.JDBC.ThirdProjectBriefIntroductionJdbc;
 import com.dicipulus.app.applicationModel.ThirdProjectBriefIntroduction;
+import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Person;
 
 @Controller
@@ -58,28 +62,35 @@ public class ThirdFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/display-brief-introduction",method=RequestMethod.GET)
-	public ModelAndView displayuThirdProjectBriefIntroduction(HttpServletRequest request,ModelAndView modelAndView){
+	@RequestMapping(value="/display-brief-introduction/{applierUid}",method=RequestMethod.GET)
+	public ModelAndView displayuThirdProjectBriefIntroduction(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info("displayThirdProjectBriefIntroduction");
 		try{
 			Person person=(Person) request.getSession().getAttribute("person");
-			String applierUid=person.getUid();
-			if(applierUid.equals("")){
-				modelAndView.setViewName("redirect:/login");
-				return modelAndView;
-			}
-			logger.info("applierUid confirm!");
+			
 			ThirdProjectBriefIntroductionJdbc thirdProjectBriefIntroductionJdbc=InitJdbc.initThirdProjectBriefIntroductionJdbc();
-			ThirdProjectBriefIntroduction thirdProjectBriefIntroduction=thirdProjectBriefIntroductionJdbc.getThirdProjectBriefIntroduction(person.getUid());
+			ThirdProjectBriefIntroduction thirdProjectBriefIntroduction=thirdProjectBriefIntroductionJdbc.getThirdProjectBriefIntroduction(applierUid);
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			modelAndView.addObject("applier", applier);
+			
+			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			
 			modelAndView.setViewName("displayform/displayThirdBriefIntroduction");
 			modelAndView.addObject("briefIntroductionForm", thirdProjectBriefIntroduction);
+			return modelAndView;
 		}
 		catch(NullPointerException e){
 			logger.info("get exception!");
 			modelAndView.setViewName("redirect:/login");
 			return modelAndView;
 		}
-		return modelAndView;
+		catch(AuthenticationException e){
+			logger.info(e.toString());
+			modelAndView.setViewName("redirect:/noAuthentication");
+			return modelAndView;
+		}
 	}
 	
 	/**

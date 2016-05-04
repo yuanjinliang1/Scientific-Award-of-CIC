@@ -1,5 +1,6 @@
 package com.dicipulus.app.formController;
 
+import javax.security.sasl.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -123,20 +124,17 @@ public class SecondFormController {
 			Person person=FormControllerUlti.getPersonInRequest(request);
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			if(isAuthenticated(applier, person)==false){
-				modelAndView.setViewName("redirect:/login");
-				logger.info("No authentication to this applier!");
-				return modelAndView;
-			}
-			else{
-				SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
-				SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
-				modelAndView.setViewName("displayform/displaySecondRefereeOpinion");
-				modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
-				modelAndView.addObject("applier",applier);//明确推荐单位正在编辑的推荐书是谁的
-				modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
-				return modelAndView;
-			}
+			
+			SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
+			SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
+			modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
+			modelAndView.addObject("applier",applier);//明确推荐单位正在编辑的推荐书是谁的
+			modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
+			
+			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+
+			modelAndView.setViewName("displayform/displaySecondRefereeOpinion");
+			return modelAndView;
 		}
 		catch(NullPointerException e){
 			modelAndView.setViewName("redirect:/login");
@@ -147,6 +145,11 @@ public class SecondFormController {
 			logger.info("forms have not been created!");
 			Person person=FormControllerUlti.getPersonInRequest(request);
 			modelAndView.setViewName("redirect:/applier-managed-by-referee/applier-view/"+person.getUid());
+			return modelAndView;
+		}
+		catch(AuthenticationException e){
+			logger.info(e.toString());
+			modelAndView.setViewName("redirect:/noAuthentication");
 			return modelAndView;
 		}
 	}

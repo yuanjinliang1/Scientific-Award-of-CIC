@@ -17,11 +17,6 @@ request.setCharacterEncoding("UTF-8");
 <title>六、论文专著目录</title>
 </head>
 <body>
-	<form action="/app/create-paper-monograph" method="POST" >
-		<table>
-			<tr><td><input type="submit" value="添加"></td></tr>
-		</table>
-	</form>
 	<table>
 		<tr>
 			<td>论文专注名称</td>
@@ -39,5 +34,7 @@ request.setCharacterEncoding("UTF-8");
 				</tr>
 			</c:forEach>
 	</table>
+	
+	<jsp:include page="fragments/footerPagination.jsp"></jsp:include>
 </body>
 </html>

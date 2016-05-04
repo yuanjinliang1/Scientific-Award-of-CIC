@@ -22,15 +22,6 @@ request.setCharacterEncoding("UTF-8");
 </h1>
 <c:out value="${person.name }"></c:out>
 
-<form action="/app/create-seventh-paper-cited-by-others" method="POST" >
-<table>
-	<tr>
-		<td><input type="submit" value="添加被引用论文专著" name="create"/></td>
-	</tr>
-</table>
-</form>
-
-
 	<table border="1">
 		<tr>
 			<td>序号</td>
@@ -41,24 +32,17 @@ request.setCharacterEncoding("UTF-8");
 			<td>操作</td>
 		</tr>
 		<c:forEach var="seventhPaperForm" items="${seventhPaperForms }">
-			<spring:url value="/save-seventh-paper-cited-by-others/{idOfSeventhPaperForm}" var="saveURL">
-				<spring:param name="idOfSeventhPaperForm" value="${seventhPaperForm.idOfSeventhPaperForm}"></spring:param>
-			</spring:url>
-			<form id="seventhPaperFormer" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="seventhPaperFormAttr">
-				<tr>
-					<td>${seventhPaperForm.rankOfPaper}</td>
-					<td>${seventhPaperForm.doiOfPaper} </td>
-					<td>${seventhPaperForm.titleAndAuthorOfPaper} </td>
-					<td>${seventhPaperForm.journalAndIF} </td>
-					<fmt:formatDate pattern="yyyy-MM-dd"  value="${seventhPaperForm.publishDate }" var="publishDateVar" />
-					<td>${publishDateVar}</td>
-					<td>
-						<input type="submit" value="保存并查看" />
-					</td>
-				</tr>
-			</form>
+		<tr>
+			<td>${seventhPaperForm.rankOfPaper}</td>
+			<td>${seventhPaperForm.doiOfPaper} </td>
+			<td>${seventhPaperForm.titleAndAuthorOfPaper} </td>
+			<td>${seventhPaperForm.journalAndIF} </td>
+			<fmt:formatDate pattern="yyyy-MM-dd"  value="${seventhPaperForm.publishDate }" var="publishDateVar" />
+			<td>${publishDateVar}</td>
+		</tr>
 		</c:forEach>
 	</table>
-
+	
+	<jsp:include page="fragments/footerPagination.jsp"></jsp:include>
 </body>
 </html>

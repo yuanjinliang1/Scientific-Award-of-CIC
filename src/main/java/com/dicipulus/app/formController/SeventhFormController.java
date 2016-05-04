@@ -2,6 +2,7 @@ package com.dicipulus.app.formController;
 
 import java.util.List;
 
+import javax.security.sasl.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -29,7 +30,7 @@ public class SeventhFormController {
 	private static final Logger logger = LoggerFactory.getLogger(SeventhFormController.class);
 	
 	/**
-	 * 项目组编辑第七知识产权表LIST GET
+	 * 项目组编辑第七论文被引用LIST GET
 	 * @param request
 	 * @param modelAndView
 	 * @return
@@ -59,24 +60,26 @@ public class SeventhFormController {
 	}
 	
 	/**
-	 * 浏览第七知识产权表LIST GET
+	 * 浏览第七论文被引用LIST GET
 	 * @param request
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/select-seventh-paper-cited-by-others",method=RequestMethod.GET)
-	public ModelAndView selectSeventhPaperCitedByOthers(HttpServletRequest request,ModelAndView modelAndView){
+	@RequestMapping(value="/select-seventh-paper-cited-by-others/{applierUid}",method=RequestMethod.GET)
+	public ModelAndView selectSeventhPaperCitedByOthers(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info("selectSeventhPaperCitedByOthers");
 		try{
 			Person person=FormControllerUlti.getPersonInRequest(request);
 			
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier= applierJdbc.getApplierByUid(person.getUid());
+			Applier applier= applierJdbc.getApplierByUid(applierUid);
 			modelAndView.addObject("applier",applier);
 			
 			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
-			List<SeventhPaperCitedByOthers>  seventhPaperCitedByOtherss = seventhPaperCitedByOthersJdbc.getSeventhPaperCitedByOtherss(person.getUid());
+			List<SeventhPaperCitedByOthers>  seventhPaperCitedByOtherss = seventhPaperCitedByOthersJdbc.getSeventhPaperCitedByOtherss(applierUid);
 			modelAndView.addObject("seventhPaperForms", seventhPaperCitedByOtherss);
+			
+			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
 			
 			modelAndView.setViewName("displayform/selectSeventhPaperCitedByOthers");
 			return modelAndView;
@@ -84,6 +87,11 @@ public class SeventhFormController {
 		catch(NullPointerException e){
 			logger.info("session null pointer!");
 			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+		catch(AuthenticationException e){
+			logger.info(e.toString());
+			modelAndView.setViewName("redirect:/noAuthentication");
 			return modelAndView;
 		}
 	}
@@ -194,19 +202,21 @@ public class SeventhFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/select-seventh-ip-doc",method=RequestMethod.GET)
-	public ModelAndView selectSeventhIntellectualPropertyDoc(HttpServletRequest request,ModelAndView modelAndView){
+	@RequestMapping(value="/select-seventh-ip-doc/{applierUid}",method=RequestMethod.GET)
+	public ModelAndView selectSeventhIntellectualPropertyDoc(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info("selectSeventhIntellectualPropertyDoc");
 		try{
 			Person person=FormControllerUlti.getPersonInRequest(request);
 			
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier= applierJdbc.getApplierByUid(person.getUid());
+			Applier applier= applierJdbc.getApplierByUid(applierUid);
 			modelAndView.addObject("applier",applier);
 			
 			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
-			List<SeventhIntellectualPropertyDoc>  seventhIntellectualPropertyDocs = seventhIntellectualPropertyDocJdbc.getSeventhIntellectualPropertyDocs(person.getUid());
+			List<SeventhIntellectualPropertyDoc>  seventhIntellectualPropertyDocs = seventhIntellectualPropertyDocJdbc.getSeventhIntellectualPropertyDocs(applierUid);
 			modelAndView.addObject("seventhIPForms", seventhIntellectualPropertyDocs);
+			
+			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
 			
 			modelAndView.setViewName("displayform/selectSeventhIPDoc");
 			return modelAndView;
@@ -214,6 +224,11 @@ public class SeventhFormController {
 		catch(NullPointerException e){
 			logger.info("session null pointer!");
 			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+		catch(AuthenticationException e){
+			logger.info(e.toString());
+			modelAndView.setViewName("redirect:/noAuthentication");
 			return modelAndView;
 		}
 	}

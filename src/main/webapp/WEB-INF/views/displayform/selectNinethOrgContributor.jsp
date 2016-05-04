@@ -21,13 +21,6 @@ request.setCharacterEncoding("UTF-8");
 </h1>
 <c:out value="${person.name }"></c:out>
 
-<form action="/app/create-nineth-major-org-contributor" method="POST" >
-<table>
-	<tr>
-		<td><input type="submit" value="添加主要完成单位" name="create"/></td>
-	</tr>
-</table>
-</form>
 <table border="1">
 	<tr>
 		<td>排名</td>
@@ -48,20 +41,6 @@ request.setCharacterEncoding("UTF-8");
 		</tr>
 	</c:forEach>
 </table>
-				<input type="button" onclick="location.href='edit-first-project-basic-situation';" value="第一页">
-				<input type="button" onclick="location.href='edit-brief-introduction';" value="第三页">
-				<input type="button" onclick="location.href='edit-fourth-form';" value="第四页">
-				<input type="button" onclick="location.href='edit-objective-evaluation';" value="第五页">
-				<c:if test="${applier.applicationType=='科技进步类'||applier.applicationType=='技术发明类' }">
-					<input type="button" onclick="location.href='/app/manage-apply-unit-situation';" value="第六页">
-					<input type="button" onclick="location.href='manage-seventh-ip-doc';" value="第七页">
-				</c:if>
-				<c:if test="${applier.applicationType=='自然科学类' }">
-					<input type="button" onclick="location.href='/app/manage-paper-monograph';" value="第七页">
-					<input type="button" onclick="location.href='manage-seventh-paper-cited-by-others';" value="第六页">
-				</c:if>
-				<input type="button" onclick="location.href='manage-eighth-major-contributor';" value="第八页">
-				<input type="button" onclick="location.href='app/manage-nineth-major-org-contributor';" value="第九页">
-				<input type="button" onclick="location.href='confirm-whole-application-by-applier';" value="确认提交">
+<jsp:include page="fragments/footerPagination.jsp"></jsp:include>
 </body>
 </html>

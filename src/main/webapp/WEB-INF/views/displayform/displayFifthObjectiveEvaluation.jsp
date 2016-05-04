@@ -12,24 +12,14 @@ request.setCharacterEncoding("UTF-8");
 <title>五、客观评价</title>
 </head>
 <body>
-	<form id="fifthFormer" action="/app/edit-objective-evaluation" method="POST" modelAttribute="objectiveEvaluation">
-		<table>
-			<tr>
-				<td>五、客观评价</td>
-			</tr>
-			<tr>
-				<td>${objectiveEvaluationForm.objectiveEvaluation}</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="submit" value="保存并查看" />
-					<input type="button" onclick="location.href='edit-first-project-basic-situation';" value="第一页">
-					<input type="button" onclick="location.href='edit-brief-introduction';" value="第三页">
-					<input type="button" onclick="location.href='edit-fourth-form';" value="第四页">
-					<input type="button" onclick="location.href='edit-objective-evaluation';" value="第五页">
-				</td>
-			</tr>
-		</table>
-	</form>
+	<table>
+		<tr>
+			<td>五、客观评价</td>
+		</tr>
+		<tr>
+			<td>${objectiveEvaluationForm.objectiveEvaluation}</td>
+		</tr>
+	</table>
+	<jsp:include page="fragments/footerPagination.jsp"></jsp:include>
 </body>
 </html>

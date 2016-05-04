@@ -1,11 +1,13 @@
 package com.dicipulus.app.formController;
 
+import javax.security.sasl.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -59,18 +61,20 @@ public class FourthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/display-fourth-form",method=RequestMethod.GET)
-	public ModelAndView displayFourthForm(HttpServletRequest request, ModelAndView modelAndView){
+	@RequestMapping(value="/display-fourth-form/{applierUid}",method=RequestMethod.GET)
+	public ModelAndView displayFourthForm(HttpServletRequest request, ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info("initFourthForm");
 		try{
 			Person person= FormControllerUlti.getPersonInRequest(request);
 			
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(person.getUid());
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
 			modelAndView.addObject("applier",applier);
 			
+			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			
 			FourthFormJdbc fourthFormJdbc=InitJdbc.initFourthFormJdbc();
-			FourthForm fourthForm=fourthFormJdbc.getFourthForm(person.getUid());
+			FourthForm fourthForm=fourthFormJdbc.getFourthForm(applierUid);
 			modelAndView.addObject("fourthForm",fourthForm);
 			
 			modelAndView.setViewName("displayform/displayFourthForm");
@@ -79,6 +83,11 @@ public class FourthFormController {
 		catch(NullPointerException e){
 			logger.info("get exception!");
 			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+		catch(AuthenticationException e){
+			logger.info(e.toString());
+			modelAndView.setViewName("redirect:/noAuthentication");
 			return modelAndView;
 		}
 	}

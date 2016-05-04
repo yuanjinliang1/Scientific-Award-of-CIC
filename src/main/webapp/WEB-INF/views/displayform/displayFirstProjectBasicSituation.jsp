@@ -17,7 +17,6 @@ request.setCharacterEncoding("UTF-8");
 	<title>一、项目基本情况</title>
 </head>
 <body>
-<form id="firstFormer" action="/app/save-first-project-basic-situation" method="POST" modelAttribute="firstFormAttr">
 	<table border="1">
 		<tr>
 			<td>推荐单位（盖章）或推荐专家</td>
@@ -139,29 +138,8 @@ request.setCharacterEncoding("UTF-8");
 			<td>项目联系人邮箱</td>
 			<td>${firstForm.applierContactEmail }</td>
 		</tr>
-		
-		
-		<tr>
-			<td><input type="submit" value="保存并查看" /></td>
-			<td>
-				<input type="button" onclick="location.href='edit-first-project-basic-situation';" value="第一页">
-				<input type="button" onclick="location.href='edit-brief-introduction';" value="第三页">
-				<input type="button" onclick="location.href='edit-fourth-form';" value="第四页">
-				<input type="button" onclick="location.href='edit-objective-evaluation';" value="第五页">
-				<c:if test="${applier.applicationType=='科技进步类'||applier.applicationType=='技术发明类' }">
-					<input type="button" onclick="location.href='manage-seventh-ip-doc';" value="第七页">
-				</c:if>
-				<c:if test="${applier.applicationType=='自然科学类' }">
-					<input type="button" onclick="location.href='manage-seventh-paper-cited-by-others';" value="第七页">
-				</c:if>
-				<input type="button" onclick="location.href='manage-eighth-major-contributor';" value="第八页">
-				<input type="button" onclick="location.href='manage-nineth-major-org-contributor';" value="第九页">
-			</td>
-		</tr>
 	</table>
-
-</form>
-
+	<jsp:include page="fragments/footerPagination.jsp"></jsp:include>
 
 </body>
 </html>

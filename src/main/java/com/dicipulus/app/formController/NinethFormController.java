@@ -2,6 +2,7 @@ package com.dicipulus.app.formController;
 
 import java.util.List;
 
+import javax.security.sasl.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -62,19 +63,21 @@ public class NinethFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/select-nineth-major-org-contributor",method=RequestMethod.GET)
-	public ModelAndView selectNinethMajorOrgContributor(HttpServletRequest request,ModelAndView modelAndView){
+	@RequestMapping(value="/select-nineth-major-org-contributor/{applierUid}",method=RequestMethod.GET)
+	public ModelAndView selectNinethMajorOrgContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info("manageNinethMajorOrgContributor");
 		try{
 			Person person=FormControllerUlti.getPersonInRequest(request);
 			
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier= applierJdbc.getApplierByUid(person.getUid());
+			Applier applier= applierJdbc.getApplierByUid(applierUid);
 			modelAndView.addObject("applier",applier);
 			
 			NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
-			List<NinethMajorOrgContributor>  ninethMajorOrgContributors = ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(person.getUid());
+			List<NinethMajorOrgContributor>  ninethMajorOrgContributors = ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(applierUid);
 			modelAndView.addObject("ninethForms", ninethMajorOrgContributors);
+			
+			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
 			
 			modelAndView.setViewName("displayform/selectNinethOrgContributor");
 			return modelAndView;
@@ -82,6 +85,11 @@ public class NinethFormController {
 		catch(NullPointerException e){
 			logger.info("session null pointer!");
 			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+		catch(AuthenticationException e){
+			logger.info(e.toString());
+			modelAndView.setViewName("redirect:/noAuthentication");
 			return modelAndView;
 		}
 	}
@@ -176,14 +184,16 @@ public class NinethFormController {
 		try{
 			Person person=FormControllerUlti.getPersonInRequest(request);
 			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(person.getUid());
-			modelAndView.addObject("applier", applier);
-			
-			
 			NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
 			NinethMajorOrgContributor ninethMajorOrgContributor=ninethMajorOrgContributorJdbc.getNinethMajorOrgContributor(idOfNinethForm);
 			modelAndView.addObject("ninethForm",ninethMajorOrgContributor);
+			
+			String applierUid=ninethMajorOrgContributor.getApplierUid();
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			modelAndView.addObject("applier", applier);
+			
+			FormControllerUlti.isAuthenticatedToRead(person, applier);
 			
 			modelAndView.setViewName("displayform/displayNinethOrgContributor");
 			return modelAndView;
@@ -191,6 +201,11 @@ public class NinethFormController {
 		catch(NullPointerException e){
 			logger.info("session null pointer!");
 			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+		catch(AuthenticationException e){
+			logger.info(e.toString());
+			modelAndView.setViewName("redirect:/noAuthentication");
 			return modelAndView;
 		}
 	}

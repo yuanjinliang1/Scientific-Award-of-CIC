@@ -1,19 +1,23 @@
 package com.dicipulus.app.formController;
 
+import javax.security.sasl.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dicipulus.app.JDBC.ApplierJdbc;
 import com.dicipulus.app.JDBC.FifthObjectiveEvaluationJdbc;
 import com.dicipulus.app.JDBC.InitJdbc;
 import com.dicipulus.app.applicationModel.FifthObjectiveEvaluation;
+import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Person;
 
 @Controller
@@ -53,15 +57,20 @@ public class FifthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/display-objective-evaluation",method=RequestMethod.GET)
-	public ModelAndView displayFifthObjectiveEvaluation(HttpServletRequest request,ModelAndView modelAndView){
+	@RequestMapping(value="/display-objective-evaluation/{applierUid}",method=RequestMethod.GET)
+	public ModelAndView displayFifthObjectiveEvaluation(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info("displayFIfthObjectiveEvaluation");
 		try{
 			Person person=(Person) request.getSession().getAttribute("person");
-			String applierUid=person.getUid();
 			FifthObjectiveEvaluationJdbc fifthObjectiveEvaluationJdbc=InitJdbc.initFifthObjectiveEvaluationJdbc();
 			FifthObjectiveEvaluation fifthObjectiveEvaluation=fifthObjectiveEvaluationJdbc.getFifthObjectiveEvaluation(applierUid);
-			logger.info(fifthObjectiveEvaluation.getObjectiveEvaluation());
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			modelAndView.addObject("applier", applier);
+			
+			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			
 			modelAndView.setViewName("displayform/displayFifthObjectiveEvaluation");
 			modelAndView.addObject("objectiveEvaluationForm", fifthObjectiveEvaluation);
 			return modelAndView;
@@ -69,6 +78,11 @@ public class FifthFormController {
 		catch(NullPointerException e){
 			logger.info("session null pointer!");
 			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+		catch(AuthenticationException e){
+			logger.info(e.toString());
+			modelAndView.setViewName("redirect:/noAuthentication");
 			return modelAndView;
 		}
 	}

@@ -16,19 +16,10 @@ request.setCharacterEncoding("UTF-8");
 	<title>七、主要知识产权证明目录（不超过10件）</title>
 </head>
 <body>
-<h1>
-	七、主要知识产权证明目录（不超过10件）
-</h1>
-<c:out value="${person.name }"></c:out>
-
-<form action="/app/create-seventh-ip-doc" method="POST" >
-<table>
-	<tr>
-		<td><input type="submit" value="添加主要完成单位" name="create"/></td>
-	</tr>
-</table>
-</form>
-
+	<h1>
+		七、主要知识产权证明目录（不超过10件）
+	</h1>
+	<c:out value="${person.name }"></c:out>
 
 	<table border="1">
 		<tr>
@@ -44,10 +35,6 @@ request.setCharacterEncoding("UTF-8");
 			<td>发明专利有效状态</td>
 		</tr>
 		<c:forEach var="seventhIPForm" items="${seventhIPForms }">
-			<spring:url value="/save-seventh-ip-doc/{idOfSeventhIPForm}" var="saveURL">
-				<spring:param name="idOfSeventhIPForm" value="${seventhIPForm.idOfSeventhIPForm}"></spring:param>
-			</spring:url>
-			<form id="seventhIPFormer" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="seventhIPFormAttr">
 				<tr>
 					<td>${seventhIPForm.rankOfIP}</td>
 					<td>${seventhIPForm.typeOfIP} </td>
@@ -59,13 +46,11 @@ request.setCharacterEncoding("UTF-8");
 					<td>${seventhIPForm.holderOfIP} </td>
 					<td>${seventhIPForm.inventorOfIP} </td>
 					<td>${seventhIPForm.isValidIP} </td>
-					<td>
-						<input type="submit" value="保存并查看" />
-					</td>
 				</tr>
-			</form>
 		</c:forEach>
 	</table>
+
+	<jsp:include page="fragments/footerPagination.jsp"></jsp:include>
 
 </body>
 </html>

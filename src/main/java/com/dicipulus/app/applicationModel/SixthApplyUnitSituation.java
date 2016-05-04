@@ -4,8 +4,9 @@ package com.dicipulus.app.applicationModel;
  * 应用单位情况表
  */
 public class SixthApplyUnitSituation {
-	int idOfApplyUnit;
+	private int idOfApplyUnit;
 	private String unitName;
+	private String applierUid;
 	private String applyTechnology;
 	private String startDate;
 	private String contactAndPhoneNumber;
@@ -23,6 +24,13 @@ public class SixthApplyUnitSituation {
 	}
 	public void setUnitName(String unitName) {
 		this.unitName = unitName;
+	}
+	
+	public String getApplierUid() {
+		return applierUid;
+	}
+	public void setApplierUid(String applierUid) {
+		this.applierUid = applierUid;
 	}
 	public String getApplyTechnology() {
 		return applyTechnology;

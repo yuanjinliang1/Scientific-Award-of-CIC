@@ -23,7 +23,7 @@ request.setCharacterEncoding("UTF-8");
 	<spring:url value="/select-referee-unit-opinion-post/{applierUid}" var="editOpinionURL">
 		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
 	</spring:url>
-	<form id="secondFormer" action="${fn:escapeXml(editOpinionURL)}" method="POST" modelAttribute="secondFormAttr">
+	
 		<table>
 		<tr><td>二、推荐单位意见</td></tr>
 		<tr>
@@ -56,30 +56,15 @@ request.setCharacterEncoding("UTF-8");
 		
 		<tr>
 			<td>推荐意见</td>
-			<!-- Don't break this line. It's textarea. -->
 			<td>${secondForm.recommendOpinion}</td>
 		</tr>
 		<tr>
-			<td>推荐该项目为中国通信学会科学技术奖
-				<select name="referingScienceTechnologyAwardRank">
-					<option value="${secondForm.referingScienceTechnologyAwardRank}">${secondForm.referingScienceTechnologyAwardRank}</option>
-					<c:forEach items="${nominatedAwards }" var="nominatedAward">
-						<c:if test="${secondForm.referingScienceTechnologyAwardRank!=nominatedAward}">
-							<option value="${nominatedAward }">${nominatedAward }</option>
-						</c:if>
-					</c:forEach>
-				</select>
-				等奖。
-			</td>
+			<td>推荐该项目为中国通信学会科学技术奖${secondForm.referingScienceTechnologyAwardRank}等奖。</td>
 		</tr>
-		<tr><td><input type="submit" value="保存"/></td></tr>
+		
 	</table>
-	</form>
-				<c:url value="/confirm-referee-unit-opinion-by-referee" var="submitURL">
-					<c:param name="applierUid" value="${secondForm.applierUid }"></c:param>
-				</c:url>
 	
-				<input type="button" onclick="location.href='${submitURL}';" value="确认提交">
+<jsp:include page="fragments/footerPagination.jsp"></jsp:include>
 	
 	
 </body>

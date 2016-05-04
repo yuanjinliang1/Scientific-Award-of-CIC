@@ -21,13 +21,6 @@ request.setCharacterEncoding("UTF-8");
 </h1>
 <c:out value="${person.name }"></c:out>
 
-<form action="/app/create-eighth-major-contributor" method="POST" >
-<table>
-	<tr>
-		<td><input type="submit" value="添加主要完成人" name="create"/></td>
-	</tr>
-</table>
-</form>
 <table border="1">
 	<tr>
 		<td>排名</td>
@@ -48,6 +41,6 @@ request.setCharacterEncoding("UTF-8");
 		</tr>
 	</c:forEach>
 </table>
-
+<jsp:include page="fragments/footerPagination.jsp"></jsp:include>
 </body>
 </html>

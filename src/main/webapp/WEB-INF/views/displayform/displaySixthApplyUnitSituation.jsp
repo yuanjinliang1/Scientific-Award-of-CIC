@@ -18,33 +18,27 @@ request.setCharacterEncoding("UTF-8");
 <title>六、推广应用情况、经济效益和社会效益</title>
 </head>
 <body>
-	<spring:url value="/save-sixth-apply-unit-situation/{idOfApplyUnit}" var="saveURL">
-		<spring:param name="idOfApplyUnit" value="${sixthApplyUnitSituationForm.idOfApplyUnit}"></spring:param>
-	</spring:url>
-	<form id="sixthApplyUnitSituationForm" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="sixthFormAttr">
-		<table>
-			<tr><td>应用单位名称</td>
-				<td>${sixthApplyUnitSituationForm.unitName }</td>
-			</tr>
-			<tr><td>应用技术</td>
-				<td>${sixthApplyUnitSituationForm.applyTechnology }</td>
-			</tr>
-			<tr>
-				<td>应用起止时间</td>
-				<td>${ sixthApplyUnitSituationForm.startDate}</td>
-			</tr>
-			<tr>
-				<td>应用单位联系人/电话</td>
-				<td>${sixthApplyUnitSituationForm.contactAndPhoneNumber }</td>
-			</tr>
-			<tr>
-				<td>应用情况</td>
-				<td>${sixthApplyUnitSituationForm.applySituation }</td>
-			</tr>
-		</table>
-		<table>
-			<tr><td><input type="submit" value="保存"></td></tr>
-		</table>
-	</form>
+	<table>
+		<tr><td>应用单位名称</td>
+			<td>${sixthApplyUnitSituationForm.unitName }</td>
+		</tr>
+		<tr><td>应用技术</td>
+			<td>${sixthApplyUnitSituationForm.applyTechnology }</td>
+		</tr>
+		<tr>
+			<td>应用起止时间</td>
+			<td>${ sixthApplyUnitSituationForm.startDate}</td>
+		</tr>
+		<tr>
+			<td>应用单位联系人/电话</td>
+			<td>${sixthApplyUnitSituationForm.contactAndPhoneNumber }</td>
+		</tr>
+		<tr>
+			<td>应用情况</td>
+			<td>${sixthApplyUnitSituationForm.applySituation }</td>
+		</tr>
+	</table>
+	
+	<jsp:include page="fragments/footerPagination.jsp"></jsp:include>
 </body>
 </html>

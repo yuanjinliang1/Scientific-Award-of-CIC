@@ -2,6 +2,7 @@ package com.dicipulus.app.formController;
 
 import java.util.List;
 
+import javax.security.sasl.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dicipulus.app.JDBC.ApplierJdbc;
 import com.dicipulus.app.JDBC.InitJdbc;
 import com.dicipulus.app.JDBC.SixthApplyUnitSituationJdbc;
 import com.dicipulus.app.JDBC.SixthEconomicAndSocialBenefitJdbc;
@@ -21,6 +23,7 @@ import com.dicipulus.app.JDBC.SixthPaperMonographNTJdbc;
 import com.dicipulus.app.applicationModel.SixthApplyUnitSituation;
 import com.dicipulus.app.applicationModel.SixthEconomicAndSocialBenefit;
 import com.dicipulus.app.applicationModel.SixthPaperMonographNT;
+import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Person;
 
 @Controller
@@ -59,14 +62,20 @@ public class SixthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/select-paper-monograph",method=RequestMethod.GET)
-	public ModelAndView selectSixthPaperMonographNT(HttpServletRequest request,ModelAndView modelAndView){
+	@RequestMapping(value="/select-paper-monograph/{applierUid}",method=RequestMethod.GET)
+	public ModelAndView selectSixthPaperMonographNT(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info("selectSixthPaperMonograph");
 		try{
 			Person person=(Person)request.getSession().getAttribute("person");
-			String applierUid=person.getUid();
 			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
 			List<SixthPaperMonographNT> sixthPaperMonographNT=sixthPaperMonographNTJdbc.getAllSixthPaperMonographNT(applierUid);
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			modelAndView.addObject("applier", applier);
+			
+			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			
 			modelAndView.setViewName("displayform/selectSixthPaperMonographNT");
 			modelAndView.addObject("sixthPaperMonographForms", sixthPaperMonographNT);
 			return modelAndView;
@@ -74,6 +83,11 @@ public class SixthFormController {
 		catch(NullPointerException e){
 			logger.info("session null pointer!");
 			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+		catch(AuthenticationException e){
+			logger.info(e.toString());
+			modelAndView.setViewName("redirect:/noAuthentication");
 			return modelAndView;
 		}
 	}
@@ -156,9 +170,16 @@ public class SixthFormController {
 		logger.info("displaySixthPaperMonographNT");
 		try{
 			Person person=(Person)request.getSession().getAttribute("person");
-			String applierUid=person.getUid();
 			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
 			SixthPaperMonographNT sixthPaperMonographNT=sixthPaperMonographNTJdbc.getSixthPaperMonographNT(idOfPaperMonograph);
+			
+			String applierUid=sixthPaperMonographNT.getApplierUid();
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			modelAndView.addObject("applier", applier);
+			
+			FormControllerUlti.isAuthenticatedToRead(person, applierUid);	
+			
 			modelAndView.setViewName("displayform/displaySixthPaperMonographNT");
 			modelAndView.addObject("sixthPaperMonograph", sixthPaperMonographNT);
 			return modelAndView;
@@ -166,6 +187,11 @@ public class SixthFormController {
 		catch(NullPointerException e){
 			logger.info("session null pointer!");
 			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+		catch(AuthenticationException e){
+			logger.info(e.toString());
+			modelAndView.setViewName("redirect:/noAuthentication");
 			return modelAndView;
 		}
 	}
@@ -228,13 +254,11 @@ public class SixthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/select-apply-unit-situation",method=RequestMethod.GET)
-	public ModelAndView selectSixthAppliedUnitSituation(HttpServletRequest request,ModelAndView modelAndView){
+	@RequestMapping(value="/select-apply-unit-situation/{applierUid}",method=RequestMethod.GET)
+	public ModelAndView selectSixthAppliedUnitSituation(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info("selectApplyUnitSituation");
 		try{
 			Person person=(Person)request.getSession().getAttribute("person");
-			String applierUid=person.getUid();
-			
 			
 			SixthApplyUnitSituationJdbc sixthApplyUnitSituationJdbc=InitJdbc.initSixthApplyUnitSituationJdbc();
 			SixthEconomicAndSocialBenefitJdbc sixthEconomicAndSocialBenefitJdbc=InitJdbc.initSixthEconomicAndSocialBenefitJdbc();
@@ -243,12 +267,24 @@ public class SixthFormController {
 			modelAndView.addObject("sixthEconomicAndSocialBenefitForms", sixthEconomicAndSocialBenefit);
 			modelAndView.addObject("sixthApplyUnitSituationForms", sixthApplyUnitSituation);
 			modelAndView.addObject("person", person);
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			modelAndView.addObject("applier", applier);
+			
+			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			
 			modelAndView.setViewName("displayform/selectSixthApplyUnitSituation");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
 			logger.info("session null pointer!");
 			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+		catch(AuthenticationException e){
+			logger.info(e.toString());
+			modelAndView.setViewName("redirect:/noAuthentication");
 			return modelAndView;
 		}
 	}
@@ -352,16 +388,29 @@ public class SixthFormController {
 		logger.info("displaySixthApplyUnitSituation");
 		try{
 			Person person=(Person) request.getSession().getAttribute("person");
-			String applierUid=person.getUid();
+			
 			SixthApplyUnitSituationJdbc sixthApplyUnitSituationJdbc=InitJdbc.initSixthApplyUnitSituationJdbc();
 			SixthApplyUnitSituation sixthApplyUnitSituation=sixthApplyUnitSituationJdbc.getSixthApplyUnitSituation(idOfApplyUnit);
-			modelAndView.addObject("sixthApplyUnitSituationForm", sixthApplyUnitSituation);
+			modelAndView.addObject("sixthApplyUnitSituationForm", sixthApplyUnitSituation);		
+			
+			String applierUid=sixthApplyUnitSituation.getApplierUid();
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			modelAndView.addObject("applier", applier);
+			
+			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			
 			modelAndView.setViewName("displayform/displaySixthApplyUnitSituation");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
 			logger.info("session null pointer!");
 			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+		catch(AuthenticationException e){
+			logger.info(e.toString());
+			modelAndView.setViewName("redirect:/noAuthentication");
 			return modelAndView;
 		}
 	}

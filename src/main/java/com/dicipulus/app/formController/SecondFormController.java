@@ -90,7 +90,7 @@ public class SecondFormController {
 			else{
 				SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
 				SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
-				modelAndView.setViewName("edit/editSecondRefereeOpinion");
+				modelAndView.setViewName("editform/editSecondRefereeOpinion");
 				modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
 				modelAndView.addObject("applier",applier);//明确推荐单位正在编辑的推荐书是谁的
 				modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);

@@ -36,7 +36,7 @@ public class FifthFormController {
 			FifthObjectiveEvaluationJdbc fifthObjectiveEvaluationJdbc=InitJdbc.initFifthObjectiveEvaluationJdbc();
 			FifthObjectiveEvaluation fifthObjectiveEvaluation=fifthObjectiveEvaluationJdbc.getFifthObjectiveEvaluation(applierUid);
 			logger.info(fifthObjectiveEvaluation.getObjectiveEvaluation());
-			modelAndView.setViewName("edit/editFifthObjectiveEvaluation");
+			modelAndView.setViewName("editform/editFifthObjectiveEvaluation");
 			modelAndView.addObject("objectiveEvaluationForm", fifthObjectiveEvaluation);
 			return modelAndView;
 		}

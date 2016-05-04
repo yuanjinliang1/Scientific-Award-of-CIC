@@ -42,7 +42,7 @@ public class FirstFormController {
 			FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
 			Person person = FormControllerUlti.getPersonInRequest(request);
 			FirstProjectBasicSituation firstForm=firstProjectBasicSituationJdbc.getFirstProjectBasicSituation(person.getUid());
-			modelAndView.setViewName("edit/editFirstProjectBasicSituation");
+			modelAndView.setViewName("editform/editFirstProjectBasicSituation");
 			modelAndView.addObject("applier",applierJdbc.getApplierByUid(person.getUid()));
 			modelAndView.addObject("firstForm",firstForm);
 			modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);

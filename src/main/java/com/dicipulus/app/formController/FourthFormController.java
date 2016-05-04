@@ -43,7 +43,7 @@ public class FourthFormController {
 			FourthForm fourthForm=fourthFormJdbc.getFourthForm(person.getUid());
 			modelAndView.addObject("fourthForm",fourthForm);
 			
-			modelAndView.setViewName("edit/editFourthForm");
+			modelAndView.setViewName("editform/editFourthForm");
 			return modelAndView;
 		}
 		catch(NullPointerException e){

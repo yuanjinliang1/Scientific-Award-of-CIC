@@ -46,7 +46,7 @@ public class EighthFormController {
 			List<EighthMajorContributor>  eighthMajorContributors = eighthMajorContributorJdbc.getEighthMajorContributors(person.getUid());
 			modelAndView.addObject("eighthForms", eighthMajorContributors);
 			
-			modelAndView.setViewName("edit/manageEighthMajorContributor");
+			modelAndView.setViewName("editform/manageEighthMajorContributor");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -111,7 +111,7 @@ public class EighthFormController {
 	 */
 	@RequestMapping(value="/edit-eighth-major-contributor/{idOfEighthForm}",method=RequestMethod.GET)
 	public ModelAndView editEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfEighthForm") int idOfEighthForm){
-		logger.info("edit/editEighthMajorContributor");
+		logger.info("editform/editEighthMajorContributor");
 		try{
 			Person person=FormControllerUlti.getPersonInRequest(request);
 			
@@ -124,7 +124,7 @@ public class EighthFormController {
 			EighthMajorContributor eighthMajorContributor=eighthMajorContributorJdbc.getEighthMajorContributor(idOfEighthForm);
 			modelAndView.addObject("eighthForm",eighthMajorContributor);
 			
-			modelAndView.setViewName("edit/editEighthMajorContributor");
+			modelAndView.setViewName("editform/editEighthMajorContributor");
 			return modelAndView;
 		}
 		catch(NullPointerException e){

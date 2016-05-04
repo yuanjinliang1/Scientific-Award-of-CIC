@@ -42,7 +42,7 @@ public class SixthFormController {
 			String applierUid=person.getUid();
 			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
 			List<SixthPaperMonographNT> sixthPaperMonographNT=sixthPaperMonographNTJdbc.getAllSixthPaperMonographNT(applierUid);
-			modelAndView.setViewName("edit/manageSixthPaperMonographNT");
+			modelAndView.setViewName("editform/manageSixthPaperMonographNT");
 			modelAndView.addObject("sixthPaperMonographForms", sixthPaperMonographNT);
 			return modelAndView;
 		}
@@ -108,7 +108,7 @@ public class SixthFormController {
 			String applierUid=person.getUid();
 			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
 			SixthPaperMonographNT sixthPaperMonographNT=sixthPaperMonographNTJdbc.getSixthPaperMonographNT(idOfPaperMonograph);
-			modelAndView.setViewName("edit/editSixthPaperMonographNT");
+			modelAndView.setViewName("editform/editSixthPaperMonographNT");
 			modelAndView.addObject("sixthPaperMonograph", sixthPaperMonographNT);
 			return modelAndView;
 		}
@@ -160,7 +160,7 @@ public class SixthFormController {
 			modelAndView.addObject("sixthEconomicAndSocialBenefitForms", sixthEconomicAndSocialBenefit);
 			modelAndView.addObject("sixthApplyUnitSituationForms", sixthApplyUnitSituation);
 			modelAndView.addObject("person", person);
-			modelAndView.setViewName("edit/manageSixthApplyUnitSituation");
+			modelAndView.setViewName("editform/manageSixthApplyUnitSituation");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -248,7 +248,7 @@ public class SixthFormController {
 			SixthApplyUnitSituationJdbc sixthApplyUnitSituationJdbc=InitJdbc.initSixthApplyUnitSituationJdbc();
 			SixthApplyUnitSituation sixthApplyUnitSituation=sixthApplyUnitSituationJdbc.getSixthApplyUnitSituation(idOfApplyUnit);
 			modelAndView.addObject("sixthApplyUnitSituationForm", sixthApplyUnitSituation);
-			modelAndView.setViewName("edit/editSixthApplyUnitSituation");
+			modelAndView.setViewName("editform/editSixthApplyUnitSituation");
 			return modelAndView;
 		}
 		catch(NullPointerException e){

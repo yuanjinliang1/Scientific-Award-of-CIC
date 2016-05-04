@@ -46,7 +46,7 @@ public class NinethFormController {
 			List<NinethMajorOrgContributor>  ninethMajorOrgContributors = ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(person.getUid());
 			modelAndView.addObject("ninethForms", ninethMajorOrgContributors);
 			
-			modelAndView.setViewName("edit/manageNinethOrgContributor");
+			modelAndView.setViewName("editform/manageNinethOrgContributor");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -124,7 +124,7 @@ public class NinethFormController {
 			NinethMajorOrgContributor ninethMajorOrgContributor=ninethMajorOrgContributorJdbc.getNinethMajorOrgContributor(idOfNinethForm);
 			modelAndView.addObject("ninethForm",ninethMajorOrgContributor);
 			
-			modelAndView.setViewName("edit/editNinethOrgContributor");
+			modelAndView.setViewName("editform/editNinethOrgContributor");
 			return modelAndView;
 		}
 		catch(NullPointerException e){

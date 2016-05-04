@@ -60,7 +60,7 @@ public class InitFormController {
 		logger.info("editInitializeApplication()");
 		try{
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			modelAndView.setViewName("edit/editInitializeApplication");
+			modelAndView.setViewName("editform/editInitializeApplication");
 			Person person = FormControllerUlti.getPersonInRequest(request);
 			modelAndView.addObject("person",applierJdbc.getApplierByUid(person.getUid()));
 			return modelAndView;

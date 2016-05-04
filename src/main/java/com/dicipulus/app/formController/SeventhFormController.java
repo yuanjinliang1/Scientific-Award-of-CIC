@@ -48,7 +48,7 @@ public class SeventhFormController {
 			List<SeventhPaperCitedByOthers>  seventhPaperCitedByOtherss = seventhPaperCitedByOthersJdbc.getSeventhPaperCitedByOtherss(person.getUid());
 			modelAndView.addObject("seventhPaperForms", seventhPaperCitedByOtherss);
 			
-			modelAndView.setViewName("edit/manageSeventhPaperCitedByOthers");
+			modelAndView.setViewName("editform/manageSeventhPaperCitedByOthers");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -148,7 +148,7 @@ public class SeventhFormController {
 			List<SeventhIntellectualPropertyDoc>  seventhIntellectualPropertyDocs = seventhIntellectualPropertyDocJdbc.getSeventhIntellectualPropertyDocs(person.getUid());
 			modelAndView.addObject("seventhIPForms", seventhIntellectualPropertyDocs);
 			
-			modelAndView.setViewName("edit/manageSeventhIPDoc");
+			modelAndView.setViewName("editform/manageSeventhIPDoc");
 			return modelAndView;
 		}
 		catch(NullPointerException e){

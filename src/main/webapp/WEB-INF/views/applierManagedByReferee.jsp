@@ -72,6 +72,12 @@ request.setCharacterEncoding("UTF-8");
 				</spring:url>
 				<a id="editOpinion" href="${fn:escapeXml(editOpinionURL)}">填写推荐书</a>
 			</td>
+			<td>
+				<spring:url value="/display-first-project-basic-situation/{applierUid}" var="displayURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a id="display" href="${fn:escapeXml(displayURL)}">浏览申请书</a>
+			</td>
 		</tr>
 	</c:forEach>
 </table>	

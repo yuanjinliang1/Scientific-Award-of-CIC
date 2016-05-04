@@ -53,6 +53,36 @@ public class ThirdFormController {
 	}
 	
 	/**
+	 * 浏览第三个表GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/display-brief-introduction",method=RequestMethod.GET)
+	public ModelAndView displayuThirdProjectBriefIntroduction(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info("displayThirdProjectBriefIntroduction");
+		try{
+			Person person=(Person) request.getSession().getAttribute("person");
+			String applierUid=person.getUid();
+			if(applierUid.equals("")){
+				modelAndView.setViewName("redirect:/login");
+				return modelAndView;
+			}
+			logger.info("applierUid confirm!");
+			ThirdProjectBriefIntroductionJdbc thirdProjectBriefIntroductionJdbc=InitJdbc.initThirdProjectBriefIntroductionJdbc();
+			ThirdProjectBriefIntroduction thirdProjectBriefIntroduction=thirdProjectBriefIntroductionJdbc.getThirdProjectBriefIntroduction(person.getUid());
+			modelAndView.setViewName("displayform/displayThirdBriefIntroduction");
+			modelAndView.addObject("briefIntroductionForm", thirdProjectBriefIntroduction);
+		}
+		catch(NullPointerException e){
+			logger.info("get exception!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+		return modelAndView;
+	}
+	
+	/**
 	 * 项目组编辑第三个表POST
 	 * @param thirdProjectBriefIntroduction
 	 * @param request

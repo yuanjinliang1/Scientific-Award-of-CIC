@@ -57,6 +57,36 @@ public class EighthFormController {
 	}
 	
 	/**
+	 * 项目组浏览第八个表LIST GET 
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/select-eighth-major-contributor",method=RequestMethod.GET)
+	public ModelAndView selectEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info("selectEighthMajorContributor");
+		try{
+			Person person=FormControllerUlti.getPersonInRequest(request);
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier= applierJdbc.getApplierByUid(person.getUid());
+			modelAndView.addObject("applier",applier);
+			
+			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
+			List<EighthMajorContributor>  eighthMajorContributors = eighthMajorContributorJdbc.getEighthMajorContributors(person.getUid());
+			modelAndView.addObject("eighthForms", eighthMajorContributors);
+			
+			modelAndView.setViewName("displayform/selectEighthMajorContributor");
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
+	/**
 	 * 项目组建立第八个表 POST
 	 * @param request
 	 * @param modelAndView
@@ -125,6 +155,37 @@ public class EighthFormController {
 			modelAndView.addObject("eighthForm",eighthMajorContributor);
 			
 			modelAndView.setViewName("editform/editEighthMajorContributor");
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
+	/**
+	 * 项目组浏览第八个表 GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/display-eighth-major-contributor/{idOfEighthForm}",method=RequestMethod.GET)
+	public ModelAndView displayEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfEighthForm") int idOfEighthForm){
+		logger.info("displayEighthMajorContributor");
+		try{
+			Person person=FormControllerUlti.getPersonInRequest(request);
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(person.getUid());
+			modelAndView.addObject("applier", applier);
+			
+			
+			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
+			EighthMajorContributor eighthMajorContributor=eighthMajorContributorJdbc.getEighthMajorContributor(idOfEighthForm);
+			modelAndView.addObject("eighthForm",eighthMajorContributor);
+			
+			modelAndView.setViewName("displayform/displayEighthMajorContributor");
 			return modelAndView;
 		}
 		catch(NullPointerException e){

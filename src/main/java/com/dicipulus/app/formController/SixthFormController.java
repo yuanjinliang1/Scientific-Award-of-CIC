@@ -52,6 +52,32 @@ public class SixthFormController {
 			return modelAndView;
 		}
 	}
+	
+	/**
+	 * 选择第六个表NT（List+其他） GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/select-paper-monograph",method=RequestMethod.GET)
+	public ModelAndView selectSixthPaperMonographNT(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info("selectSixthPaperMonograph");
+		try{
+			Person person=(Person)request.getSession().getAttribute("person");
+			String applierUid=person.getUid();
+			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
+			List<SixthPaperMonographNT> sixthPaperMonographNT=sixthPaperMonographNTJdbc.getAllSixthPaperMonographNT(applierUid);
+			modelAndView.setViewName("displayform/selectSixthPaperMonographNT");
+			modelAndView.addObject("sixthPaperMonographForms", sixthPaperMonographNT);
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
 	/**
 	 * 项目组建立第六个表NT POST(点击添加新论文专著)
 	 * @param request
@@ -118,6 +144,32 @@ public class SixthFormController {
 			return modelAndView;
 		}
 	}
+	
+	/**
+	 * 浏览第六个表NT GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/display-sixth-paper-monograph/{idOfPaperMonograph}",method=RequestMethod.GET)
+	public ModelAndView displaySixthPaperMonographNT(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfPaperMonograph")int idOfPaperMonograph){
+		logger.info("displaySixthPaperMonographNT");
+		try{
+			Person person=(Person)request.getSession().getAttribute("person");
+			String applierUid=person.getUid();
+			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
+			SixthPaperMonographNT sixthPaperMonographNT=sixthPaperMonographNTJdbc.getSixthPaperMonographNT(idOfPaperMonograph);
+			modelAndView.setViewName("displayform/displaySixthPaperMonographNT");
+			modelAndView.addObject("sixthPaperMonograph", sixthPaperMonographNT);
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
 	/**
 	 * 项目组编辑第六个表NT POST
 	 * @param request
@@ -161,6 +213,37 @@ public class SixthFormController {
 			modelAndView.addObject("sixthApplyUnitSituationForms", sixthApplyUnitSituation);
 			modelAndView.addObject("person", person);
 			modelAndView.setViewName("editform/manageSixthApplyUnitSituation");
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
+	/**
+	 * 浏览第六个表（List+其他） GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/select-apply-unit-situation",method=RequestMethod.GET)
+	public ModelAndView selectSixthAppliedUnitSituation(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info("selectApplyUnitSituation");
+		try{
+			Person person=(Person)request.getSession().getAttribute("person");
+			String applierUid=person.getUid();
+			
+			
+			SixthApplyUnitSituationJdbc sixthApplyUnitSituationJdbc=InitJdbc.initSixthApplyUnitSituationJdbc();
+			SixthEconomicAndSocialBenefitJdbc sixthEconomicAndSocialBenefitJdbc=InitJdbc.initSixthEconomicAndSocialBenefitJdbc();
+			List<SixthApplyUnitSituation> sixthApplyUnitSituation=sixthApplyUnitSituationJdbc.getAllSixthApplyUnitSituation(applierUid);
+			SixthEconomicAndSocialBenefit sixthEconomicAndSocialBenefit=sixthEconomicAndSocialBenefitJdbc.getSixthEconomicAndSocialBenefit(applierUid);
+			modelAndView.addObject("sixthEconomicAndSocialBenefitForms", sixthEconomicAndSocialBenefit);
+			modelAndView.addObject("sixthApplyUnitSituationForms", sixthApplyUnitSituation);
+			modelAndView.addObject("person", person);
+			modelAndView.setViewName("displayform/selectSixthApplyUnitSituation");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -257,6 +340,32 @@ public class SixthFormController {
 			return modelAndView;
 		}
 	}
+	
+	/**
+	 * 浏览第六个表(应用单位情况表) GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/display-sixth-apply-unit-situation/{idOfApplyUnit}",method=RequestMethod.GET)
+	public ModelAndView displaySixthApplyUnitSituation(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfApplyUnit")int idOfApplyUnit){
+		logger.info("displaySixthApplyUnitSituation");
+		try{
+			Person person=(Person) request.getSession().getAttribute("person");
+			String applierUid=person.getUid();
+			SixthApplyUnitSituationJdbc sixthApplyUnitSituationJdbc=InitJdbc.initSixthApplyUnitSituationJdbc();
+			SixthApplyUnitSituation sixthApplyUnitSituation=sixthApplyUnitSituationJdbc.getSixthApplyUnitSituation(idOfApplyUnit);
+			modelAndView.addObject("sixthApplyUnitSituationForm", sixthApplyUnitSituation);
+			modelAndView.setViewName("displayform/displaySixthApplyUnitSituation");
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
 	/**
 	 * 项目组编辑第六个表(应用单位情况表) POST
 	 * @param request
@@ -277,7 +386,6 @@ public class SixthFormController {
 			logger.info("session null pointer!");
 			return "redirect:/login";
 		}
-
 	}
 	
 }

@@ -59,6 +59,36 @@ public class SeventhFormController {
 	}
 	
 	/**
+	 * 浏览第七知识产权表LIST GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/select-seventh-paper-cited-by-others",method=RequestMethod.GET)
+	public ModelAndView selectSeventhPaperCitedByOthers(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info("selectSeventhPaperCitedByOthers");
+		try{
+			Person person=FormControllerUlti.getPersonInRequest(request);
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier= applierJdbc.getApplierByUid(person.getUid());
+			modelAndView.addObject("applier",applier);
+			
+			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
+			List<SeventhPaperCitedByOthers>  seventhPaperCitedByOtherss = seventhPaperCitedByOthersJdbc.getSeventhPaperCitedByOtherss(person.getUid());
+			modelAndView.addObject("seventhPaperForms", seventhPaperCitedByOtherss);
+			
+			modelAndView.setViewName("displayform/selectSeventhPaperCitedByOthers");
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
+	/**
 	 * 项目组建立第七论文被引用表 POST
 	 * @param request
 	 * @param modelAndView
@@ -149,6 +179,36 @@ public class SeventhFormController {
 			modelAndView.addObject("seventhIPForms", seventhIntellectualPropertyDocs);
 			
 			modelAndView.setViewName("editform/manageSeventhIPDoc");
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
+	/**
+	 * 项目组浏览第七知识产权表LIST GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/select-seventh-ip-doc",method=RequestMethod.GET)
+	public ModelAndView selectSeventhIntellectualPropertyDoc(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info("selectSeventhIntellectualPropertyDoc");
+		try{
+			Person person=FormControllerUlti.getPersonInRequest(request);
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier= applierJdbc.getApplierByUid(person.getUid());
+			modelAndView.addObject("applier",applier);
+			
+			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
+			List<SeventhIntellectualPropertyDoc>  seventhIntellectualPropertyDocs = seventhIntellectualPropertyDocJdbc.getSeventhIntellectualPropertyDocs(person.getUid());
+			modelAndView.addObject("seventhIPForms", seventhIntellectualPropertyDocs);
+			
+			modelAndView.setViewName("displayform/selectSeventhIPDoc");
 			return modelAndView;
 		}
 		catch(NullPointerException e){

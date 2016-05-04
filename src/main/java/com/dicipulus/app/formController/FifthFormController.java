@@ -47,6 +47,32 @@ public class FifthFormController {
 		}
 	}
 	
+	/**
+	 * 项目组浏览第五个表GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/display-objective-evaluation",method=RequestMethod.GET)
+	public ModelAndView displayFifthObjectiveEvaluation(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info("displayFIfthObjectiveEvaluation");
+		try{
+			Person person=(Person) request.getSession().getAttribute("person");
+			String applierUid=person.getUid();
+			FifthObjectiveEvaluationJdbc fifthObjectiveEvaluationJdbc=InitJdbc.initFifthObjectiveEvaluationJdbc();
+			FifthObjectiveEvaluation fifthObjectiveEvaluation=fifthObjectiveEvaluationJdbc.getFifthObjectiveEvaluation(applierUid);
+			logger.info(fifthObjectiveEvaluation.getObjectiveEvaluation());
+			modelAndView.setViewName("displayform/displayFifthObjectiveEvaluation");
+			modelAndView.addObject("objectiveEvaluationForm", fifthObjectiveEvaluation);
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
 	
 	/**
 	 * 项目组编辑第五个表POST

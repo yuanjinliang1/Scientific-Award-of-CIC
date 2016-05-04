@@ -37,7 +37,6 @@ public class FirstFormController {
 	public ModelAndView editFirstProjectBasicSituationGet(ModelAndView modelAndView, HttpServletRequest request){
 		logger.info("editFirstProjectBasicSituationGet()");
 		try{
-			logger.info("authentication confirmed!");
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
 			Person person = FormControllerUlti.getPersonInRequest(request);
@@ -91,5 +90,30 @@ public class FirstFormController {
 		 */
 		firstProjectBasicSituationJdbc.setFirstProjectBasicSituation(firstForm, personSession.getUid());
 		return "redirect:/edit-first-project-basic-situation";
+	}
+	
+	@RequestMapping(value="/display-first-project-basic-situation",method=RequestMethod.GET)
+	public ModelAndView displayFirstProjectBasicSituationGet(ModelAndView modelAndView, HttpServletRequest request){
+		logger.info("displayFirstProjectBasicSituationGet()");
+		try{
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
+			Person person = FormControllerUlti.getPersonInRequest(request);
+			FirstProjectBasicSituation firstForm=firstProjectBasicSituationJdbc.getFirstProjectBasicSituation(person.getUid());
+			modelAndView.setViewName("displayform/displayFirstProjectBasicSituation");
+			modelAndView.addObject("applier",applierJdbc.getApplierByUid(person.getUid()));
+			modelAndView.addObject("firstForm",firstForm);
+			modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);
+			modelAndView.addObject("economicFields",Constants.ECONOMICFIELDS);
+			modelAndView.addObject("nationalFocusFields",Constants.NATIONALFOCUSFIELDS);
+			modelAndView.addObject("technologicalFields",Constants.TECHNOLOGICALFIELDS);
+			modelAndView.addObject("taskSources",Constants.TASKSOURCES);
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			modelAndView.setViewName("redirect:/login");
+			logger.info("null session!");
+			return modelAndView;
+		}
 	}
 }

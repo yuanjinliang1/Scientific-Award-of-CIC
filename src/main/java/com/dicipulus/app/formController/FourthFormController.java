@@ -54,6 +54,36 @@ public class FourthFormController {
 	}
 	
 	/**
+	 * 项目组浏览第四个表GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/display-fourth-form",method=RequestMethod.GET)
+	public ModelAndView displayFourthForm(HttpServletRequest request, ModelAndView modelAndView){
+		logger.info("initFourthForm");
+		try{
+			Person person= FormControllerUlti.getPersonInRequest(request);
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(person.getUid());
+			modelAndView.addObject("applier",applier);
+			
+			FourthFormJdbc fourthFormJdbc=InitJdbc.initFourthFormJdbc();
+			FourthForm fourthForm=fourthFormJdbc.getFourthForm(person.getUid());
+			modelAndView.addObject("fourthForm",fourthForm);
+			
+			modelAndView.setViewName("displayform/displayFourthForm");
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("get exception!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
+	/**
 	 * 项目组编辑第四个表POST
 	 * @param fourthForm
 	 * @param request

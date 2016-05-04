@@ -57,6 +57,36 @@ public class NinethFormController {
 	}
 	
 	/**
+	 * 项目组选择第九个表LIST GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/select-nineth-major-org-contributor",method=RequestMethod.GET)
+	public ModelAndView selectNinethMajorOrgContributor(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info("manageNinethMajorOrgContributor");
+		try{
+			Person person=FormControllerUlti.getPersonInRequest(request);
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier= applierJdbc.getApplierByUid(person.getUid());
+			modelAndView.addObject("applier",applier);
+			
+			NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
+			List<NinethMajorOrgContributor>  ninethMajorOrgContributors = ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(person.getUid());
+			modelAndView.addObject("ninethForms", ninethMajorOrgContributors);
+			
+			modelAndView.setViewName("displayform/selectNinethOrgContributor");
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
+	/**
 	 * 项目组建立第九个表 POST
 	 * @param request
 	 * @param modelAndView
@@ -125,6 +155,37 @@ public class NinethFormController {
 			modelAndView.addObject("ninethForm",ninethMajorOrgContributor);
 			
 			modelAndView.setViewName("editform/editNinethOrgContributor");
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("session null pointer!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	
+	/**
+	 * 项目组浏览第九个表 GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/display-nineth-major-org-contributor/{idOfNinethForm}",method=RequestMethod.GET)
+	public ModelAndView displayNinethMajorOrgContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfNinethForm") int idOfNinethForm){
+		logger.info("editNinethMajorOrgContributor");
+		try{
+			Person person=FormControllerUlti.getPersonInRequest(request);
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(person.getUid());
+			modelAndView.addObject("applier", applier);
+			
+			
+			NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
+			NinethMajorOrgContributor ninethMajorOrgContributor=ninethMajorOrgContributorJdbc.getNinethMajorOrgContributor(idOfNinethForm);
+			modelAndView.addObject("ninethForm",ninethMajorOrgContributor);
+			
+			modelAndView.setViewName("displayform/displayNinethOrgContributor");
 			return modelAndView;
 		}
 		catch(NullPointerException e){

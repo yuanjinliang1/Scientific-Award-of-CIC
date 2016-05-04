@@ -67,7 +67,6 @@ public class SecondFormController {
 	}
 	
 	
-	
 	/**
 	 * 推荐人编辑某一项目的推荐书GET
 	 * @param request
@@ -110,4 +109,45 @@ public class SecondFormController {
 		}
 	}
 	
+	/**
+	 * 浏览某一项目的推荐书GET
+	 * @param request
+	 * @param modelAndView
+	 * @param ownerUid
+	 * @return
+	 */
+	@RequestMapping(value="/display-referee-unit-opinion/{applierUid}",method=RequestMethod.GET)
+	public ModelAndView displaySecondRefereeUnitOpinionForm(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
+		logger.info("displaySecondRefereeUnitOpinionForm");
+		try{
+			Person person=FormControllerUlti.getPersonInRequest(request);
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			if(isAuthenticated(applier, person)==false){
+				modelAndView.setViewName("redirect:/login");
+				logger.info("No authentication to this applier!");
+				return modelAndView;
+			}
+			else{
+				SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
+				SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
+				modelAndView.setViewName("displayform/displaySecondRefereeOpinion");
+				modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
+				modelAndView.addObject("applier",applier);//明确推荐单位正在编辑的推荐书是谁的
+				modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
+				return modelAndView;
+			}
+		}
+		catch(NullPointerException e){
+			modelAndView.setViewName("redirect:/login");
+			logger.info("null session!");
+			return modelAndView;
+		}
+		catch(EmptyResultDataAccessException e2){
+			logger.info("forms have not been created!");
+			Person person=FormControllerUlti.getPersonInRequest(request);
+			modelAndView.setViewName("redirect:/applier-managed-by-referee/applier-view/"+person.getUid());
+			return modelAndView;
+		}
+	}
 }

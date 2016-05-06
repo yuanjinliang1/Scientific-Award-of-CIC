@@ -57,9 +57,9 @@ public class ApplierManagedByRefereeController{
 	}
 	
 	@RequestMapping(value="/applier-managed-by-referee/applier-view/{ownerUid}",method=RequestMethod.GET)
-	public ModelAndView showRefereeList(ModelAndView modelAndView,@PathVariable("ownerUid") String ownerUid,HttpServletRequest request){
+	public ModelAndView showApplierList(ModelAndView modelAndView,@PathVariable("ownerUid") String ownerUid,HttpServletRequest request){
 		
-		logger.info("showRefereeList()");
+		logger.info("showApplierList()");
 		
 		try{
 			if(isAuthenticated(request, ownerUid)==false){

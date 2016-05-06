@@ -59,6 +59,19 @@ public class ApplicationJdbc {
 		logger.info(applicationList.toString());
 		return applications;
 	}
+	
+	public Applications getApplicationsByReferee(String refereeUid){
+		String sql="select * from project_major "
+				+ "join secondrefereeunitopinion on project_major.applierUid=secondrefereeunitopinion.applierUid "
+				+ "join applier on project_major.applierUid=applier.uid "
+				+ "where owner=? ";
+		List<Application> applicationList=jdbcTemplateObject.query(sql,new Object[]{refereeUid},BeanPropertyRowMapper.newInstance(Application.class));
+		Applications applications=new Applications();
+		applications.setApplicationList(applicationList);
+		
+		logger.info("SQL:"+sql);
+		return applications;
+	}
 
 	public Applications getApplicationsByReferee(String  yearCreated,String refereeUid){
 		String sql="select * from project_major where (yearCreated=? and owner=?)";

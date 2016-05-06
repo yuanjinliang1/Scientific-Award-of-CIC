@@ -27,6 +27,13 @@ request.setCharacterEncoding("UTF-8");
 </spring:url>
 <a id="selfManage" href="${fn:escapeXml(selfManageURL)}">个人管理</a>
 
+<spring:url value="/applier-managed-by-referee/applier-view/{ownerUid}" var="applierURL">
+	<spring:param name="ownerUid" value="${person.uid}"></spring:param>
+</spring:url>
+<a href="${fn:escapeXml(applierURL)}" >项目组用户管理</a>
+
+<a href="/app/application-managed-by-referee" >项目管理</a>
+
 <form action="/app/applier-managed-by-referee/applier-create" method="POST" >
 <table>
 	<tr>

@@ -27,7 +27,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ApplicationJdbc {
-	private static final Logger logger=LoggerFactory.getLogger(FirstProjectBasicSituationJdbc.class);
+	private static final Logger logger=LoggerFactory.getLogger(ApplicationJdbc.class);
 	private DataSource dataSource;
 	
 	private JdbcTemplate jdbcTemplateObject;
@@ -84,7 +84,10 @@ public class ApplicationJdbc {
 	}
 	
 	public Application getApplicationByApplier(String applierUid){
-		String sql="select * from project_major where applierUid=?";
+		String sql="select * from project_major "
+				+ "join secondrefereeunitopinion on project_major.applierUid=secondrefereeunitopinion.applierUid "
+				+ "join applier on project_major.applierUid=applier.uid "
+				+ "where project_major.applierUid=?";
 		Application application=jdbcTemplateObject.queryForObject(sql,new Object[]{applierUid},BeanPropertyRowMapper.newInstance(Application.class));
 		
 		logger.info("SQL:"+sql);

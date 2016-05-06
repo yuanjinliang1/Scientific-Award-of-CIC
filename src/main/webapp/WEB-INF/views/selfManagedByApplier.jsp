@@ -25,9 +25,14 @@
 </spring:url>
 <a id="editAddress" href="${fn:escapeXml(editURL)}">建立项目</a>
 
+<spring:url value="/display-first-project-basic-situation/{applierUid}" var="displayFisrtEditURL">
+	<spring:param name="applierUid" value="${person.uid}"></spring:param>
+</spring:url>
+<a id="firstEditAddress" href="${fn:escapeXml(displayFisrtEditURL)}">查看项目</a>
+
 <spring:url value="/edit-first-project-basic-situation" var="fisrtEditURL">
 </spring:url>
-<a id="firstEditAddress" href="${fn:escapeXml(fisrtEditURL)}">第一张表</a>
+<a id="firstEditAddress" href="${fn:escapeXml(fisrtEditURL)}">编辑项目</a>
 
 	<form action="/app/self-managed-by-applier/change-name" method="POST">
 		<table>
@@ -67,6 +72,42 @@
 			</tr>
 		</table>
 	</form>
+	
+	<table border="1">
+		<tr>
+			<td>项目状态</td>
+			<td>项目名称</td>
+			<td>奖种</td>
+			<td>推荐等级</td>
+			<td>形审结果</td>
+			<td>操作</td>
+			<td>操作</td>
+			<td>确认提交</td>
+		</tr>
+		<tr>
+			<c:set var="serial" value="${serial+1 }"></c:set>
+			<td>${application.projectStatus }</td>
+			<td>${application.projectName }</td>
+			<td>${application.applicationType }</td>
+			<td>${application.referingScienceTechnologyAwardRank }</td>
+			<td>${application.formalityExaminationResult }</td>
+			<td>
+				<spring:url value="/display-first-project-basic-situation/{applierUid}" var="firstFormURL">
+					<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
+				</spring:url>
+				<input type="button" onclick="location.href='${fn:escapeXml(firstFormURL)}';" value="查看">
+			</td>
+			<td>
+				<spring:url value="/edit-first-project-basic-situation/{applierUid}" var="editFirstFormURL">
+					<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
+				</spring:url>
+				<input type="button" onclick="location.href='${fn:escapeXml(editFirstFormURL)}';" value="编辑">
+			</td>
+				<spring:url value="/confirm-whole-application-by-applier" var="confirmURL">
+				</spring:url>
+			<td><input type="button" onclick="location.href='${fn:escapeXml(confirmURL)}';" value="确认提交"></td>
+		</tr>
+	</table>
 
 
 </body>

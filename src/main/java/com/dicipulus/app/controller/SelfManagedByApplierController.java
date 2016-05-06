@@ -33,6 +33,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpRequest;
 
 @Controller
@@ -82,30 +83,60 @@ public class SelfManagedByApplierController {
 	}
 	
 	@RequestMapping(value="/self-managed-by-applier/{applierUid}",method=RequestMethod.GET)
-	public ModelAndView selfManagedByApplier(ModelAndView modelAndView,@PathVariable("applierUid") String applierUid,HttpServletRequest request){
-		
-		logger.info("selfManagedByApplier()");
-		
-		try{
-			if(isAuthenticated(request, applierUid)==false){
-					modelAndView.setViewName("redirect:/login");
-					logger.info("authentication denied!");
-					return modelAndView;
-				}
-				else{
-					logger.info("authentication confirmed!");
-					ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-					
-					modelAndView.setViewName("selfManagedByApplier");
-					modelAndView.addObject("person",applierJdbc.getApplierByUid(applierUid));
-					return modelAndView;
-				}
-		}
-		catch(NullPointerException e){
+	public ModelAndView selfManagedByApplier(ModelAndView modelAndView,@PathVariable("applierUid") String applierUid,HttpServletRequest request,Person person){
+		logger.info("selfManagedByApplier");
+		if(request==null){
+			logger.info("session null pointer!");
 			modelAndView.setViewName("redirect:/login");
-			logger.info("null session!");
 			return modelAndView;
 		}
+		try{
+			person=FormControllerUlti.getPersonInRequest(request);
+		}
+		//though catching runtime exception is not a good practice, here we just do it.
+		catch(NullPointerException e){
+			logger.info("session null pointer!\n Bad Clause in:\"Person person=FormControllerUlti.getPersonInRequest(request);\" ");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+		
+		if(person==null){
+			logger.info("person==null ");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+		//guard clause
+		if(person.getUid().equals(applierUid)==false){
+			logger.info("non-applier access denied");
+			logger.info("person.uid="+person.getUid()+", applierUid="+applierUid);
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+		
+		ApplicationJdbc applicationJdbc=InitJdbc.initApplicationJdbc();
+		Application application=new Application();
+		try{
+			application=applicationJdbc.getApplicationByApplier(person.getUid());
+		}
+		catch(DataAccessException e){
+			logger.info(e.getLocalizedMessage());
+			modelAndView.setViewName("redirect:/data-access-exception");
+			return modelAndView;
+		}
+		modelAndView.addObject("application", application);
+		
+		ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+		try{
+		modelAndView.addObject("person",applierJdbc.getApplierByUid(applierUid));
+		}
+		catch(DataAccessException e){
+			logger.info(e.getLocalizedMessage());
+			modelAndView.setViewName("redirect:/data-access-exception");
+			return modelAndView;
+		}
+		modelAndView.setViewName("selfManagedByApplier");
+		return modelAndView;
+		
 	}
 
 	@RequestMapping(value="/self-managed-by-applier/change-name",method=RequestMethod.POST)

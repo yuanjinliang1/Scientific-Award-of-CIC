@@ -107,7 +107,7 @@ public class ConfirmApplicationController{
 			Person person=FormControllerUlti.getPersonInRequest(request);
 			setMajorContributorsForFirstForm(person.getUid());
 			setMajorContributingOrgNamesForFirstForm(person.getUid());
-			return "redirect:/read-first-project-basic-situation/"+person.getUid();
+			return "redirect:/display-first-project-basic-situation/"+person.getUid();
 		}
 		catch(NullPointerException e){
 			logger.info(e.toString());
@@ -121,7 +121,7 @@ public class ConfirmApplicationController{
 		try{
 			Person person=FormControllerUlti.getPersonInRequest(request);
 			setRefereeInformationForFirstForm(applierUid);
-			return "redirect:/read-referee-unit-opinion/"+applierUid;
+			return "redirect:/display-referee-unit-opinion/"+applierUid;
 		}
 		catch(NullPointerException e){
 			logger.info(e.toString());

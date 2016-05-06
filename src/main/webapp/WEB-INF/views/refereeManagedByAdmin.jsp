@@ -21,6 +21,14 @@ request.setCharacterEncoding("UTF-8");
 </h1>
 <c:out value="${person.name }"></c:out>
 
+<spring:url value="/application-managed-by-admin" var="manageApplicationURL">
+</spring:url>
+<a href="${fn:escapeXml(manageApplicationURL)}" >项目管理</a>
+
+<spring:url value="/referee-managed-by-admin/referee-view" var="manageRefereeURL">
+</spring:url>
+<a href="${fn:escapeXml(manageRefereeURL)}" >推荐单位管理</a>
+
 <spring:url value="/self-managed-by-admin" var="selfManageURL">
 </spring:url>
 <a id="selfManage" href="${fn:escapeXml(selfManageURL)}">个人管理</a>

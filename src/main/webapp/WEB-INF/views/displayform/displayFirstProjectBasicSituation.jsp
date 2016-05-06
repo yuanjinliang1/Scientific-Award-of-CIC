@@ -41,32 +41,32 @@ request.setCharacterEncoding("UTF-8");
 		<tr>
 			<td>学科分类名称1</td>
 			<td>
-				${firstForm.subjectCategoryName1}"
+				${firstForm.subjectCategoryName1}
 			</td>
 		</tr>
 		<tr>
 			<td>学科分类名称2</td>
 			<td>
-				${firstForm.subjectCategoryName2}"
+				${firstForm.subjectCategoryName2}
 			</td>
 		</tr>
 		<tr>
 			<td>学科分类名称3</td>
 			<td>
-				${firstForm.subjectCategoryName3}"
+				${firstForm.subjectCategoryName3}
 			</td>
 		</tr>
 		<c:if test="${applier.applicationType=='科技进步类'||applier.applicationType=='技术发明类' }">
 			<tr>
 				<td>所属国民经济行业</td>
 				<td>
-					${firstForm.economicField}"
+					${firstForm.economicField}
 				</td>
 			</tr>
 			<tr>
 				<td>所属国家重点发展领域</td>
 				<td>
-					${firstForm.nationalFocusField}"
+					${firstForm.nationalFocusField}
 				</td>
 			</tr>
 		</c:if>
@@ -74,14 +74,14 @@ request.setCharacterEncoding("UTF-8");
 			<tr>
 				<td>所属科学技术领域</td>
 				<td>
-					${firstForm.technologicalField}"
+					${firstForm.technologicalField}
 				</td>
 			</tr>
 		</c:if>
 		<tr>
 			<td>任务来源</td>
 			<td>
-				${firstForm.taskSource}"
+				${firstForm.taskSource}
 			</td>
 		</tr>
 		<tr>

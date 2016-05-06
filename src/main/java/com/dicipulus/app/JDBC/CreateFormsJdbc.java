@@ -34,8 +34,8 @@ public class CreateFormsJdbc{
 	
 	public void createAllForms(Applier applier){
 		
-		createProjectMajor(applier);
 		createSecondRefereeUnitOpinion(applier);
+		createProjectMajor(applier);
 	}
 	
 	private void createProjectMajor(Applier applier){

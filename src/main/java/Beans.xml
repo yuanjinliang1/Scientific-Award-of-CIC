@@ -76,4 +76,7 @@
 	   <bean id="sixthPaperMonographNTJdbc" class="com.dicipulus.app.JDBC.SixthPaperMonographNTJdbc">
 	   	<property name="dataSource" ref="dataSource"></property>
 	   </bean>
+	   <bean id="applicationJdbc" class="com.dicipulus.app.JDBC.ApplicationJdbc">
+	   	<property name="dataSource" ref="dataSource"></property>
+	   </bean>
 </beans>

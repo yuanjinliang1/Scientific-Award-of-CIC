@@ -151,4 +151,11 @@ public final class InitJdbc{
 		context.registerShutdownHook();
 		return ninethMajorOrgContributorJdbc;
 	}
+	
+	public static ApplicationJdbc initApplicationJdbc(){
+		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+		ApplicationJdbc applicationJdbc=(ApplicationJdbc) context.getBean("applicationJdbc");
+		context.registerShutdownHook();
+		return applicationJdbc;
+	}
 }

@@ -105,8 +105,13 @@ public class ConfirmApplicationController{
 		logger.info("confirmWholeApplicationByApplier");
 		try{
 			Person person=FormControllerUlti.getPersonInRequest(request);
+			ApplicationJdbc applicationJdbc=InitJdbc.initApplicationJdbc();
+			if(!applicationJdbc.getStatusOfApplication(person.getUid()).equals("未提交")){
+				return "redirect:/error?message=already-submitted";
+			}
 			setMajorContributorsForFirstForm(person.getUid());
 			setMajorContributingOrgNamesForFirstForm(person.getUid());
+			applicationJdbc.setStatusOfApplication("已提交", person.getUid());
 			return "redirect:/display-first-project-basic-situation/"+person.getUid();
 		}
 		catch(NullPointerException e){
@@ -120,7 +125,12 @@ public class ConfirmApplicationController{
 		logger.info("confirmRefereeUnitOpinionByReferee");
 		try{
 			Person person=FormControllerUlti.getPersonInRequest(request);
+			ApplicationJdbc applicationJdbc=InitJdbc.initApplicationJdbc();
+			if(!applicationJdbc.getStatusOfApplication(person.getUid()).equals("已提交")){
+				return "redirect:/error?message=status-prerequisite-not-fullfilled";
+			}
 			setRefereeInformationForFirstForm(applierUid);
+			applicationJdbc.setStatusOfApplication("已推荐", person.getUid());
 			return "redirect:/display-referee-unit-opinion/"+applierUid;
 		}
 		catch(NullPointerException e){

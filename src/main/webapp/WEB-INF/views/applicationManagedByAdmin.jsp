@@ -58,7 +58,20 @@ request.setCharacterEncoding("UTF-8");
 				<td><input type="checkbox" id="${application.applierUid }"> </td>
 				<c:set var="serial" value="${serial+1 }"></c:set>
 				<td>${serial }</td>
-				<td>${application.projectStatus }</td>
+				<td>${application.projectStatus }
+					<c:if test="${application.projectStatus=='已推荐' }">
+						<spring:url value="/accept-application-by-admin/{applierUid}" var="acceptURL">
+							<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
+						</spring:url>
+						<input type="button" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="接收">
+					</c:if>
+					<c:if test="${application.projectStatus=='已接收' }">
+						<spring:url value="/withdraw-application-by-admin/{applierUid}" var="withdrawURL">
+							<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
+						</spring:url>
+						<input type="button" onclick="location.href='${fn:escapeXml(withdrawURL)}';" value="退回">
+					</c:if>
+				</td>
 				<td>${application.projectName }</td>
 				<td>${application.refereeString }</td>
 				<td>${application.applicationType }</td>

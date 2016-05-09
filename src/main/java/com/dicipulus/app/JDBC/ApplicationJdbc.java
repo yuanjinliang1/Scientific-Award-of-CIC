@@ -102,7 +102,7 @@ public class ApplicationJdbc {
 		logger.info("SQL:"+sql);
 	}
 	
-	//not a good practice for multiple update
+	/*//not a good practice for multiple update
 	public void setApplicationsByAdmin(List<Application> applicationList) throws DataAccessException {
 		for(Application application:applicationList){
 			String sql="update project_major set formalityExaminationResult=?, primaryExaminationResult=?, finalExaminationResult=?, commentOfAdmin=? where applierUid=?";
@@ -110,8 +110,9 @@ public class ApplicationJdbc {
 					application.getCommentOfAdmin(),application.getApplierUid());
 			logger.info("SQL:"+sql);
 		}
-	}
+	}*/
 	
+	/*//NOT WORKING
 	public void setApplicationsByAdminAtomic(final Applications applications) throws SQLException {
 		String sql="update project_major set formalityExaminationResult=?, primaryExaminationResult=?, finalExaminationResult=?, commentOfAdmin=? where applierUid=?";
 		
@@ -136,6 +137,19 @@ public class ApplicationJdbc {
 		};
 		int[] batchReturn= jdbcTemplateObject.batchUpdate(sql, pss);
 		logger.info("batchReturn: "+batchReturn);
-		
+	}*/
+	
+	public void setStatusOfApplication(String status, String applierUid){
+		String sql="update project_major set projectStatus=? where applierUid=?";
+		jdbcTemplateObject.update(sql,status,applierUid);
+		logger.info("SQL:"+sql);
+	}
+	
+	public String getStatusOfApplication(String applierUid){
+		String sql="select projectStatus from project_major where applierUid=?";
+		String status=jdbcTemplateObject.queryForObject(sql,new Object[]{applierUid},String.class);
+		logger.info(sql);
+		logger.info(status.toString());
+		return status;
 	}
 }

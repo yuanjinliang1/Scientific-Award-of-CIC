@@ -33,6 +33,19 @@
 <spring:url value="/edit-first-project-basic-situation" var="fisrtEditURL">
 </spring:url>
 <a id="firstEditAddress" href="${fn:escapeXml(fisrtEditURL)}">编辑项目</a>
+<br/>项目状态： ${application.projectStatus }
+
+<c:if test="${application.projectStatus=='未提交' }">
+	<spring:url value="/submit-application-by-applier" var="acceptURL">
+	</spring:url>
+	<input type="button" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="提交">
+</c:if>
+<c:if test="${application.projectStatus=='已提交' }">
+	<spring:url value="/withdraw-application-by-applier" var="withdrawURL">
+	</spring:url>
+	<input type="button" onclick="location.href='${fn:escapeXml(withdrawURL)}';" value="撤回">
+</c:if>
+
 
 	<form action="/app/self-managed-by-applier/change-name" method="POST">
 		<table>

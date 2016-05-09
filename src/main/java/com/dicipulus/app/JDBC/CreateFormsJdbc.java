@@ -41,11 +41,13 @@ public class CreateFormsJdbc{
 	private void createProjectMajor(Applier applier){
 		String nameAndCodeOFPlansOrFundations="不超过300字。应按重要程度依次填写，先国家计划，后其他计划，不超过10项";
 		String technicalReportNumber="指在国家科技计划项目申报中心呈交的科技报告编号，未呈交的可不填";
-		String sql="insert into project_major (applierUid, yearCreated, refereeString,secretLevel,NameAndCodeOFPlansOrFundations,technicalReportNumber) values(?,?,?,'非密',?,?)";
+		String projectStatus="未提交";
+		String sql="insert into project_major (applierUid, yearCreated, refereeString,secretLevel,NameAndCodeOFPlansOrFundations,technicalReportNumber,projectStatus) "
+				+ "values(?,?,?,'非密',?,?,?)";
 		int year = Calendar.getInstance().get(Calendar.YEAR);
 		RefereeJdbc refereeJdbc=InitJdbc.initRefereeJdbc();
 		Referee referee=refereeJdbc.getRefereeByUid(applier.getOwner());
-		jdbcTemplateObject.update(sql,applier.getUid(),year,referee.getName(),nameAndCodeOFPlansOrFundations,technicalReportNumber);
+		jdbcTemplateObject.update(sql,applier.getUid(),year,referee.getName(),nameAndCodeOFPlansOrFundations,technicalReportNumber,projectStatus);
 		logger.info(sql);
 	}
 	

@@ -47,7 +47,20 @@ request.setCharacterEncoding("UTF-8");
 		<tr>
 			<c:set var="serial" value="${serial+1 }"></c:set>
 			<td>${serial }</td>
-			<td>${application.projectStatus }</td>
+			<td>${application.projectStatus }
+				<c:if test="${application.projectStatus=='已提交' }">
+					<spring:url value="/submit-application-by-referee/{applierUid}" var="acceptURL">
+						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
+					</spring:url>
+					<input type="button" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="推荐">
+				</c:if>
+				<c:if test="${application.projectStatus=='已推荐' }">
+					<spring:url value="/withdraw-application-by-referee/{applierUid}" var="withdrawURL">
+						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
+					</spring:url>
+					<input type="button" onclick="location.href='${fn:escapeXml(withdrawURL)}';" value="撤回推荐">
+				</c:if>
+			</td>
 			<td>${application.projectName }</td>
 			<td>${application.refereeString }</td>
 			<td>${application.applicationType }</td>

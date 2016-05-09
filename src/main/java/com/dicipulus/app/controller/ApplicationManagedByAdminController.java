@@ -80,6 +80,7 @@ public class ApplicationManagedByAdminController {
 	/*
 	 * NOT WORKING
 	 */
+	/*
 	@RequestMapping(value="/application-managed-by-admin/post",method=RequestMethod.POST)
 	public String postApplicationsManagedByAdmin(HttpServletRequest request,@ModelAttribute("applicationsAttr") Applications applications, Person person){
 		logger.info("postApplicationManagedByAdmin");
@@ -119,6 +120,7 @@ public class ApplicationManagedByAdminController {
 		
 		return "redirect:/application-managed-by-admin";
 	}
+	*/
 	
 	@RequestMapping(value="/application-managed-by-admin/post/{applierUid}",method=RequestMethod.POST)
 	public String postApplicationManagedByAdmin(HttpServletRequest request,@ModelAttribute("applicationAttr") Application application, 

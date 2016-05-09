@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dicipulus.app.JDBC.ApplicationJdbc;
 import com.dicipulus.app.JDBC.ApplierJdbc;
 import com.dicipulus.app.JDBC.InitJdbc;
 import com.dicipulus.app.JDBC.SecondRefereeUnitOpinionJdbc;
@@ -55,11 +56,14 @@ public class SecondFormController {
 				logger.info("No authentication to this applier!");
 				return "redirect:/login";
 			}
-			else{
-				SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
-				secondRefereeUnitOpinionJdbc.updateSecondRefereeUnitOpinion(secondRefereeUnitOpinion, applierUid);
-				return "redirect:/edit-referee-unit-opinion/"+applier.getUid();
+			ApplicationJdbc applicatoinJdbc=InitJdbc.initApplicationJdbc();
+			if(applicatoinJdbc.getStatusOfApplication(applierUid)=="已接收"){
+				return "redirect:/error?message=prerequisite-status-wrong";
 			}
+			
+			SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
+			secondRefereeUnitOpinionJdbc.updateSecondRefereeUnitOpinion(secondRefereeUnitOpinion, applierUid);
+			return "redirect:/edit-referee-unit-opinion/"+applier.getUid();
 		}
 		catch(NullPointerException e){
 			logger.info("null session!");
@@ -87,15 +91,19 @@ public class SecondFormController {
 				logger.info("No authentication to this applier!");
 				return modelAndView;
 			}
-			else{
-				SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
-				SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
-				modelAndView.setViewName("editform/editSecondRefereeOpinion");
-				modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
-				modelAndView.addObject("applier",applier);//明确推荐单位正在编辑的推荐书是谁的
-				modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
+			ApplicationJdbc applicatoinJdbc=InitJdbc.initApplicationJdbc();
+			if(applicatoinJdbc.getStatusOfApplication(applierUid).equals("已接收")){
+				String previousPage =request.getHeader("Referer");
+				modelAndView.setViewName("redirect:"+previousPage+"?message=prerequisite-status-wrong");
 				return modelAndView;
 			}
+			SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
+			SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
+			modelAndView.setViewName("editform/editSecondRefereeOpinion");
+			modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
+			modelAndView.addObject("applier",applier);//明确推荐单位正在编辑的推荐书是谁的
+			modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
+			return modelAndView;
 		}
 		catch(NullPointerException e){
 			modelAndView.setViewName("redirect:/login");

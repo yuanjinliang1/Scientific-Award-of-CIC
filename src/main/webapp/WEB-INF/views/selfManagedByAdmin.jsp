@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="dicipulus" tagdir="/WEB-INF/tags"%>
 <%@ page session="true"%>
 <!-- Set charset encoding to utf-8  -->
 <%
@@ -14,33 +15,44 @@
 
 <html>
 <head>
+<jsp:include page="fragments/header.jsp"></jsp:include>
 <title>SelfManagement</title>
+<style>
+	div.row {width:300;}
+</style>
 </head>
 <body>
-	<h1>Self Managed By Admin Prototype</h1>
-	<c:out value="${person.name }"></c:out>
+<div class="container">
 	
+	
+	<dicipulus:bodyHeaderForAdmin menuName="manageSelf" />
+	<br/><br/><br/>
+	<h1>Self Managed By Admin Prototype</h1>
 	<form action="/app/self-managed-by-admin/change-password"
 		method="POST">
-		<table>
-			<tr>
-				<td>修改密码</td>
-			</tr>
-			<tr>
-				<td>输入旧密码</td>
-				<td><input type="password" name="passwordOld" /></td>
-			</tr>
-			<tr>
-				<td>输入新密码</td>
-				<td><input type="password" name="passwordNew1" /></td>
-			</tr>
-			<tr>
-				<td>再次输入新密码</td>
-				<td><input type="password" name="passwordNew2" /> <input
-					type="hidden" value="${person }" name="person" /></td>
-				<td><input type="submit" value="修改密码" /></td>
-			</tr>
-		</table>
+		<div class="form-group">
+			<div class="row">
+				<label>修改密码</label>
+			</div>
+			<div class="row">
+				<label>输入旧密码</label>
+				<input type="password" class="form-control" name="passwordOld" />
+			</div>
+			<div class="row">
+				<label>输入新密码</label>
+				<input type="password" class="form-control" name="passwordNew1" />
+			</div>
+			<div class="row">
+				<label>再次输入新密码</label>
+				<input type="password" class="form-control" name="passwordNew2" /> 
+				<input type="hidden" value="${person }" name="person" />
+			</div>
+			<div class="row">
+				<input type="submit" value="修改密码" />
+			</div>
+		</div>
 	</form>
+	
+</div>
 </body>
 </html>

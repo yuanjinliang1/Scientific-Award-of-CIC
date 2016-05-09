@@ -21,15 +21,11 @@ request.setCharacterEncoding("UTF-8");
 	</style>
 </head>
 <body>
-
-
-
-
 <div class="container" style="width:100%;">
 <dicipulus:bodyHeaderForAdmin menuName="manageApplication" />
 <br/><br/><br/>
 <div class="row" style="margin-left: 20px"><h1>Application Management</h1></div>
-<div class="col-md-16">
+<div class="col-md-12">
 <table class="table table-bordered" style="width:100%">
 	<thead>
 	<tr>

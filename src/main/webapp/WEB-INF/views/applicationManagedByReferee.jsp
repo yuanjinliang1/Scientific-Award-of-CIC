@@ -3,6 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="dicipulus" tagdir="/WEB-INF/tags"%>
 <%@ page session="true" %>
 <!-- Set charset encoding to utf-8  -->
 <%
@@ -13,26 +14,17 @@ request.setCharacterEncoding("UTF-8");
 
 <html>
 <head>
+	<jsp:include page="fragments/header.jsp"></jsp:include>
 	<title>Application Management</title>
 </head>
 <body>
-<h1>Application Management</h1>
-<h1>list size: ${application.applicationList.size }</h1>
+<div class="container">
+<dicipulus:bodyHeaderForReferee menuName="manageApplication"/>
+<br/><br/><br/>
+<div class="row" style="margin-left: 20px"><h1>Application Management</h1></div>
 
-<!-- 跳转到个人管理 -->
-<spring:url value="/self-managed-by-referee/{refereeUid}" var="selfManageURL">
-	<spring:param name="refereeUid" value="${person.uid}"></spring:param>
-</spring:url>
-<a id="selfManage" href="${fn:escapeXml(selfManageURL)}">个人管理</a>
-
-<spring:url value="/applier-managed-by-referee/applier-view/{ownerUid}" var="applierURL">
-	<spring:param name="ownerUid" value="${person.uid}"></spring:param>
-</spring:url>
-<a href="${fn:escapeXml(applierURL)}" >项目组用户管理</a>
-
-<a href="/app/application-managed-by-referee" >项目管理</a>
-
-<table border="1">
+<table class="table table-bordered">
+	<thead>
 	<tr>
 		<td>序号</td>
 		<td>项目状态</td>
@@ -41,7 +33,11 @@ request.setCharacterEncoding("UTF-8");
 		<td>推荐等级</td>
 		<td>形审结果</td>
 		<td>操作</td>
+		<td>操作</td>
+		<td>操作</td>
 	</tr>
+	</thead>
+	<tbody>
 	<c:set var="serial" value="0"></c:set>
 	<c:forEach var="application" items="${applications.applicationList }">
 		<tr>
@@ -52,13 +48,13 @@ request.setCharacterEncoding("UTF-8");
 					<spring:url value="/submit-application-by-referee/{applierUid}" var="acceptURL">
 						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 					</spring:url>
-					<input type="button" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="推荐">
+					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="推荐">
 				</c:if>
 				<c:if test="${application.projectStatus=='已推荐' }">
 					<spring:url value="/withdraw-application-by-referee/{applierUid}" var="withdrawURL">
 						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 					</spring:url>
-					<input type="button" onclick="location.href='${fn:escapeXml(withdrawURL)}';" value="撤回推荐">
+					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(withdrawURL)}';" value="撤回推荐">
 				</c:if>
 			</td>
 			<td>${application.projectName }</td>
@@ -70,10 +66,18 @@ request.setCharacterEncoding("UTF-8");
 				<spring:url value="/display-first-project-basic-situation/{applierUid}" var="firstFormURL">
 					<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 				</spring:url>
-				<input type="button" onclick="location.href='${fn:escapeXml(firstFormURL)}';" value="查看">
+				<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(firstFormURL)}';" value="查看申请书">
+			</td>
+			<td>
+				<spring:url value="/edit-referee-unit-opinion/{applierUid}" var="editOpinionURL">
+					<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
+				</spring:url>
+				<a id="editOpinion" class="btn btn-default" href="${fn:escapeXml(editOpinionURL)}">填写推荐书</a>
 			</td>
 		</tr>
 	</c:forEach>
+	</tbody>
 </table>
+</div>
 </body>
 </html>

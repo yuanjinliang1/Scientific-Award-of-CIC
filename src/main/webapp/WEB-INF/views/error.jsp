@@ -18,5 +18,6 @@ request.setCharacterEncoding("UTF-8");
 <body>
 <h1>ERROR!</h1>
 <p>ALL KINDS OF ERROR REDIRECT TO HERE</p>
+<h1>ERROR MESSAGE:${message }</h1>
 </body>
 </html>

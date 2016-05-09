@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="dicipulus" tagdir="/WEB-INF/tags"%>
 <%@ page session="true"%>
 <!-- Set charset encoding to utf-8  -->
 <%
@@ -14,33 +15,58 @@
 
 <html>
 <head>
-<title>SelfManagement</title>
+	<jsp:include page="fragments/header.jsp"></jsp:include>
+	<title>SelfManagement</title>
 </head>
 <body>
-	<h1>Self Managed By Referee Prototype</h1>
-	<c:out value="${person.name }"></c:out>
-
+<div class="container">
+	<dicipulus:bodyHeaderForReferee menuName="manageSelf"/>
+	<br/><br/><br/>
+	<div class="row" ><h3>修改密码</h3></div>
+	<br/><br/>
 	<form action="/app/self-managed-by-referee/change-password"
 		method="POST">
+		<div class="form-group col-md-4">
+			<div class="row">
+				<label>输入旧密码</label>
+				<input type="password" class="form-control" name="passwordOld" />
+				<br/>
+			</div>
+			<div class="row">
+				<label>输入新密码</label>
+				<input type="password" class="form-control" name="passwordNew1" />
+				<br/>
+			</div>
+			<div class="row">
+				<label>再次输入新密码</label>
+				<input type="password" class="form-control" name="passwordNew2" /> 
+				<input type="hidden" value="${person }" name="person" />
+				<br/>
+			</div>
+			<div class="row">
+				<input type="submit" class="btn btn-primary" value="修改密码" />
+			</div>
+		</div>
+		
 		<table>
 			<tr>
-				<td>修改密码</td>
+				<td></td>
 			</tr>
 			<tr>
-				<td>输入旧密码</td>
-				<td><input type="password" name="passwordOld" /></td>
+				<td></td>
+				<td></td>
 			</tr>
 			<tr>
-				<td>输入新密码</td>
-				<td><input type="password" name="passwordNew1" /></td>
+				<td></td>
+				<td></td>
 			</tr>
 			<tr>
-				<td>再次输入新密码</td>
-				<td><input type="password" name="passwordNew2" /> <input
-					type="hidden" value="${person }" name="person" /></td>
-				<td><input type="submit" value="修改密码" /></td>
+				<td></td>
+				<td></td>
+				<td></td>
 			</tr>
 		</table>
 	</form>
+</div>
 </body>
 </html>

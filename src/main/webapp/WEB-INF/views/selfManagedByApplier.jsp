@@ -67,8 +67,7 @@
 				<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(firstFormURL)}';" value="查看">
 			</td>
 			<td>
-				<spring:url value="/edit-first-project-basic-situation/{applierUid}" var="editFirstFormURL">
-					<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
+				<spring:url value="/edit-first-project-basic-situation" var="editFirstFormURL">
 				</spring:url>
 				<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(editFirstFormURL)}';" value="编辑">
 			</td>

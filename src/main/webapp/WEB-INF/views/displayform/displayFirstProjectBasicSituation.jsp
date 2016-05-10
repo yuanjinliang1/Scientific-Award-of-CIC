@@ -119,11 +119,19 @@ request.setCharacterEncoding("UTF-8");
 					${firstForm.nameAndCodeOfPlansOrFundations }
 				</div>
 			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="row">
+					<h4>
+						已呈交的科技报告编号
+					</h4>
+					</div>
+				</div>
+				<div class="row panel-body">
+					${firstForm.technicalReportNumber }
+				</div>
+			</div>
 			<table class="table table-bordered">
-				<tr>
-					<td>已呈交的科技报告编号</td>
-					<td>${firstForm.technicalReportNumber }</td>
-				</tr>
 				<c:if test="${applier.applicationType=='科技进步类'||applier.applicationType=='技术发明类' }">
 					<tr>
 						<td>授权发明专利项数</td>

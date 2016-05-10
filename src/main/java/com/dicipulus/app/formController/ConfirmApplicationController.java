@@ -107,7 +107,7 @@ public class ConfirmApplicationController{
 			Person person=FormControllerUlti.getPersonInRequest(request);
 			ApplicationJdbc applicationJdbc=InitJdbc.initApplicationJdbc();
 			if(!applicationJdbc.getStatusOfApplication(person.getUid()).equals("δ�ύ")){
-				return "redirect:/error?message=already-submitted";
+				return "redirect:/error?message=status-prerequisite-not-fullfilled";
 			}
 			setMajorContributorsForFirstForm(person.getUid());
 			setMajorContributingOrgNamesForFirstForm(person.getUid());

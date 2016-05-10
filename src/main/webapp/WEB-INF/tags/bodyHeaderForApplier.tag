@@ -59,7 +59,7 @@
     </div>
     <div >
     	<ul class="nav navbar-nav navbar-right">
-    	<li><a><c:out value="${ person.name }(${person.uid })"/>，欢迎您！</a></li>
+    	<li><a><small><c:out value="${ person.name }(${person.uid })"/>，欢迎您！</small></a></li>
     	<spring:url value="/self-managed-by-applier/{applierUid}" var="selfManageURL">
 			<spring:param name="applierUid" value="${person.uid}"></spring:param>
 		</spring:url>

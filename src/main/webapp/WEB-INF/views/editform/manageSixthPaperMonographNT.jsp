@@ -4,6 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="dicipulus" tagdir="/WEB-INF/tags"%>
 <%@ page session="true" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
@@ -13,38 +14,56 @@ request.setCharacterEncoding("UTF-8");
 %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>六、论文专著目录</title>
+	<jsp:include page="../fragments/header.jsp"></jsp:include>
+	<title>六、论文专著目录</title>
 </head>
 <body>
-	<form action="/app/create-paper-monograph" method="POST" >
-		<table>
-			<tr><td><input type="submit" value="添加"></td></tr>
-		</table>
-	</form>
-	<table>
-		<tr>
-			<td>论文专注名称</td>
-			<td>操作</td>
-			<td>操作</td>
-		</tr>
-		<c:forEach var="sixthForm" items="${sixthPaperMonographForms}">
+<div class="container">
+	<dicipulus:bodyHeaderForApplier menuName="editApplication"/>
+	<div class="wrapper">
+		<dicipulus:bodySidebarForEdit page="6"/>
+		<div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row" style="margin-left: 20px"><h1>六、论文专著目录</h1></div>
+            <form action="/app/create-paper-monograph" method="POST" >
+				<div class="row" style="margin-left:20px">
+					<input type="submit" class="btn btn-default" value="添加论文专著" />
+				</div>
+			</form>	
+			<br/>
+            <table class="table table-bordered">
 				<tr>
-					<td>${sixthForm.name}</td>
-					<td>
-						<spring:url value="/edit-sixth-paper-monograph/{idOfPaperMonograph}" var="editFormURL">
-							<spring:param name="idOfPaperMonograph" value="${sixthForm.idOfPaperMonograph}"></spring:param>
-						</spring:url>
-						<a id="editOpinion" href="${fn:escapeXml(editFormURL)}">填写</a>
-					</td>
-					<td>
-						<c:url value="/delete-sixth-paper-monograph" var="deleteURL">
-							<c:param name="idOfPaperMonograph" value="${sixthForm.idOfPaperMonograph}"></c:param>
-						</c:url>
-						<a id="deletePaperMonograph" href="${fn:escapeXml(deleteURL)}">删除</a>
-					</td>
+					<td>论文专著名称</td>
+					<td>操作</td>
+					<td>操作</td>
 				</tr>
-			</c:forEach>
-	</table>
+				<c:forEach var="sixthForm" items="${sixthPaperMonographForms}">
+					<tr>
+						<td>${sixthForm.name}</td>
+						<td>
+							<spring:url value="/edit-sixth-paper-monograph/{idOfPaperMonograph}" var="editFormURL">
+								<spring:param name="idOfPaperMonograph" value="${sixthForm.idOfPaperMonograph}"></spring:param>
+							</spring:url>
+							<a id="editOpinion" href="${fn:escapeXml(editFormURL)}">填写</a>
+						</td>
+						<td>
+							<c:url value="/delete-sixth-paper-monograph" var="deleteURL">
+								<c:param name="idOfPaperMonograph" value="${sixthForm.idOfPaperMonograph}"></c:param>
+							</c:url>
+							<a id="deletePaperMonograph" href="${fn:escapeXml(deleteURL)}">删除</a>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+        </div>
+		</div>
+	</div>
+</div>
+
+
+
+
+	
+	
 </body>
 </html>

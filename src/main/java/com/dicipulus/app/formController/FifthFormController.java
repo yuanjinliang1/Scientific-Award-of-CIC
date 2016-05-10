@@ -39,7 +39,11 @@ public class FifthFormController {
 			String applierUid=person.getUid();
 			FifthObjectiveEvaluationJdbc fifthObjectiveEvaluationJdbc=InitJdbc.initFifthObjectiveEvaluationJdbc();
 			FifthObjectiveEvaluation fifthObjectiveEvaluation=fifthObjectiveEvaluationJdbc.getFifthObjectiveEvaluation(applierUid);
-			logger.info(fifthObjectiveEvaluation.getObjectiveEvaluation());
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			modelAndView.addObject("applier", applier);
+			
 			modelAndView.setViewName("editform/editFifthObjectiveEvaluation");
 			modelAndView.addObject("objectiveEvaluationForm", fifthObjectiveEvaluation);
 			return modelAndView;

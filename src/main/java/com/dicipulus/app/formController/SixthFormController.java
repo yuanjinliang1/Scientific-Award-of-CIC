@@ -47,6 +47,11 @@ public class SixthFormController {
 			List<SixthPaperMonographNT> sixthPaperMonographNT=sixthPaperMonographNTJdbc.getAllSixthPaperMonographNT(applierUid);
 			modelAndView.setViewName("editform/manageSixthPaperMonographNT");
 			modelAndView.addObject("sixthPaperMonographForms", sixthPaperMonographNT);
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			modelAndView.addObject("applier", applier);
+			
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -150,6 +155,11 @@ public class SixthFormController {
 			SixthPaperMonographNT sixthPaperMonographNT=sixthPaperMonographNTJdbc.getSixthPaperMonographNT(idOfPaperMonograph);
 			modelAndView.setViewName("editform/editSixthPaperMonographNT");
 			modelAndView.addObject("sixthPaperMonograph", sixthPaperMonographNT);
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			modelAndView.addObject("applier", applier);
+			
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -239,6 +249,11 @@ public class SixthFormController {
 			modelAndView.addObject("sixthApplyUnitSituationForms", sixthApplyUnitSituation);
 			modelAndView.addObject("person", person);
 			modelAndView.setViewName("editform/manageSixthApplyUnitSituation");
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			modelAndView.addObject("applier", applier);
+			
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -368,6 +383,11 @@ public class SixthFormController {
 			SixthApplyUnitSituation sixthApplyUnitSituation=sixthApplyUnitSituationJdbc.getSixthApplyUnitSituation(idOfApplyUnit);
 			modelAndView.addObject("sixthApplyUnitSituationForm", sixthApplyUnitSituation);
 			modelAndView.setViewName("editform/editSixthApplyUnitSituation");
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			modelAndView.addObject("applier", applier);
+			
 			return modelAndView;
 		}
 		catch(NullPointerException e){

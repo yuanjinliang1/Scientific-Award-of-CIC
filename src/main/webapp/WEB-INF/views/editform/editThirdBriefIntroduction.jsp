@@ -3,6 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="dicipulus" tagdir="/WEB-INF/tags"%>
 <%@ page session="true" %>
 <!-- Set charset encoding to utf-8  -->
 <%
@@ -12,30 +13,37 @@ request.setCharacterEncoding("UTF-8");
 %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>三、项目简介</title>
+	<jsp:include page="../fragments/header.jsp"></jsp:include>
+	<title>三、项目简介</title>
 </head>
 <body>
-<form id="thirdFormer" action="/app/edit-brief-introduction" method="POST" modelAttribute="briefIntroduction">
-	<table>
-		<tr>
-			<td>项目简介</td>
-		</tr>
-		<tr>
-			<!-- Don't break this line. It's textarea. -->
-			<td><textarea rows="40" cols="100" name="briefIntroduction" form="thirdFormer">${briefIntroductionForm.briefIntroduction}</textarea></td>
-		</tr>
-		<tr>
-			<td>
-				<input type="submit" value="保存并查看" />
-				<input type="button" onclick="location.href='edit-first-project-basic-situation';" value="第一页">
-				<input type="button" onclick="location.href='edit-brief-introduction';" value="第三页">
-				<input type="button" onclick="location.href='edit-fourth-form';" value="第四页">
-				<input type="button" onclick="location.href='edit-objective-evaluation';" value="第五页">
-			</td>
-		</tr>
-	</table>
-
-</form>
+<div class="container">
+	<dicipulus:bodyHeaderForApplier menuName="editApplication"/>
+	<div class="wrapper">
+		<dicipulus:bodySidebarForEdit page="3"/>
+		<div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row" style="margin-left: 20px"><h1>三、项目简介</h1></div>
+            <form id="thirdFormer" action="/app/edit-brief-introduction" method="POST" modelAttribute="briefIntroduction">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="row">
+						<h4 >
+							项目简介
+						</h4>
+						</div>
+					</div>
+					<div class="row panel-body">
+						<textarea rows="40" name="briefIntroduction" form="thirdFormer">${briefIntroductionForm.briefIntroduction}</textarea>
+					</div>
+				</div>
+				<div class="row" style="margin-left:20px">
+					<input type="submit" class="btn btn-default" value="保存并查看" />
+				</div>
+			</form>	
+        </div>
+		</div>
+	</div>
+</div>
 </body>
 </html>

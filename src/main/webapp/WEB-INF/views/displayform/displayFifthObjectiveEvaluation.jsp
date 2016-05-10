@@ -37,10 +37,10 @@ request.setCharacterEncoding("UTF-8");
 		<dicipulus:bodySidebarForDisplay page="5"/>
 		<div id="page-content-wrapper">
         <div class="container-fluid">
-            <div class="row" style="margin-left: 20px"><h1>八、主要完成人情况表</h1></div>
+            <div class="row" style="margin-left: 20px"><h1>五、客观评价</h1></div>
             <table class="table table-bordered">
 				<tr>
-					<td>五、客观评价</td>
+					<td>客观评价</td>
 				</tr>
 				<tr>
 					<td>${objectiveEvaluationForm.objectiveEvaluation}</td>

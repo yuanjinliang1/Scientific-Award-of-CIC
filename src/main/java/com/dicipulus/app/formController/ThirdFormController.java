@@ -47,6 +47,10 @@ public class ThirdFormController {
 			ThirdProjectBriefIntroduction thirdProjectBriefIntroduction=thirdProjectBriefIntroductionJdbc.getThirdProjectBriefIntroduction(person.getUid());
 			modelAndView.setViewName("editform/editThirdBriefIntroduction");
 			modelAndView.addObject("briefIntroductionForm", thirdProjectBriefIntroduction);
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(applierUid);
+			modelAndView.addObject("applier", applier);
 		}
 		catch(NullPointerException e){
 			logger.info("get exception!");

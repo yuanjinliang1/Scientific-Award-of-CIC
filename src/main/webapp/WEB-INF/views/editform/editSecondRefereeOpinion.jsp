@@ -3,6 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="dicipulus" tagdir="/WEB-INF/tags"%>
 <%@ page session="true" %>
 <!-- Set charset encoding to utf-8  -->
 <%
@@ -13,19 +14,24 @@ request.setCharacterEncoding("UTF-8");
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>二、推荐单位意见</title>
-<h1>项目组名称: ${applier.name }</h1>
-<h1>项目组ID: ${applier.uid }</h1>
+	<jsp:include page="../fragments/header.jsp"></jsp:include>
+		<title>二、推荐单位意见</title>
 </head>
-
 <body>
+<div class="container">
+	<dicipulus:bodyHeaderForReferee menuName="manageApplication"/>
+	<br/><br/><br/>
+	<div class="row" style="margin-left: 20px"><h1>二、推荐单位意见</h1></div>
+	<div class="row" style="margin-left: 20px">
+		<h5 style="color:red;">
+			您正在编辑的是  名称为：<b>${applier.name }</b>，ID为：<b>${applier.uid }</b> 的项目组的推荐单位意见。
+		</h5>
+	</div>
 	<spring:url value="/edit-referee-unit-opinion-post/{applierUid}" var="editOpinionURL">
 		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
 	</spring:url>
 	<form id="secondFormer" action="${fn:escapeXml(editOpinionURL)}" method="POST" modelAttribute="secondFormAttr">
-		<table>
-		<tr><td>二、推荐单位意见</td></tr>
+		<table class="table table-bordered">
 		<tr>
 			<td>推荐单位名称</td>
 			<td><input type="text" name="refereeUnitName" value="${secondForm.refereeUnitName}"/></td>
@@ -53,34 +59,35 @@ request.setCharacterEncoding("UTF-8");
 			<td>传真</td>
 			<td><input type="text" name="fax" value="${secondForm.fax}"></td>
 		</tr>
-		
-		<tr>
-			<td>推荐意见</td>
-			<!-- Don't break this line. It's textarea. -->
-			<td><textarea rows="8" cols="100" name="recommendOpinion" form="secondFormer">${secondForm.recommendOpinion}</textarea></td>
-		</tr>
-		<tr>
-			<td>推荐该项目为中国通信学会科学技术奖
-				<select name="referingScienceTechnologyAwardRank">
-					<option value="${secondForm.referingScienceTechnologyAwardRank}">${secondForm.referingScienceTechnologyAwardRank}</option>
-					<c:forEach items="${nominatedAwards }" var="nominatedAward">
-						<c:if test="${secondForm.referingScienceTechnologyAwardRank!=nominatedAward}">
-							<option value="${nominatedAward }">${nominatedAward }</option>
-						</c:if>
-					</c:forEach>
-				</select>
-				等奖。
-			</td>
-		</tr>
-		<tr><td><input type="submit" value="保存"/></td></tr>
-	</table>
+		</table>
+	
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="row">
+				<h4 >
+					推荐意见
+				</h4>
+				</div>
+			</div>
+			<div class="row panel-body">
+				<textarea rows="8" name="recommendOpinion" form="secondFormer">${secondForm.recommendOpinion}</textarea>
+			</div>
+		</div>
+		<div class="row" style="margin-left:5px">
+			推荐该项目为中国通信学会科学技术奖
+			<select name="referingScienceTechnologyAwardRank">
+				<option value="${secondForm.referingScienceTechnologyAwardRank}">${secondForm.referingScienceTechnologyAwardRank}</option>
+				<c:forEach items="${nominatedAwards }" var="nominatedAward">
+					<c:if test="${secondForm.referingScienceTechnologyAwardRank!=nominatedAward}">
+						<option value="${nominatedAward }">${nominatedAward }</option>
+					</c:if>
+				</c:forEach>
+			</select>
+		</div>
+		<div class="row" style="margin-left:20px;margin-top:10px;">
+			<input type="submit" class="btn btn-default" value="保存" />
+		</div>
 	</form>
-				<c:url value="/confirm-referee-unit-opinion-by-referee" var="submitURL">
-					<c:param name="applierUid" value="${secondForm.applierUid }"></c:param>
-				</c:url>
-	
-				<input type="button" onclick="location.href='${submitURL}';" value="确认提交">
-	
-	
+</div>
 </body>
 </html>

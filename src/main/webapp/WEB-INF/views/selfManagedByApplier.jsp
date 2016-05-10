@@ -3,6 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="dicipulus" tagdir="/WEB-INF/tags"%>
 <%@ page session="true"%>
 <!-- Set charset encoding to utf-8  -->
 <%
@@ -15,78 +16,21 @@
 
 <html>
 <head>
-<title>SelfManagement</title>
+	<jsp:include page="fragments/header.jsp"></jsp:include>
+	<title>SelfManagement</title>
+	<style type="text/css">
+		.center {
+				     float: none;
+				     margin-left: auto;
+				     margin-right: auto;
+				}
+	</style>
 </head>
 <body>
-	<h1>Self Managed By Applier Prototype</h1>
-	<c:out value="${person.name }"></c:out>
-
-<spring:url value="/edit-initialize-application" var="editURL">
-</spring:url>
-<a id="editAddress" href="${fn:escapeXml(editURL)}">建立项目</a>
-
-<spring:url value="/display-first-project-basic-situation/{applierUid}" var="displayFisrtEditURL">
-	<spring:param name="applierUid" value="${person.uid}"></spring:param>
-</spring:url>
-<a id="firstEditAddress" href="${fn:escapeXml(displayFisrtEditURL)}">查看项目</a>
-
-<spring:url value="/edit-first-project-basic-situation" var="fisrtEditURL">
-</spring:url>
-<a id="firstEditAddress" href="${fn:escapeXml(fisrtEditURL)}">编辑项目</a>
-<br/>项目状态： ${application.projectStatus }
-
-<c:if test="${application.projectStatus=='未提交' }">
-	<spring:url value="/submit-application-by-applier" var="acceptURL">
-	</spring:url>
-	<input type="button" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="提交">
-</c:if>
-<c:if test="${application.projectStatus=='已提交' }">
-	<spring:url value="/withdraw-application-by-applier" var="withdrawURL">
-	</spring:url>
-	<input type="button" onclick="location.href='${fn:escapeXml(withdrawURL)}';" value="撤回">
-</c:if>
-
-
-	<form action="/app/self-managed-by-applier/change-name" method="POST">
-		<table>
-			<tr>
-				<td>修改名称</td>
-			</tr>
-			<tr>
-				<td>原名称:</td>
-				<td><c:out value="${person.name }"></c:out></td>
-			</tr>
-			<tr>
-				<td>新名称:<input type="hidden" value="${person }" name="person" /></td>
-				<td><input type="text" name="name" /></td>
-				<td><input type="submit" value="修改名称" /></td>
-			</tr>
-		</table>
-	</form>
-	<form action="/app/self-managed-by-applier/change-password"
-		method="POST">
-		<table>
-			<tr>
-				<td>修改密码</td>
-			</tr>
-			<tr>
-				<td>输入旧密码</td>
-				<td><input type="password" name="passwordOld" /></td>
-			</tr>
-			<tr>
-				<td>输入新密码</td>
-				<td><input type="password" name="passwordNew1" /></td>
-			</tr>
-			<tr>
-				<td>再次输入新密码</td>
-				<td><input type="password" name="passwordNew2" /> <input
-					type="hidden" value="${person }" name="person" /></td>
-				<td><input type="submit" value="修改密码" /></td>
-			</tr>
-		</table>
-	</form>
-	
-	<table border="1">
+<div class="container">
+	<dicipulus:bodyHeaderForApplier menuName="manageSelf"/>
+	<br/><br/><br/>
+	<table class="table table-bordered">
 		<tr>
 			<td>项目状态</td>
 			<td>项目名称</td>
@@ -99,7 +43,19 @@
 		</tr>
 		<tr>
 			<c:set var="serial" value="${serial+1 }"></c:set>
-			<td>${application.projectStatus }</td>
+			<td>
+				${application.projectStatus }
+				<c:if test="${application.projectStatus=='未提交' }">
+					<spring:url value="/submit-application-by-applier" var="acceptURL">
+					</spring:url>
+					<input type="button" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="提交">
+				</c:if>
+				<c:if test="${application.projectStatus=='已提交' }">
+					<spring:url value="/withdraw-application-by-applier" var="withdrawURL">
+					</spring:url>
+					<input type="button" onclick="location.href='${fn:escapeXml(withdrawURL)}';" value="撤回">
+				</c:if>
+			</td>
 			<td>${application.projectName }</td>
 			<td>${application.applicationType }</td>
 			<td>${application.referingScienceTechnologyAwardRank }</td>
@@ -121,7 +77,61 @@
 			<td><input type="button" onclick="location.href='${fn:escapeXml(confirmURL)}';" value="确认提交"></td>
 		</tr>
 	</table>
+	<div>
+	<form action="/app/self-managed-by-applier/change-name" method="POST">
+		<div class="form-group col-md-4 panel panel-default center">
+			<div class="panel-heading row">
+				<h3 class=" panel-title ">修改名称</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<label>原名称: <c:out value="${ person.name }"/></label>
+				</div>
+				<div class="row">
+					<label>新名称</label>
+					<input type="hidden" value="${person }" name="person" />
+					<input type="text" class="form-control" name="name" />
+					<br/>
+				</div>
+				<div class="row">
+					<input type="submit" class="btn btn-default" value="修改名称" />
+				</div>
+			</div>
+		</div>
+	</form>
+	</div>
+	<div><br/>
+	<form action="/app/self-managed-by-applier/change-password" 	method="POST">
+		<div class="form-group col-md-4 panel panel-default center">
+			<div class="panel-heading row">
+				<h3 class=" panel-title ">修改密码</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<label>输入旧密码</label>
+					<input type="password" class="form-control" name="passwordOld" />
+					<br/>
+				</div>
+				<div class="row">
+					<label>输入新密码</label>
+					<input type="password" class="form-control" name="passwordNew1" />
+					<br/>
+				</div>
+				<div class="row">
+					<label>再次输入新密码</label>
+					<input type="password" class="form-control" name="passwordNew2" /> 
+					<input type="hidden" value="${person }" name="person" />
+					<br/>
+				</div>
+				<div class="row">
+					<input type="submit" class="btn btn-default" value="修改密码" />
+				</div>
+			</div>
+		</div>
+	</form>
+	</div>
+	
 
-
+</div>
 </body>
 </html>

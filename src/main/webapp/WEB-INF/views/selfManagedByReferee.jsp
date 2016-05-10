@@ -47,25 +47,6 @@
 				<input type="submit" class="btn btn-primary" value="修改密码" />
 			</div>
 		</div>
-		
-		<table>
-			<tr>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-		</table>
 	</form>
 </div>
 </body>

@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="dicipulus" tagdir="/WEB-INF/tags"%>
 <%@ page session="true" %>
 <!-- Set charset encoding to utf-8  -->
 <%
@@ -14,213 +15,244 @@ request.setCharacterEncoding("UTF-8");
 
 <html>
 <head>
+	<jsp:include page="../fragments/header.jsp"></jsp:include>
 	<title>八、主要完成人情况表</title>
 </head>
 <body>
-	<h1>八、主要完成人情况表</h1>
-	<table border="1">
-	
-		<tr>
-			<td>姓名</td>
-			<td>
-			${eighthForm.nameOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>性别</td>
-			<td>
-			${eighthForm.genderOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>排名</td>
-			<td>
-			${eighthForm.rankOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>国籍</td>
-			<td>${eighthForm.nationalityOfContributor}</td>
-		</tr>
-		<c:if test="${applier.applicationType!='科技进步类' }">
-			<tr>
-				<td>中国通信学会会员</td>
-				<td>
-					<select name="isMemberOfCIC">
-						<option value="${eighthForm.isMemberOfCIC}">${eighthForm.isMemberOfCIC}</option>
-						<c:if test="${eighthForm.isMemberOfCIC!='是'}">
-							<option value="是">是</option>
-						</c:if>
-						<c:if test="${eighthForm.isMemberOfCIC!='否'}">
-							<option value="否">否</option>
-						</c:if>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>会员证号</td>
-				<td>${eighthForm.memberIdOfCIC}</td>
-			</tr>
-		</c:if>
-		<tr>
-			<td>出生年月</td>
-			<td>${eighthForm.birthdayOfContributor}</td>
-		</tr>
-		<tr>
-			<td>出生地</td>
-			<td>${eighthForm.birthPlaceOfContributor}</td>
-		</tr>
-		<tr>
-			<td>民族</td>
-			<td>${eighthForm.nationOfContributor}</td>
-		</tr>
-		<tr>
-			<td>身份证号</td>
-			<td>${eighthForm.citizenIdOfContributor}</td>
-		</tr>
-		<tr>
-			<td>归国人员</td>
-			<td>${eighthForm.isReturnedFormOverseas}</td>
-		</tr>
-		
-		<tr>
-			<td>技术职称</td>
-			<td>
-			${eighthForm.technicalTitleOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>最高学历</td>
-			<td>
-			${eighthForm.highestEducationOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>最高学位</td>
-			<td>
-			${eighthForm.highestDegreeOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>毕业学校</td>
-			<td>
-			${eighthForm.universityOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>毕业时间</td>
-			<td>
-			${eighthForm.graduateDateOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>所学专业</td>
-			<td>
-			${eighthForm.majorOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>电子邮箱</td>
-			<td>
-			${eighthForm.emailOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>办公电话</td>
-			<td>
-			${eighthForm.officePhoneOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>移动电话</td>
-			<td>
-			${eighthForm.mobileOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>通讯地址</td>
-			<td>
-			${eighthForm.addressOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>邮政编码</td>
-			<td>
-			${eighthForm.zipCodeOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>工作单位</td>
-			<td>
-			${eighthForm.workUnitOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>行政职务</td>
-			<td>
-			${eighthForm.administrativePositionOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>二级单位</td>
-			<td>
-			${eighthForm.subWorkUnitOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>党派</td>
-			<td>
-			${eighthForm.policitalPartyOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>完成单位</td>
-			<td>
-			${eighthForm.completeUnitOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>所在地</td>
-			<td>
-			${eighthForm.locationOfContributor}
-			</td>
-		</tr>
-		<tr>
-			<td>单位性质</td>
-			<td>
-			${eighthForm.typeOfUnit}
-			</td>
-		</tr>
-		<tr>
-			<td>参加本项目开始时间</td>
-			<fmt:formatDate pattern="yyyy-MM-dd"  value="${eighthForm.startDateOfParticipation }" var="startDateVar" />
-			<td>${startDateVar}</td>
-		</tr>
-		<tr>
-			<td>参加本项目结束时间</td>
-			<fmt:formatDate pattern="yyyy-MM-dd"  value="${eighthForm.endDateOfParticipation }" var="endDateVar" />
-			<td>${endDateVar }</td>
-		</tr>
-		<tr>
-			<c:choose>
-				<c:when test="${applier.applicationType!='科技进步类' }">
-				<td>对本项目主要学术贡献</td>
-				</c:when>
-				<c:when test="${applier.applicationType=='科技进步类' }">
-				<td>对本项目技术创造性贡献</td>
-				</c:when>
-				<c:otherwise>
-				<td>bad applicationType!</td>
-				</c:otherwise>
-			</c:choose>
-			<td>${eighthForm.contributionOfContributor}</td>
-		</tr>
-		<tr>
-			<td>曾获中国通信学会科技奖励情况：</td>
-			<td>${eighthForm.formerRewardOfCIC}</td>
-		</tr>
-	</table>
-
-	<jsp:include page="fragments/footerPagination.jsp"></jsp:include>
+<div class="container" >
+	<c:choose>
+		<c:when test="${person.role eq 'admin' }">
+			<dicipulus:bodyHeaderForAdmin menuName=""/>
+		</c:when>
+		<c:when test="${person.role eq 'referee' }">
+			<dicipulus:bodyHeaderForReferee menuName=""/>
+		</c:when>
+		<c:when test="${person.role eq 'applier' }">
+			<dicipulus:bodyHeaderForApplier menuName=""/>
+		</c:when>
+		<c:otherwise>
+			<c:out value="${person.uid} ${person.name } ${person.role} bad role name" />
+		</c:otherwise>
+	</c:choose>
+	<div class="wrapper">
+		<dicipulus:bodySidebarForDisplay page="8"/>
+		<div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row" style="margin-left: 20px"><h1>八、主要完成人情况表</h1></div>	
+			<table class="table table-bordered" >
+				<tr>
+					<th>姓名</th>
+					<td>
+					${eighthForm.nameOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>性别</th>
+					<td>
+					${eighthForm.genderOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>排名</th>
+					<td>
+					${eighthForm.rankOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>国籍</th>
+					<td>${eighthForm.nationalityOfContributor}</td>
+				</tr>
+				<c:if test="${applier.applicationType!='科技进步类' }">
+					<tr>
+						<th>中国通信学会会员</th>
+						<td>
+							${eighthForm.isMemberOfCIC}
+						</td>
+					</tr>
+					<tr>
+						<th>会员证号</th>
+						<td>${eighthForm.memberIdOfCIc}</td>
+					</tr>
+				</c:if>
+				<tr>
+					<th>出生年月</th>
+					<td>${eighthForm.birthdayOfContributor}</td>
+				</tr>
+				<tr>
+					<th>出生地</th>
+					<td>${eighthForm.birthPlaceOfContributor}</td>
+				</tr>
+				<tr>
+					<th>民族</th>
+					<td>${eighthForm.nationOfContributor}</td>
+				</tr>
+				<tr>
+					<th>身份证号</th>
+					<td>${eighthForm.citizenIdOfContributor}</td>
+				</tr>
+				<tr>
+					<th>归国人员</th>
+					<td>${eighthForm.isReturnedFormOverseas}</td>
+				</tr>
+				
+				<tr>
+					<th>技术职称</th>
+					<td>
+					${eighthForm.technicalTitleOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>最高学历</th>
+					<td>
+					${eighthForm.highestEducationOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>最高学位</th>
+					<td>
+					${eighthForm.highestDegreeOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>毕业学校</th>
+					<td>
+					${eighthForm.universityOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>毕业时间</th>
+					<td>
+					${eighthForm.graduateDateOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>所学专业</th>
+					<td>
+					${eighthForm.majorOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>电子邮箱</th>
+					<td>
+					${eighthForm.emailOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>办公电话</th>
+					<td>
+					${eighthForm.officePhoneOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>移动电话</th>
+					<td>
+					${eighthForm.mobileOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>通讯地址</th>
+					<td>
+					${eighthForm.addressOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>邮政编码</th>
+					<td>
+					${eighthForm.zipCodeOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>工作单位</th>
+					<td>
+					${eighthForm.workUnitOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>行政职务</th>
+					<td>
+					${eighthForm.administrativePositionOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>二级单位</th>
+					<td>
+					${eighthForm.subWorkUnitOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>党派</th>
+					<td>
+					${eighthForm.policitalPartyOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>完成单位</th>
+					<td>
+					${eighthForm.completeUnitOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>所在地</th>
+					<td>
+					${eighthForm.locationOfContributor}
+					</td>
+				</tr>
+				<tr>
+					<th>单位性质</th>
+					<td>
+					${eighthForm.typeOfUnit}
+					</td>
+				</tr>
+				<tr>
+					<th>参加本项目开始时间</th>
+					<fmt:formatDate pattern="yyyy-MM-dd"  value="${eighthForm.startDateOfParticipation }" var="startDateVar" />
+					<td>${startDateVar}</td>
+				</tr>
+				<tr>
+					<th>参加本项目结束时间</th>
+					<fmt:formatDate pattern="yyyy-MM-dd"  value="${eighthForm.endDateOfParticipation }" var="endDateVar" />
+					<td>${endDateVar }</td>
+				</tr>
+			</table>
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">
+				<div class="row">
+					<h4>
+					<c:choose>
+						<c:when test="${applier.applicationType!='科技进步类' }">
+						对本项目主要学术贡献
+						</c:when>
+						<c:when test="${applier.applicationType=='科技进步类' }">
+						对本项目技术创造性贡献
+						</c:when>
+						<c:otherwise>
+						bad applicationType!
+						</c:otherwise>
+					</c:choose>
+					</h4>
+				</div>
+				</div>
+				<div class="row panel-body">
+					${eighthForm.contributionOfContributor}
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="row">
+					<h4>
+					曾获中国通信学会科技奖励情况：
+					</h4>
+					</div>
+				</div>
+				<div class="row panel-body">
+				${eighthForm.formerRewardOfCIC}
+				</div>
+			</div>
+			
+        </div>
+        </div>
+	</div>
+	</div>
 </body>
 </html>

@@ -3,6 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="dicipulus" tagdir="/WEB-INF/tags"%>
 <%@ page session="true" %>
 <!-- Set charset encoding to utf-8  -->
 <%
@@ -13,59 +14,78 @@ request.setCharacterEncoding("UTF-8");
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>二、推荐单位意见</title>
-<h1>项目组名称: ${applier.name }</h1>
-<h1>项目组ID: ${applier.uid }</h1>
+	<jsp:include page="../fragments/header.jsp"></jsp:include>
+	<title>二、推荐单位意见</title>
 </head>
 
 <body>
-	<spring:url value="/select-referee-unit-opinion-post/{applierUid}" var="editOpinionURL">
-		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
-	</spring:url>
-	
-		<table>
-		<tr><td>二、推荐单位意见</td></tr>
-		<tr>
-			<td>推荐单位名称</td>
-			<td>${secondForm.refereeUnitName}</td>
-		</tr>
-		<tr>
-			<td>通讯地址</td>
-			<td>${secondForm.postAddress}</td>
-		</tr>
-		<tr>
-			<td>邮政编码</td>
-			<td>${secondForm.zipCode }</td>
-		</tr>
-		<tr>
-			<td>联系人</td>
-			<td>${secondForm.contact }</td>
-		</tr>
-		<tr>
-			<td>联系电话</td>
-			<td>${secondForm.phoneNumber }</td>
-		</tr>
-		<tr><td>电子邮箱</td>
-			<td>${secondForm.email }</td>
-		</tr>
-		<tr>
-			<td>传真</td>
-			<td>${secondForm.fax}</td>
-		</tr>
-		
-		<tr>
-			<td>推荐意见</td>
-			<td>${secondForm.recommendOpinion}</td>
-		</tr>
-		<tr>
-			<td>推荐该项目为中国通信学会科学技术奖${secondForm.referingScienceTechnologyAwardRank}等奖。</td>
-		</tr>
-		
-	</table>
-	
-<jsp:include page="fragments/footerPagination.jsp"></jsp:include>
-	
-	
+<div class="container">
+	<c:choose>
+		<c:when test="${person.role eq 'admin' }">
+			<dicipulus:bodyHeaderForAdmin menuName=""/>
+		</c:when>
+		<c:when test="${person.role eq 'referee' }">
+			<dicipulus:bodyHeaderForReferee menuName=""/>
+		</c:when>
+		<c:when test="${person.role eq 'applier' }">
+			<dicipulus:bodyHeaderForApplier menuName=""/>
+		</c:when>
+		<c:otherwise>
+			<c:out value="${person.uid} ${person.name } ${person.role} bad role name" />
+		</c:otherwise>
+	</c:choose>
+	<div class="wrapper">
+		<dicipulus:bodySidebarForDisplay page="2"/>
+		<div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row" style="margin-left: 20px"><h1>二、推荐单位意见</h1></div>	
+            <table class="table table-bordered">
+				<tr>
+					<td>推荐单位名称</td>
+					<td>${secondForm.refereeUnitName}</td>
+				</tr>
+				<tr>
+					<td>通讯地址</td>
+					<td>${secondForm.postAddress}</td>
+				</tr>
+				<tr>
+					<td>邮政编码</td>
+					<td>${secondForm.zipCode }</td>
+				</tr>
+				<tr>
+					<td>联系人</td>
+					<td>${secondForm.contact }</td>
+				</tr>
+				<tr>
+					<td>联系电话</td>
+					<td>${secondForm.phoneNumber }</td>
+				</tr>
+				<tr><td>电子邮箱</td>
+					<td>${secondForm.email }</td>
+				</tr>
+				<tr>
+					<td>传真</td>
+					<td>${secondForm.fax}</td>
+				</tr>
+			</table>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="row">
+					<h4>
+						推荐意见
+					</h4>
+					</div>
+				</div>
+				<div class="row panel-body">
+					${secondForm.recommendOpinion}
+				</div>
+			</div>
+			<div class="row">
+				<h4>推荐该项目为中国通信学会科学技术奖${secondForm.referingScienceTechnologyAwardRank}。</h4>
+			</div>
+        </div>
+		</div>
+	</div>
+</div>	
 </body>
 </html>

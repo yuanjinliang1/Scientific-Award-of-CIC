@@ -48,12 +48,12 @@
 				<c:if test="${application.projectStatus=='未提交' }">
 					<spring:url value="/submit-application-by-applier" var="acceptURL">
 					</spring:url>
-					<input type="button" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="提交">
+					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="提交">
 				</c:if>
 				<c:if test="${application.projectStatus=='已提交' }">
 					<spring:url value="/withdraw-application-by-applier" var="withdrawURL">
 					</spring:url>
-					<input type="button" onclick="location.href='${fn:escapeXml(withdrawURL)}';" value="撤回">
+					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(withdrawURL)}';" value="撤回">
 				</c:if>
 			</td>
 			<td>${application.projectName }</td>
@@ -64,17 +64,17 @@
 				<spring:url value="/display-first-project-basic-situation/{applierUid}" var="firstFormURL">
 					<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 				</spring:url>
-				<input type="button" onclick="location.href='${fn:escapeXml(firstFormURL)}';" value="查看">
+				<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(firstFormURL)}';" value="查看">
 			</td>
 			<td>
 				<spring:url value="/edit-first-project-basic-situation/{applierUid}" var="editFirstFormURL">
 					<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 				</spring:url>
-				<input type="button" onclick="location.href='${fn:escapeXml(editFirstFormURL)}';" value="编辑">
+				<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(editFirstFormURL)}';" value="编辑">
 			</td>
 				<spring:url value="/confirm-whole-application-by-applier" var="confirmURL">
 				</spring:url>
-			<td><input type="button" onclick="location.href='${fn:escapeXml(confirmURL)}';" value="确认提交"></td>
+			<td><input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(confirmURL)}';" value="确认提交"></td>
 		</tr>
 	</table>
 	<div>

@@ -3,6 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="dicipulus" tagdir="/WEB-INF/tags"%>
 <%@ page session="true" %>
 <!-- Set charset encoding to utf-8  -->
 <%
@@ -13,34 +14,53 @@ request.setCharacterEncoding("UTF-8");
 
 <html>
 <head>
+	<jsp:include page="../fragments/header.jsp"></jsp:include>
 	<title>八、主要完成人情况表</title>
 </head>
 <body>
-<h1>
-	八、主要完成人情况表
-</h1>
-<c:out value="${person.name }"></c:out>
-
-<table border="1">
-	<tr>
-		<td>排名</td>
-		<td>姓名</td>
-		<td>操作</td>
-	</tr>
-	<c:forEach var="eighthForm" items="${eighthForms }">
-		<tr>
-			<td>${eighthForm.rankOfContributor } </td>
-			<td>${eighthForm.nameOfContributor }</td>
-			<td>
-				<spring:url value="/display-eighth-major-contributor/{idOfEighthForm}" var="editFormURL">
-					<spring:param name="idOfEighthForm" value="${eighthForm.idOfEighthForm }"></spring:param>
-				</spring:url>
-				<a id="editOpinion" href="${fn:escapeXml(editFormURL)}">浏览</a>
-			</td>
-			
-		</tr>
-	</c:forEach>
-</table>
-<jsp:include page="fragments/footerPagination.jsp"></jsp:include>
+<div class="container">
+	<c:choose>
+		<c:when test="${person.role eq 'admin' }">
+			<dicipulus:bodyHeaderForAdmin menuName=""/>
+		</c:when>
+		<c:when test="${person.role eq 'referee' }">
+			<dicipulus:bodyHeaderForReferee menuName=""/>
+		</c:when>
+		<c:when test="${person.role eq 'applier' }">
+			<dicipulus:bodyHeaderForApplier menuName=""/>
+		</c:when>
+		<c:otherwise>
+			<c:out value="${person.uid} ${person.name } ${person.role} bad role name" />
+		</c:otherwise>
+	</c:choose>
+	<div class="wrapper">
+		<dicipulus:bodySidebarForDisplay page="8"/>
+		<div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row" style="margin-left: 20px"><h1>八、主要完成人情况表</h1></div>	
+            <table class="table table-bordered">
+				<tr>
+					<td>排名</td>
+					<td>姓名</td>
+					<td>操作</td>
+				</tr>
+				<c:forEach var="eighthForm" items="${eighthForms }">
+					<tr>
+						<td>${eighthForm.rankOfContributor } </td>
+						<td>${eighthForm.nameOfContributor }</td>
+						<td>
+							<spring:url value="/display-eighth-major-contributor/{idOfEighthForm}" var="editFormURL">
+								<spring:param name="idOfEighthForm" value="${eighthForm.idOfEighthForm }"></spring:param>
+							</spring:url>
+							<a id="editOpinion" class="btn btn-default" href="${fn:escapeXml(editFormURL)}">浏览</a>
+						</td>
+						
+					</tr>
+				</c:forEach>
+			</table>
+        </div>
+		</div>
+	</div>
+</div>
 </body>
 </html>

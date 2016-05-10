@@ -48,7 +48,7 @@
 				<input type="hidden" value="${person }" name="person" />
 			</div>
 			<div class="row">
-				<input type="submit" value="修改密码" />
+				<input type="submit"  class="btn btn-default" value="修改密码" />
 			</div>
 		</div>
 	</form>

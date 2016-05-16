@@ -3,7 +3,10 @@ package com.dicipulus.app.controller;
 import com.dicipulus.app.*;
 import com.dicipulus.app.JDBC.*;
 import com.dicipulus.app.model.*;
+import com.dicipulus.app.pdf.CombinePdf;
+import com.itextpdf.text.DocumentException;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,7 +41,8 @@ public class LoginController{
 	//private final SystemService systemService=(SystemService)context.getBean("systemService");
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String initLoginForm(){
+	public String initLoginForm() throws DocumentException, IOException{
+		//CombinePdf.buildPdf("100116001");
 		return "login";
 	}
 	

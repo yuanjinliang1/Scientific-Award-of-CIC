@@ -59,7 +59,12 @@
 			</tr>
 			<tr>
 				<td>是否是代表性论文专著</td>
-				<td><input type="text" name="representativePaperMonograph" value="${sixthPaperMonograph.representativePaperMonograph}"></td>
+				<td><input type="text" name="representativePaperMonograph" value="${sixthPaperMonograph.representativePaperMonograph}">
+					<select name="representativePaperMonograph">
+						<option value="yes">是</option>
+						<option value="no">否</option>
+					</select>
+				</td>
 			</tr>
 		</table>
 		<table>

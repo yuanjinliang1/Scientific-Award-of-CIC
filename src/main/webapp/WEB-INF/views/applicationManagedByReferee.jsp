@@ -34,7 +34,6 @@ request.setCharacterEncoding("UTF-8");
 		<td>形审结果</td>
 		<td>操作</td>
 		<td>操作</td>
-		<td>操作</td>
 	</tr>
 	</thead>
 	<tbody>
@@ -58,7 +57,6 @@ request.setCharacterEncoding("UTF-8");
 				</c:if>
 			</td>
 			<td>${application.projectName }</td>
-			<td>${application.refereeString }</td>
 			<td>${application.applicationType }</td>
 			<td>${application.referingScienceTechnologyAwardRank }</td>
 			<td>${application.formalityExaminationResult }</td>

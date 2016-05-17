@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dicipulus.app.JDBC.ApplicationJdbc;
 import com.dicipulus.app.JDBC.ApplierJdbc;
 import com.dicipulus.app.JDBC.EighthMajorContributorJdbc;
 import com.dicipulus.app.JDBC.InitJdbc;
 import com.dicipulus.app.applicationModel.EighthMajorContributor;
 import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Person;
+import com.dicipulus.app.formController.*;
 
 @Controller
 @SessionAttributes("person")
@@ -228,10 +230,22 @@ public class EighthFormController {
 	public String saveEighthMajorContributor(HttpServletRequest request,@ModelAttribute("eighthFormAttr") EighthMajorContributor eighthForm,
 			@PathVariable("idOfEighthForm") int idOfEighthForm){
 		logger.info("saveEighthMajorContributor");
+		Person person=FormControllerUlti.getPersonInRequest(request);
+		if(person==null){
+			return "redirect:/error?message=null-session";
+		}
+		String applierUid=person.getUid();
+		//guard
+		ApplicationJdbc applicationJdbc=InitJdbc.initApplicationJdbc();
+		if(!applicationJdbc.getStatusOfApplication(person.getUid()).equals("未提交")&&
+				!applicationJdbc.getStatusOfApplication(person.getUid()).equals("已提交")){
+			return "redirect:/self-managed-by-applier/"+applierUid;
+		}
 		try{
 			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
 			eighthMajorContributorJdbc.updateEighthMajorContributor(eighthForm);
 			
+			FormControllerUlti.setMajorContributorsForFirstForm(applierUid);
 			return "redirect:/edit-eighth-major-contributor/"+eighthForm.getIdOfEighthForm();
 		}
 		catch(NullPointerException e){

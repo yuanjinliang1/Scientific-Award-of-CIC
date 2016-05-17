@@ -198,15 +198,15 @@ request.setCharacterEncoding("UTF-8");
 					</tr>
 					<tr>
 						<td>推荐单位联系人</td>
-						<td><input type="text" name="refereeContactName" value="${firstForm.refereeContactName }" /></td>
+						<td>${firstForm.refereeContactName }</td>
 					</tr>
 					<tr>
 						<td>推荐单位联系人电话</td>
-						<td><input type="text" name="refereeContactPhone" value="${firstForm.refereeContactPhone }" /></td>
+						<td>${firstForm.refereeContactPhone }</td>
 					</tr>
 					<tr>
 						<td>推荐单位联系人邮箱</td>
-						<td><input type="text" name="refereeContactEmail" value="${firstForm.refereeContactEmail }" /></td>
+						<td>${firstForm.refereeContactEmail }</td>
 					</tr>
 					<tr>
 						<td>项目联系人</td>

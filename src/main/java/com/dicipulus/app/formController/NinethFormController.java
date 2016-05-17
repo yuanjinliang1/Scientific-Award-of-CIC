@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dicipulus.app.JDBC.ApplicationJdbc;
 import com.dicipulus.app.JDBC.ApplierJdbc;
 import com.dicipulus.app.JDBC.InitJdbc;
 import com.dicipulus.app.JDBC.NinethMajorOrgContributorJdbc;
@@ -220,10 +221,19 @@ public class NinethFormController {
 	public String saveNinethMajorOrgContributor(HttpServletRequest request,@ModelAttribute("ninethFormAttr") NinethMajorOrgContributor ninethForm,
 			@PathVariable("idOfNinethForm") int idOfNinethForm){
 		logger.info("saveNinethMajorOrgContributor");
+		Person person=FormControllerUlti.getPersonInRequest(request);
+		if(person==null){
+			return "redirect:/error?message=null-session";
+		}
+		String applierUid=person.getUid();
 		try{
 			NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
 			ninethMajorOrgContributorJdbc.updateNinethMajorOrgContributor(ninethForm);
-			
+			ApplicationJdbc applicationJdbc=InitJdbc.initApplicationJdbc();
+			if(applicationJdbc.getStatusOfApplication(person.getUid()).equals("未提交")||
+					applicationJdbc.getStatusOfApplication(person.getUid()).equals("已提交")){
+				FormControllerUlti.setMajorContributingOrgNamesForFirstForm(applierUid);
+			}
 			return "redirect:/edit-nineth-major-org-contributor/"+ninethForm.getIdOfNinethForm();
 		}
 		catch(NullPointerException e){

@@ -81,5 +81,6 @@ public class FirstProjectBasicSituationJdbc{
 	public void setRefereeInformation(SecondRefereeUnitOpinion secondForm,String applierUid){
 		String sql="update project_major set refereeString=?,refereeContactName=?,refereeContactPhone=?,RefereeContactEmail=? where applierUid=?";
 		jdbcTemplateObject.update(sql,secondForm.getRefereeUnitName(),secondForm.getContact(),secondForm.getPhoneNumber(),secondForm.getEmail(),applierUid);
+		logger.info(sql);
 	}
 }

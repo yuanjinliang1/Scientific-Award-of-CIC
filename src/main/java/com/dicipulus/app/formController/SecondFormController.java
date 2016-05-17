@@ -60,9 +60,9 @@ public class SecondFormController {
 			if(applicatoinJdbc.getStatusOfApplication(applierUid)=="“—Ω” ’"){
 				return "redirect:/error?message=prerequisite-status-wrong";
 			}
-			
 			SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
 			secondRefereeUnitOpinionJdbc.updateSecondRefereeUnitOpinion(secondRefereeUnitOpinion, applierUid);
+			FormControllerUlti.setRefereeInformationForFirstForm(applierUid);
 			return "redirect:/edit-referee-unit-opinion/"+applier.getUid();
 		}
 		catch(NullPointerException e){

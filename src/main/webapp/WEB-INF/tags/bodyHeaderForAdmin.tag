@@ -49,7 +49,7 @@
        		<a id="selfManage" href="${fn:escapeXml(selfManageURL)}">个人管理</a>
         </li>
     	<li>
-	    	<a href="app/login">
+	    	<a href="login">
 	    	<span class="glyphicon glyphicon-log-out"></span>
 	    	登出</a>
     	</li>

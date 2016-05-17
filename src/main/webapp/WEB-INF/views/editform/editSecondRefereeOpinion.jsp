@@ -34,7 +34,7 @@ request.setCharacterEncoding("UTF-8");
 		<table class="table table-bordered">
 		<tr>
 			<td>推荐单位名称</td>
-			<td><input type="text" name="refereeUnitName" value="${secondForm.refereeUnitName}"/></td>
+			<td><input type="hidden" name="refereeUnitName" value="${person.name}"/>${person.name}</td>
 		</tr>
 		<tr>
 			<td>通讯地址</td>

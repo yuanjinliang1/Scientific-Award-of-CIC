@@ -67,7 +67,25 @@
 					</tr>
 					<tr>
 						<td>是否是代表性论文专著</td>
-						<td><input type="text" name="representativePaperMonograph" value="${sixthPaperMonograph.representativePaperMonograph}"></td>
+						<td>
+							<select name="representativePaperMonograph" >
+								<option value="${${sixthPaperMonograph.representativePaperMonograph}}">${sixthPaperMonograph.representativePaperMonograph}</option>
+								<c:choose>
+									<c:when test="${sixthPaperMonograph.representativePaperMonograph eq 'yes'}">
+										<option value="yes">是</option>
+										<option value="no">否</option>
+									</c:when>
+									<c:when test="${sixthPaperMonograph.representativePaperMonograph eq 'no'}">
+										<option value="no">否</option>
+										<option value="yes">是</option>
+									</c:when>
+									<c:otherwise>
+										<option value="yes">是</option>
+										<option value="no">否</option>
+									</c:otherwise>
+								</c:choose>						
+							</select>
+						</td>
 					</tr>
 				</table>
 				<div class="row" style="margin-left:20px">
@@ -79,10 +97,5 @@
 		</div>
 	</div>
 </div>
-
-
-
-
-	
 </body>
 </html>

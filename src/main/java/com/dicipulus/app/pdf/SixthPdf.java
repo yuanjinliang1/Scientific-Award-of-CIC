@@ -48,7 +48,7 @@ public class SixthPdf {
 		
 		while(it.hasNext()){
 			String temp=it.next().getRepresentativePaperMonograph();
-			if(temp.equals("no")) it.remove();
+			if(temp.equals("·ñ")) it.remove();
 		}
 		BaseFont baseFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
 		Font subTitle =  new  Font(baseFont  ,16, Font.BOLD, BaseColor.BLACK);

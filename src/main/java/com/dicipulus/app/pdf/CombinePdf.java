@@ -1,5 +1,6 @@
 package com.dicipulus.app.pdf;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,6 +15,12 @@ public class CombinePdf {
 	public static void buildPdf(String applierUid) throws DocumentException, IOException{
 		Document document=new Document(PageSize.A4,50,50,50,50);
 		String pathOfPdf=MyProperties.getRootPath()+applierUid+"/pdf/"+applierUid+".pdf";
+		
+		File folder = new File(MyProperties.getRootPath()+applierUid+"/pdf/");
+		if(folder.exists()==false){
+			folder.mkdirs();
+		}
+		
 		PdfWriter writer=PdfWriter.getInstance(document,new FileOutputStream(pathOfPdf));
 		document.open();
 		FirstProjectBasicSituationPdf.buildFirstProjectBasicSituationPdf(applierUid, document);

@@ -69,19 +69,14 @@
 						<td>是否是代表性论文专著</td>
 						<td>
 							<select name="representativePaperMonograph" >
-								<option value="${${sixthPaperMonograph.representativePaperMonograph}}">${sixthPaperMonograph.representativePaperMonograph}</option>
 								<c:choose>
-									<c:when test="${sixthPaperMonograph.representativePaperMonograph eq 'yes'}">
-										<option value="yes">是</option>
-										<option value="no">否</option>
-									</c:when>
-									<c:when test="${sixthPaperMonograph.representativePaperMonograph eq 'no'}">
-										<option value="no">否</option>
-										<option value="yes">是</option>
-									</c:when>
+									<c:when test="${sixthPaperMonograph.representativePaperMonograph eq '否'}">
+										<option value="否">否</option>
+										<option value="是">是</option>
+									</c:when>									
 									<c:otherwise>
-										<option value="yes">是</option>
-										<option value="no">否</option>
+										<option value="是">是</option>
+										<option value="否">否</option>
 									</c:otherwise>
 								</c:choose>						
 							</select>

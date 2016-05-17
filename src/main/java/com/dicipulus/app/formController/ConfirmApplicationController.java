@@ -56,7 +56,7 @@ public class ConfirmApplicationController{
 		return person;
 	}
 	
-	private void setMajorContributorsForFirstForm(String applierUid){
+	public void setMajorContributorsForFirstForm(String applierUid){
 		EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
 		List<EighthMajorContributor> eighthMajorContributors=eighthMajorContributorJdbc.getEighthMajorContributors(applierUid);//根据添加顺序（主键大小）排序
 		
@@ -74,7 +74,7 @@ public class ConfirmApplicationController{
 		firstProjectBasicSituationJdbc.setMajorContributorNames(majorContributorNames, applierUid);
 	}
 	
-	private void setMajorContributingOrgNamesForFirstForm(String applierUid){
+	public void setMajorContributingOrgNamesForFirstForm(String applierUid){
 		NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
 		List<NinethMajorOrgContributor> ninethMajorOrgContributors=ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(applierUid);
 		
@@ -92,7 +92,7 @@ public class ConfirmApplicationController{
 		firstProjectBasicSituationJdbc.setMajorContributingOrgNames(majorContributingOrgNames, applierUid);
 	}
 	
-	private void setRefereeInformationForFirstForm(String applierUid){
+	public void setRefereeInformationForFirstForm(String applierUid){
 		SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
 		SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
 		

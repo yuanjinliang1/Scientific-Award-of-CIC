@@ -15,44 +15,52 @@
 
 <html>
 <head>
-<jsp:include page="fragments/header.jsp"></jsp:include>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
 <title>SelfManagement</title>
 <style>
-	div.row {width:300;}
+div.row {
+	width: 300;
+}
 </style>
 </head>
 <body>
-<div class="container">
-	
-	
-	<dicipulus:bodyHeaderForAdmin menuName="manageSelf" />
-	<br/><br/><br/>
-	<h1>Self Managed By Admin Prototype</h1>
-	<form action="/app/self-managed-by-admin/change-password"
-		method="POST">
-		<div class="form-group">
-			<div class="row">
-				<label>修改密码</label>
+	<div class="container">
+
+
+		<dicipulus:bodyHeaderForAdmin menuName="manageSelf" />
+		<br />
+		<br />
+		<br />
+		<h1>Self Managed By Admin Prototype</h1>
+		<form action="/app/self-managed-by-admin/change-password"
+			method="POST">
+			<div class="form-group">
+				<div class="row">
+					<label>修改密码</label>
+				</div>
+				<div class="row">
+					<label>输入旧密码</label> <input type="password" class="form-control"
+						name="passwordOld" />
+				</div>
+				<div class="row">
+					<label>输入新密码</label> <input type="password" class="form-control"
+						name="passwordNew1" />
+				</div>
+				<div class="row">
+					<label>再次输入新密码</label> <input type="password" class="form-control"
+						name="passwordNew2" /> <input type="hidden" value="${person }"
+						name="person" />
+				</div>
+				<div class="row">
+					<input type="submit" class="btn btn-default" value="修改密码" />
+				</div>
 			</div>
-			<div class="row">
-				<label>输入旧密码</label>
-				<input type="password" class="form-control" name="passwordOld" />
-			</div>
-			<div class="row">
-				<label>输入新密码</label>
-				<input type="password" class="form-control" name="passwordNew1" />
-			</div>
-			<div class="row">
-				<label>再次输入新密码</label>
-				<input type="password" class="form-control" name="passwordNew2" /> 
-				<input type="hidden" value="${person }" name="person" />
-			</div>
-			<div class="row">
-				<input type="submit"  class="btn btn-default" value="修改密码" />
-			</div>
-		</div>
-	</form>
-	
-</div>
+		</form>
+
+	</div>
 </body>
 </html>

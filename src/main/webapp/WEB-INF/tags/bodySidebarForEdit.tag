@@ -43,6 +43,26 @@
 	<c:when test="${page eq '9' }">
 		<c:set var="ninethDisplay" value="active"></c:set>
 	</c:when>
+	<c:when test="${page eq 'a1' }">
+		<c:set var="a1Display" value="active"></c:set>
+		<c:set var="attachmentDisplay" value="active"></c:set>
+	</c:when>
+	<c:when test="${page eq 'a2' }">
+		<c:set var="a2Display" value="active"></c:set>
+		<c:set var="attachmentDisplay" value="active"></c:set>
+	</c:when>
+	<c:when test="${page eq 'a3' }">
+		<c:set var="a3Display" value="active"></c:set>
+		<c:set var="attachmentDisplay" value="active"></c:set>
+	</c:when>
+	<c:when test="${page eq 'a4' }">
+		<c:set var="a4Display" value="active"></c:set>
+		<c:set var="attachmentDisplay" value="active"></c:set>
+	</c:when>
+	<c:when test="${page eq 'a5' }">
+		<c:set var="a5Display" value="active"></c:set>
+		<c:set var="attachmentDisplay" value="active"></c:set>
+	</c:when>
 	<c:otherwise>
 		<c:out value="bad page"></c:out>
 	</c:otherwise>
@@ -67,6 +87,21 @@
 	</c:if>
 	<spring:url value="/manage-eighth-major-contributor" var="eighthFormURL"/>
 	<spring:url value="/manage-nineth-major-org-contributor" var="ninethFormURL"/>
+	<spring:url value="/upload/{applierUid}/1" var="firstAttachmentURL">
+		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
+	</spring:url>
+	<spring:url value="/upload/{applierUid}/2" var="secondAttachmentURL">
+		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
+	</spring:url>
+	<spring:url value="/upload/{applierUid}/3" var="thirdAttachmentURL">
+		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
+	</spring:url>
+	<spring:url value="/upload/{applierUid}/4" var="fourthAttachmentURL">
+		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
+	</spring:url>
+	<spring:url value="/upload/{applierUid}/5" var="fifthAttachmentURL">
+		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
+	</spring:url>
 	<spring:url value="/confirm-whole-application-by-applier" var="confirmFormURL"/>
 </div>
 <style>
@@ -109,10 +144,30 @@
                 <li class="${ ninethDisplay }">
                     <a href="${fn:escapeXml(ninethFormURL)}">第九页</a>
                 </li>
+                
+                <li class="dropdown ${attachmentDisplay }">
+			        <a class="dropdown-toggle " data-toggle="dropdown" href="#">附件  <span class="caret"></span></a>
+			        <ul class="dropdown-menu ">
+					    <li class="${ a1Display }">
+		                    <a href="${fn:escapeXml(firstAttachmentURL)}">附件1</a>
+		                </li>
+		                <li class="${ a2Display }">
+		                    <a href="${fn:escapeXml(secondAttachmentURL)}">附件2</a>
+		                </li>
+		                <li class="${ a3Display }">
+		                    <a href="${fn:escapeXml(thirdAttachmentURL)}">附件3</a>
+		                </li>
+		                <li class="${ a4Display }">
+		                    <a href="${fn:escapeXml(fourthAttachmentURL)}">附件4</a>
+		                </li>
+		                <li class="${ a5Display }">
+		                    <a href="${fn:escapeXml(fifthAttachmentURL)}">附件5</a>
+		                </li>
+			        </ul>
+			    </li>
                 <li class="achtung">
                     <a href="${fn:escapeXml(confirmFormURL)}">保存整个申请表</a>
                 </li>
-                
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->

@@ -32,13 +32,14 @@ import com.dicipulus.app.JDBC.InitJdbc;
 import com.dicipulus.app.applicationModel.FileMeta;
 import com.dicipulus.app.formController.FormControllerUlti;
 import com.dicipulus.app.model.Applier;
+import com.dicipulus.app.model.MyProperties;
 import com.dicipulus.app.model.Person;
 
 @Controller
 public class UploadController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(UploadController.class);
-	final String rootPath = "D:/Exchange/uploadedFiles/";
+	String rootPath = MyProperties.getRootPath();
 
 	@RequestMapping(value = "/upload/{applierUid}/{index}", method = RequestMethod.GET)
 	public ModelAndView uploadView(HttpServletRequest request,
@@ -69,7 +70,7 @@ public class UploadController {
 			MultipartHttpServletRequest request, HttpServletResponse response,
 			@PathVariable String applierUid, @PathVariable int index) throws IOException {
 		logger.info("upload");
-		String pathNow = rootPath + applierUid + "/" + index;
+		String pathNow = rootPath + applierUid + "/uploaded/" + index;
 		LinkedList<FileMeta> files = new LinkedList<FileMeta>();
 		FileMeta fileMeta = null;
 		// 1. build an iterator
@@ -135,7 +136,7 @@ public class UploadController {
 	public String deleteFile(HttpServletResponse response,
 			@PathVariable String applierUid, @PathVariable int index) {
 		logger.info("deleteFile");
-		String pathNow = rootPath + applierUid + "/" + index;
+		String pathNow = rootPath + applierUid + "/uploaded/" + index;
 		File folder = new File(pathNow);
 		File[] listOfFiles = folder.listFiles();
 		for (int i = 0; i < listOfFiles.length; i++) {

@@ -12,18 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dicipulus.app.model.MyProperties;
+
 @Controller
 public class InitUploadFolder {
 	private static final Logger logger = LoggerFactory
 			.getLogger(InitUploadFolder.class);
-	final String rootPath = "D:/Exchange/uploadedFiles/";
+	String rootPath = MyProperties.getRootPath();
 
 	@RequestMapping(value = "/upload/{applierUid}", method = RequestMethod.GET)
 	public String initUploadFolder(HttpServletRequest request,
 			@PathVariable String applierUid) {
 		logger.info("initUpload");
 
-		String applierPath = rootPath + applierUid + "/";
+		String applierPath = rootPath + applierUid + "/uploaded/";
 		for (int i = 1; i <= 5; i++) {
 			File file=new File(applierPath + i);
 			if(file.exists()==false){

@@ -43,6 +43,8 @@ request.setCharacterEncoding("UTF-8");
 		<td>操作</td>
 		<td>备注</td>
 		<td>操作</td>
+		<td>操作</td>
+		
 	</tr>
 	</thead>
 	<tbody>
@@ -115,6 +117,12 @@ request.setCharacterEncoding("UTF-8");
 				</td>
 				<td><input type="text" class="form-control" name="commentOfAdmin" value="${application.commentOfAdmin }"></td>
 				<td><input type="submit" class="btn btn-default" value="保存并查看" /></td>
+				<td>
+					<spring:url value="/download-zip/{applierUid}" var="zipURL">
+						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
+					</spring:url>
+					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(zipURL)}';" value="生成并下载压缩包">
+				</td>
 			</tr>
 		</form>
 		

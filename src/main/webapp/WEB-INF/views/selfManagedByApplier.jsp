@@ -40,6 +40,7 @@
 			<td>操作</td>
 			<td>操作</td>
 			<td>确认提交</td>
+			<td>下载pdf</td>
 		</tr>
 		<tr>
 			<c:set var="serial" value="${serial+1 }"></c:set>
@@ -74,6 +75,10 @@
 				<spring:url value="/confirm-whole-application-by-applier" var="confirmURL">
 				</spring:url>
 			<td><input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(confirmURL)}';" value="确认提交"></td>
+				<spring:url value="/download-pdf/{applierUid}" var="pdfURL">
+					<spring:param name="applierUid" value="${application.applierUid}"></spring:param>
+				</spring:url>
+			<td><input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(pdfURL)}';" value="下载pdf"></td>
 		</tr>
 	</table>
 	<div>

@@ -2,6 +2,7 @@ package com.dicipulus.app.pdf;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -235,11 +236,13 @@ public class FirstProjectBasicSituationPdf {
         cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
         cell.setMinimumHeight(25f);
         table.addCell(cell);
-        cell=new PdfPCell(new Phrase("起始：    "+String.valueOf(firstProjectBasicSituation.getStartDate()),fontChinese));
+        //cell=new PdfPCell(new Phrase("起始：    "+String.valueOf(firstProjectBasicSituation.getStartDate()),fontChinese));
+        cell=new PdfPCell(new Phrase("起始：    "+DateFormat.getDateInstance().format(firstProjectBasicSituation.getStartDate()),fontChinese));
         
         cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
         table.addCell(cell);//
-        cell=new PdfPCell(new Phrase("完成：    "+String.valueOf(firstProjectBasicSituation.getFinishDate()),fontChinese));
+        //cell=new PdfPCell(new Phrase("起始：    "+String.valueOf(firstProjectBasicSituation.getFinishDate()),fontChinese));
+        cell=new PdfPCell(new Phrase("完成：    "+DateFormat.getDateInstance().format(firstProjectBasicSituation.getFinishDate()),fontChinese));
         cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
         table.addCell(cell);//
         table.setWidthPercentage(100);

@@ -2,6 +2,7 @@ package com.dicipulus.app.pdf;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -235,7 +236,8 @@ public class EighthPdf {
 		cell.setMinimumHeight(30f);
 		cell.setPhrase(new Phrase("参加本项目的起止时间",fontChinese));
 		table.addCell(cell);
-		cell.setPhrase(new Phrase(String.valueOf(eighthMajorContributor.get(i).getStartDateOfParticipation())+" 至 "+String.valueOf(eighthMajorContributor.get(i).getEndDateOfParticipation()),fontChinese));
+		
+		cell.setPhrase(new Phrase(DateFormat.getDateInstance().format(eighthMajorContributor.get(i).getStartDateOfParticipation())+" 至 "+DateFormat.getDateInstance().format(eighthMajorContributor.get(i).getEndDateOfParticipation()),fontChinese));
 		table.addCell(cell);
 		cell=new PdfPCell();
 		cell.setColspan(2);

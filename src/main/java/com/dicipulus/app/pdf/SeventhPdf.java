@@ -2,6 +2,7 @@ package com.dicipulus.app.pdf;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.List;
 
 import com.dicipulus.app.JDBC.ApplierJdbc;
@@ -163,7 +164,7 @@ public class SeventhPdf {
 			cell.setHorizontalAlignment(cell.ALIGN_CENTER);
 	        cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
 			table.addCell(cell);
-			cell=new PdfPCell(new Phrase(String.valueOf(seventhPaperCitedByOthers.get(i).getPublishDate()),fontChinese));
+			cell=new PdfPCell(new Phrase(DateFormat.getDateInstance().format(seventhPaperCitedByOthers.get(i).getPublishDate()),fontChinese));
 			cell.setHorizontalAlignment(cell.ALIGN_CENTER);
 	        cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
 			table.addCell(cell);

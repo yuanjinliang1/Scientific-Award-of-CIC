@@ -8,6 +8,7 @@ import java.util.Random;
 
 import javax.sql.DataSource;
 
+import com.dicipulus.app.ajax.AjaxApplication;
 import com.dicipulus.app.applicationModel.FirstProjectBasicSituation;
 import com.dicipulus.app.applicationModel.NinethMajorOrgContributor;
 import com.dicipulus.app.applicationModel.SecondRefereeUnitOpinion;
@@ -89,6 +90,17 @@ public class ApplicationJdbc {
 				+ "join applier on project_major.applierUid=applier.uid "
 				+ "where project_major.applierUid=?";
 		Application application=jdbcTemplateObject.queryForObject(sql,new Object[]{applierUid},BeanPropertyRowMapper.newInstance(Application.class));
+		
+		logger.info("SQL:"+sql);
+		return application;
+	}
+	
+	public AjaxApplication getAjaxApplicationByApplier(String applierUid){
+		String sql="select * from project_major "
+				+ "join secondrefereeunitopinion on project_major.applierUid=secondrefereeunitopinion.applierUid "
+				+ "join applier on project_major.applierUid=applier.uid "
+				+ "where project_major.applierUid=?";
+		AjaxApplication application=jdbcTemplateObject.queryForObject(sql,new Object[]{applierUid},BeanPropertyRowMapper.newInstance(AjaxApplication.class));
 		
 		logger.info("SQL:"+sql);
 		return application;

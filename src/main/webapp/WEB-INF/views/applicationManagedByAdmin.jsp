@@ -15,7 +15,7 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 	<jsp:include page="fragments/header.jsp"></jsp:include>
-	<title>Application Management</title>
+	<title>Application Manaapplication-managed-by-admingement</title>
 	<style>
 		table { font-size:small}
 	</style>
@@ -25,6 +25,8 @@ request.setCharacterEncoding("UTF-8");
 <dicipulus:bodyHeaderForAdmin menuName="manageApplication" />
 <br/><br/><br/>
 <div class="row" style="margin-left: 20px"><h1>Application Management</h1></div>
+<div id="feedback"></div>
+<div id="message"></div>
 <div class="col-md-12">
 <table class="table table-bordered" style="width:100%">
 	<thead>
@@ -50,13 +52,12 @@ request.setCharacterEncoding("UTF-8");
 	<tbody>
 	<c:set var="serial" value="0"></c:set>
 	<c:forEach var="application" items="${applications.applicationList }">
-		<spring:url value="/application-managed-by-admin/post/{applierUid}" var="saveURL">
-			<spring:param name="applierUid" value="${application.applierUid}"></spring:param>
-		</spring:url>
-		<form action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="applicationAttr">
-			<tr>
-				<td><input type="checkbox" id="${application.applierUid }"> </td>
-				<c:set var="serial" value="${serial+1 }"></c:set>
+		<c:set var="serial" value="${serial+1 }"></c:set>
+		<form  class="search-form" data-serial="${serial }"  modelAttribute="applicationAttr">
+		<tr>
+				<td><input type="checkbox" id="${application.applierUid }"> 
+				<input type="hidden" id="applierUid${serial}" value="${application.applierUid }"></input>
+				</td>
 				<td>${serial }</td>
 				<td>${application.projectStatus }
 					<c:if test="${application.projectStatus=='已推荐' }">
@@ -77,30 +78,30 @@ request.setCharacterEncoding("UTF-8");
 				<td>${application.applicationType }</td>
 				<td>${application.referingScienceTechnologyAwardRank }</td>
 				<td>
-					<select name="formalityExaminationResult" class="form-control">
+					<select id="formalityExaminationResult${serial }" name="formalityExaminationResult" class="form-control">
 						<option value="${application.formalityExaminationResult }">${application.formalityExaminationResult }</option>
 						<c:forTokens items="合格,不合格" delims="," var="formaliltyResultOption">
-							<c:if test="${firstForm.formalityExaminationResult!=formaliltyResultOption}">
+							<c:if test="${application.formalityExaminationResult!=formaliltyResultOption}">
 								<option value="${formaliltyResultOption }">${formaliltyResultOption }</option>
 							</c:if>
 						</c:forTokens>
 					</select>
 				</td>
 				<td>
-					<select name="primaryExaminationResult" class="form-control">
+					<select id="primaryExaminationResult${serial }" name="primaryExaminationResult" class="form-control">
 						<option value="${application.primaryExaminationResult }">${application.primaryExaminationResult }</option>
 						<c:forTokens items="无,提名三等奖,提名二等奖,提名一等奖,申请特等奖" delims="," var="primaryResultOption">
-							<c:if test="${firstForm.primaryExaminationResult!=primaryResultOption}">
+							<c:if test="${application.primaryExaminationResult!=primaryResultOption}">
 								<option value="${primaryResultOption }">${primaryResultOption }</option>
 							</c:if>
 						</c:forTokens>
 					</select>
 				</td>
 				<td>
-					<select name="finalExaminationResult" class="form-control">
+					<select id="finalExaminationResult${serial }" name="finalExaminationResult" class="form-control">
 						<option value="${application.finalExaminationResult }">${application.finalExaminationResult }</option>
 						<c:forTokens items="无,三等奖,二等奖,一等奖,特等奖" delims="," var="finalResultOption">
-							<c:if test="${firstForm.finalExaminationResult!=finalResultOption}">
+							<c:if test="${application.finalExaminationResult!=finalResultOption}">
 								<option value="${finalResultOption }">${finalResultOption }</option>
 							</c:if>
 						</c:forTokens>
@@ -115,21 +116,100 @@ request.setCharacterEncoding("UTF-8");
 				<td>
 					<input type="button" class="btn btn-default" value="下载(未完工)">
 				</td>
-				<td><input type="text" class="form-control" name="commentOfAdmin" value="${application.commentOfAdmin }"></td>
-				<td><input type="submit" class="btn btn-default" value="保存并查看" /></td>
+				<td><input id="commentOfAdmin${serial}" type="text" class="form-control" name="commentOfAdmin" value="${application.commentOfAdmin }"></td>
+				<td>
+					<input type="submit" class="btn btn-default" value="保存并查看" />
+					<button type="submit" id="bth-search" class="btn btn-primary btn-lg">Search</button>
+				</td>
 				<td>
 					<spring:url value="/download-zip/{applierUid}" var="zipURL">
 						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 					</spring:url>
 					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(zipURL)}';" value="生成并下载压缩包">
 				</td>
-			</tr>
+		</tr>
 		</form>
 		
 	</c:forEach>
 	</tbody>
 </table>
+
+
+
 </div>
 </div>
+<c:url var="ajaxTest" value="/ajax-test" scope="request" />
+<script>
+
+	jQuery(document).ready(function($) {
+		$(".search-form").submit(function(event) {
+			var serial=$(this).attr("data-serial");
+			// Disble the search button
+			enableSearchButton(false);
+
+			// Prevent the form from submitting via the browser.
+			event.preventDefault();
+
+			searchViaAjax(serial);
+
+		});
+
+	});
+
+	function searchViaAjax(serial) {
+
+		var search = {}
+		search["applierUid"] = $("#applierUid"+serial).val();
+		search["formalityExaminationResult"] = $("#formalityExaminationResult"+serial).val();
+		search["primaryExaminationResult"] = $("#primaryExaminationResult"+serial).val();
+		search["finalExaminationResult"] = $("#finalExaminationResult"+serial).val();
+		search["commentOfAdmin"] = $("#commentOfAdmin"+serial).val();
+
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "${ajaxTest}",
+			data : JSON.stringify(search),
+			dataType : 'json',
+			timeout : 100000,
+			success : function(data) {
+				console.log("SUCCESS: ", data);
+				display(data);
+				successMessage();
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+				display(e);
+			},
+			done : function(e) {
+				console.log("DONE");
+				enableSearchButton(true);
+			}
+		});
+
+	}
+
+	function enableSearchButton(flag) {
+		$("#btn-search").prop("disabled", flag);
+	}
+
+	function display(data) {
+		var json = "<h4>Ajax Response</h4><pre>"
+				+ JSON.stringify(data, null, 4) + "</pre>";
+		$('#feedback').html(json);
+		$("#feedback").fadeTo(2000, 500).slideUp(500, function(){
+        $("#feedback").alert('close');
+		});
+		
+	}
+	
+	function successMessage(){
+		var successMessage='<div class="alert alert-success"> <strong>Success!</strong> Indicates a successful or positive action.</div>';
+		$("#message").html(successMessage);
+		$("#message").fadeTo(2000, 500).slideUp(500, function(){
+        $("#message").alert('close');
+		});
+	}
+</script>
 </body>
 </html>

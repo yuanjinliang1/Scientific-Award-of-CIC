@@ -1,15 +1,28 @@
 package com.dicipulus.app.model;
 
+import com.dicipulus.app.ajax.AjaxViews;
+import com.fasterxml.jackson.annotation.JsonView;
+
 public class Application {
+	@JsonView(AjaxViews.Public.class)
 	private String applierUid;
+	@JsonView(AjaxViews.Public.class)
 	private String projectStatus;
+	@JsonView(AjaxViews.Public.class)
 	private String projectName;
+	@JsonView(AjaxViews.Public.class)
 	private String refereeString;
+	@JsonView(AjaxViews.Public.class)
 	private String applicationType;
+	@JsonView(AjaxViews.Public.class)
 	private String referingScienceTechnologyAwardRank;
+	@JsonView(AjaxViews.Public.class)
 	private String formalityExaminationResult;
+	@JsonView(AjaxViews.Public.class)
 	private String primaryExaminationResult;
+	@JsonView(AjaxViews.Public.class)
 	private String finalExaminationResult;
+	@JsonView(AjaxViews.Public.class)
 	private String commentOfAdmin;
 	
 	public Application(String applierUid, String projectStatus,

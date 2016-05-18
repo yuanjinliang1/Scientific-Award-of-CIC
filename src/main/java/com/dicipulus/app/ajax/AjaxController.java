@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Controller
 public class AjaxController {
 	private static final Logger logger = LoggerFactory.getLogger(AjaxController.class);
-	List<AjaxApplication> applications;
+	List<Application> applications;
 	
 	@JsonView(AjaxViews.Public.class)
 	@RequestMapping(value="/ajax-test")
@@ -29,7 +29,7 @@ public class AjaxController {
 		
 		ApplicationJdbc applicationJdbc=InitJdbc.initApplicationJdbc();
 		applicationJdbc.setApplicationByAdmin(application);
-		AjaxApplication newApplicaiton =applicationJdbc.getAjaxApplicationByApplier(application.getApplierUid());
+		Application newApplicaiton =applicationJdbc.getApplicationByApplier(application.getApplierUid());
 		
 		if(newApplicaiton==null){
 			result.setCode("400");

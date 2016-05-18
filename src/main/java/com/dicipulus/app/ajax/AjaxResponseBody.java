@@ -14,7 +14,7 @@ public class AjaxResponseBody {
 	String code;
 
 	@JsonView(AjaxViews.Public.class)
-	AjaxApplication result;
+	Application result;
 
 	public String getMsg() {
 		return msg;
@@ -32,11 +32,11 @@ public class AjaxResponseBody {
 		this.code = code;
 	}
 
-	public AjaxApplication getResult() {
+	public Application getResult() {
 		return result;
 	}
 
-	public void setResult(AjaxApplication result) {
+	public void setResult(Application result) {
 		this.result = result;
 	}
 	

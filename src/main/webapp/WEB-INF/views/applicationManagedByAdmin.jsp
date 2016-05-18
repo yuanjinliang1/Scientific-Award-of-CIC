@@ -24,9 +24,38 @@ request.setCharacterEncoding("UTF-8");
 <div class="container" style="width:100%;">
 <dicipulus:bodyHeaderForAdmin menuName="manageApplication" />
 <br/><br/><br/>
-<div class="row" style="margin-left: 20px"><h1>Application Management</h1></div>
+<div class="row" style="margin-left: 20px"><h1>项目管理</h1></div>
 <div id="feedback"></div>
 <div id="message"></div>
+
+<div style="float:right" class="form-inline form-group" >
+	<label >全选/反选</label>
+	<input type="checkbox" id="multi-checkbox">
+	<button class="btn btn-default" id="multi-accept">批量接收</button>
+	<select id="multi-formalityExaminationResult" class="form-control">
+			<option value="批量修改形审结果">批量修改形审结果</option>
+			<option value="合格">合格</option>
+			<option value="不合格">不合格</option>
+	</select>
+	<select id="multi-primaryExaminationResult" class="form-control">
+			<option value="批量修改初审结果">批量修改初审结果</option>
+			<option value="无">无</option>
+			<option value="提名三等奖">提名三等奖</option>
+			<option value="提名二等奖">提名二等奖</option>
+			<option value="提名一等奖">提名一等奖</option>
+			<option value="申请特等奖">申请特等奖</option>
+	</select>
+	<select id="multi-finalExaminationResult" class="form-control">
+			<option value="批量修改终审结果">批量修改终审结果</option>
+			<option value="无">无</option>
+			<option value="三等奖">三等奖</option>
+			<option value="二等奖">二等奖</option>
+			<option value="一等奖">一等奖</option>
+			<option value="特等奖">特等奖</option>
+	</select>
+</div>
+
+
 <div class="col-md-12">
 <table class="table table-bordered" style="width:100%">
 	<thead>
@@ -53,9 +82,9 @@ request.setCharacterEncoding("UTF-8");
 	<c:set var="serial" value="0"></c:set>
 	<c:forEach var="application" items="${applications.applicationList }">
 		<c:set var="serial" value="${serial+1 }"></c:set>
-		<form  class="search-form" data-serial="${serial }"  modelAttribute="applicationAttr">
+		<form id="form${serial}" class="app-form" data-serial="${serial }"  modelAttribute="applicationAttr">
 		<tr>
-				<td><input type="checkbox" id="${application.applierUid }"> 
+				<td><input type="checkbox" id="checkbox${serial}" class="flag-checkbox"> 
 				<input type="hidden" id="applierUid${serial}" value="${application.applierUid }"></input>
 				</td>
 				<td>${serial }</td>
@@ -140,29 +169,154 @@ request.setCharacterEncoding("UTF-8");
 </div>
 <c:url var="ajaxTest" value="/ajax-test" scope="request" />
 <script>
-
 	jQuery(document).ready(function($) {
-		$(".search-form").submit(function(event) {
+		$(".app-form").submit(function(event) {
 			var serial=$(this).attr("data-serial");
 			// Disble the search button
 			enableSearchButton(false);
 
 			// Prevent the form from submitting via the browser.
 			event.preventDefault();
-
+			
 			searchViaAjax(serial);
 
 		});
+		
+		$("#multi-checkbox").change(function(){
+			if($("#multi-checkbox").is(':checked')){
+				$(".flag-checkbox").prop('checked',true);
+			}
+			else if(!$("#multi-checkbox").is(':checked')){
+				$(".flag-checkbox").prop('checked',false);
+			}
+		});
+		
+		$("#multi-formalityExaminationResult").change(function(){
+			var multiPosition="formalityExaminationResult";
+			var changedValue=$("#multi-formalityExaminationResult option:selected").text();
+			if(changedValue==="批量修改形审结果"){
+				return false;
+			}
+			multiSet(multiPosition,changedValue);
+		});
+		
+		$("#multi-primaryExaminationResult").change(function(){
+			var multiPosition="primaryExaminationResult";
+			var changedValue=$("#multi-primaryExaminationResult option:selected").text();
+			if(changedValue==="批量修改初审结果"){
+				return false;
+			}
+			multiSet(multiPosition,changedValue);
+		});
+		
+		$("#multi-finalExaminationResult").change(function(){
+			var multiPosition="finalExaminationResult";
+			var changedValue=$("#multi-finalExaminationResult option:selected").text();
+			if(changedValue==="批量修改终审结果"){
+				return false;
+			}
+			multiSet(multiPosition,changedValue);
+		});
 
 	});
+	
+	function multiSet(multiPosition,changedValue){
+		if(!confirm("您确定批量修改所选项目的状态吗？")){
+			return false;
+		}
+		$(".app-form").each(function(){
+			var serial=$(this).attr("data-serial");
+			if($("#checkbox"+serial).is(':checked')){
+				// Disble the search button
+				enableSearchButton(false);
 
+				// Prevent the form from submitting via the browser.
+				event.preventDefault();
+
+				searchViaAjaxMulti(serial,multiPosition,changedValue);
+			}
+		});
+		console.log("clean");
+	}
+	
+	function cleanMultiSelect(multiPosition){
+		if(multiPosition==="formalityExaminationResult"){
+			$("#multi-formalityExaminationResult").val("批量修改形审结果");
+		}
+		if(multiPosition==="primaryExaminationResult"){
+			$("#multi-primaryExaminationResult").val("批量修改初审结果");
+		}
+		if(multiPosition==="finalExaminationResult"){
+			$("#multi-finalExaminationResult").val("批量修改终审结果");
+		}
+	}
+	
+	function searchViaAjaxMulti(serial,multiPosition,changedValue) {
+
+		var search = {}
+		search["applierUid"] = $("#applierUid"+serial).val();
+		if(multiPosition==="formalityExaminationResult"){
+			search["formalityExaminationResult"] = changedValue;
+		}else{
+			search["formalityExaminationResult"] = $("#formalityExaminationResult"+serial).val();
+		}
+		
+		if(multiPosition==="primaryExaminationResult"){
+			search["primaryExaminationResult"] = changedValue;
+		}else{
+			search["primaryExaminationResult"] = $("#primaryExaminationResult"+serial).val();
+		}
+		
+		if(multiPosition==="finalExaminationResult"){
+			search["finalExaminationResult"] = changedValue;
+		}else{
+			search["finalExaminationResult"] = $("#finalExaminationResult"+serial).val();
+		}
+		
+		search["commentOfAdmin"] = $("#commentOfAdmin"+serial).val();
+
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "${ajaxTest}",
+			data : JSON.stringify(search),
+			dataType : 'json',
+			timeout : 100000,
+			success : function(data) {
+				console.log("SUCCESS: ", data);
+				changeCurrentTable(serial,multiPosition,changedValue);
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+				display(e);
+				errorMessage();
+			},
+			done : function(e) {
+				console.log("DONE");
+				enableSearchButton(true);
+			}
+		});
+	}
+	
+	function changeCurrentTable(serial,multiPosition,changedValue){
+		if(multiPosition==="formalityExaminationResult"){
+			$("#formalityExaminationResult"+serial).val(changedValue);
+		}
+		if(multiPosition==="primaryExaminationResult"){
+			$("#primaryExaminationResult"+serial).val(changedValue);
+		}
+		if(multiPosition==="finalExaminationResult"){
+			$("#finalExaminationResult"+serial).val(changedValue);
+		}
+	}
+	
 	function searchViaAjax(serial) {
 
 		var search = {}
 		search["applierUid"] = $("#applierUid"+serial).val();
 		search["formalityExaminationResult"] = $("#formalityExaminationResult"+serial).val();
-		search["primaryExaminationResult"] = $("#primaryExaminationResult"+serial).val();
-		search["finalExaminationResult"] = $("#finalExaminationResult"+serial).val();
+		search["primaryExaminationResult"] = $("#primaryExaminationResult"+serial).val();	
+		search["finalExaminationResult"] = $("#finalExaminationResult"+serial).val();		
 		search["commentOfAdmin"] = $("#commentOfAdmin"+serial).val();
 
 		$.ajax({
@@ -180,13 +334,13 @@ request.setCharacterEncoding("UTF-8");
 			error : function(e) {
 				console.log("ERROR: ", e);
 				display(e);
+				errorMessage();
 			},
 			done : function(e) {
 				console.log("DONE");
 				enableSearchButton(true);
 			}
 		});
-
 	}
 
 	function enableSearchButton(flag) {
@@ -196,15 +350,23 @@ request.setCharacterEncoding("UTF-8");
 	function display(data) {
 		var json = "<h4>Ajax Response</h4><pre>"
 				+ JSON.stringify(data, null, 4) + "</pre>";
-		$('#feedback').html(json);
-		$("#feedback").fadeTo(2000, 500).slideUp(500, function(){
+		//$('#feedback').html(json);
+		$("#feedback").fadeTo(1000, 500).slideUp(500, function(){
         $("#feedback").alert('close');
 		});
 		
 	}
 	
 	function successMessage(){
-		var successMessage='<div class="alert alert-success"> <strong>Success!</strong> Indicates a successful or positive action.</div>';
+		var successMessage='<div class="alert alert-success"> <strong>更新成功</strong></div>';
+		$("#message").html(successMessage);
+		$("#message").fadeTo(2000, 500).slideUp(500, function(){
+        $("#message").alert('close');
+		});
+	}
+	
+	function errorMessage(){
+		var successMessage='<div class="alert alert-success"> <strong>更新失败</strong></div>';
 		$("#message").html(successMessage);
 		$("#message").fadeTo(2000, 500).slideUp(500, function(){
         $("#message").alert('close');

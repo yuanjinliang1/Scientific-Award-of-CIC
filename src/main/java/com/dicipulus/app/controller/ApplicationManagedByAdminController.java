@@ -12,16 +12,21 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dicipulus.app.JDBC.ApplicationJdbc;
 import com.dicipulus.app.JDBC.InitJdbc;
+import com.dicipulus.app.ajax.AjaxResponseBody;
+import com.dicipulus.app.ajax.AjaxViews;
 import com.dicipulus.app.formController.FifthFormController;
 import com.dicipulus.app.formController.FormControllerUlti;
 import com.dicipulus.app.model.*;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Controller
 @SessionAttributes("person")
@@ -77,51 +82,30 @@ public class ApplicationManagedByAdminController {
 		return modelAndView;
 	}
 	
-	/*
-	 * NOT WORKING
-	 */
-	/*
-	@RequestMapping(value="/application-managed-by-admin/post",method=RequestMethod.POST)
-	public String postApplicationsManagedByAdmin(HttpServletRequest request,@ModelAttribute("applicationsAttr") Applications applications, Person person){
-		logger.info("postApplicationManagedByAdmin");
-		// guard clause
-		if(request==null){
-			logger.info("session null pointer!");
-			return "redirect:/login";
-		}
-		try{
-			person=FormControllerUlti.getPersonInRequest(request);
-		}
-		//though catching runtime exception is not a good practice, here we just do it.
-		catch(NullPointerException e){
-			logger.info("session null pointer!\n Bad Clause in:\"Person person=FormControllerUlti.getPersonInRequest(request);\" ");
-			return"redirect:/login";
-		}
-		
-		if(person==null){
-			logger.info("person==null ");
-			return "redirect:/login";
-		}
-		//guard clause
-		if(person.getRole().equals("admin")==false){
-			logger.info("non-admin access denied");
-			return "redirect:/login";
-		}
+	@JsonView(AjaxViews.Public.class)
+	@RequestMapping(value="/ajax-test")
+	public @ResponseBody AjaxResponseBody updateApplicationViaAjax(@RequestBody Application application){
+		logger.info("updateApplicationViaAjax");
+		logger.info(application.toString());
+		AjaxResponseBody result= new AjaxResponseBody();
 		
 		ApplicationJdbc applicationJdbc=InitJdbc.initApplicationJdbc();
-		logger.info("listSize="+applications.getApplicationList().size());
-		try{
-			applicationJdbc.setApplicationsByAdminAtomic(applications);
-		}
-		catch(SQLException e){
-			logger.info(e.getLocalizedMessage());
-			return "redirect:/data-access-exception";
-		}
+		applicationJdbc.setApplicationByAdmin(application);
+		Application newApplicaiton =applicationJdbc.getApplicationByApplier(application.getApplierUid());
 		
-		return "redirect:/application-managed-by-admin";
+		if(newApplicaiton==null){
+			result.setCode("400");
+			result.setMsg("database error");
+		}
+		else {
+			result.setCode("200");
+			result.setMsg("");
+			result.setResult(newApplicaiton);
+		}
+		return result;
 	}
-	*/
 	
+	@Deprecated
 	@RequestMapping(value="/application-managed-by-admin/post/{applierUid}",method=RequestMethod.POST)
 	public String postApplicationManagedByAdmin(HttpServletRequest request,@ModelAttribute("applicationAttr") Application application, 
 			Person person,@PathVariable String applierUid){

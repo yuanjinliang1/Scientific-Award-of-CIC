@@ -21,7 +21,7 @@ request.setCharacterEncoding("UTF-8");
 	</style>
 </head>
 <body>
-<div class="container" style="width:100%;">
+<div class="container" style="width:100%; zoom:75%">
 <dicipulus:bodyHeaderForAdmin menuName="manageApplication" />
 <br/><br/><br/>
 <div class="row" style="margin-left: 20px"><h1>项目管理</h1></div>
@@ -70,9 +70,8 @@ request.setCharacterEncoding("UTF-8");
 		<td>形审结果</td>
 		<td>初审结果</td>
 		<td>终审结果</td>
-		<td>操作</td>
-		<td>操作</td>
 		<td>备注</td>
+		<td>操作</td>
 		<td>操作</td>
 		<td>操作</td>
 		
@@ -136,6 +135,7 @@ request.setCharacterEncoding("UTF-8");
 						</c:forTokens>
 					</select>
 				</td>
+				<td><input id="commentOfAdmin${serial}" type="text" class="form-control" name="commentOfAdmin" value="${application.commentOfAdmin }"></td>
 				<td>
 					<spring:url value="/display-first-project-basic-situation/{applierUid}" var="firstFormURL">
 						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
@@ -143,18 +143,13 @@ request.setCharacterEncoding("UTF-8");
 					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(firstFormURL)}';" value="查看">
 				</td>
 				<td>
-					<input type="button" class="btn btn-default" value="下载(未完工)">
-				</td>
-				<td><input id="commentOfAdmin${serial}" type="text" class="form-control" name="commentOfAdmin" value="${application.commentOfAdmin }"></td>
-				<td>
-					<input type="submit" class="btn btn-default" value="保存并查看" />
-					<button type="submit" id="bth-search" class="btn btn-primary btn-lg">Search</button>
+					<input type="submit" class="btn btn-default" value="保存" />
 				</td>
 				<td>
 					<spring:url value="/download-zip/{applierUid}" var="zipURL">
 						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 					</spring:url>
-					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(zipURL)}';" value="生成并下载压缩包">
+					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(zipURL)}';" value="下载压缩包">
 				</td>
 		</tr>
 		</form>

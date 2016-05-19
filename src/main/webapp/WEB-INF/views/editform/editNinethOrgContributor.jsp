@@ -38,8 +38,8 @@ request.setCharacterEncoding("UTF-8");
 					</tr>
 					<tr>
 						<td>排名</td>
-						<td>
-						<input type="number" name="rankOfOrg" value="${ninethForm.rankOfOrg}" />
+						<td>${ninethForm.rankOfOrg}
+						<input type="hidden" name="rankOfOrg" value="${ninethForm.rankOfOrg}" />
 						</td>
 					</tr>
 					<tr>

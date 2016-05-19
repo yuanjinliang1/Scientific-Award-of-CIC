@@ -46,8 +46,8 @@ request.setCharacterEncoding("UTF-8");
 					</tr>
 					<tr>
 						<td>排名</td>
-						<td>
-						<input type="number" name="rankOfContributor" value="${eighthForm.rankOfContributor}" />
+						<td>${eighthForm.rankOfContributor}
+						<input type="hidden" name="rankOfContributor" value="${eighthForm.rankOfContributor}" />
 						</td>
 					</tr>
 					<tr>

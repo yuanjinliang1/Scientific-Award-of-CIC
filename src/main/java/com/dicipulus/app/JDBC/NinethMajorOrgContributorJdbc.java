@@ -43,10 +43,15 @@ public class NinethMajorOrgContributorJdbc{
 		return ninethMajorContributors;
 	}
 	
-	public void createNinethMajorOrgContributor(String applierUid,int rankOfOrg){
+	public int createNinethMajorOrgContributor(String applierUid,int rankOfOrg){
 		String sql="insert into major_org_contributor (applierUid,nameOfOrg,rankOfOrg,contributionToProject) values(?,'未命名单位',?,?);";
 		jdbcTemplateObject.update(sql,applierUid,rankOfOrg,"不超过600字。");
 		logger.info(sql);
+		
+		String sql2="select idOfNinethForm from major_org_contributor where(applierUid=? and rankOfOrg=?)";
+		int idOfNinethForm= jdbcTemplateObject.queryForInt(sql2, new Object[]{applierUid,rankOfOrg});
+		logger.info(""+idOfNinethForm);
+		return idOfNinethForm;
 	}
 	
 	public void createNinethMajorOrgContributor(String applierUid,int rankOfOrg,String nameOfOrg){

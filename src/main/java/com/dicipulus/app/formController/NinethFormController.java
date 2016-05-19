@@ -110,10 +110,10 @@ public class NinethFormController {
 			NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
 			List<NinethMajorOrgContributor>  ninethMajorOrgContributors = ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(person.getUid());
 			int rankOfOrg =ninethMajorOrgContributors.size()+1;
-			ninethMajorOrgContributorJdbc.createNinethMajorOrgContributor(person.getUid(), rankOfOrg);
+			int idOfNinethForm =ninethMajorOrgContributorJdbc.createNinethMajorOrgContributor(person.getUid(), rankOfOrg);
 			InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributingOrgNamesForFirstForm(person.getUid());
 			
-			return "redirect:/manage-nineth-major-org-contributor";
+			return "redirect:/edit-nineth-major-org-contributor/"+idOfNinethForm;
 		}
 		catch(NullPointerException e){
 			logger.info("session null pointer!");

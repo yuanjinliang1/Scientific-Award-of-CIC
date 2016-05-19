@@ -102,7 +102,9 @@
 	<spring:url value="/upload/{applierUid}/5" var="fifthAttachmentURL">
 		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
 	</spring:url>
-	<spring:url value="/confirm-whole-application-by-applier" var="confirmFormURL"/>
+	<spring:url value="/download-pdf/{applierUid}" var="pdfURL">
+		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
+	</spring:url>
 </div>
 <style>
 	li.active {
@@ -166,7 +168,7 @@
 			        </ul>
 			    </li>
                 <li class="achtung">
-                    <a href="${fn:escapeXml(confirmFormURL)}">保存整个申请表</a>
+                    <a href="${fn:escapeXml(pdfURL)}">预览pdf</a>
                 </li>
             </ul>
         </div>

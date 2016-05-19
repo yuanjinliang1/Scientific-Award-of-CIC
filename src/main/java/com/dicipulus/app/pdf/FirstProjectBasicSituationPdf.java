@@ -99,14 +99,14 @@ public class FirstProjectBasicSituationPdf {
         table.addCell(cell);
         StringBuffer majorContributors=new StringBuffer();
         for(EighthMajorContributor Contributors:eighthMajorContributor){
-        	majorContributors.append(Contributors.getNameOfContributor()).append(",");
+        	majorContributors.append(",").append(Contributors.getNameOfContributor());
         }
-        cell.setPhrase(new Phrase(majorContributors.toString(),fontChinese));
+        cell.setPhrase(new Phrase(majorContributors.toString().substring(1),fontChinese));
         cell.setHorizontalAlignment(cell.ALIGN_LEFT);
         table.addCell(cell);//
         table.setWidthPercentage(100);
        	
-        if(applicationType.equals("技术发明类")&&applicationType.equals("科技进步类")){
+        if(applicationType.equals("技术发明类")||applicationType.equals("科技进步类")){
         	cell=new PdfPCell(new Phrase("主要完成单位",fontChinese));
             cell.setHorizontalAlignment(cell.ALIGN_CENTER);
             cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
@@ -114,10 +114,10 @@ public class FirstProjectBasicSituationPdf {
             table.addCell(cell);
             StringBuffer majorOrgContributors=new StringBuffer();
             for(NinethMajorOrgContributor orgContributors:ninethMajorOrgContributor){
-            	majorOrgContributors.append(orgContributors.getNameOfOrg()).append(",");
+            	majorOrgContributors.append(",").append(orgContributors.getNameOfOrg());
             }
             cell.setHorizontalAlignment(cell.ALIGN_LEFT);
-            cell.setPhrase(new Phrase(majorOrgContributors.toString(),fontChinese));
+            cell.setPhrase(new Phrase(majorOrgContributors.toString().substring(1),fontChinese));
             table.addCell(cell);
             cell=new PdfPCell(new Phrase("项目密级",fontChinese));
             cell.setHorizontalAlignment(cell.ALIGN_CENTER);

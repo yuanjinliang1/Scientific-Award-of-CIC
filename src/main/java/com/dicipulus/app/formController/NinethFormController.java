@@ -111,6 +111,7 @@ public class NinethFormController {
 			List<NinethMajorOrgContributor>  ninethMajorOrgContributors = ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(person.getUid());
 			int rankOfOrg =ninethMajorOrgContributors.size()+1;
 			ninethMajorOrgContributorJdbc.createNinethMajorOrgContributor(person.getUid(), rankOfOrg);
+			InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributingOrgNamesForFirstForm(person.getUid());
 			
 			return "redirect:/manage-nineth-major-org-contributor";
 		}
@@ -133,7 +134,7 @@ public class NinethFormController {
 			Person person=FormControllerUlti.getPersonInRequest(request);
 			NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
 			ninethMajorOrgContributorJdbc.deleteNinethMajorOrgContributor(idOfNinethForm);
-			
+			InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributingOrgNamesForFirstForm(person.getUid());
 			return "redirect:/manage-nineth-major-org-contributor";
 		}
 		catch(NullPointerException e){
@@ -230,10 +231,7 @@ public class NinethFormController {
 			NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
 			ninethMajorOrgContributorJdbc.updateNinethMajorOrgContributor(ninethForm);
 			ApplicationJdbc applicationJdbc=InitJdbc.initApplicationJdbc();
-			if(applicationJdbc.getStatusOfApplication(person.getUid()).equals("未提交")||
-					applicationJdbc.getStatusOfApplication(person.getUid()).equals("已提交")){
-				FormControllerUlti.setMajorContributingOrgNamesForFirstForm(applierUid);
-			}
+			InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributingOrgNamesForFirstForm(applierUid);
 			return "redirect:/edit-nineth-major-org-contributor/"+ninethForm.getIdOfNinethForm();
 		}
 		catch(NullPointerException e){

@@ -62,7 +62,8 @@ public class SecondFormController {
 			}
 			SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
 			secondRefereeUnitOpinionJdbc.updateSecondRefereeUnitOpinion(secondRefereeUnitOpinion, applierUid);
-			FormControllerUlti.setRefereeInformationForFirstForm(applierUid);
+			
+			InitJdbc.initFirstProjectBasicSituationJdbc().setRefereeInformation(secondRefereeUnitOpinion, applierUid);
 			return "redirect:/edit-referee-unit-opinion/"+applier.getUid();
 		}
 		catch(NullPointerException e){

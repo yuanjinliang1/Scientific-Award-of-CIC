@@ -119,7 +119,7 @@ public class EighthFormController {
 			List<EighthMajorContributor>  eighthMajorContributors = eighthMajorContributorJdbc.getEighthMajorContributors(person.getUid());
 			int rankOfContributor =eighthMajorContributors.size()+1;
 			eighthMajorContributorJdbc.createEighthMajorContributor(person.getUid(), rankOfContributor);
-			
+			InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributorNamesForFirstForm(person.getUid());
 			return "redirect:/manage-eighth-major-contributor";
 		}
 		catch(NullPointerException e){
@@ -141,7 +141,7 @@ public class EighthFormController {
 			Person person=FormControllerUlti.getPersonInRequest(request);
 			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
 			eighthMajorContributorJdbc.deleteEighthMajorContributor(idOfEighthForm);
-			
+			InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributorNamesForFirstForm(person.getUid());
 			return "redirect:/manage-eighth-major-contributor";
 		}
 		catch(NullPointerException e){
@@ -245,7 +245,7 @@ public class EighthFormController {
 			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
 			eighthMajorContributorJdbc.updateEighthMajorContributor(eighthForm);
 			
-			FormControllerUlti.setMajorContributorsForFirstForm(applierUid);
+			InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributorNamesForFirstForm(applierUid);
 			return "redirect:/edit-eighth-major-contributor/"+eighthForm.getIdOfEighthForm();
 		}
 		catch(NullPointerException e){

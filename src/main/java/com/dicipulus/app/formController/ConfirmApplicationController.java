@@ -50,76 +50,7 @@ public class ConfirmApplicationController{
 	private static final Logger logger = LoggerFactory
 			.getLogger(ConfirmApplicationController.class);
 	
-	private Person getPersonInRequest(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		Person person = (Person) session.getAttribute("person");
-		return person;
-	}
-	
-	public void setMajorContributorsForFirstForm(String applierUid){
-		EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
-		List<EighthMajorContributor> eighthMajorContributors=eighthMajorContributorJdbc.getEighthMajorContributors(applierUid);//根据添加顺序（主键大小）排序
-		
-		String majorContributorNames="";
-		for(EighthMajorContributor eighthForm:eighthMajorContributors){
-			if(majorContributorNames.equals("")){
-				majorContributorNames=majorContributorNames+eighthForm.getNameOfContributor();
-			}
-			else{
-				majorContributorNames=majorContributorNames+","+eighthForm.getNameOfContributor();
-			}
-		}
-		
-		FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
-		firstProjectBasicSituationJdbc.setMajorContributorNames(majorContributorNames, applierUid);
-	}
-	
-	public void setMajorContributingOrgNamesForFirstForm(String applierUid){
-		NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
-		List<NinethMajorOrgContributor> ninethMajorOrgContributors=ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(applierUid);
-		
-		String majorContributingOrgNames="";
-		for(NinethMajorOrgContributor ninethForm:ninethMajorOrgContributors){
-			if(majorContributingOrgNames.equals("")){
-				majorContributingOrgNames=majorContributingOrgNames+ninethForm.getNameOfOrg();
-			}
-			else{
-				majorContributingOrgNames=majorContributingOrgNames+","+ninethForm.getNameOfOrg();
-			}
-		}
-		
-		FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
-		firstProjectBasicSituationJdbc.setMajorContributingOrgNames(majorContributingOrgNames, applierUid);
-	}
-	
-	public void setRefereeInformationForFirstForm(String applierUid){
-		SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
-		SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
-		
-		FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
-		firstProjectBasicSituationJdbc.setRefereeInformation(secondRefereeUnitOpinion, applierUid);
-	}
-	
-	@RequestMapping(value="/confirm-whole-application-by-applier",method=RequestMethod.GET)
-	public String confirmWholeApplicationByApplier(HttpServletRequest request){
-		logger.info("confirmWholeApplicationByApplier");
-		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
-			ApplicationJdbc applicationJdbc=InitJdbc.initApplicationJdbc();
-			if(!applicationJdbc.getStatusOfApplication(person.getUid()).equals("未提交")){
-				return "redirect:/error?message=status-prerequisite-not-fullfilled";
-			}
-			setMajorContributorsForFirstForm(person.getUid());
-			setMajorContributingOrgNamesForFirstForm(person.getUid());
-			applicationJdbc.setStatusOfApplication("已提交", person.getUid());
-			return "redirect:/display-first-project-basic-situation/"+person.getUid();
-		}
-		catch(NullPointerException e){
-			logger.info(e.toString());
-			return "redirect:/login";
-		}
-	}
-	
+	@Deprecated
 	@RequestMapping(value="/confirm-referee-unit-opinion-by-referee", method=RequestMethod.GET)
 	public String confirmRefereeUnitOpinionByReferee(HttpServletRequest request, String applierUid){
 		logger.info("confirmRefereeUnitOpinionByReferee");
@@ -129,7 +60,10 @@ public class ConfirmApplicationController{
 			if(!applicationJdbc.getStatusOfApplication(person.getUid()).equals("已提交")){
 				return "redirect:/error?message=status-prerequisite-not-fullfilled";
 			}
-			setRefereeInformationForFirstForm(applierUid);
+			
+			SecondRefereeUnitOpinion secondRefereeUnitOpinion=InitJdbc.initSecondRefereeUnitOpinionJdbc().getSecondRefereeUnitOpinion(applierUid);
+			InitJdbc.initFirstProjectBasicSituationJdbc().setRefereeInformation(secondRefereeUnitOpinion, applierUid);
+			
 			applicationJdbc.setStatusOfApplication("已推荐", person.getUid());
 			return "redirect:/display-referee-unit-opinion/"+applierUid;
 		}

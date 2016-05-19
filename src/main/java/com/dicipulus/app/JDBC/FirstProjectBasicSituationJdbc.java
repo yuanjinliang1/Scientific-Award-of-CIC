@@ -1,12 +1,16 @@
 package com.dicipulus.app.JDBC;
 
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
 import javax.sql.DataSource;
 
+import com.dicipulus.app.applicationModel.EighthMajorContributor;
 import com.dicipulus.app.applicationModel.FirstProjectBasicSituation;
+import com.dicipulus.app.applicationModel.NinethMajorOrgContributor;
 import com.dicipulus.app.applicationModel.SecondRefereeUnitOpinion;
 import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Referee;
@@ -39,6 +43,15 @@ public class FirstProjectBasicSituationJdbc{
 		return firstProjectBasicSituation;
 	}
 	
+	@Deprecated
+	public FirstProjectBasicSituation completeFirstProjectBasicSituation (FirstProjectBasicSituation firstProjectBasicSituation){
+        firstProjectBasicSituation.setMajorContributingOrgNames(getMajorContributorOrgNames(firstProjectBasicSituation.getApplierUid()));
+        firstProjectBasicSituation.setMajorContributorNames(getMajorContributorNames(firstProjectBasicSituation.getApplierUid()));
+        return firstProjectBasicSituation;
+	}
+	/*
+	 * majorContributorNames 和 majorContributingOrgNames 先留着，但不用
+	 */
 	public void setFirstProjectBasicSituation(FirstProjectBasicSituation firstForm, String applierUid){
 		String sql="UPDATE `dicipulus`.`project_major` SET `yearCreated`=?, `refereeString`=?, `projectName`=?,"
 				+ " `majorContributorNames`=?, `majorContributingOrgNames`=?, `secretLevel`=?, `subjectCategoryName1`=?,"
@@ -64,18 +77,18 @@ public class FirstProjectBasicSituationJdbc{
 		logger.info(firstForm.toString());
 	}
 	
-	public void setMajorContributorNames(String majorContributorNames,String applierUid ){
+	public void setMajorContributorNamesForFirstForm(String applierUid ){
 		String sql="update project_major set majorContributorNames=? where applierUid=?";
-		jdbcTemplateObject.update(sql,majorContributorNames,applierUid);
+		jdbcTemplateObject.update(sql,getMajorContributorNames(applierUid),applierUid);
 		logger.info(sql);
-		logger.info("majorContributorNames:"+majorContributorNames);
+		logger.info("majorContributorNames:"+getMajorContributorNames(applierUid));
 	}
 	
-	public void setMajorContributingOrgNames(String majorContributingOrgNames, String applierUid){
+	public void setMajorContributingOrgNamesForFirstForm(String applierUid){
 		String sql="update project_major set majorContributingOrgNames=? where applierUid=?";
-		jdbcTemplateObject.update(sql,majorContributingOrgNames,applierUid);
+		jdbcTemplateObject.update(sql,getMajorContributorOrgNames(applierUid),applierUid);
 		logger.info(sql);
-		logger.info("majorContributingOrgNames:"+majorContributingOrgNames);
+		logger.info("majorContributingOrgNames:"+getMajorContributorOrgNames(applierUid));
 	}
 	
 	public void setRefereeInformation(SecondRefereeUnitOpinion secondForm,String applierUid){
@@ -83,4 +96,37 @@ public class FirstProjectBasicSituationJdbc{
 		jdbcTemplateObject.update(sql,secondForm.getRefereeUnitName(),secondForm.getContact(),secondForm.getPhoneNumber(),secondForm.getEmail(),applierUid);
 		logger.info(sql);
 	}
+	
+	private String getMajorContributorNames(String applierUid){
+		EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
+		List<EighthMajorContributor> eighthMajorContributor=eighthMajorContributorJdbc.getEighthMajorContributors(applierUid);	
+		Collections.sort(eighthMajorContributor,new Comparator<EighthMajorContributor>(){
+			public int compare(EighthMajorContributor eighthMajorContributor1, EighthMajorContributor eighthMajorContributor2){
+				return eighthMajorContributor1.getRankOfContributor().compareTo(eighthMajorContributor2.getRankOfContributor());
+			}
+		});
+		
+		StringBuffer majorContributors=new StringBuffer();
+        for(EighthMajorContributor Contributors:eighthMajorContributor){
+        	majorContributors.append(",").append(Contributors.getNameOfContributor());
+        }
+        return majorContributors.toString().substring(1);
+	}
+	
+	private String getMajorContributorOrgNames(String applierUid){
+		NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
+		List<NinethMajorOrgContributor> ninethMajorOrgContributor=ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(applierUid);
+		Collections.sort(ninethMajorOrgContributor, new Comparator<NinethMajorOrgContributor>(){
+			public int compare(NinethMajorOrgContributor ninethMajorOrgContributor1,NinethMajorOrgContributor ninethMajorOrgContributor2){
+				return ninethMajorOrgContributor1.getRankOfOrg()-(ninethMajorOrgContributor2.getRankOfOrg());
+			}
+		});
+		
+		StringBuffer majorOrgContributors=new StringBuffer();
+        for(NinethMajorOrgContributor orgContributors:ninethMajorOrgContributor){
+        	majorOrgContributors.append(",").append(orgContributors.getNameOfOrg());
+        }
+		return majorOrgContributors.toString().substring(1);
+	}
+	
 }

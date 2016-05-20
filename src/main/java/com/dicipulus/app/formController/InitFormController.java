@@ -61,7 +61,7 @@ public class InitFormController {
 		try{
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			modelAndView.setViewName("editform/editInitializeApplication");
-			Person person = FormControllerUlti.getPersonInRequest(request);
+			Person person = FormUlti.getPersonInRequest(request);
 			modelAndView.addObject("person",applierJdbc.getApplierByUid(person.getUid()));
 			return modelAndView;
 		}
@@ -82,7 +82,7 @@ public class InitFormController {
 	public String editInitializeApplicationPost(HttpServletRequest request, String applicationType){
 		logger.info("editInitializeApplicationPost()");
 		try{
-			Person person = FormControllerUlti.getPersonInRequest(request);
+			Person person = FormUlti.getPersonInRequest(request);
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			CreateFormsJdbc createFormsJdbc=InitJdbc.initCreateFormsJdbc();
 			applierJdbc.setApplicationType(person.getUid(),applicationType);

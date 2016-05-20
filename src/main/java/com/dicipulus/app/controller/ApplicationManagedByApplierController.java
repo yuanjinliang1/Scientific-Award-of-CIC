@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dicipulus.app.JDBC.ApplicationJdbc;
 import com.dicipulus.app.JDBC.InitJdbc;
 import com.dicipulus.app.formController.FifthFormController;
-import com.dicipulus.app.formController.FormControllerUlti;
+import com.dicipulus.app.formController.FormUlti;
 import com.dicipulus.app.model.*;
 
 @Controller
@@ -37,11 +37,11 @@ public class ApplicationManagedByApplierController {
 			return modelAndView;
 		}
 		try{
-			person=FormControllerUlti.getPersonInRequest(request);
+			person=FormUlti.getPersonInRequest(request);
 		}
 		//though catching runtime exception is not a good practice, here we just do it.
 		catch(NullPointerException e){
-			logger.info("session null pointer!\n Bad Clause in:\"Person person=FormControllerUlti.getPersonInRequest(request);\" ");
+			logger.info("session null pointer!\n Bad Clause in:\"Person person=FormUlti.getPersonInRequest(request);\" ");
 			modelAndView.setViewName("redirect:/login");
 			return modelAndView;
 		}

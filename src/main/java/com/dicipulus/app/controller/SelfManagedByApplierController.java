@@ -2,7 +2,7 @@ package com.dicipulus.app.controller;
 
 import com.dicipulus.app.*;
 import com.dicipulus.app.JDBC.*;
-import com.dicipulus.app.formController.FormControllerUlti;
+import com.dicipulus.app.formController.FormUlti;
 import com.dicipulus.app.model.*;
 
 import java.text.DateFormat;
@@ -62,7 +62,7 @@ public class SelfManagedByApplierController {
 	// only when session and ownerUid in url match with each other,
 	// authentication is granted
 	private boolean isAuthenticated(HttpServletRequest request, String applierUid) {
-		Person person = FormControllerUlti.getPersonInRequest(request);
+		Person person = FormUlti.getPersonInRequest(request);
 		logger.info("session uid=" + person.getUid() + ", " + "applierUid="
 				+ applierUid);
 		if (person.getUid().equals(applierUid)) {
@@ -91,11 +91,11 @@ public class SelfManagedByApplierController {
 			return modelAndView;
 		}
 		try{
-			person=FormControllerUlti.getPersonInRequest(request);
+			person=FormUlti.getPersonInRequest(request);
 		}
 		//though catching runtime exception is not a good practice, here we just do it.
 		catch(NullPointerException e){
-			logger.info("session null pointer!\n Bad Clause in:\"Person person=FormControllerUlti.getPersonInRequest(request);\" ");
+			logger.info("session null pointer!\n Bad Clause in:\"Person person=FormUlti.getPersonInRequest(request);\" ");
 			modelAndView.setViewName("redirect:/login");
 			return modelAndView;
 		}
@@ -142,7 +142,7 @@ public class SelfManagedByApplierController {
 	@RequestMapping(value="/self-managed-by-applier/change-name",method=RequestMethod.POST)
 	public String changeName(HttpServletRequest request, String name,Person person){
 		logger.info("changeName()");
-		Person personSession =FormControllerUlti.getPersonInRequest(request);
+		Person personSession =FormUlti.getPersonInRequest(request);
 		if(isAuthenticated(request, person.getUid())){
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			applierJdbc.changeName(personSession.getUid(),name);
@@ -157,7 +157,7 @@ public class SelfManagedByApplierController {
 	public String changepassword(HttpServletRequest request, String passwordOld,
 			String passwordNew1, String passwordNew2,Person person){
 		logger.info("changePassword()");
-		Person personSession =FormControllerUlti.getPersonInRequest(request);
+		Person personSession =FormUlti.getPersonInRequest(request);
 		if(isAuthenticated(request, person.getUid())&&passwordCheck(passwordOld,person.getUid())){
 			if(passwordNew1.equals(passwordNew2)){
 				ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();

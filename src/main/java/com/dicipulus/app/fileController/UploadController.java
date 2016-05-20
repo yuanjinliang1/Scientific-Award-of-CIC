@@ -30,7 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dicipulus.app.JDBC.ApplierJdbc;
 import com.dicipulus.app.JDBC.InitJdbc;
 import com.dicipulus.app.applicationModel.FileMeta;
-import com.dicipulus.app.formController.FormControllerUlti;
+import com.dicipulus.app.formController.FormUlti;
 import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.MyProperties;
 import com.dicipulus.app.model.Person;
@@ -46,7 +46,7 @@ public class UploadController {
 			ModelAndView modelAndView, @PathVariable String applierUid,
 			@PathVariable int index) {
 		logger.info("uploadView");
-		Person person = FormControllerUlti.getPersonInRequest(request);
+		Person person = FormUlti.getPersonInRequest(request);
 		if (person == null) {
 			modelAndView.setViewName("redirect:/error?message=null-session");
 			return modelAndView;

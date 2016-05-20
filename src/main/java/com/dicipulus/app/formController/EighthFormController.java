@@ -1,5 +1,6 @@
 package com.dicipulus.app.formController;
 
+import java.util.Arrays;
 import java.util.List;
 import java.io.*;
 
@@ -38,25 +39,29 @@ public class EighthFormController {
 	 */
 	@RequestMapping(value="/manage-eighth-major-contributor",method=RequestMethod.GET)
 	public ModelAndView manageEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView){
-		logger.info("manageEighthMajorContributor");
-		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier= applierJdbc.getApplierByUid(person.getUid());
-			modelAndView.addObject("applier",applier);
-
-			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
-			List<EighthMajorContributor>  eighthMajorContributors = eighthMajorContributorJdbc.getEighthMajorContributors(person.getUid());
-			modelAndView.addObject("eighthForms", eighthMajorContributors);
-			
-			modelAndView.setViewName("editform/manageEighthMajorContributor");
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+		if(FormUlti.getPersonInRequest(request)==null){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("null-session"));
 			return modelAndView;
 		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
+		if(FormUlti.rightRole(request, "applier")==false){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-role"));
 			return modelAndView;
 		}
+		String applierUid=FormUlti.getPersonInRequest(request).getUid();
+		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-status"));
+			return modelAndView;
+		}
+		//main work
+		Applier applier=InitJdbc.initApplierJdbc().getApplierByUid(applierUid);
+		modelAndView.addObject("applier",applier);
+		
+		List<EighthMajorContributor> eighthMajorContributors=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributors(applierUid);
+		modelAndView.addObject("eighthForms", eighthMajorContributors);
+		
+		modelAndView.setViewName("editform/manageEighthMajorContributor");
+		return modelAndView;
 	}
 	
 	/**
@@ -67,40 +72,24 @@ public class EighthFormController {
 	 */
 	@RequestMapping(value="/select-eighth-major-contributor/{applierUid}",method=RequestMethod.GET)
 	public ModelAndView selectEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
-		logger.info("selectEighthMajorContributor");
-		try{
-			/*
-			 * 编辑的时候，session中的person不仅用于判断用户是谁，还用来判断要编辑哪个用户
-			 * 浏览的时候，session中的person仅用于判断用户是谁，浏览哪个用户则由url参数来判断
-			 */
-			Person person=FormControllerUlti.getPersonInRequest(request);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier= applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier",applier);
-			/*
-			 * 编辑的时候，因为编辑的对象是从用户session里取的，所以如果能编辑那么必定是有权限这么做的。
-			 * 但浏览的时候，浏览的对象是从url里面取的，所以需要判断是否有阅读权限!
-			 */
-			FormControllerUlti.isAuthenticatedToRead(person, applier);
-			
-			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
-			List<EighthMajorContributor>  eighthMajorContributors = eighthMajorContributorJdbc.getEighthMajorContributors(applierUid);
-			modelAndView.addObject("eighthForms", eighthMajorContributors);
-			
-			modelAndView.setViewName("displayform/selectEighthMajorContributor");
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+		if(FormUlti.getPersonInRequest(request)==null){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("null-session"));
 			return modelAndView;
 		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
+		if(FormUlti.isAuthenticatedToRead(request, applierUid)==false){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("no-authority"));
 			return modelAndView;
 		}
-		catch(AuthenticationException e){
-			logger.info(e.toString());
-			modelAndView.setViewName("redirect:/noAuthentication");
-			return modelAndView;
-		}
+		//main work
+		Applier applier=InitJdbc.initApplierJdbc().getApplierByUid(applierUid);
+		modelAndView.addObject("applier",applier);
+		
+		List<EighthMajorContributor>  eighthMajorContributors = InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributors(applierUid);
+		modelAndView.addObject("eighthForms", eighthMajorContributors);
+		
+		modelAndView.setViewName("displayform/selectEighthMajorContributor");
+		return modelAndView;
 	}
 	
 	/**
@@ -110,22 +99,23 @@ public class EighthFormController {
 	 * @return
 	 */
 	@RequestMapping(value="/create-eighth-major-contributor",method=RequestMethod.POST)
-	public String createEighthMajorContributor(HttpServletRequest request,EighthMajorContributor eighthMajorContributor){
-		logger.info("createEighthMajorContributor");
-		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
-			
-			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
-			List<EighthMajorContributor>  eighthMajorContributors = eighthMajorContributorJdbc.getEighthMajorContributors(person.getUid());
-			int rankOfContributor =eighthMajorContributors.size()+1;
-			eighthMajorContributorJdbc.createEighthMajorContributor(person.getUid(), rankOfContributor);
-			InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributorNamesForFirstForm(person.getUid());
-			return "redirect:/manage-eighth-major-contributor";
+	public String createEighthMajorContributor(HttpServletRequest request){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+		if(FormUlti.getPersonInRequest(request)==null){
+			return FormUlti.redirectErrorMessage("null-session");
 		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			return "redirect:/login";
+		if(FormUlti.rightRole(request, "applier")==false){
+			return FormUlti.redirectErrorMessage("illegal-role");
 		}
+		String applierUid=FormUlti.getPersonInRequest(request).getUid();
+		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
+			return FormUlti.redirectErrorMessage("illegal-status");
+		}
+		List<EighthMajorContributor>  eighthMajorContributors = InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributors(applierUid);
+		InitJdbc.initEighthMajorContributorJdbc().createEighthMajorContributor(applierUid, eighthMajorContributors.size()+1);
+		InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributorNamesForFirstForm(applierUid);
+		
+		return "redirect:/manage-eighth-major-contributor";
 	}
 	
 	/**
@@ -136,18 +126,22 @@ public class EighthFormController {
 	 */
 	@RequestMapping(value="/delete-eighth-major-contributor",method=RequestMethod.GET)
 	public String deleteEighthMajorContributor(HttpServletRequest request, int idOfEighthForm){
-		logger.info("deleteEighthMajorContributor");
-		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
-			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
-			eighthMajorContributorJdbc.deleteEighthMajorContributor(idOfEighthForm);
-			InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributorNamesForFirstForm(person.getUid());
-			return "redirect:/manage-eighth-major-contributor";
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+		if(FormUlti.getPersonInRequest(request)==null){
+			return FormUlti.redirectErrorMessage("null-session");
 		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			return "redirect:/login";
+		String applierUid=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributor(idOfEighthForm).getApplierUid();
+		if(FormUlti.isIdenticalPerson(request, applierUid)==false){
+			return FormUlti.redirectErrorMessage("no-authority");
 		}
+		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
+			return FormUlti.redirectErrorMessage("illegal-status");
+		}
+		//main work
+		InitJdbc.initEighthMajorContributorJdbc().deleteEighthMajorContributor(idOfEighthForm);
+		InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributorNamesForFirstForm(applierUid);
+		
+		return "redirect:/manage-eighth-major-contributor";
 	}
 	
 	/**
@@ -158,27 +152,29 @@ public class EighthFormController {
 	 */
 	@RequestMapping(value="/edit-eighth-major-contributor/{idOfEighthForm}",method=RequestMethod.GET)
 	public ModelAndView editEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfEighthForm") int idOfEighthForm){
-		logger.info("editform/editEighthMajorContributor");
-		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(person.getUid());
-			modelAndView.addObject("applier", applier);
-			
-			
-			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
-			EighthMajorContributor eighthMajorContributor=eighthMajorContributorJdbc.getEighthMajorContributor(idOfEighthForm);
-			modelAndView.addObject("eighthForm",eighthMajorContributor);
-			
-			modelAndView.setViewName("editform/editEighthMajorContributor");
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+		if(FormUlti.getPersonInRequest(request)==null){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("null-session"));
 			return modelAndView;
 		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
+		String applierUid=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributor(idOfEighthForm).getApplierUid();
+		if(FormUlti.isIdenticalPerson(request, applierUid)==false){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("no-authority"));
 			return modelAndView;
 		}
+		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-status"));
+			return modelAndView;
+		}
+		//main work
+		Applier applier=InitJdbc.initApplierJdbc().getApplierByUid(applierUid);
+		modelAndView.addObject("applier",applier);
+
+		EighthMajorContributor eighthMajorContributor=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributor(idOfEighthForm);
+		modelAndView.addObject("eighthForm",eighthMajorContributor);
+		
+		modelAndView.setViewName("editform/editEighthMajorContributor");
+		return modelAndView;
 	}
 	
 	/**
@@ -189,35 +185,25 @@ public class EighthFormController {
 	 */
 	@RequestMapping(value="/display-eighth-major-contributor/{idOfEighthForm}",method=RequestMethod.GET)
 	public ModelAndView displayEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfEighthForm") int idOfEighthForm){
-		logger.info("displayEighthMajorContributor");
-		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
-			
-			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
-			EighthMajorContributor eighthMajorContributor=eighthMajorContributorJdbc.getEighthMajorContributor(idOfEighthForm);
-			modelAndView.addObject("eighthForm",eighthMajorContributor);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(eighthMajorContributor.getApplierUid());
-			modelAndView.addObject("applier", applier);
-			
-			FormControllerUlti.isAuthenticatedToRead(person, applier);
-			
-			logger.info("auth confirmed");
-			modelAndView.setViewName("displayform/displayEighthMajorContributor");
-			return modelAndView;
-			
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+		if(FormUlti.getPersonInRequest(request)==null){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("null-session"));
 			return modelAndView;
 		}
-		catch(AuthenticationException e){
-			logger.info(e.toString());
-			modelAndView.setViewName("redirect:/login");
+		String applierUid=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributor(idOfEighthForm).getApplierUid();
+		if(FormUlti.isAuthenticatedToRead(request, applierUid)==false){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("no-authority"));
 			return modelAndView;
 		}
+		//main work
+		Applier applier=InitJdbc.initApplierJdbc().getApplierByUid(applierUid);
+		modelAndView.addObject("applier",applier);
+		
+		EighthMajorContributor eighthMajorContributor=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributor(idOfEighthForm);
+		modelAndView.addObject("eighthForm",eighthMajorContributor);
+		
+		modelAndView.setViewName("displayform/displayEighthMajorContributor");
+		return modelAndView;
 	}
 	
 	/**
@@ -229,29 +215,20 @@ public class EighthFormController {
 	@RequestMapping(value="/save-eighth-major-contributor/{idOfEighthForm}",method=RequestMethod.POST)
 	public String saveEighthMajorContributor(HttpServletRequest request,@ModelAttribute("eighthFormAttr") EighthMajorContributor eighthForm,
 			@PathVariable("idOfEighthForm") int idOfEighthForm){
-		logger.info("saveEighthMajorContributor");
-		Person person=FormControllerUlti.getPersonInRequest(request);
-		if(person==null){
-			return "redirect:/error?message=null-session";
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
+		if(FormUlti.getPersonInRequest(request)==null){
+			return FormUlti.redirectErrorMessage("null-session");
 		}
-		String applierUid=person.getUid();
-		//guard
-		ApplicationJdbc applicationJdbc=InitJdbc.initApplicationJdbc();
-		if(!applicationJdbc.getStatusOfApplication(person.getUid()).equals("未提交")&&
-				!applicationJdbc.getStatusOfApplication(person.getUid()).equals("已提交")){
-			return "redirect:/self-managed-by-applier/"+applierUid;
+		String applierUid=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributor(idOfEighthForm).getApplierUid();
+		if(FormUlti.isIdenticalPerson(request, applierUid)){
+			return FormUlti.redirectErrorMessage("no-authority");
 		}
-		try{
-			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
-			eighthMajorContributorJdbc.updateEighthMajorContributor(eighthForm);
-			
-			InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributorNamesForFirstForm(applierUid);
-			return "redirect:/edit-eighth-major-contributor/"+eighthForm.getIdOfEighthForm();
+		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
+			return FormUlti.redirectErrorMessage("illegal-status");
 		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			return "redirect:/login";
-		}
+		
+		InitJdbc.initEighthMajorContributorJdbc().updateEighthMajorContributor(eighthForm);
+		InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributorNamesForFirstForm(applierUid);
+		return "redirect:/edit-eighth-major-contributor/"+eighthForm.getIdOfEighthForm();
 	}
-
 }

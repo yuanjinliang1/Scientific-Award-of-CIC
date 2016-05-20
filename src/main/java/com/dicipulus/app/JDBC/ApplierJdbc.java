@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ApplierJdbc extends Applier {
-	private static final Logger logger=LoggerFactory.getLogger(RefereeJdbc.class);
+	private static final Logger logger=LoggerFactory.getLogger(ApplierJdbc.class);
 	private DataSource dataSource;
 	
 	private JdbcTemplate jdbcTemplateObject;

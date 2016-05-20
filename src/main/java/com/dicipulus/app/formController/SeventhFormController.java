@@ -39,7 +39,7 @@ public class SeventhFormController {
 	public ModelAndView manageSeventhPaperCitedByOthers(HttpServletRequest request,ModelAndView modelAndView){
 		logger.info("manageSeventhPaperCitedByOthers");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			Applier applier= applierJdbc.getApplierByUid(person.getUid());
@@ -69,7 +69,7 @@ public class SeventhFormController {
 	public ModelAndView selectSeventhPaperCitedByOthers(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info("selectSeventhPaperCitedByOthers");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			Applier applier= applierJdbc.getApplierByUid(applierUid);
@@ -79,7 +79,7 @@ public class SeventhFormController {
 			List<SeventhPaperCitedByOthers>  seventhPaperCitedByOtherss = seventhPaperCitedByOthersJdbc.getSeventhPaperCitedByOtherss(applierUid);
 			modelAndView.addObject("seventhPaperForms", seventhPaperCitedByOtherss);
 			
-			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			FormUlti.isAuthenticatedToRead(person, applierUid);
 			
 			modelAndView.setViewName("displayform/selectSeventhPaperCitedByOthers");
 			return modelAndView;
@@ -106,7 +106,7 @@ public class SeventhFormController {
 	public String createSeventhPaperCitedByOthers(HttpServletRequest request,SeventhPaperCitedByOthers seventhPaperCitedByOthers){
 		logger.info("createSeventhPaperCitedByOthers");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			
 			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
 			List<SeventhPaperCitedByOthers>  seventhPaperCitedByOtherss = seventhPaperCitedByOthersJdbc.getSeventhPaperCitedByOtherss(person.getUid());
@@ -131,7 +131,7 @@ public class SeventhFormController {
 	public String deleteSeventhPaperCitedByOthers(HttpServletRequest request, int idOfSeventhPaperForm){
 		logger.info("deleteSeventhPaperCitedByOthers");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
 			seventhPaperCitedByOthersJdbc.deleteSeventhPaperCitedByOthers(idOfSeventhPaperForm);
 			
@@ -176,7 +176,7 @@ public class SeventhFormController {
 	public ModelAndView manageSeventhIntellectualPropertyDoc(HttpServletRequest request,ModelAndView modelAndView){
 		logger.info("manageSeventhIntellectualPropertyDoc");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			Applier applier= applierJdbc.getApplierByUid(person.getUid());
@@ -206,7 +206,7 @@ public class SeventhFormController {
 	public ModelAndView selectSeventhIntellectualPropertyDoc(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info("selectSeventhIntellectualPropertyDoc");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			Applier applier= applierJdbc.getApplierByUid(applierUid);
@@ -216,7 +216,7 @@ public class SeventhFormController {
 			List<SeventhIntellectualPropertyDoc>  seventhIntellectualPropertyDocs = seventhIntellectualPropertyDocJdbc.getSeventhIntellectualPropertyDocs(applierUid);
 			modelAndView.addObject("seventhIPForms", seventhIntellectualPropertyDocs);
 			
-			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			FormUlti.isAuthenticatedToRead(person, applierUid);
 			
 			modelAndView.setViewName("displayform/selectSeventhIPDoc");
 			return modelAndView;
@@ -243,7 +243,7 @@ public class SeventhFormController {
 	public String createSeventhIntellectualPropertyDoc(HttpServletRequest request,SeventhIntellectualPropertyDoc seventhIntellectualPropertyDoc){
 		logger.info("createSeventhIntellectualPropertyDoc");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			
 			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
 			List<SeventhIntellectualPropertyDoc>  seventhIntellectualPropertyDocs = seventhIntellectualPropertyDocJdbc.getSeventhIntellectualPropertyDocs(person.getUid());
@@ -268,7 +268,7 @@ public class SeventhFormController {
 	public String deleteSeventhIntellectualPropertyDoc(HttpServletRequest request, int idOfSeventhIPForm){
 		logger.info("deleteSeventhIntellectualPropertyDoc");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
 			seventhIntellectualPropertyDocJdbc.deleteSeventhIntellectualPropertyDoc(idOfSeventhIPForm);
 			

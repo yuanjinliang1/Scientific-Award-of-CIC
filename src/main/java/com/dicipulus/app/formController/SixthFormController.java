@@ -79,7 +79,7 @@ public class SixthFormController {
 			Applier applier=applierJdbc.getApplierByUid(applierUid);
 			modelAndView.addObject("applier", applier);
 			
-			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			FormUlti.isAuthenticatedToRead(person, applierUid);
 			
 			modelAndView.setViewName("displayform/selectSixthPaperMonographNT");
 			modelAndView.addObject("sixthPaperMonographForms", sixthPaperMonographNT);
@@ -188,7 +188,7 @@ public class SixthFormController {
 			Applier applier=applierJdbc.getApplierByUid(applierUid);
 			modelAndView.addObject("applier", applier);
 			
-			FormControllerUlti.isAuthenticatedToRead(person, applierUid);	
+			FormUlti.isAuthenticatedToRead(person, applierUid);	
 			
 			modelAndView.setViewName("displayform/displaySixthPaperMonographNT");
 			modelAndView.addObject("sixthPaperMonograph", sixthPaperMonographNT);
@@ -287,7 +287,7 @@ public class SixthFormController {
 			Applier applier=applierJdbc.getApplierByUid(applierUid);
 			modelAndView.addObject("applier", applier);
 			
-			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			FormUlti.isAuthenticatedToRead(person, applierUid);
 			
 			modelAndView.setViewName("displayform/selectSixthApplyUnitSituation");
 			return modelAndView;
@@ -418,7 +418,7 @@ public class SixthFormController {
 			Applier applier=applierJdbc.getApplierByUid(applierUid);
 			modelAndView.addObject("applier", applier);
 			
-			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			FormUlti.isAuthenticatedToRead(person, applierUid);
 			
 			modelAndView.setViewName("displayform/displaySixthApplyUnitSituation");
 			return modelAndView;

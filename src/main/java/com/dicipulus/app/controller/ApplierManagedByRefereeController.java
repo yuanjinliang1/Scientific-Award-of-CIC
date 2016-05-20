@@ -2,7 +2,7 @@ package com.dicipulus.app.controller;
 
 import com.dicipulus.app.*;
 import com.dicipulus.app.JDBC.*;
-import com.dicipulus.app.formController.FormControllerUlti;
+import com.dicipulus.app.formController.FormUlti;
 import com.dicipulus.app.model.*;
 
 import java.text.DateFormat;
@@ -46,7 +46,7 @@ public class ApplierManagedByRefereeController{
 	
 	//only when session and ownerUid in url match with each other, authentication is granted
 	private boolean isAuthenticated(HttpServletRequest request, String ownerUid){
-		Person person = FormControllerUlti.getPersonInRequest(request);
+		Person person = FormUlti.getPersonInRequest(request);
 		logger.debug("session uid="+person.getUid()+", "+"ownerUid="+ownerUid);
 		if(person.getUid().equals(ownerUid)){
 			return true;
@@ -85,7 +85,7 @@ public class ApplierManagedByRefereeController{
 	@RequestMapping(value="/applier-managed-by-referee/applier-create", method=RequestMethod.POST)
 	public String createApplier(HttpServletRequest request){
 		logger.info("createReferee()");
-		Person person =FormControllerUlti.getPersonInRequest(request);
+		Person person =FormUlti.getPersonInRequest(request);
 		ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 		applierJdbc.createApplierForReferee(person.getUid());
 		return "redirect:applier-view/"+person.getUid();
@@ -100,7 +100,7 @@ public class ApplierManagedByRefereeController{
 	@RequestMapping(value="/applier-managed-by-referee/delete-applier", method=RequestMethod.GET)
 	public String deleteApplier(HttpServletRequest request, @RequestParam String uid){
 		logger.info("deleteApplier()");
-		Person person =FormControllerUlti.getPersonInRequest(request);
+		Person person =FormUlti.getPersonInRequest(request);
 		ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 		DeleteFormsJdbc deleteFormsJdbc=InitJdbc.initDeleteFormsJdbc();
 		deleteFormsJdbc.deleteAllForms(applierJdbc.getApplierByUid(uid));//охи╬╠М
@@ -111,7 +111,7 @@ public class ApplierManagedByRefereeController{
 	@RequestMapping(value="/applier-managed-by-referee/reset-password", method=RequestMethod.GET)
 	public String resetPassword(HttpServletRequest request, @RequestParam String uid){
 		logger.info("resetPassword()");
-		Person person =FormControllerUlti.getPersonInRequest(request);
+		Person person =FormUlti.getPersonInRequest(request);
 		ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 		
 		applierJdbc.resetPassword(uid);

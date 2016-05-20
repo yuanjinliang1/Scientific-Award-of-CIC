@@ -49,7 +49,7 @@ public class SecondFormController {
 		logger.info("editSecondRefereeUnitOpinionPost()");
 		
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			Applier applier=applierJdbc.getApplierByUid(applierUid);
 			if(isAuthenticated(applier, person)==false){
@@ -84,7 +84,7 @@ public class SecondFormController {
 	public ModelAndView initSecondRefereeUnitOpinionForm(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info("initSecondRefereeUnitOpinionForm");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			Applier applier=applierJdbc.getApplierByUid(applierUid);
 			if(isAuthenticated(applier, person)==false){
@@ -113,7 +113,7 @@ public class SecondFormController {
 		}
 		catch(EmptyResultDataAccessException e2){
 			logger.info("forms have not been created!");
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			modelAndView.setViewName("redirect:/applier-managed-by-referee/applier-view/"+person.getUid());
 			return modelAndView;
 		}
@@ -130,7 +130,7 @@ public class SecondFormController {
 	public ModelAndView displaySecondRefereeUnitOpinionForm(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info("displaySecondRefereeUnitOpinionForm");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			Applier applier=applierJdbc.getApplierByUid(applierUid);
 			
@@ -140,7 +140,7 @@ public class SecondFormController {
 			modelAndView.addObject("applier",applier);//明确推荐单位正在编辑的推荐书是谁的
 			modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
 			
-			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			FormUlti.isAuthenticatedToRead(person, applierUid);
 
 			modelAndView.setViewName("displayform/displaySecondRefereeOpinion");
 			return modelAndView;
@@ -152,7 +152,7 @@ public class SecondFormController {
 		}
 		catch(EmptyResultDataAccessException e2){
 			logger.info("forms have not been created!");
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			modelAndView.setViewName("redirect:/applier-managed-by-referee/applier-view/"+person.getUid());
 			return modelAndView;
 		}

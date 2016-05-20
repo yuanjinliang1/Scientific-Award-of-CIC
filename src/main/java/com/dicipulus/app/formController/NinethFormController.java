@@ -38,7 +38,7 @@ public class NinethFormController {
 	public ModelAndView manageNinethMajorOrgContributor(HttpServletRequest request,ModelAndView modelAndView){
 		logger.info("manageNinethMajorOrgContributor");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			Applier applier= applierJdbc.getApplierByUid(person.getUid());
@@ -68,7 +68,7 @@ public class NinethFormController {
 	public ModelAndView selectNinethMajorOrgContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info("manageNinethMajorOrgContributor");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			Applier applier= applierJdbc.getApplierByUid(applierUid);
@@ -78,7 +78,7 @@ public class NinethFormController {
 			List<NinethMajorOrgContributor>  ninethMajorOrgContributors = ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(applierUid);
 			modelAndView.addObject("ninethForms", ninethMajorOrgContributors);
 			
-			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			FormUlti.isAuthenticatedToRead(person, applierUid);
 			
 			modelAndView.setViewName("displayform/selectNinethOrgContributor");
 			return modelAndView;
@@ -105,7 +105,7 @@ public class NinethFormController {
 	public String createNinethMajorOrgContributor(HttpServletRequest request,NinethMajorOrgContributor ninethMajorOrgContributor){
 		logger.info("createNinethMajorOrgContributor");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			
 			NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
 			List<NinethMajorOrgContributor>  ninethMajorOrgContributors = ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(person.getUid());
@@ -131,7 +131,7 @@ public class NinethFormController {
 	public String deleteNinethMajorOrgContributor(HttpServletRequest request, int idOfNinethForm){
 		logger.info("deleteNinethMajorOrgContributor");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
 			ninethMajorOrgContributorJdbc.deleteNinethMajorOrgContributor(idOfNinethForm);
 			InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributingOrgNamesForFirstForm(person.getUid());
@@ -153,7 +153,7 @@ public class NinethFormController {
 	public ModelAndView editNinethMajorOrgContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfNinethForm") int idOfNinethForm){
 		logger.info("editNinethMajorOrgContributor");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			Applier applier=applierJdbc.getApplierByUid(person.getUid());
@@ -184,7 +184,7 @@ public class NinethFormController {
 	public ModelAndView displayNinethMajorOrgContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfNinethForm") int idOfNinethForm){
 		logger.info("editNinethMajorOrgContributor");
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			
 			NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
 			NinethMajorOrgContributor ninethMajorOrgContributor=ninethMajorOrgContributorJdbc.getNinethMajorOrgContributor(idOfNinethForm);
@@ -195,7 +195,7 @@ public class NinethFormController {
 			Applier applier=applierJdbc.getApplierByUid(applierUid);
 			modelAndView.addObject("applier", applier);
 			
-			FormControllerUlti.isAuthenticatedToRead(person, applier);
+			FormUlti.isAuthenticatedToRead(person, applier);
 			
 			modelAndView.setViewName("displayform/displayNinethOrgContributor");
 			return modelAndView;
@@ -222,7 +222,7 @@ public class NinethFormController {
 	public String saveNinethMajorOrgContributor(HttpServletRequest request,@ModelAttribute("ninethFormAttr") NinethMajorOrgContributor ninethForm,
 			@PathVariable("idOfNinethForm") int idOfNinethForm){
 		logger.info("saveNinethMajorOrgContributor");
-		Person person=FormControllerUlti.getPersonInRequest(request);
+		Person person=FormUlti.getPersonInRequest(request);
 		if(person==null){
 			return "redirect:/error?message=null-session";
 		}

@@ -35,7 +35,7 @@ public class FourthFormController {
 	public ModelAndView getFourthForm(HttpServletRequest request, ModelAndView modelAndView){
 		logger.info("initFourthForm");
 		try{
-			Person person= FormControllerUlti.getPersonInRequest(request);
+			Person person= FormUlti.getPersonInRequest(request);
 			
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			Applier applier=applierJdbc.getApplierByUid(person.getUid());
@@ -65,13 +65,13 @@ public class FourthFormController {
 	public ModelAndView displayFourthForm(HttpServletRequest request, ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info("initFourthForm");
 		try{
-			Person person= FormControllerUlti.getPersonInRequest(request);
+			Person person= FormUlti.getPersonInRequest(request);
 			
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			Applier applier=applierJdbc.getApplierByUid(applierUid);
 			modelAndView.addObject("applier",applier);
 			
-			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			FormUlti.isAuthenticatedToRead(person, applierUid);
 			
 			FourthFormJdbc fourthFormJdbc=InitJdbc.initFourthFormJdbc();
 			FourthForm fourthForm=fourthFormJdbc.getFourthForm(applierUid);

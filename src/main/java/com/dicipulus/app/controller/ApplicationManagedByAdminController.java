@@ -24,7 +24,7 @@ import com.dicipulus.app.JDBC.InitJdbc;
 import com.dicipulus.app.ajax.AjaxResponseBody;
 import com.dicipulus.app.ajax.AjaxViews;
 import com.dicipulus.app.formController.FifthFormController;
-import com.dicipulus.app.formController.FormControllerUlti;
+import com.dicipulus.app.formController.FormUlti;
 import com.dicipulus.app.model.*;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -44,11 +44,11 @@ public class ApplicationManagedByAdminController {
 			return modelAndView;
 		}
 		try{
-			person=FormControllerUlti.getPersonInRequest(request);
+			person=FormUlti.getPersonInRequest(request);
 		}
 		//though catching runtime exception is not a good practice, here we just do it.
 		catch(NullPointerException e){
-			logger.info("session null pointer!\n Bad Clause in:\"Person person=FormControllerUlti.getPersonInRequest(request);\" ");
+			logger.info("session null pointer!\n Bad Clause in:\"Person person=FormUlti.getPersonInRequest(request);\" ");
 			modelAndView.setViewName("redirect:/login");
 			return modelAndView;
 		}
@@ -116,11 +116,11 @@ public class ApplicationManagedByAdminController {
 			return "redirect:/login";
 		}
 		try{
-			person=FormControllerUlti.getPersonInRequest(request);
+			person=FormUlti.getPersonInRequest(request);
 		}
 		//though catching runtime exception is not a good practice, here we just do it.
 		catch(NullPointerException e){
-			logger.info("session null pointer!\n Bad Clause in:\"Person person=FormControllerUlti.getPersonInRequest(request);\" ");
+			logger.info("session null pointer!\n Bad Clause in:\"Person person=FormUlti.getPersonInRequest(request);\" ");
 			return"redirect:/login";
 		}
 		

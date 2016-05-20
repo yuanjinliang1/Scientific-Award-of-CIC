@@ -79,7 +79,7 @@ public class ThirdFormController {
 			Applier applier=applierJdbc.getApplierByUid(applierUid);
 			modelAndView.addObject("applier", applier);
 			
-			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			FormUlti.isAuthenticatedToRead(person, applierUid);
 			
 			modelAndView.setViewName("displayform/displayThirdBriefIntroduction");
 			modelAndView.addObject("briefIntroductionForm", thirdProjectBriefIntroduction);
@@ -107,7 +107,7 @@ public class ThirdFormController {
 	@RequestMapping(value="/edit-brief-introduction",method=RequestMethod.POST)
 	public String editThirdProjectBriefIntroduction(@ModelAttribute("briefIntroduction")ThirdProjectBriefIntroduction thirdProjectBriefIntroduction,HttpServletRequest request,Model nodel){
 		try{
-			Person person=FormControllerUlti.getPersonInRequest(request);
+			Person person=FormUlti.getPersonInRequest(request);
 			ThirdProjectBriefIntroductionJdbc thirdProjectBriefInroductionJdbc=InitJdbc.initThirdProjectBriefIntroductionJdbc();
 			logger.info(thirdProjectBriefIntroduction.getBriefIntroduction()+"!!!");
 			thirdProjectBriefInroductionJdbc.updateThirdProjectBriefIntroduction(thirdProjectBriefIntroduction, person.getUid());

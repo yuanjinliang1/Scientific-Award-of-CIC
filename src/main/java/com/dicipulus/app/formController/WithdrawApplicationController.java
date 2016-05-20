@@ -53,7 +53,7 @@ public class WithdrawApplicationController {
 	@RequestMapping(value="/withdraw-application-by-applier", method=RequestMethod.GET)
 	public String withdrawApplicationByApplier(HttpServletRequest request){
 		logger.info("withdrawApplicationByApplier");
-		Person person=FormControllerUlti.getPersonInRequest(request);
+		Person person=FormUlti.getPersonInRequest(request);
 		if(person==null){
 			return "redirect:/error?message=null-session";
 		}
@@ -72,12 +72,12 @@ public class WithdrawApplicationController {
 	@RequestMapping(value="/withdraw-application-by-referee/{applierUid}", method=RequestMethod.GET)
 	public String withdrawApplicationByReferee(HttpServletRequest request, @PathVariable("applierUid") String applierUid) throws AuthenticationException{
 		logger.info("withdrawApplicationByReferee");
-		Person person=FormControllerUlti.getPersonInRequest(request);
+		Person person=FormUlti.getPersonInRequest(request);
 		if(person==null){
 			return "redirect:/error?message=null-session";
 		}
 		
-		if(FormControllerUlti.isAuthenticatedToRead(person, applierUid)==false){
+		if(FormUlti.isAuthenticatedToRead(person, applierUid)==false){
 			return "redirect:/error?message=no-authentication";
 		}
 		
@@ -94,12 +94,12 @@ public class WithdrawApplicationController {
 	@RequestMapping(value="/withdraw-application-by-admin/{applierUid}", method=RequestMethod.GET)
 	public String withdrawApplicationByAdmin(HttpServletRequest request, @PathVariable("applierUid") String applierUid) throws AuthenticationException{
 		logger.info("withdrawApplicationByReferee");
-		Person person=FormControllerUlti.getPersonInRequest(request);
+		Person person=FormUlti.getPersonInRequest(request);
 		if(person==null){
 			return "redirect:/error?message=null-session";
 		}
 		
-		if(FormControllerUlti.isAuthenticatedToRead(person, applierUid)==false){
+		if(FormUlti.isAuthenticatedToRead(person, applierUid)==false){
 			return "redirect:/error?message=no-authentication";
 		}
 		

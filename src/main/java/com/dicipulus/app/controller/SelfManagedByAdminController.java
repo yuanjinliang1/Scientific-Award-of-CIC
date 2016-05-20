@@ -2,7 +2,7 @@ package com.dicipulus.app.controller;
 
 import com.dicipulus.app.*;
 import com.dicipulus.app.JDBC.*;
-import com.dicipulus.app.formController.FormControllerUlti;
+import com.dicipulus.app.formController.FormUlti;
 import com.dicipulus.app.model.*;
 
 import java.text.DateFormat;
@@ -109,7 +109,7 @@ public class SelfManagedByAdminController {
 	public String changepassword(HttpServletRequest request, String passwordOld,
 			String passwordNew1, String passwordNew2,Person person){
 		logger.info("changePassword()");
-		Person personSession =FormControllerUlti.getPersonInRequest(request);
+		Person personSession =FormUlti.getPersonInRequest(request);
 		if(isAuthenticated(request)&&passwordCheck(passwordOld)){
 			if(passwordNew1.equals(passwordNew2)){
 				AdminJdbc adminJdbc=InitJdbc.initAdminJdbc();

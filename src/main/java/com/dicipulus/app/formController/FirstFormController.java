@@ -41,7 +41,7 @@ public class FirstFormController {
 		try{
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
-			Person person = FormControllerUlti.getPersonInRequest(request);
+			Person person = FormUlti.getPersonInRequest(request);
 			FirstProjectBasicSituation firstForm=firstProjectBasicSituationJdbc.getFirstProjectBasicSituation(person.getUid());
 			modelAndView.setViewName("editform/editFirstProjectBasicSituation");
 			modelAndView.addObject("applier",applierJdbc.getApplierByUid(person.getUid()));
@@ -75,7 +75,7 @@ public class FirstFormController {
 		/*
 		 * 准备工作
 		 */
-		Person personSession =FormControllerUlti.getPersonInRequest(request);
+		Person personSession =FormUlti.getPersonInRequest(request);
 		ApplierJdbc applierJdbc= InitJdbc.initApplierJdbc();
 		Applier applier=applierJdbc.getApplierByUid(personSession.getUid());
 		FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
@@ -99,14 +99,14 @@ public class FirstFormController {
 		logger.info("displayFirstProjectBasicSituationGet()");
 		try{
 			FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
-			Person person = FormControllerUlti.getPersonInRequest(request);
+			Person person = FormUlti.getPersonInRequest(request);
 			FirstProjectBasicSituation firstForm=firstProjectBasicSituationJdbc.getFirstProjectBasicSituation(applierUid);
 			
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 			Applier applier=applierJdbc.getApplierByUid(applierUid);
 			modelAndView.addObject("applier", applier);
 			
-			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			FormUlti.isAuthenticatedToRead(person, applierUid);
 			
 			modelAndView.addObject("firstForm",firstForm);
 			modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);

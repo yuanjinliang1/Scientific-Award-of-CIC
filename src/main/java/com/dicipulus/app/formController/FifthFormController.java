@@ -73,7 +73,7 @@ public class FifthFormController {
 			Applier applier=applierJdbc.getApplierByUid(applierUid);
 			modelAndView.addObject("applier", applier);
 			
-			FormControllerUlti.isAuthenticatedToRead(person, applierUid);
+			FormUlti.isAuthenticatedToRead(person, applierUid);
 			
 			modelAndView.setViewName("displayform/displayFifthObjectiveEvaluation");
 			modelAndView.addObject("objectiveEvaluationForm", fifthObjectiveEvaluation);

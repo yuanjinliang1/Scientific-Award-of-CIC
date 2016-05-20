@@ -20,11 +20,9 @@ import com.dicipulus.app.applicationModel.SecondRefereeUnitOpinion;
 import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Person;
 
-public final class FormControllerUlti {
+public final class FormUlti {
 	public static Person getPersonInRequest(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		Person person = (Person) session.getAttribute("person");
-		return person;
+		return (Person)request.getSession().getAttribute("person");
 	}
 	
 	public static boolean isAuthenticatedToRead(Person self,Applier applier ) throws AuthenticationException {
@@ -41,7 +39,7 @@ public final class FormControllerUlti {
 			throw new AuthenticationException("no authentication to read");
 		}
 	}
-	
+	//self, referee, admin
 	public static boolean isAuthenticatedToRead(Person self,String applierUid ) throws AuthenticationException {
 		ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 		Applier applier= applierJdbc.getApplierByUid(applierUid);
@@ -59,4 +57,60 @@ public final class FormControllerUlti {
 			throw new AuthenticationException("no authentication to read");
 		}
 	}
+	public static boolean isAuthenticatedToRead(HttpServletRequest request,String applierUid ) {
+		Person self=FormUlti.getPersonInRequest(request);
+		ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+		Applier applier= applierJdbc.getApplierByUid(applierUid);
+		
+		if(self.getRole().contains("admin")){
+			return true;
+		}
+		else if(self.getUid().equals(applier.getOwner())){
+			return true;
+		}
+		else if(self.getUid().equals(applier.getUid())){
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public static boolean rightRole(HttpServletRequest request, String role){
+		if(getPersonInRequest(request)!=null||getPersonInRequest(request).getRole().equals(role)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	public static boolean rightProjectStatus(String applierUid, List<String> projectStatuses){
+		String projectStatusNow= InitJdbc.initApplicationJdbc().getApplicationByApplier(applierUid).getProjectStatus();
+		for(String status:projectStatuses){
+			if(projectStatusNow!=null&&projectStatusNow.equals(status)){
+				return true;
+			}
+		}
+		return false;
+
+	}
+	
+	public static String redirectErrorMessage(String message){
+		return "redirect:/error?message="+message;
+	}
+	
+	public static String redirectPrevious(HttpServletRequest request){
+		return "redirect:"+request.getHeader("Referer");
+	}
+	
+	public static boolean isIdenticalPerson(HttpServletRequest request, String personUid){
+		if(getPersonInRequest(request)!=null||getPersonInRequest(request).getUid().equals(personUid)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
 }

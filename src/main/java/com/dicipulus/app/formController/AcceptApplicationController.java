@@ -7,6 +7,8 @@ import com.dicipulus.app.applicationModel.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -52,65 +54,62 @@ public class AcceptApplicationController {
 	
 	@RequestMapping(value="/submit-application-by-applier",method=RequestMethod.GET)
 	public String submitApplicationByApplier(HttpServletRequest request){
-		logger.info("submitApplicationByApplier");
-		Person person=FormControllerUlti.getPersonInRequest(request);
-		if(person==null){
-			return "redirect:/error?message=null-session";
+		//logger
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+		//guard null-session
+		if(FormUlti.getPersonInRequest(request)==null){
+			return FormUlti.redirectErrorMessage("null-session");
 		}
-		String applierUid=person.getUid();
-		
-		ApplicationJdbc applicationJdbc=InitJdbc.initApplicationJdbc();
-		logger.info(applicationJdbc.getStatusOfApplication(applierUid));
-		if(applicationJdbc.getStatusOfApplication(applierUid).contains("未提交")==false){
-				return "redirect:/error?message=prerequisite-status-wrong";	
+		//guard illegal-role
+		if(FormUlti.rightRole(request, "applier")==false){
+			return FormUlti.redirectErrorMessage("illegal-role");
 		}
-		applicationJdbc.setStatusOfApplication("已提交", applierUid);	
-
-		String previousPage =request.getHeader("Referer");
-		return "redirect:"+previousPage;
+		//set applierUid in different context
+		String applierUid=FormUlti.getPersonInRequest(request).getUid();
+		//guard illegal-status
+		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
+			return FormUlti.redirectErrorMessage("illegal-status");
+		}
+		//do the main work
+		InitJdbc.initApplicationJdbc().setStatusOfApplication("已提交", applierUid);	
+		//return redirect
+		return FormUlti.redirectPrevious(request);
 	}
 	
 	@RequestMapping(value="/submit-application-by-referee/{applierUid}", method=RequestMethod.GET)
 	public String submitApplicationByReferee(HttpServletRequest request, @PathVariable("applierUid") String applierUid) throws AuthenticationException{
-		logger.info("submitApplicationByReferee");
-		Person person=FormControllerUlti.getPersonInRequest(request);
-		if(person==null){
-			return "redirect:/error?message=null-session";
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+		if(FormUlti.getPersonInRequest(request)==null){
+			return FormUlti.redirectErrorMessage("null-session");
 		}
-		
-		if(FormControllerUlti.isAuthenticatedToRead(person, applierUid)==false||person.getRole().equals("referee")==false){
-			return "redirect:/error?message=no-authentication";
+		if(!FormUlti.isAuthenticatedToRead(request, applierUid)
+				||!FormUlti.rightRole(request, "referee")){
+			return FormUlti.redirectErrorMessage("illegal-role");
 		}
-		
-		ApplicationJdbc applicationJdbc=InitJdbc.initApplicationJdbc();
-		if(applicationJdbc.getStatusOfApplication(applierUid).equals("已提交")==false){
-				return "redirect:/error?message=prerequisite-status-wrong";	
+		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("已提交"))==false){
+			return FormUlti.redirectErrorMessage("illegal-status");
 		}
-		applicationJdbc.setStatusOfApplication("已推荐", applierUid);	
-		
-		String previousPage =request.getHeader("Referer");
-		return "redirect:"+previousPage;
+		//main work
+		InitJdbc.initApplicationJdbc().setStatusOfApplication("已推荐", applierUid);
+
+		return FormUlti.redirectPrevious(request);
 	}
 	
 	@RequestMapping(value="/accept-application-by-admin/{applierUid}", method=RequestMethod.GET)
 	public String acceptApplicationByAdmin(HttpServletRequest request, @PathVariable("applierUid") String applierUid) throws AuthenticationException{
-		logger.info("acceptApplicationByAdmin");
-		Person person=FormControllerUlti.getPersonInRequest(request);
-		if(person==null){
-			return "redirect:/error?message=null-session";
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+		if(FormUlti.getPersonInRequest(request)==null){
+			return FormUlti.redirectErrorMessage("null-session");
 		}
-		
-		if(FormControllerUlti.isAuthenticatedToRead(person, applierUid)==false||person.getUid().contains("admin")==false){
-			return "redirect:/error?message=no-authentication";
+		if(!FormUlti.rightRole(request, "admin")){
+			return FormUlti.redirectErrorMessage("illegal-role");
 		}
-		
-		ApplicationJdbc applicationJdbc=InitJdbc.initApplicationJdbc();
-		if(applicationJdbc.getStatusOfApplication(applierUid).equals("已推荐")==false){
-				return "redirect:/error?message=prerequisite-status-wrong";	
+		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("已推荐"))==false){
+			return FormUlti.redirectErrorMessage("illegal-status");
 		}
-		applicationJdbc.setStatusOfApplication("已接收", applierUid);
+		//main work
+		InitJdbc.initApplicationJdbc().setStatusOfApplication("已接收", applierUid);
 		
-		String previousPage =request.getHeader("Referer");
-		return "redirect:"+previousPage;
+		return FormUlti.redirectPrevious(request);
 	}
 }

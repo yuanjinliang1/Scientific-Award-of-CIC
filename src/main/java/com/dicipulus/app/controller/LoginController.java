@@ -2,8 +2,9 @@ package com.dicipulus.app.controller;
 
 import com.dicipulus.app.*;
 import com.dicipulus.app.JDBC.*;
+import com.dicipulus.app.download.CombineExcel;
+import com.dicipulus.app.download.CombinePdf;
 import com.dicipulus.app.model.*;
-import com.dicipulus.app.pdf.CombinePdf;
 import com.itextpdf.text.DocumentException;
 
 import java.io.IOException;
@@ -14,6 +15,9 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,8 +45,9 @@ public class LoginController{
 	//private final SystemService systemService=(SystemService)context.getBean("systemService");
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String initLoginForm() throws DocumentException, IOException{
+	public String initLoginForm() throws DocumentException, IOException, RowsExceededException, WriteException{
 		//CombinePdf.buildPdf("100116001");
+		//CombineExcel.buildExcel(2016);
 		return "login";
 	}
 	

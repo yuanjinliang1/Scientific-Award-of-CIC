@@ -39,6 +39,13 @@ public class FirstProjectBasicSituationJdbc{
 		return firstProjectBasicSituation;
 	}
 	
+	public List<FirstProjectBasicSituation> getFirstProjectBasicSituationByYear(int year){
+		String sql="select * from project_major where yearCreated=?";
+		List<FirstProjectBasicSituation> FirstProjectBasicSituations=jdbcTemplateObject.query(sql, BeanPropertyRowMapper.newInstance(FirstProjectBasicSituation.class));
+		logger.info("SQL: "+sql);
+		return FirstProjectBasicSituations;
+	}
+	
 	public void setFirstProjectBasicSituation(FirstProjectBasicSituation firstForm, String applierUid){
 		String sql="UPDATE `dicipulus`.`project_major` SET `yearCreated`=?, `refereeString`=?, `projectName`=?,"
 				+ " `majorContributorNames`=?, `majorContributingOrgNames`=?, `secretLevel`=?, `subjectCategoryName1`=?,"

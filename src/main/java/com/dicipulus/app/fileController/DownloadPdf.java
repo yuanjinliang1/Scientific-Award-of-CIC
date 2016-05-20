@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.dicipulus.app.download.CombinePdf;
 import com.dicipulus.app.model.MyProperties;
-import com.dicipulus.app.pdf.CombinePdf;
 import com.itextpdf.text.DocumentException;
 
 @Controller

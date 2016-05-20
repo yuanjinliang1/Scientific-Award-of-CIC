@@ -1,4 +1,4 @@
-package com.dicipulus.app.pdf;
+package com.dicipulus.app.download;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

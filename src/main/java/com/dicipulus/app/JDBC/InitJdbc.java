@@ -158,4 +158,11 @@ public final class InitJdbc{
 		context.registerShutdownHook();
 		return applicationJdbc;
 	}
+	
+	public static ManageExcelJdbc initManageExcelJdbc(){
+		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+		ManageExcelJdbc manageExcelJdbc=(ManageExcelJdbc) context.getBean("manageExcelJdbc");
+		context.registerShutdownHook();
+		return manageExcelJdbc;
+	}
 }

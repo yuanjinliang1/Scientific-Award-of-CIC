@@ -24,9 +24,19 @@ import com.dicipulus.app.applicationModel.EighthMajorContributor;
 import com.dicipulus.app.applicationModel.Excel;
 import com.dicipulus.app.applicationModel.FirstProjectBasicSituation;
 import com.dicipulus.app.applicationModel.NinethMajorOrgContributor;
+import com.dicipulus.app.model.MyProperties;
 
 public class CombineExcel {
 	public static void buildExcel(int year) throws IOException, RowsExceededException, WriteException{
+		
+		String pathOfExcel=MyProperties.getRootPath()+"/admin/"+year+".pdf";
+		
+		File folder = new File(MyProperties.getRootPath()+"/admin/");
+		if(folder.exists()==false){
+			folder.mkdirs();
+		}
+		
+		
 		ManageExcelJdbc manageExcelJdbc=InitJdbc.initManageExcelJdbc();
 		List<Excel> manageExcelAll=manageExcelJdbc.getExcelByYear(year);
 		List<Excel> manageExcel=new ArrayList<Excel>();
@@ -36,8 +46,11 @@ public class CombineExcel {
 				manageExcel.add(ex);
 			}
 		}
+		
+		
+		
 		//表头
-		WritableWorkbook book=Workbook.createWorkbook(new File("/Users/cyq/Desktop/test.xls"));
+		WritableWorkbook book=Workbook.createWorkbook(new File(pathOfExcel));
 		WritableSheet sheet=book.createSheet("明细表", 0);
 		sheet.mergeCells(0, 0, 19, 0);
 		Label label=new Label(0,0,year+"年中国通信学会科学技术奖收集明细表");

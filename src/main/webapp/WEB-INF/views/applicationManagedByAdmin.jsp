@@ -25,6 +25,12 @@ request.setCharacterEncoding("UTF-8");
 <dicipulus:bodyHeaderForAdmin menuName="manageApplication" />
 <br/><br/><br/>
 <div class="row" style="margin-left: 20px"><h1>Application Management</h1></div>
+<div class="row" style="margin-left: 20px">
+	<spring:url value="/download-excel/{year}" var="excelURL">
+			<spring:param name="year" value="2016"></spring:param>
+		</spring:url>
+	<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(excelURL)}';" value="下载excel">
+</div>
 <div class="col-md-12">
 <table class="table table-bordered" style="width:100%">
 	<thead>

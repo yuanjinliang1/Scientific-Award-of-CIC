@@ -5,6 +5,9 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.dicipulus.app.download.CombineExcel;
 import com.dicipulus.app.download.CombinePdf;
 import com.dicipulus.app.model.MyProperties;
 import com.itextpdf.text.DocumentException;
@@ -32,5 +36,15 @@ public class DownloadPdf {
 		String pathOfPdf=MyProperties.getRootPath()+applierUid+"/pdf/"+applierUid+".pdf";
 		File fileOfPdf = new File(pathOfPdf);
 		return new FileSystemResource(fileOfPdf);
+	}
+	
+	@RequestMapping(value="/download-excel/{year}",produces = "application/vnd.ms-excel",method=RequestMethod.GET)
+	@ResponseBody
+	public FileSystemResource  downloadExcel(HttpServletRequest request, @PathVariable("year") int year) throws DocumentException, IOException, RowsExceededException, WriteException{
+		logger.info("downloadExcel");
+		CombineExcel.buildExcel(year);
+		String pathOfExcel=MyProperties.getRootPath()+"/admin/"+year+".pdf";
+		File fileOfExcel = new File(pathOfExcel);
+		return new FileSystemResource(fileOfExcel);
 	}
 }

@@ -48,23 +48,23 @@ public class FirstProjectBasicSituationJdbc{
 	
 	public void setFirstProjectBasicSituation(FirstProjectBasicSituation firstForm, String applierUid){
 		String sql="UPDATE `dicipulus`.`project_major` SET `yearCreated`=?, `refereeString`=?, `projectName`=?,"
-				+ " `majorContributorNames`=?, `majorContributingOrgNames`=?, `secretLevel`=?, `subjectCategoryName1`=?,"
+				+ " `secretLevel`=?, `subjectCategoryName1`=?,"
 				+ " `subjectCategoryId1`=?, `subjectCategoryName2`=?, `subjectCategoryId2`=?, `subjectCategoryName3`=?,"
 				+ " `subjectCategoryId3`=?, `economicField`=?, `nationalFocusField`=?, `technologicalField`=?, `taskSource`=?, "
 				+ "`NameAndCodeOfPlansOrFundations`=?, `technicalReportNumber`=?, `numOfOtherIntellectualProperty`=?, "
-				+ "`numOfInventionPatent`=?, `startDate`=?, `finishDate`=?, `refereeContactName`=?, `refereeContactPhone`=?,"
-				+ " `refereeContactEmail`=?, `applierContactName`=?, `applierContactPhone`=?, `applierContactEmail`=? "
+				+ "`numOfInventionPatent`=?, `startDate`=?, `finishDate`=?, "
+				+ "`applierContactName`=?, `applierContactPhone`=?, `applierContactEmail`=? "
 				+ "WHERE `applierUid`=?;";
 		
 		jdbcTemplateObject.update(sql,firstForm.getYearCreated(),firstForm.getRefereeString(),firstForm.getProjectName(),
-				firstForm.getMajorContributorNames(),firstForm.getMajorContributingOrgNames(),firstForm.getSecretLevel(),
+				firstForm.getSecretLevel(),
 				firstForm.getSubjectCategoryName1(),firstForm.getSubjectCategoryId1(),
 				firstForm.getSubjectCategoryName2(),firstForm.getSubjectCategoryId2(),
 				firstForm.getSubjectCategoryName3(),firstForm.getSubjectCategoryId3(),
 				firstForm.getEconomicField(),firstForm.getNationalFocusField(),firstForm.getTechnologicalField(),firstForm.getTaskSource(),
 				firstForm.getNameAndCodeOfPlansOrFundations(),firstForm.getTechnicalReportNumber(),firstForm.getNumOfOtherIntellectualProperty(),
 				firstForm.getNumOfInventionPatent(),firstForm.getStartDate(),firstForm.getFinishDate(),
-				firstForm.getRefereeContactName(),firstForm.getRefereeContactPhone(),firstForm.getRefereeContactEmail(),
+				
 				firstForm.getApplierContactName(),firstForm.getApplierContactPhone(),firstForm.getApplierContactEmail(),
 				firstForm.getApplierUid());
 		logger.info(sql);

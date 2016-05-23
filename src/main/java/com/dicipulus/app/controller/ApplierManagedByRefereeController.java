@@ -84,10 +84,11 @@ public class ApplierManagedByRefereeController{
 	
 	@RequestMapping(value="/applier-managed-by-referee/applier-create", method=RequestMethod.POST)
 	public String createApplier(HttpServletRequest request){
-		logger.info("createReferee()");
+		logger.info("createApplier()");
 		Person person =FormUlti.getPersonInRequest(request);
 		ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-		applierJdbc.createApplierForReferee(person.getUid());
+		String applierUid=applierJdbc.createApplierForReferee(person.getUid());
+		InitJdbc.initCreateFormsJdbc().createAllForms(applierJdbc.getApplierByUid(applierUid));//初始化所有表
 		return "redirect:applier-view/"+person.getUid();
 	}
 	

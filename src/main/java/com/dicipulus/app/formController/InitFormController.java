@@ -84,10 +84,7 @@ public class InitFormController {
 		try{
 			Person person = FormUlti.getPersonInRequest(request);
 			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			CreateFormsJdbc createFormsJdbc=InitJdbc.initCreateFormsJdbc();
 			applierJdbc.setApplicationType(person.getUid(),applicationType);
-			Applier applier=applierJdbc.getApplierByUid(person.getUid());
-			createFormsJdbc.createAllForms(applier);//初始化所有表
 			return "redirect:/edit-first-project-basic-situation";
 		}
 		catch(NullPointerException e){

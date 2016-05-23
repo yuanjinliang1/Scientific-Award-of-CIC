@@ -51,7 +51,7 @@ public class ApplierJdbc extends Applier {
 		logger.info("uid:"+uid+", password:"+password);
 	}
 	
-	public void createApplierForReferee(String refereeUid){
+	public String createApplierForReferee(String refereeUid){
 		List<Applier> appliers=getAppliers(refereeUid);
 		int year = Calendar.getInstance().get(Calendar.YEAR);
 		int yearTwoDigit=year-2000;
@@ -79,6 +79,7 @@ public class ApplierJdbc extends Applier {
 		jdbcTemplateObject.update(sql, newUidString, password, "ÏîÄ¿×é", refereeUid, yearString);
 		logger.info("SQL: "+sql);
 		logger.info("uid:"+newUidString+", password:"+password+"refereeUid:"+refereeUid+"year:"+yearString);
+		return newUidString;
 	}
 	
 	private String getRandomPassword(){

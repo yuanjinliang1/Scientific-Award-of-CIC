@@ -59,16 +59,13 @@ public final class FormUlti {
 	}
 	public static boolean isAuthenticatedToRead(HttpServletRequest request,String applierUid ) {
 		Person self=FormUlti.getPersonInRequest(request);
-		ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-		Applier applier= applierJdbc.getApplierByUid(applierUid);
+		Applier applier= InitJdbc.initApplierJdbc().getApplierByUid(applierUid);
 		
-		if(self.getRole().contains("admin")){
-			return true;
-		}
-		else if(self.getUid().equals(applier.getOwner())){
-			return true;
-		}
-		else if(self.getUid().equals(applier.getUid())){
+		if(self!=null&&(
+				self.getRole().contains("admin")||
+				self.getUid().equals(applier.getOwner())||
+				self.getUid().equals(applier.getUid())
+						)){
 			return true;
 		}
 		else {
@@ -77,7 +74,7 @@ public final class FormUlti {
 	}
 	
 	public static boolean rightRole(HttpServletRequest request, String role){
-		if(getPersonInRequest(request)!=null||getPersonInRequest(request).getRole().equals(role)){
+		if(getPersonInRequest(request)!=null&&getPersonInRequest(request).getRole().equals(role)){
 			return true;
 		}
 		else{
@@ -104,8 +101,12 @@ public final class FormUlti {
 		return "redirect:"+request.getHeader("Referer");
 	}
 	
+	public static String redirectLogin(){
+		return "redirect:/login";
+	}
+	
 	public static boolean isIdenticalPerson(HttpServletRequest request, String personUid){
-		if(getPersonInRequest(request)!=null||getPersonInRequest(request).getUid().equals(personUid)){
+		if(getPersonInRequest(request)!=null&&getPersonInRequest(request).getUid().equals(personUid)){
 			return true;
 		}
 		else{

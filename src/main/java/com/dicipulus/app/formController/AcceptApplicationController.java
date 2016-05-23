@@ -64,6 +64,8 @@ public class AcceptApplicationController {
 		if(FormUlti.rightRole(request, "applier")==false){
 			return FormUlti.redirectErrorMessage("illegal-role");
 		}
+		logger.info(((Person)request.getSession().getAttribute("person")).getRole());
+		logger.info((""+FormUlti.rightRole(request, "applier")));
 		//set applierUid in different context
 		String applierUid=FormUlti.getPersonInRequest(request).getUid();
 		//guard illegal-status
@@ -77,7 +79,7 @@ public class AcceptApplicationController {
 	}
 	
 	@RequestMapping(value="/submit-application-by-referee/{applierUid}", method=RequestMethod.GET)
-	public String submitApplicationByReferee(HttpServletRequest request, @PathVariable("applierUid") String applierUid) throws AuthenticationException{
+	public String submitApplicationByReferee(HttpServletRequest request, @PathVariable("applierUid") String applierUid){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
 		if(FormUlti.getPersonInRequest(request)==null){
 			return FormUlti.redirectErrorMessage("null-session");
@@ -96,7 +98,7 @@ public class AcceptApplicationController {
 	}
 	
 	@RequestMapping(value="/accept-application-by-admin/{applierUid}", method=RequestMethod.GET)
-	public String acceptApplicationByAdmin(HttpServletRequest request, @PathVariable("applierUid") String applierUid) throws AuthenticationException{
+	public String acceptApplicationByAdmin(HttpServletRequest request, @PathVariable("applierUid") String applierUid){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
 		if(FormUlti.getPersonInRequest(request)==null){
 			return FormUlti.redirectErrorMessage("null-session");

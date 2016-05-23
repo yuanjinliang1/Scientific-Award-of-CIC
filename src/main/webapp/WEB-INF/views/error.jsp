@@ -13,11 +13,40 @@ request.setCharacterEncoding("UTF-8");
 
 <html>
 <head>
-	<title>ERROR</title>
+	<jsp:include page="fragments/header.jsp"></jsp:include>
+	<title>出错了！</title>
+	<style type="text/css">
+		.center {
+				     float: none;
+				     margin-left: auto;
+				     margin-right: auto;
+				     margin-top: 20%;
+				     margin-bottom: auto;
+				     zoom:150%
+				}
+	</style>
 </head>
-<body>
-<h1>ERROR!</h1>
-<p>ALL KINDS OF ERROR REDIRECT TO HERE</p>
-<h1>ERROR MESSAGE:${message }</h1>
+<body >
+<div class="container">
+	<div class="form-group col-md-4 panel panel-default center">
+	
+			<div class="panel-heading row">
+				<h3 class=" panel-title ">出错了</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+				<h3><c:out value="${message }"></c:out></h3>
+				</div>
+				<div class="row">
+					<a class="btn btn-default" onClick="return goBack()" >返回</a>
+				</div>
+			</div>
+	</div>
+</div>
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
 </body>
 </html>

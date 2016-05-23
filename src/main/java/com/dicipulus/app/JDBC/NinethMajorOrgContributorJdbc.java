@@ -49,7 +49,7 @@ public class NinethMajorOrgContributorJdbc{
 		logger.info(sql);
 		
 		String sql2="select idOfNinethForm from major_org_contributor where(applierUid=? and rankOfOrg=?)";
-		int idOfNinethForm= jdbcTemplateObject.queryForInt(sql2, new Object[]{applierUid,rankOfOrg});
+		int idOfNinethForm= jdbcTemplateObject.queryForObject(sql2, new Object[]{applierUid,rankOfOrg},Integer.class);
 		logger.info(""+idOfNinethForm);
 		return idOfNinethForm;
 	}

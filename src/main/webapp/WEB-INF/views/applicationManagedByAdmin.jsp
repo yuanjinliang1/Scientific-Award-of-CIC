@@ -55,7 +55,6 @@ request.setCharacterEncoding("UTF-8");
 	</select>
 </div>
 
-
 <div class="col-md-12">
 <table class="table table-bordered" style="width:100%">
 	<thead>

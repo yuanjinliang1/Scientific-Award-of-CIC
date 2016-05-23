@@ -79,5 +79,8 @@
 	   <bean id="applicationJdbc" class="com.dicipulus.app.JDBC.ApplicationJdbc">
 	   	<property name="dataSource" ref="dataSource"></property>
 	   </bean>
+	   <bean id="manageExcelJdbc" class="com.dicipulus.app.JDBC.ManageExcelJdbc">
+	   	<property name="dataSource" ref="dataSource"></property>
+	   </bean>
     	
 </beans>

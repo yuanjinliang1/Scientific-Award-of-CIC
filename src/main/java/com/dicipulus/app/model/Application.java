@@ -24,6 +24,7 @@ public class Application {
 	private String finalExaminationResult;
 	@JsonView(AjaxViews.Public.class)
 	private String commentOfAdmin;
+	private String yearCreated;//用于隐藏去年的项目
 	
 	public Application(String applierUid, String projectStatus,
 			String projectName, String refereeString, String applicationType,
@@ -51,7 +52,7 @@ public class Application {
 
 
 
-	private String yearCreated;//用于隐藏去年的项目
+
 
 	public String getApplierUid() {
 		return applierUid;

@@ -220,7 +220,7 @@ public class EighthFormController {
 			return FormUlti.redirectErrorMessage("null-session");
 		}
 		String applierUid=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributor(idOfEighthForm).getApplierUid();
-		if(FormUlti.isIdenticalPerson(request, applierUid)){
+		if(FormUlti.isIdenticalPerson(request, applierUid)==false){
 			return FormUlti.redirectErrorMessage("no-authority");
 		}
 		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("δ�ύ"))==false){

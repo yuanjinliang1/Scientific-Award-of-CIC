@@ -142,32 +142,32 @@ public class FirstProjectBasicSituationPdf {
        
         table.addCell(cell);
         table.addCell("  1");
-        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getSubjectCategoryName1(),fontChinese)));//
+        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getSubjectCategoryName1().replaceAll("[-0-9]", ""),fontChinese)));//
         cell=new PdfPCell(new Phrase("ДњТы",fontChinese));
         cell.setHorizontalAlignment(cell.ALIGN_CENTER);
         cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
         cell.setMinimumHeight(25f);
         table.addCell(cell);
-        cell.setPhrase(new Phrase(firstProjectBasicSituation.getSubjectCategoryId1()));
+        cell.setPhrase(new Phrase(firstProjectBasicSituation.getSubjectCategoryName1().replaceAll("[^0-9]", "")));
         table.addCell(cell);
         table.addCell("  2");
-        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getSubjectCategoryName2(),fontChinese)));//
+        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getSubjectCategoryName2().replaceAll("[-0-9]", ""),fontChinese)));//
         cell=new PdfPCell(new Phrase("ДњТы",fontChinese));
         cell.setHorizontalAlignment(cell.ALIGN_CENTER);
         cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
         cell.setMinimumHeight(25f);
         table.addCell(cell);
-        cell.setPhrase(new Phrase(firstProjectBasicSituation.getSubjectCategoryId2()));
+        cell.setPhrase(new Phrase(firstProjectBasicSituation.getSubjectCategoryName2().replaceAll("[^0-9]", "")));
         table.addCell(cell);
         table.addCell("  3");
-        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getSubjectCategoryName3(),fontChinese)));//
+        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getSubjectCategoryName3().replaceAll("[-0-9]", ""),fontChinese)));//
         
         cell=new PdfPCell(new Phrase("ДњТы",fontChinese));
         cell.setHorizontalAlignment(cell.ALIGN_CENTER);
         cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
         cell.setMinimumHeight(25f);
         table.addCell(cell);
-        cell.setPhrase(new Phrase(firstProjectBasicSituation.getSubjectCategoryId3()));
+        cell.setPhrase(new Phrase(firstProjectBasicSituation.getSubjectCategoryName3().replaceAll("[^0-9]", "")));
         table.addCell(cell);
         table.setWidthPercentage(100);
         document.add(table);

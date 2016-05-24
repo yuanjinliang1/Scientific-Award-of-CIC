@@ -37,7 +37,7 @@ request.setCharacterEncoding("UTF-8");
 						<td>项目名称</td>
 						<td class="form-group">
 							<input class="form-control" type="text" name="projectName" value="${firstForm.projectName }" 
-							placeholder="${person.name}" data-error="请填写此项" required/></td>
+							placeholder="${person.name}" data-error="请填写此项" maxlength="30" required/></td>
 							<div class="help-block with-errors" style="font-size:15px"></div>
 					</tr>
 					<tr>
@@ -199,7 +199,7 @@ request.setCharacterEncoding("UTF-8");
 					</div>
 					<div class="row panel-body form-group">
 						<textarea class="form-control" rows="5"  name="nameAndCodeOfPlansOrFundations" form="firstFormer" 
-						 placeholder="不超过300字。应按重要程度依次填写，先国家计划，后其他计划，不超过10项"
+						 placeholder="不超过300字。应按重要程度依次填写，先国家计划，后其他计划，不超过10项" maxlength="300"
 						 data-error="请填写此项" required>${firstForm.nameAndCodeOfPlansOrFundations }</textarea>
 						 <div class="help-block with-errors" style="font-size:15px"></div>
 					</div>

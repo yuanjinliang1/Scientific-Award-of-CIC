@@ -97,13 +97,13 @@ request.setCharacterEncoding("UTF-8");
 			</table>
 			<table class="table table-bordered">
 				<tr><td>主要经济指标的有关说明</td></tr>
-				<tr><td>${ sixthEconomicAndSocialBenefitForms.mainEconomicProfitIntroduction}</td></tr>
+				<tr><td><pre>${ sixthEconomicAndSocialBenefitForms.mainEconomicProfitIntroduction}</pre></td></tr>
 				<tr><td>其他经济效益指标的有关说明</td></tr>
-				<tr><td>${ sixthEconomicAndSocialBenefitForms.otherEconomicProfitIntroduction}</td></tr>
+				<tr><td><pre>${ sixthEconomicAndSocialBenefitForms.otherEconomicProfitIntroduction}</pre></td></tr>
 			</table>
 			<div class="row" style="margin-left: 20px"><h3>2.社会效益</h3></div>
 			<table class="table table-bordered">
-				<tr><td>${ sixthEconomicAndSocialBenefitForms.socialBenefit}</td></tr>
+				<tr><td><pre>${ sixthEconomicAndSocialBenefitForms.socialBenefit}</pre></td></tr>
 			</table>
             
         </div>

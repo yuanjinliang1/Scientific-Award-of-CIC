@@ -18,7 +18,7 @@ request.setCharacterEncoding("UTF-8");
 	<title>七、主要知识产权证明目录（不超过10件）</title>
 </head>
 <body>
-<div class="container">
+<div class="container" style="width:100%">
 	<dicipulus:bodyHeaderForApplier menuName="editApplication"/>
 	<div class="wrapper">
 		<dicipulus:bodySidebarForEdit page="7"/>
@@ -27,10 +27,10 @@ request.setCharacterEncoding("UTF-8");
             <div class="row" style="margin-left: 20px"><h1>七、主要知识产权证明目录（不超过10件）</h1></div>
            	<form action="/app/create-seventh-ip-doc" method="POST" >
 				<div class="row" style="margin-left:20px">
-					<input type="submit" class="btn btn-default" value="添加主要完成单位" />
+					<input type="submit" class="btn btn-primary" value="添加主要知识产权证明" />
 				</div>
 			</form>
-            <table class="table table-bordered">
+            <table class="table table-bordered" style="zoom:80%">
 				<tr>
 					<td>排名</td>
 					<td>知识产权类别</td>
@@ -52,23 +52,23 @@ request.setCharacterEncoding("UTF-8");
 					<form id="seventhIPFormer" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="seventhIPFormAttr">
 						<tr>
 							<td>${seventhIPForm.rankOfIP}</td>
-							<td><input type="text" name="typeOfIP" value="${seventhIPForm.typeOfIP}" /> </td>
-							<td><input type="text" name="nameOfIP" value="${seventhIPForm.nameOfIP}" /> </td>
-							<td><input type="text" name="locationOfIP" value="${seventhIPForm.locationOfIP}" /> </td>
-							<td><input type="text" name="authorizationCodeOfIP" value="${seventhIPForm.authorizationCodeOfIP}" /> </td>
-							<td><input type="text" name="authorizationDateOfIP" value="${seventhIPForm.authorizationDateOfIP}" /> </td>
-							<td><input type="text" name="certificateNumberOfIP" value="${seventhIPForm.certificateNumberOfIP}" /> </td>
-							<td><input type="text" name="holderOfIP" value="${seventhIPForm.holderOfIP}" /> </td>
-							<td><input type="text" name="inventorOfIP" value="${seventhIPForm.inventorOfIP}" /> </td>
-							<td><input type="text" name="isValidIP" value="${seventhIPForm.isValidIP}" /> </td>
+							<td><input type="text" class="form-control" name="typeOfIP" value="${seventhIPForm.typeOfIP}" /> </td>
+							<td><input type="text" class="form-control" name="nameOfIP" value="${seventhIPForm.nameOfIP}" /> </td>
+							<td><input type="text" class="form-control" name="locationOfIP" value="${seventhIPForm.locationOfIP}" /> </td>
+							<td><input type="text" class="form-control" name="authorizationCodeOfIP" value="${seventhIPForm.authorizationCodeOfIP}" /> </td>
+							<td><input type="text" class="form-control" name="authorizationDateOfIP" value="${seventhIPForm.authorizationDateOfIP}" /> </td>
+							<td><input type="text" class="form-control" name="certificateNumberOfIP" value="${seventhIPForm.certificateNumberOfIP}" /> </td>
+							<td><input type="text" class="form-control" name="holderOfIP" value="${seventhIPForm.holderOfIP}" /> </td>
+							<td><input type="text" class="form-control" name="inventorOfIP" value="${seventhIPForm.inventorOfIP}" /> </td>
+							<td><input type="text" class="form-control" name="isValidIP" value="${seventhIPForm.isValidIP}" /> </td>
 							<td>
 								<c:url value="/delete-seventh-ip-doc" var="deleteURL">
 									<c:param name="idOfSeventhIPForm" value="${seventhIPForm.idOfSeventhIPForm }"></c:param>
 								</c:url>
-								<a id="delete" href="${fn:escapeXml(deleteURL)}">删除</a>
+								<a id="delete" class="form-control btn btn-danger" href="${fn:escapeXml(deleteURL)}">删除</a>
 							</td>
 							<td>
-								<input type="submit" value="保存并查看" />
+								<input type="submit" class="form-control btn btn-primary" value="保存并查看" />
 							</td>
 						</tr>
 					</form>

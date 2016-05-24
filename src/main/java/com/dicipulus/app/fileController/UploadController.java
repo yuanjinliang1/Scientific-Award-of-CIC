@@ -70,6 +70,8 @@ public class UploadController {
 			MultipartHttpServletRequest request, HttpServletResponse response,
 			@PathVariable String applierUid, @PathVariable int index) throws IOException {
 		logger.info("upload");
+		InitUploadFolder initUploadFolder=new InitUploadFolder();
+		initUploadFolder.initUploadFolder(applierUid);
 		String pathNow = rootPath + applierUid + "/uploaded/" + index;
 		LinkedList<FileMeta> files = new LinkedList<FileMeta>();
 		FileMeta fileMeta = null;

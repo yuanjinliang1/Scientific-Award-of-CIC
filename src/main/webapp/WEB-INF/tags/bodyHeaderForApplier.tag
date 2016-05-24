@@ -45,8 +45,12 @@
     </div>
     <div>
       <ul class="nav navbar-nav">
-      	<spring:url value="/edit-initialize-application" var="editURL"/>
-        <li  class="${createApplication }"><a id="editAddress" href="${fn:escapeXml(editURL)}">建立项目</a></li>
+      	<spring:url value="/self-managed-by-applier/{applierUid}" var="selfManageURL">
+			<spring:param name="applierUid" value="${person.uid}"></spring:param>
+		</spring:url>
+        <li  class="${manageSelf }" >
+       		<a id="projectStats" href="${fn:escapeXml(selfManageURL)}">项目状态</a>
+        </li>
         
         <spring:url value="/edit-first-project-basic-situation" var="fisrtEditURL"/>
         <li  class="${editApplication }"><a id="firstEditAddress" href="${fn:escapeXml(fisrtEditURL)}">编辑项目</a></li>

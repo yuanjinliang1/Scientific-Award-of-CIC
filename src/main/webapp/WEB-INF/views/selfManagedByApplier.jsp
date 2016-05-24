@@ -30,6 +30,18 @@
 <div class="container">
 	<dicipulus:bodyHeaderForApplier menuName="manageSelf"/>
 	<br/><br/><br/>
+	<div class="row" id="selectAppType">
+		<form action="/app/edit-initialize-application" method="post">
+			<label>申请类型</label>
+			<select name="applicationType">
+				<option value="自然科学类">自然科学类</option>
+				<option value="科技进步类">科技进步类</option>
+				<option value="技术发明类">技术发明类</option>
+			</select>
+			<input type="submit" class="btn btn-default" value="设置奖种" />
+		</form>
+	</div>
+	
 	<table class="table table-bordered">
 		<tr>
 			<td>项目状态</td>
@@ -57,7 +69,7 @@
 				</c:if>
 			</td>
 			<td>${application.projectName }</td>
-			<td>${application.applicationType }</td>
+			<td >${application.applicationType }</td>
 			<td>${application.referingScienceTechnologyAwardRank }</td>
 			<td>${application.formalityExaminationResult }</td>
 			<td>
@@ -130,8 +142,6 @@
 		</div>
 	</form>
 	</div>
-	
-
 </div>
 </body>
 </html>

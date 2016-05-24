@@ -43,7 +43,7 @@ request.setCharacterEncoding("UTF-8");
 					<td>客观评价</td>
 				</tr>
 				<tr>
-					<td>${objectiveEvaluationForm.objectiveEvaluation}</td>
+					<td><pre>${objectiveEvaluationForm.objectiveEvaluation}</pre></td>
 				</tr>
 			</table>
         </div>

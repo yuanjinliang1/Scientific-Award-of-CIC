@@ -40,7 +40,7 @@ request.setCharacterEncoding("UTF-8");
 		<dicipulus:bodySidebarForDisplay page="8"/>
 		<div id="page-content-wrapper">
         <div class="container-fluid">
-            <div class="row" style="margin-left: 20px"><h1>八、主要完成人情况表</h1></div>
+            <div class="row" style="margin-left: 20px"><h1>七、主要知识产权证明目录（不超过10件）</h1></div>
             <table class="table table-bordered" style="width:100%">
 		        <tr>
 					<td>排名</td>

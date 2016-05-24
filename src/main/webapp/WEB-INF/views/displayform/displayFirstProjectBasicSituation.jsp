@@ -116,7 +116,7 @@ request.setCharacterEncoding("UTF-8");
 					</div>
 				</div>
 				<div class="row panel-body">
-					${firstForm.nameAndCodeOfPlansOrFundations }
+					<pre>${firstForm.nameAndCodeOfPlansOrFundations }</pre>
 				</div>
 			</div>
 			<div class="panel panel-default">
@@ -128,7 +128,7 @@ request.setCharacterEncoding("UTF-8");
 					</div>
 				</div>
 				<div class="row panel-body">
-					${firstForm.technicalReportNumber }
+					<pre>${firstForm.technicalReportNumber }</pre>
 				</div>
 			</div>
 			<table class="table table-bordered">

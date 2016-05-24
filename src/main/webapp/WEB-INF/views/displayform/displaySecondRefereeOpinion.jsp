@@ -77,7 +77,7 @@ request.setCharacterEncoding("UTF-8");
 					</div>
 				</div>
 				<div class="row panel-body">
-					${secondForm.recommendOpinion}
+					<pre>${secondForm.recommendOpinion}</pre>
 				</div>
 			</div>
 			<div class="row">

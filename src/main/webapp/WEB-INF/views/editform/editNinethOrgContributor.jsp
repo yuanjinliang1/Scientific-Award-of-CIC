@@ -67,13 +67,21 @@ request.setCharacterEncoding("UTF-8");
 							<td>中国通信学会团体会员</td>
 							<td>
 								<select name="isOrgMemberOfCIC">
-									<option value="${ninethForm.isOrgMemberOfCIC}">${ninethForm.isOrgMemberOfCIC}</option>
-									<c:if test="${ninethForm.isOrgMemberOfCIC!='是'}">
-										<option value="是">是</option>
-									</c:if>
-									<c:if test="${ninethForm.isOrgMemberOfCIC!='否'}">
-										<option value="否">否</option>
-									</c:if>
+									<c:choose>
+										<c:when test="${ninethForm.isOrgMemberOfCIC eq '否'}">
+											<option value="否">否</option>
+											<option value="是">是</option>
+										</c:when>	
+										<c:when test="${ninethForm.isOrgMemberOfCIC eq '是'}">
+											<option value="是">是</option>
+											<option value="否">否</option>
+										</c:when>								
+										<c:otherwise>
+											<option disabled selected value>请选择</option>
+											<option value="是">是</option>
+											<option value="否">否</option>
+										</c:otherwise>
+									</c:choose>		
 								</select>
 							</td>
 						</tr>

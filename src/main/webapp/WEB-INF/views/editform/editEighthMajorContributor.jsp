@@ -59,13 +59,21 @@ request.setCharacterEncoding("UTF-8");
 							<td>中国通信学会会员</td>
 							<td>
 								<select name="isMemberOfCIC">
-									<option value="${eighthForm.isMemberOfCIC}">${eighthForm.isMemberOfCIC}</option>
-									<c:if test="${eighthForm.isMemberOfCIC!='是'}">
-										<option value="是">是</option>
-									</c:if>
-									<c:if test="${eighthForm.isMemberOfCIC!='否'}">
-										<option value="否">否</option>
-									</c:if>
+									<c:choose>
+										<c:when test="${eighthForm.isMemberOfCIC eq '否'}">
+											<option value="否">否</option>
+											<option value="是">是</option>
+										</c:when>	
+										<c:when test="${eighthForm.isMemberOfCIC eq '是'}">
+											<option value="是">是</option>
+											<option value="否">否</option>
+										</c:when>								
+										<c:otherwise>
+											<option disabled selected value>请选择</option>
+											<option value="是">是</option>
+											<option value="否">否</option>
+										</c:otherwise>
+									</c:choose>		
 								</select>
 							</td>
 						</tr>
@@ -92,7 +100,25 @@ request.setCharacterEncoding("UTF-8");
 					</tr>
 					<tr>
 						<td>归国人员</td>
-						<td><input type="text" name="isReturnedFormOverseas" value="${eighthForm.isReturnedFormOverseas}" /></td>
+						<td>
+							<select name="isReturnedFormOverseas" id="isReturnedFormOverseas">
+								<c:choose>
+									<c:when test="${eighthForm.isReturnedFormOverseas eq '否'}">
+										<option value="否">否</option>
+										<option value="是">是</option>
+									</c:when>	
+									<c:when test="${eighthForm.isReturnedFormOverseas eq '是'}">
+										<option value="是">是</option>
+										<option value="否">否</option>
+									</c:when>								
+									<c:otherwise>
+										<option disabled selected value>请选择</option>
+										<option value="是">是</option>
+										<option value="否">否</option>
+									</c:otherwise>
+								</c:choose>						
+							</select>
+						</td>
 					</tr>
 					
 					<tr>

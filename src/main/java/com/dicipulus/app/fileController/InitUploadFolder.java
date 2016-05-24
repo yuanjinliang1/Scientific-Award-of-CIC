@@ -35,4 +35,18 @@ public class InitUploadFolder {
 		String uploadURL="redirect:/upload/"+applierUid+"/1";
 		return uploadURL;
 	}
+	
+	public String initUploadFolder(String applierUid) {
+		logger.info("initUpload");
+
+		String applierPath = rootPath + applierUid + "/uploaded/";
+		for (int i = 1; i <= 5; i++) {
+			File file=new File(applierPath + i);
+			if(file.exists()==false){
+				logger.info(file.toString()+" "+file.mkdirs());
+			}
+		}
+		String uploadURL="redirect:/upload/"+applierUid+"/1";
+		return uploadURL;
+	}
 }

@@ -234,7 +234,7 @@ request.setCharacterEncoding("UTF-8");
 				</div>
 				</div>
 				<div class="row panel-body">
-					${eighthForm.contributionOfContributor}
+					<pre>${eighthForm.contributionOfContributor}</pre>
 				</div>
 			</div>
 			<div class="panel panel-default">
@@ -246,7 +246,7 @@ request.setCharacterEncoding("UTF-8");
 					</div>
 				</div>
 				<div class="row panel-body">
-				${eighthForm.formerRewardOfCIC}
+				<pre>${eighthForm.formerRewardOfCIC}</pre>
 				</div>
 			</div>
 			

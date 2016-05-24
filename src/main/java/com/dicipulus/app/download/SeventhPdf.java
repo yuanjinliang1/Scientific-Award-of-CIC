@@ -164,7 +164,7 @@ public class SeventhPdf {
 			cell.setHorizontalAlignment(cell.ALIGN_CENTER);
 	        cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
 			table.addCell(cell);
-			cell=new PdfPCell(new Phrase(DateFormat.getDateInstance().format(seventhPaperCitedByOthers.get(i).getPublishDate()),fontChinese));
+			cell=new PdfPCell(new Phrase(seventhPaperCitedByOthers.get(i).getPublishDate(),fontChinese));
 			cell.setHorizontalAlignment(cell.ALIGN_CENTER);
 	        cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
 			table.addCell(cell);

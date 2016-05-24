@@ -42,7 +42,7 @@ request.setCharacterEncoding("UTF-8");
 					<td>项目简介</td>
 				</tr>
 				<tr>
-					<td>${briefIntroductionForm.briefIntroduction}</td>
+					<td><pre>${briefIntroductionForm.briefIntroduction}</pre></td>
 				</tr>
 			</table>
         </div>

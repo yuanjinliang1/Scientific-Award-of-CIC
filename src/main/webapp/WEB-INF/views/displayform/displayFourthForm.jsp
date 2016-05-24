@@ -83,7 +83,9 @@ request.setCharacterEncoding("UTF-8");
 					</td>
 				</tr>
 				<tr>
-					<td>${fourthForm.fourthForm1}</td>
+					<td>
+					<pre>${fourthForm.fourthForm1}</pre>
+					</td>
 				</tr>
 				<tr>
 					<td>
@@ -101,7 +103,7 @@ request.setCharacterEncoding("UTF-8");
 					</td>
 				</tr>
 				<tr>
-					<td>${fourthForm.fourthForm2}</td>
+					<td><pre>${fourthForm.fourthForm2}</pre></td>
 				</tr>
 			</table>
         </div>

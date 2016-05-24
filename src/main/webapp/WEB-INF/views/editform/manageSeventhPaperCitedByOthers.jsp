@@ -51,8 +51,7 @@ request.setCharacterEncoding("UTF-8");
 							<td><input type="text" name="doiOfPaper" value="${seventhPaperForm.doiOfPaper}" /> </td>
 							<td><input type="text" name="titleAndAuthorOfPaper" value="${seventhPaperForm.titleAndAuthorOfPaper}" /> </td>
 							<td><input type="text" name="journalAndIF" value="${seventhPaperForm.journalAndIF}" /> </td>
-							<fmt:formatDate pattern="yyyy-MM-dd"  value="${seventhPaperForm.publishDate }" var="publishDateVar" />
-							<td><input type="date" name="publishDate" value="${publishDateVar}" /></td>
+							<td><input type="text" name="publishDate" value="${seventhPaperForm.publishDate}" /></td>
 							<td>
 								<c:url value="/delete-seventh-paper-cited-by-others" var="deleteURL">
 									<c:param name="idOfSeventhPaperForm" value="${seventhPaperForm.idOfSeventhPaperForm }"></c:param>

@@ -53,8 +53,7 @@ request.setCharacterEncoding("UTF-8");
 					<td>${seventhPaperForm.doiOfPaper} </td>
 					<td>${seventhPaperForm.titleAndAuthorOfPaper} </td>
 					<td>${seventhPaperForm.journalAndIF} </td>
-					<fmt:formatDate pattern="yyyy-MM-dd"  value="${seventhPaperForm.publishDate }" var="publishDateVar" />
-					<td>${publishDateVar}</td>
+					<td>${seventhPaperForm.publishDate}</td>
 				</tr>
 				</c:forEach>
 			</table>

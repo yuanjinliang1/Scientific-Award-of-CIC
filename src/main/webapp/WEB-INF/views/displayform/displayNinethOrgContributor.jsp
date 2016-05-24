@@ -121,7 +121,7 @@ request.setCharacterEncoding("UTF-8");
 					</div>
 				</div>
 				<div class="row panel-body">
-					${ninethForm.contributionToProject}
+					<pre>${ninethForm.contributionToProject}</pre>
 				</div>
 			</div>
         </div>

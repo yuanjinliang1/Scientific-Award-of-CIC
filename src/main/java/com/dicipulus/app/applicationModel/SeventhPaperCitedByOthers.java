@@ -12,8 +12,7 @@ public class SeventhPaperCitedByOthers{
 	private String doiOfPaper;//被引代表性论文专著序号
 	private String titleAndAuthorOfPaper;//引文题目/作者
 	private String journalAndIF;//引文刊名/影响因子
-	@DateTimeFormat(pattern = "yyy-MM-dd")
-	private Date publishDate;//引文发表时间（年 月 日）
+	private String publishDate;//引文发表时间（年 月 日）
 	
 	
 	public int getIdOfSeventhPaperForm() {
@@ -52,10 +51,10 @@ public class SeventhPaperCitedByOthers{
 	public void setJournalAndIF(String journalAndIF) {
 		this.journalAndIF = journalAndIF;
 	}
-	public Date getPublishDate() {
+	public String getPublishDate() {
 		return publishDate;
 	}
-	public void setPublishDate(Date publishDate) {
+	public void setPublishDate(String publishDate) {
 		this.publishDate = publishDate;
 	}
 	

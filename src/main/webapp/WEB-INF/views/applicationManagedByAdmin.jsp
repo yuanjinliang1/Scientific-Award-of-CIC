@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="dicipulus" tagdir="/WEB-INF/tags"%>
 <%@ page session="true" %>
@@ -53,6 +54,13 @@ request.setCharacterEncoding("UTF-8");
 			<option value="一等奖">一等奖</option>
 			<option value="特等奖">特等奖</option>
 	</select>
+	
+	<jsp:useBean id="date" class="java.util.Date" />
+	<fmt:formatDate value="${date}" pattern="yyyy" var="jspYear" />
+	<spring:url value="/download-excel/{year}" var="excelURL">
+		<spring:param name="year" value="${jspYear }"></spring:param>
+	</spring:url>
+	<input type="button" class="btn btn-success" onclick="location.href='${fn:escapeXml(excelURL)}';" value="下载总表（今年）">
 </div>
 
 <div class="col-md-12">

@@ -26,6 +26,23 @@
 			<form id="sixthPaperMonograph" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="paperMonographFormAttr">
 				<table class="table table-bordered">
 					<tr>
+						<td>是否是代表性论文专著</td>
+						<td>
+							<select name="representativePaperMonograph" id="representativePaperMonograph">
+								<c:choose>
+									<c:when test="${sixthPaperMonograph.representativePaperMonograph eq '否'}">
+										<option value="否">否</option>
+										<option value="是">是</option>
+									</c:when>									
+									<c:otherwise>
+										<option value="是">是</option>
+										<option value="否">否</option>
+									</c:otherwise>
+								</c:choose>						
+							</select>
+						</td>
+					</tr>
+					<tr>
 						<td>论文专刊名称/刊名/作者</td>
 						<td><input type="text" name="name" value="${sixthPaperMonograph.name}"></td>
 					</tr>
@@ -41,36 +58,32 @@
 						<td>发表时间（年、月、日）</td>
 						<td><input type="text" name="publishTime" value="${sixthPaperMonograph.publishTime}"></td>
 					</tr>
-					<tr>
+					<tr class="toHide">
 						<td>通讯作者</td>
 						<td><input type="text" name="correspondenceAuthor" value="${sixthPaperMonograph.correspondenceAuthor}"></td>
 					</tr>
-					<tr>
+					<tr class="toHide">
 						<td>第一作者</td>
 						<td><input type="text" name="firstAuthor" value="${sixthPaperMonograph.firstAuthor}"></td>
 					</tr>
-					<tr>
+					<tr class="toHide">
 						<td>国内作者</td>
 						<td><input type="text" name="domesticAuthor" value="${sixthPaperMonograph.domesticAuthor}"></td>
 					</tr>
 					<tr>
 						<td>SCI他引次数</td>
-						<td><input type="text" name="referenceBySCI" value="${sixthPaperMonograph.referenceBySCI}"></td>
+						<td><input type="number" name="referenceBySCI" value="${sixthPaperMonograph.referenceBySCI}"></td>
 					</tr>
 					<tr>
 						<td>他引总次数</td>
-						<td><input type="text" name="totalReference" value="${sixthPaperMonograph.totalReference}"></td>
+						<td><input type="number" name="totalReference" value="${sixthPaperMonograph.totalReference}"></td>
 					</tr>
 					<tr>
 						<td>知识产权是否归国内所有</td>
-						<td><input type="text" name="intellectualRightBelongToNation" value="${sixthPaperMonograph.intellectualRightBelongToNation}"></td>
-					</tr>
-					<tr>
-						<td>是否是代表性论文专著</td>
 						<td>
-							<select name="representativePaperMonograph" >
+							<select name="intellectualRightBelongToNation" >
 								<c:choose>
-									<c:when test="${sixthPaperMonograph.representativePaperMonograph eq '否'}">
+									<c:when test="${sixthPaperMonograph.intellectualRightBelongToNation eq '否'}">
 										<option value="否">否</option>
 										<option value="是">是</option>
 									</c:when>									
@@ -82,6 +95,7 @@
 							</select>
 						</td>
 					</tr>
+					
 				</table>
 				<div class="row" style="margin-left:20px">
 					<input type="submit" class="btn btn-default" value="保存并查看" />
@@ -92,5 +106,30 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$("#representativePaperMonograph").ready(function(){
+			if($("#representativePaperMonograph option:selected").text()=="是"){
+				$(".toHide").show();
+				console.log("yes");
+			}
+			if($("#representativePaperMonograph option:selected").text()=="否"){
+				$(".toHide").hide();
+				console.log("no");
+			}
+		});
+		$("#representativePaperMonograph").change(function(){
+			if($("#representativePaperMonograph option:selected").text()=="是"){
+				$(".toHide").show();
+				console.log("yes");
+			}
+			if($("#representativePaperMonograph option:selected").text()=="否"){
+				$(".toHide").hide();
+				console.log("no");
+			}
+		});
+		
+	})
+</script>
 </body>
 </html>

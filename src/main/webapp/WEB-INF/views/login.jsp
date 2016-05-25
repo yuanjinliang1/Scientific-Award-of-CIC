@@ -9,11 +9,29 @@
 </head>
 <body>
 
-<div class="container" style="margin-top:12.5%">
-<div style="margin:auto">
+<div class="container" style="margin-top:5%">
+	<div class="panel panel-default pull-left" style="width:35%">
+		<div class="panel-heading">
+			<div class="row">
+			<h4>
+				文档下载
+			</h4>
+			</div>
+		</div>
+		<div class="row panel-body">
+		<table class=" table table-bordered" style="font-size:15px">
+			<tr><td><a href="/app/download-word/3">3-2016年度学会科技奖各奖种推荐书式样-自然科学类.docx</a></td></tr>
+			<tr><td><a href="/app/download-word/3">4-2016年度学会科技奖各奖种推荐书式样-技术发明类.docx</a></td></tr>
+			<tr><td><a href="/app/download-word/3">5-2016年度学会科技奖各奖种推荐书式样-科技进步类.docx</a></td></tr>
+		</table>
+		</div>
+		
+		
+	</div>
+<div style="margin:auto;width:60%" class="pull-right" >
 	
 	<form class="form-horizontal" action="/app/login" method="POST" modelAttribute="loginAttr">
-		<div class="form-group ">
+		<div class="form-group " style="margin-right:10%">
 			<div class="row"><h1 style="text-align: center">中国通信学会报奖系统</h1></div>
 			<div class="row">
 	    	<div style="width:300;margin:auto">
@@ -27,10 +45,11 @@
     			<input type="password" class="form-control" name="password" id="passwordGet" value="8888"/>
 	    	</div>
 			</div>
+			<br/>
 			<div class="row">
 	    	<div style="width:300;margin:auto">
-    			<button type="submit" class="btn btn-default" name="Submit" onClick="return loginPreCheck()">登陆</button>
-    			<button type="reset" class="btn btn-default" name="Reset">取消</button>
+    			<button type="submit" class="btn btn-primary" name="Submit" onClick="return loginPreCheck()">登陆</button>
+    			<button type="reset" class="btn btn-danger" name="Reset">取消</button>
 	    	</div>
 			</div>
 		</div>

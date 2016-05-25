@@ -128,7 +128,6 @@
 						<th>File Name</th>
 						<th>File Size</th>
 						<th>File Type</th>
-						<th>Download</th>
 					</tr>
 				</table>
             </div>
@@ -172,7 +171,6 @@
 		                        .append($('<td/>').text(file.fileName))
 		                        .append($('<td/>').text(file.fileSize))
 		                        .append($('<td/>').text(file.fileType))
-		                        .append($('<td/>').html("<a class=\"btn btn-default\" href='get/"+index+"'>download</a>"))
 		                        )//end $("#uploaded-files").append()
 		            }); 
 		        },

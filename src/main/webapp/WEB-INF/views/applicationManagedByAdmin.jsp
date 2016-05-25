@@ -32,7 +32,8 @@ request.setCharacterEncoding("UTF-8");
 <div style="float:right" class="form-inline form-group" >
 	<label >全选/反选</label>
 	<input type="checkbox" id="multi-checkbox">
-	<button class="btn btn-default" id="multi-accept">批量接收</button>
+	<button class="btn btn-success" id="multi-accept">批量接收</button>
+	<button class="btn btn-danger" id="multi-reject">批量退回</button>
 	<select id="multi-formalityExaminationResult" class="form-control">
 			<option value="批量修改形审结果">批量修改形审结果</option>
 			<option value="合格">合格</option>
@@ -94,19 +95,9 @@ request.setCharacterEncoding("UTF-8");
 				<input type="hidden" id="applierUid${serial}" value="${application.applierUid }"></input>
 				</td>
 				<td>${serial }</td>
-				<td>${application.projectStatus }
-					<c:if test="${application.projectStatus=='已推荐' }">
-						<spring:url value="/accept-application-by-admin/{applierUid}" var="acceptURL">
-							<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
-						</spring:url>
-						<input type="button"  class="btn btn-default" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="接收">
-					</c:if>
-					<c:if test="${application.projectStatus=='已接收' }">
-						<spring:url value="/withdraw-application-by-admin/{applierUid}" var="withdrawURL">
-							<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
-						</spring:url>
-						<input type="button"  class="btn btn-default" onclick="location.href='${fn:escapeXml(withdrawURL)}';" value="退回">
-					</c:if>
+				<td class="inline-form"><div id="projectStatus${serial}" data-serial="${serial }" class="projectStatus">${application.projectStatus }</div>
+					<input type="button" id="accept-app${serial}" data-serial="${serial }" style="display:none" class="btn btn-success accept-app"  value="接收">
+					<input type="button" id="reject-app${serial}" data-serial="${serial }" style="display:none" class="btn btn-danger reject-app"  value="退回">
 				</td>
 				<td>${application.projectName }</td>
 				<td>${application.refereeString }</td>
@@ -147,16 +138,16 @@ request.setCharacterEncoding("UTF-8");
 					<spring:url value="/display-first-project-basic-situation/{applierUid}" var="firstFormURL">
 						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 					</spring:url>
-					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(firstFormURL)}';" value="查看">
+					<input type="button" class="btn btn-primary" onclick="location.href='${fn:escapeXml(firstFormURL)}';" value="查看">
 				</td>
 				<td>
-					<input type="submit" class="btn btn-default" value="保存" />
+					<input type="submit" class="btn btn-primary" value="保存" />
 				</td>
 				<td>
 					<spring:url value="/download-zip/{applierUid}" var="zipURL">
 						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 					</spring:url>
-					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(zipURL)}';" value="下载压缩包">
+					<input type="button" class="btn btn-primary" onclick="location.href='${fn:escapeXml(zipURL)}';" value="下载压缩包">
 				</td>
 		</tr>
 		</form>
@@ -170,8 +161,30 @@ request.setCharacterEncoding("UTF-8");
 </div>
 </div>
 <c:url var="ajaxTest" value="/ajax-test" scope="request" />
+<c:url var="ajaxAccept" value="/accept-application-by-admin-via-ajax" scope="request" />
 <script>
 	jQuery(document).ready(function($) {
+		
+		$(".projectStatus").each(function(){
+			var serial=$(this).attr("data-serial");
+			if($(this).text()==="已推荐"){
+				$("#accept-app"+serial).show();
+				$("#reject-app"+serial).hide();
+				console.log("已推荐");
+			}
+			else if($(this).text()==="已接收"){
+				$("#reject-app"+serial).show();
+				$("#accept-app"+serial).hide();
+				console.log("已接收");
+			}
+			else{
+				$("#accept-app"+serial).hide();
+				$("#reject-app"+serial).hide();
+				console.log(serial);
+			}
+		});
+		
+		
 		$(".app-form").submit(function(event) {
 			var serial=$(this).attr("data-serial");
 			// Disble the search button
@@ -184,6 +197,22 @@ request.setCharacterEncoding("UTF-8");
 
 		});
 		
+		$(".accept-app").click(function(event){
+			var serial=$(this).attr("data-serial");
+			enableSearchButton(false);
+			event.preventDefault();
+			
+			acceptViaAjaxMulti(serial, "mullti-accept", "true")
+		});
+		
+		$(".reject-app").click(function(event){
+			var serial=$(this).attr("data-serial");
+			enableSearchButton(false);
+			event.preventDefault();
+			
+			acceptViaAjaxMulti(serial, "mullti-reject", "true")
+		});
+		
 		$("#multi-checkbox").change(function(){
 			if($("#multi-checkbox").is(':checked')){
 				$(".flag-checkbox").prop('checked',true);
@@ -191,6 +220,16 @@ request.setCharacterEncoding("UTF-8");
 			else if(!$("#multi-checkbox").is(':checked')){
 				$(".flag-checkbox").prop('checked',false);
 			}
+		});
+		
+		$("#multi-accept").click(function(){
+			var multiPosition="mullti-accept";
+			multiSubmit(multiPosition);
+		});
+		
+		$("#multi-reject").click(function(){
+			var multiPosition="mullti-reject";
+			multiSubmit(multiPosition);
 		});
 		
 		$("#multi-formalityExaminationResult").change(function(){
@@ -344,6 +383,94 @@ request.setCharacterEncoding("UTF-8");
 			}
 		});
 	}
+	
+	function multiSubmit(multiPosition){
+		if(!confirm("您确定批量修改所选项目的状态吗？")){
+			return false;
+		}
+		$(".app-form").each(function(){
+			var serial=$(this).attr("data-serial");
+			if($("#checkbox"+serial).is(':checked')){
+				// Disble the search button
+				enableSearchButton(false);
+
+				// Prevent the form from submitting via the browser.
+				event.preventDefault();
+
+				acceptViaAjaxMulti(serial,multiPosition,"false");
+			}
+		});
+	}
+	
+	
+	function acceptViaAjaxMulti(serial,multiPosition,isSingle) {
+		console.log("serial:"+serial+" multiPosition:"+multiPosition+" isSingle:"+isSingle);
+		var accept = {};
+			
+		accept["applierUid"] = $("#applierUid"+serial).val();
+		var serial=serial;
+		var multiPosition=multiPosition;
+		var isSingle=isSingle;
+		if(multiPosition==="mullti-accept"){
+			accept["projectStatus"] = "已接收";
+		}
+		else if(multiPosition==="mullti-reject"){
+			accept["projectStatus"] = "已推荐";
+		}
+		else{
+			console.log("wrong multiPosition:"+multiPosition);
+		}
+
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "${ajaxAccept}",
+			data : JSON.stringify(accept),
+			dataType : 'json',
+			timeout : 100000,
+			success : function(data) {
+				if(data["code"]=="400"){
+					errorMessage();
+				}
+				else{
+					console.log("SUCCESS: ", data);
+					console.log(JSON.stringify(data, null, 4))
+					afterHandle(serial,isSingle,multiPosition);
+				}
+				console.log("status:"+data["code"]);
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+				display(e);
+				errorMessage();
+			},
+			done : function(e) {
+				console.log("DONE");
+				enableSearchButton(true);
+			}
+		});
+	}
+	
+	function afterHandle(serial,isSingle,multiPosition){
+		console.log("afterHandle serial:"+serial+" isSingle:"+isSingle+" multiPosition:"+multiPosition);
+		if(isSingle==="true"){
+			successMessage();
+		}
+		if(multiPosition==="mullti-accept"){
+			$("#projectStatus"+serial).text("已接收");
+			$("#accept-app"+serial).hide();
+			$("#reject-app"+serial).show();
+			
+		}
+		else if(multiPosition==="mullti-reject"){
+			$("#projectStatus"+serial).text("已推荐");
+			$("#accept-app"+serial).show();
+			$("#reject-app"+serial).hide();
+		}
+		else{
+			console.log("wrong multiPosition:"+multiPosition);
+		}
+	}
 
 	function enableSearchButton(flag) {
 		$("#btn-search").prop("disabled", flag);
@@ -368,7 +495,7 @@ request.setCharacterEncoding("UTF-8");
 	}
 	
 	function errorMessage(){
-		var successMessage='<div class="alert alert-success"> <strong>更新失败</strong></div>';
+		var successMessage='<div class="alert alert-danger"> <strong>更新失败</strong></div>';
 		$("#message").html(successMessage);
 		$("#message").fadeTo(2000, 500).slideUp(500, function(){
         $("#message").alert('close');

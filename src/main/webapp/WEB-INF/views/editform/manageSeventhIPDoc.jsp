@@ -24,6 +24,7 @@ request.setCharacterEncoding("UTF-8");
 		<dicipulus:bodySidebarForEdit page="7"/>
 		<div id="page-content-wrapper">
         <div class="container-fluid">
+        
             <div class="row" style="margin-left: 20px"><h1>七、主要知识产权证明目录（不超过10件）</h1></div>
            	<form action="/app/create-seventh-ip-doc" method="POST" >
 				<div class="row" style="margin-left:20px">
@@ -51,7 +52,10 @@ request.setCharacterEncoding("UTF-8");
 					</spring:url>
 					<form id="seventhIPFormer" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="seventhIPFormAttr">
 						<tr>
-							<td>${seventhIPForm.rankOfIP}</td>
+							<td>
+								${seventhIPForm.rankOfIP}
+								<input type="hidden" class="form-control" name="rankOfIP" value="${seventhIPForm.rankOfIP}" />
+							</td>
 							<td><input type="text" class="form-control" name="typeOfIP" value="${seventhIPForm.typeOfIP}" /> </td>
 							<td><input type="text" class="form-control" name="nameOfIP" value="${seventhIPForm.nameOfIP}" /> </td>
 							<td><input type="text" class="form-control" name="locationOfIP" value="${seventhIPForm.locationOfIP}" /> </td>

@@ -3,7 +3,10 @@ package com.dicipulus.app.formController;
 import com.dicipulus.app.*;
 import com.dicipulus.app.JDBC.*;
 import com.dicipulus.app.model.*;
+import com.dicipulus.app.ajax.AjaxResponseBody;
+import com.dicipulus.app.ajax.AjaxViews;
 import com.dicipulus.app.applicationModel.*;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -27,6 +30,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -113,5 +117,33 @@ public class AcceptApplicationController {
 		InitJdbc.initApplicationJdbc().setStatusOfApplication("已接收", applierUid);
 		
 		return FormUlti.redirectPrevious(request);
+	}
+	
+	//TODO 增加权限验证
+	//HACK responsebody 是string可以吗
+	@JsonView(AjaxViews.Public.class)
+	@RequestMapping(value="/accept-application-by-admin-via-ajax")
+	public @ResponseBody AjaxResponseBody acceptApplicationByAdminViaAjax(@RequestBody Application application){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+		AjaxResponseBody result= new AjaxResponseBody();
+		String projectStatusDB=InitJdbc.initApplicationJdbc().getApplicationByApplier(application.getApplierUid()).getProjectStatus();
+		logger.info(projectStatusDB);
+		if(projectStatusDB.equals("已推荐")==false&&projectStatusDB.equals("已接收")==false){
+			result.setCode("400");
+			result.setMsg("项目原有状态非法");
+			logger.info("1");
+		}
+		else if(application.getProjectStatus().equals("已推荐")==false&&application.getProjectStatus().equals("已接收")==false){
+			result.setCode("400");
+			result.setMsg("修改状态请求非法");
+			logger.info("2");
+		}
+		else{
+			InitJdbc.initApplicationJdbc().setStatusOfApplication(application.getProjectStatus(), application.getApplierUid());
+			result.setCode("200");
+			result.setMsg("项目状态更新成功");
+			logger.info("3");
+		}
+		return result;
 	}
 }

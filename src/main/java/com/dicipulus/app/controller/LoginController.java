@@ -65,7 +65,7 @@ public class LoginController{
 				modelAndView.addObject("person",adminJdbc.getAdmin());
 			}
 			else{
-				modelAndView.setViewName("login");
+				modelAndView.setViewName("redirect:/login?message=wrong");
 			}
 		}
 		
@@ -78,7 +78,7 @@ public class LoginController{
 				modelAndView.addObject("person", referee);
 			}
 			else {
-				modelAndView.setViewName("login");
+				modelAndView.setViewName("redirect:/login?message=wrong");
 			}
 		}
 		
@@ -91,18 +91,18 @@ public class LoginController{
 				modelAndView.addObject("person", applier);
 			}
 			else {
-				modelAndView.setViewName("login");
+				modelAndView.setViewName("redirect:/login?message=wrong");
 			}
 		}
 		else{
-			modelAndView.setViewName("login");
+			modelAndView.setViewName("redirect:/login?message=wrong");
 		}
 		
 		return modelAndView;
 		}
 		catch(EmptyResultDataAccessException e){
 			logger.info(e.toString());
-			modelAndView.setViewName("login");
+			modelAndView.setViewName("redirect:/login?message=wrong");
 			return modelAndView;
 		}
 	}

@@ -39,7 +39,7 @@
         <spring:url value="/applier-managed-by-referee/applier-view/{ownerUid}" var="applierURL">
 			<spring:param name="ownerUid" value="${person.uid}"></spring:param>
 		</spring:url>
-        <li  class="${manageApplier }" ><a href="${fn:escapeXml(applierURL)}" >项目组用户管理</a></li>
+        <li  class="${manageApplier }" ><a href="${fn:escapeXml(applierURL)}" >项目组管理</a></li>
       </ul>
     </div>
     <div >

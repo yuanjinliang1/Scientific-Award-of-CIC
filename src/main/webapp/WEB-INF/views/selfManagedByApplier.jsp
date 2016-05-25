@@ -30,15 +30,16 @@
 <div class="container">
 	<dicipulus:bodyHeaderForApplier menuName="manageSelf"/>
 	<br/><br/><br/>
+	<div id="message"></div>
 	<div class="row" id="selectAppType">
 		<form action="/app/edit-initialize-application" method="post">
-			<label>申请类型</label>
-			<select name="applicationType">
+			<label style="font-size:20px">设置申请类型:</label>
+			<select style="width:150px" name="applicationType">
 				<option value="自然科学类">自然科学类</option>
 				<option value="科技进步类">科技进步类</option>
 				<option value="技术发明类">技术发明类</option>
 			</select>
-			<input type="submit" class="btn btn-default" value="设置奖种" />
+			<input type="submit" class="btn btn-success" value="确定" />
 		</form>
 	</div>
 	
@@ -69,7 +70,7 @@
 				</c:if>
 			</td>
 			<td>${application.projectName }</td>
-			<td >${application.applicationType }</td>
+			<td id="applicationType">${application.applicationType }</td>
 			<td>${application.referingScienceTechnologyAwardRank }</td>
 			<td>${application.formalityExaminationResult }</td>
 			<td>
@@ -81,7 +82,7 @@
 			<td>
 				<spring:url value="/edit-first-project-basic-situation" var="editFirstFormURL">
 				</spring:url>
-				<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(editFirstFormURL)}';" value="编辑">
+				<a type="button" class="btn btn-default to-edit" href='${fn:escapeXml(editFirstFormURL)}'>编辑</a>
 			</td>
 				<spring:url value="/download-pdf/{applierUid}" var="pdfURL">
 					<spring:param name="applierUid" value="${application.applierUid}"></spring:param>
@@ -143,5 +144,29 @@
 	</form>
 	</div>
 </div>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+		$(".to-edit").each(function(){
+			if($("#applicationType").text()!="自然科学类"&&$("#applicationType").text()!="科技进步类"&&$("#applicationType").text()!="技术发明类"){
+				$(this).click(function(event){
+					enableSearchButton(false);
+					event.preventDefault();
+					window.location="#";
+					var failMessage='<div class="alert alert-danger"> <strong>请先选定申请类型</strong></div>';
+					$("#message").html(failMessage);
+					$("#message").fadeTo(2000, 500).slideUp(500, function(){
+			        $("#message").alert('close');
+			        return false;
+					});
+				})
+				
+			}
+		});
+		
+		function enableSearchButton(flag) {
+			$(".to-edit").prop("disabled", flag);
+		}
+	})
+</script>
 </body>
 </html>

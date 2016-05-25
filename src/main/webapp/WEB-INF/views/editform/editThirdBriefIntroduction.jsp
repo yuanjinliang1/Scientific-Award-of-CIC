@@ -30,7 +30,7 @@ request.setCharacterEncoding("UTF-8");
 					<div class="panel-heading">
 						<div class="row">
 						<h4 >
-							项目简介
+							项目简介（限1200字）
 						</h4>
 						</div>
 					</div>
@@ -42,8 +42,8 @@ request.setCharacterEncoding("UTF-8");
 							<c:set var="placeholder" value="（应包含项目主要研究内容、科学发现点、科学价值、同行引用及评价等）"></c:set>
 						</c:if>
 						<textarea rows="40" name="briefIntroduction" form="thirdFormer"
-						class="form-control" placeholder="${placeholder }" maxlength="300"
-						 data-error="请填写此项" required>${briefIntroductionForm.briefIntroduction}</textarea>
+						class="form-control" placeholder="${placeholder }" maxlength="1200"
+						 data-error="请检查此项" required>${briefIntroductionForm.briefIntroduction}</textarea>
 						 <div class="help-block with-errors" style="font-size:15px"></div>
 					</div>
 					

@@ -8,7 +8,6 @@
 	<title>登陆报奖系统</title>
 </head>
 <body>
-
 <div class="container" style="margin-top:5%">
 	<div class="panel panel-default pull-left" style="width:35%">
 		<div class="panel-heading">
@@ -29,34 +28,34 @@
 		
 	</div>
 <div style="margin:auto;width:60%" class="pull-right" >
-	
+	<div id="message"></div>
 	<form class="form-horizontal" action="/app/login" method="POST" modelAttribute="loginAttr">
 		<div class="form-group " style="margin-right:10%">
 			<div class="row"><h1 style="text-align: center">中国通信学会报奖系统</h1></div>
 			<div class="row">
 	    	<div style="width:300;margin:auto">
     			<label for="uidGet">用户名</label>
-    			<input type="text" class="form-control" name="uid" id="uidGet" value="100116001" />
+    			<input type="text" class="form-control" name="uid" id="uidGet"/>
 	    	</div>
 			</div>
 			<div class="row">
 	    	<div style="width:300;margin:auto">
     			<label for="passwordGet" >密码</label>
-    			<input type="password" class="form-control" name="password" id="passwordGet" value="8888"/>
+    			<input type="password" class="form-control" name="password" id="passwordGet" />
 	    	</div>
 			</div>
 			<br/>
 			<div class="row">
 	    	<div style="width:300;margin:auto">
     			<button type="submit" class="btn btn-primary" name="Submit" onClick="return loginPreCheck()">登陆</button>
-    			<button type="reset" class="btn btn-danger" name="Reset">取消</button>
+    			<button type="reset" class="btn btn-danger" name="Reset" id="reset">取消</button>
 	    	</div>
 			</div>
 		</div>
 	</form>
 </div>
 </div>
-
+<c:set var="message" value="${param.message }"></c:set>
 <script type="text/javascript">
     	function loginPreCheck(){
     		if(uidGet.value==""){
@@ -71,6 +70,21 @@
     			return true;
     		}
     	}
+</script>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+		if("${message}"=="wrong"){
+			var successMessage='<div class="alert alert-danger"> <strong>用户名或密码错误</strong></div>';
+			$("#message").html(successMessage);
+			$("#message").fadeTo(2000, 500).slideUp(500, function(){
+	        $("#message").alert('close');
+			});
+		};
+		$("#reset").click(function(){
+			$("input").not(':button, :submit, :reset, :hidden, :radio, :checkbox').val('  ');
+			console.log("heh");
+		})
+	})
 </script>
 </body>
 </html>

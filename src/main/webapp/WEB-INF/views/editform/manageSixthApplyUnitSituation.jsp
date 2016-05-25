@@ -55,7 +55,7 @@ request.setCharacterEncoding("UTF-8");
 					</tr>
 				</c:forEach>	
 			</table>	
-			<div class="row" style="margin-left: 20px"><h3>2．近三年经济效益</h3></div>	
+			<div class="row" style="margin-left: 20px"><h3>2．近三年经济效益（万元）</h3></div>	
 			<form id="sixthFormer" action="/app/edit-economic-social-benefit" method="POST" modelAttibute="sixthFormAttr">
 				<table class="table table-bordered">
 					<tr>

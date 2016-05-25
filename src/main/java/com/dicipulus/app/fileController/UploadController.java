@@ -106,7 +106,6 @@ public class UploadController {
 						+ "/" + mpf.getOriginalFilename()));
 
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			// 2.4 add to files

@@ -15,12 +15,8 @@
 
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-<title>SelfManagement</title>
+	<jsp:include page="fragments/header.jsp"></jsp:include>
+	<title>SelfManagement</title>
 <style>
 div.row {
 	width: 300;
@@ -29,13 +25,10 @@ div.row {
 </head>
 <body>
 	<div class="container">
-
-
 		<dicipulus:bodyHeaderForAdmin menuName="manageSelf" />
 		<br />
 		<br />
 		<br />
-		<h1>Self Managed By Admin Prototype</h1>
 		<form action="/app/self-managed-by-admin/change-password"
 			method="POST">
 			<div class="form-group">

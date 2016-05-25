@@ -22,7 +22,7 @@ request.setCharacterEncoding("UTF-8");
 <div class="container">
 <dicipulus:bodyHeaderForReferee menuName="manageApplier"/>
 <br/><br/><br/>
-<div class="row" style="margin-left: 20px"><h1>User Management Prototype</h1></div>
+<div class="row" style="margin-left: 20px"><h1>项目组管理</h1></div>
 
 
 
@@ -40,8 +40,6 @@ request.setCharacterEncoding("UTF-8");
 		<td>项目组id</td>
 		<td>项目组名称</td>
 		<td>密码</td>
-		<td>操作</td>
-		<td>操作</td>
 		<td>操作</td>
 		<td>操作</td>
 	</tr>
@@ -66,20 +64,7 @@ request.setCharacterEncoding("UTF-8");
 				</c:url>
 				<a id="deleteApplier" class="btn btn-default" href="${fn:escapeXml(deleteURL)}">删除用户</a>
 			</td>
-			<!-- 填写与查看推荐书 -->
-			<td>
-				<spring:url value="/display-first-project-basic-situation/{applierUid}" var="displayURL">
-					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
-				</spring:url>
-				<a id="display" class="btn btn-default" href="${fn:escapeXml(displayURL)}">查看申请书</a>
-			</td>
-			<td>
-
-				<spring:url value="/edit-referee-unit-opinion/{applierUid}" var="editOpinionURL">
-					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
-				</spring:url>
-				<a id="editOpinion" class="btn btn-default" href="${fn:escapeXml(editOpinionURL)}">填写推荐书</a>
-			</td>
+			
 			
 		</tr>
 	</c:forEach>

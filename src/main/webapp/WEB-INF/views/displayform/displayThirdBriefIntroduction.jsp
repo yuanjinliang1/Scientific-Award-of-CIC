@@ -45,6 +45,16 @@ request.setCharacterEncoding("UTF-8");
 					<td><pre>${briefIntroductionForm.briefIntroduction}</pre></td>
 				</tr>
 			</table>
+			<div class="row" style="margin-left:20px">
+				<spring:url value="/display-referee-unit-opinion/{applierUid}" var="secondFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a class="btn btn-default" href="${fn:escapeXml(secondFormURL)}">上一页</a>
+				<spring:url value="/display-fourth-form/{applierUid}" var="fourthFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a class="btn btn-default" href="${fn:escapeXml(fourthFormURL)}">下一页</a>
+			</div>
         </div>
 		</div>
 	</div>

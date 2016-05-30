@@ -124,6 +124,12 @@ request.setCharacterEncoding("UTF-8");
 					<pre>${ninethForm.contributionToProject}</pre>
 				</div>
 			</div>
+			<div class="row" style="margin-left:20px">
+				<spring:url value="/select-nineth-major-org-contributor/{applierUid}" var="ninethFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a class="btn btn-default" href="${fn:escapeXml(ninethFormURL)}">返回</a>
+			</div>
         </div>
 		</div>
 	</div>

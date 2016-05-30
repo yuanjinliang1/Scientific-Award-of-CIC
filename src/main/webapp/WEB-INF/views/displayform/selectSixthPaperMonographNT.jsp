@@ -55,6 +55,16 @@ request.setCharacterEncoding("UTF-8");
 						</tr>
 					</c:forEach>
 			</table>
+			<div class="row" style="margin-left:20px">
+				<spring:url value="/display-objective-evaluation/{applierUid}" var="fifthFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>				
+				<a class="btn btn-default" href="${fn:escapeXml(fifthFormURL)}">上一页</a>
+				<spring:url value="/select-seventh-paper-cited-by-others/{applierUid}" var="seventhFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a class="btn btn-default" href="${fn:escapeXml(seventhFormURL)}">下一页</a>
+			</div>
             
         </div>
 		</div>

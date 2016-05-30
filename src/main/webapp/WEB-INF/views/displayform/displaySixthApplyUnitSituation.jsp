@@ -61,6 +61,12 @@ request.setCharacterEncoding("UTF-8");
 					<td>${sixthApplyUnitSituationForm.applySituation }</td>
 				</tr>
 			</table>
+			<div class="row" style="margin-left:20px">
+				<spring:url value="/select-apply-unit-situation/{applierUid}" var="sixthFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a class="btn btn-default" href="${fn:escapeXml(sixthFormURL)}">返回</a>
+			</div>
         </div>
 		</div>
 	</div>

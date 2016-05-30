@@ -57,7 +57,16 @@ request.setCharacterEncoding("UTF-8");
 				</tr>
 				</c:forEach>
 			</table>
-            
+            <div class="row" style="margin-left:20px">
+				<spring:url value="/select-paper-monograph/{applierUid}" var="sixthFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a class="btn btn-default" href="${fn:escapeXml(sixthFormURL)}">上一页</a>
+				<spring:url value="/select-eighth-major-contributor/{applierUid}" var="eighthFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a class="btn btn-default" href="${fn:escapeXml(eighthFormURL)}">下一页</a>
+			</div>
         </div>
 		</div>
 	</div>

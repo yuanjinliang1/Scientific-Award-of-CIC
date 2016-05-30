@@ -83,6 +83,16 @@ request.setCharacterEncoding("UTF-8");
 			<div class="row">
 				<h4>推荐该项目为中国通信学会科学技术奖${secondForm.referingScienceTechnologyAwardRank}。</h4>
 			</div>
+			<div class="row" style="margin-left:20px">
+				<spring:url value="/display-first-project-basic-situation/{applierUid}" var="firstFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a class="btn btn-default" href="${fn:escapeXml(firstFormURL)}">上一页</a>
+				<spring:url value="/display-brief-introduction/{applierUid}" var="thirdFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a class="btn btn-default" href="${fn:escapeXml(thirdFormURL)}">下一页</a>
+			</div>
         </div>
 		</div>
 	</div>

@@ -46,6 +46,23 @@ request.setCharacterEncoding("UTF-8");
 					<td><pre>${objectiveEvaluationForm.objectiveEvaluation}</pre></td>
 				</tr>
 			</table>
+			<div class="row" style="margin-left:20px">
+				<spring:url value="/display-fourth-form/{applierUid}" var="fourthFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a class="btn btn-default" href="${fn:escapeXml(fourthFormURL)}">上一页</a>
+				<c:if test="${applier.applicationType=='科技进步类'||applier.applicationType=='技术发明类' }">
+					<spring:url value="/select-apply-unit-situation/{applierUid}" var="sixthFormURL">
+						<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+					</spring:url>
+				</c:if>
+				<c:if test="${applier.applicationType=='自然科学类' }">
+					<spring:url value="/select-paper-monograph/{applierUid}" var="sixthFormURL">
+						<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+					</spring:url>
+				</c:if>
+				<a class="btn btn-default" href="${fn:escapeXml(sixthFormURL)}">下一页</a>
+			</div>
         </div>
         </div>
     </div>

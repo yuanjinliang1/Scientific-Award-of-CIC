@@ -79,6 +79,12 @@
 						<td>${sixthPaperMonograph.representativePaperMonograph}</td>
 					</tr>
 				</table>
+				<div class="row" style="margin-left:20px">
+					<spring:url value="/select-paper-monograph/{applierUid}" var="sixthFormURL">
+						<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+					</spring:url>
+					<a class="btn btn-default" href="${fn:escapeXml(sixthFormURL)}">返回</a>
+				</div>
         </div>
 		</div>
 	</div>

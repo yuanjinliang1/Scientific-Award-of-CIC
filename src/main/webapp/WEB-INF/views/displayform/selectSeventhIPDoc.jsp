@@ -37,7 +37,7 @@ request.setCharacterEncoding("UTF-8");
 		</c:otherwise>
 	</c:choose>
 	<div class="wrapper" >
-		<dicipulus:bodySidebarForDisplay page="8"/>
+		<dicipulus:bodySidebarForDisplay page="7"/>
 		<div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row" style="margin-left: 20px"><h1>七、主要知识产权证明目录（不超过10件）</h1></div>
@@ -69,6 +69,16 @@ request.setCharacterEncoding("UTF-8");
 						</tr>
 				</c:forEach>
 			</table>
+			<div class="row" style="margin-left:20px">
+				<spring:url value="/select-apply-unit-situation/{applierUid}" var="sixthFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a class="btn btn-default" href="${fn:escapeXml(sixthFormURL)}">上一页</a>
+				<spring:url value="/select-eighth-major-contributor/{applierUid}" var="eighthFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a class="btn btn-default" href="${fn:escapeXml(eighthFormURL)}">下一页</a>
+			</div>
         </div>
 		</div>
 	</div>

@@ -249,7 +249,12 @@ request.setCharacterEncoding("UTF-8");
 				<pre>${eighthForm.formerRewardOfCIC}</pre>
 				</div>
 			</div>
-			
+			<div class="row" style="margin-left:20px">
+				<spring:url value="/select-eighth-major-contributor/{applierUid}" var="eighthFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a class="btn btn-default" href="${fn:escapeXml(eighthFormURL)}">返回</a>
+			</div>
         </div>
         </div>
 	</div>

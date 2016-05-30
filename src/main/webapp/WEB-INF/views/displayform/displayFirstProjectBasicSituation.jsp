@@ -179,6 +179,12 @@ request.setCharacterEncoding("UTF-8");
 					<td>${firstForm.applierContactEmail }</td>
 				</tr>
 			</table>
+			<div class="row" style="margin-left:20px">
+				<spring:url value="/display-referee-unit-opinion/{applierUid}" var="secondFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a class="btn btn-default" href="${fn:escapeXml(secondFormURL)}">下一页</a>
+			</div>
         </div>
 		</div>
 	</div>

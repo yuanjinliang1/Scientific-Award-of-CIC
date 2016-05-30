@@ -58,6 +58,23 @@ request.setCharacterEncoding("UTF-8");
 					</tr>
 				</c:forEach>
 			</table>
+			<div class="row" style="margin-left:20px">
+				<c:if test="${applier.applicationType=='科技进步类'||applier.applicationType=='技术发明类' }">
+					<spring:url value="/select-seventh-ip-doc/{applierUid}" var="seventhFormURL">
+						<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+					</spring:url>
+				</c:if>
+				<c:if test="${applier.applicationType=='自然科学类' }">
+					<spring:url value="/select-seventh-paper-cited-by-others/{applierUid}" var="seventhFormURL">
+						<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+					</spring:url>
+				</c:if>
+				<a class="btn btn-default" href="${fn:escapeXml(seventhFormURL)}">上一页</a>
+				<spring:url value="/select-nineth-major-org-contributor/{applierUid}" var="ninethFormURL">
+					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
+				</spring:url>
+				<a class="btn btn-default" href="${fn:escapeXml(ninethFormURL)}">下一页</a>
+			</div>
         </div>
 		</div>
 	</div>

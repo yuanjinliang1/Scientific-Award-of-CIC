@@ -59,7 +59,7 @@ request.setCharacterEncoding("UTF-8");
 								<a id="delete" href="${fn:escapeXml(deleteURL)}">删除</a>
 							</td>
 							<td>
-								<input type="submit" value="保存并查看" />
+								<input type="submit" value="保存" />
 							</td>
 						</tr>
 					</form>

@@ -22,11 +22,7 @@ request.setCharacterEncoding("UTF-8");
 	<dicipulus:bodyHeaderForReferee menuName="manageApplication"/>
 	<br/><br/><br/>
 	<div class="row" style="margin-left: 20px"><h1>二、推荐单位意见</h1></div>
-	<div class="row" style="margin-left: 20px">
-		<h5 style="color:red;">
-			您正在编辑的是  名称为：<b>${applier.name }</b>，ID为：<b>${applier.uid }</b> 的项目组的推荐单位意见。
-		</h5>
-	</div>
+	<div class="alert alert-danger"> <strong>您正在编辑的是  名称为：<b>${applier.name }</b>，ID为：<b>${applier.uid }</b> 的项目组的推荐单位意见。</strong></div>	
 	<spring:url value="/edit-referee-unit-opinion-post/{applierUid}" var="editOpinionURL">
 		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
 	</spring:url>

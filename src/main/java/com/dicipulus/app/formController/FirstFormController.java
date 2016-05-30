@@ -91,7 +91,8 @@ public class FirstFormController {
 		 * 调用JDBC将Form写入数据库
 		 */
 		firstProjectBasicSituationJdbc.setFirstProjectBasicSituation(firstForm, personSession.getUid());
-		return "redirect:/edit-first-project-basic-situation";
+		//return "redirect:/edit-first-project-basic-situation";
+		return "redirect:/display-second-form-when-applier-editing";
 	}
 	
 	@RequestMapping(value="/display-first-project-basic-situation/{applierUid}",method=RequestMethod.GET)

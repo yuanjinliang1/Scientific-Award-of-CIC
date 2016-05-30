@@ -71,9 +71,7 @@
 
 <div>
 	<spring:url value="/edit-first-project-basic-situation" var="firstFormURL"/>
-	<spring:url value="/display-referee-unit-opinion/{applierUid}" var="secondFormURL">
-		<spring:param name="applierUid" value="${applier.uid }"/>
-	</spring:url>
+	<spring:url value="/display-second-form-when-applier-editing" var="secondFormURL"/>
 	<spring:url value="/edit-brief-introduction" var="thirdFormURL"/>
 	<spring:url value="/edit-fourth-form" var="fourthFormURL"/>
 	<spring:url value="/edit-objective-evaluation" var="fifthFormURL"/>
@@ -122,8 +120,8 @@
                 <li class="${ firstDisplay }">
                     <a href="${fn:escapeXml(firstFormURL)}">第一页</a>
                 </li>
-                <li class="niemals">
-                    <a href="#">第二页</a>
+                <li class="${ secondDisplay }">
+                	<a href="${fn:escapeXml(secondFormURL)}">第二页</a>
                 </li>
                 <li class="${ thirdDisplay }">
                     <a href="${fn:escapeXml(thirdFormURL)}">第三页</a>

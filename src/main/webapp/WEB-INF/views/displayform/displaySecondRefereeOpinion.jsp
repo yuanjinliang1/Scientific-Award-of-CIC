@@ -28,7 +28,7 @@ request.setCharacterEncoding("UTF-8");
 			<dicipulus:bodyHeaderForReferee menuName=""/>
 		</c:when>
 		<c:when test="${person.role eq 'applier' }">
-			<dicipulus:bodyHeaderForApplier menuName=""/>
+			<dicipulus:bodyHeaderForApplier menuName="viewApplication"/>
 		</c:when>
 		<c:otherwise>
 			<c:out value="${person.uid} ${person.name } ${person.role} bad role name" />

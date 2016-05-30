@@ -49,7 +49,11 @@ request.setCharacterEncoding("UTF-8");
 					
 				</div>
 				<div class="row" style="margin-left:20px">
-					<input type="submit" class="btn btn-primary" value="保存并查看" />
+					<input type="submit" class="btn btn-primary" value="保存" />
+					<spring:url value="/display-second-form-when-applier-editing" var="secondFormURL"/>
+						<a class="btn btn-default" href="${fn:escapeXml(secondFormURL)}">上一页</a>
+					<spring:url value="/edit-fourth-form" var="fourthFormURL"/>
+						<a class="btn btn-default" href="${fn:escapeXml(fourthFormURL)}">下一页</a>
 				</div>
 			</form>	
         </div>

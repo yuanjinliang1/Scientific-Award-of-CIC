@@ -98,7 +98,7 @@
 					
 				</table>
 				<div class="row" style="margin-left:20px">
-					<input type="submit" class="btn btn-default" value="保存并查看" />
+					<input type="submit" class="btn btn-default" value="保存" />
 				</div>
 			</form>
             

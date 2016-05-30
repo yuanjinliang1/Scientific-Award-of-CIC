@@ -35,13 +35,13 @@
 			<div class="row">
 	    	<div style="width:300;margin:auto">
     			<label for="uidGet">用户名</label>
-    			<input type="text" class="form-control" name="uid" id="uidGet"/>
+    			<input type="text" class="form-control" name="uid" id="uidGet" value="100116001"/>
 	    	</div>
 			</div>
 			<div class="row">
 	    	<div style="width:300;margin:auto">
     			<label for="passwordGet" >密码</label>
-    			<input type="password" class="form-control" name="password" id="passwordGet" />
+    			<input type="password" class="form-control" name="password" id="passwordGet" value="8888" />
 	    	</div>
 			</div>
 			<br/>

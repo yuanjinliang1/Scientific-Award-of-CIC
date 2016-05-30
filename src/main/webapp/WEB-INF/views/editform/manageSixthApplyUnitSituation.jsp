@@ -124,7 +124,7 @@ request.setCharacterEncoding("UTF-8");
 					<textarea class="form-control" rows="10"  name="socialBenefit" form="sixthFormer">${sixthEconomicAndSocialBenefitForms.socialBenefit}</textarea>
 				</div>
 				<div class="row" style="margin-left:20px">
-					<input type="submit" class="btn btn-default" value="保存并查看" />
+					<input type="submit" class="btn btn-default" value="保存" />
 				</div>
 			</form>
         </div>

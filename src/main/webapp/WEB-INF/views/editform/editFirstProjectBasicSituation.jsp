@@ -41,11 +41,12 @@ request.setCharacterEncoding("UTF-8");
 							<div class="help-block with-errors" style="font-size:15px"></div>
 					</tr>
 					<tr>
-						<td>主要完成人</td>
+						
+						<td>主要完成人<small data-toggle="tooltip" title="系统根据申请书信息自动生成，不需要填写">(自动生成)</small></td>
 						<td>${firstForm.majorContributorNames }</td>
 					</tr>
 					<tr>
-						<td>主要完成单位</td>
+						<td>主要完成单位<small data-toggle="tooltip" title="系统根据申请书信息自动生成，不需要填写">(自动生成)</small></td>
 						<td>${firstForm.majorContributingOrgNames }</td>
 					</tr>
 					<tr>
@@ -259,15 +260,15 @@ request.setCharacterEncoding("UTF-8");
 						</td>
 					</tr>
 					<tr>
-						<td>推荐单位联系人</td>
+						<td>推荐单位联系人<small data-toggle="tooltip" title="系统根据申请书信息自动生成，不需要填写">(自动生成)</small></td>
 						<td>${firstForm.refereeContactName }</td>
 					</tr>
 					<tr>
-						<td>推荐单位联系人电话</td>
+						<td>推荐单位联系人电话<small data-toggle="tooltip" title="系统根据申请书信息自动生成，不需要填写">(自动生成)</small></td>
 						<td>${firstForm.refereeContactPhone }</td>
 					</tr>
 					<tr>
-						<td>推荐单位联系人邮箱</td>
+						<td>推荐单位联系人邮箱<small data-toggle="tooltip" title="系统根据申请书信息自动生成，不需要填写">(自动生成)</small></td>
 						<td>${firstForm.refereeContactEmail }</td>
 					</tr>
 					<tr>
@@ -296,7 +297,9 @@ request.setCharacterEncoding("UTF-8");
 					</tr>
 				</table>
 				<div class="row" style="margin-left:20px">
-					<input type="submit" class="btn btn-default" value="保存并查看" />
+					<input type="submit" class="btn btn-primary" value="保存" />
+					<spring:url value="/display-second-form-when-applier-editing" var="secondFormURL"/>
+					<a class="btn btn-default" href="${fn:escapeXml(secondFormURL)}">下一页</a>
 				</div>
 			</form>
         </div>
@@ -304,7 +307,11 @@ request.setCharacterEncoding("UTF-8");
 	</div>
 </div>
 
-
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
+</script>
 
 
 

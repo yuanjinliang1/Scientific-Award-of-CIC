@@ -1,5 +1,7 @@
 package com.dicipulus.app.formController;
 
+import java.util.Arrays;
+
 import javax.security.sasl.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -137,7 +139,7 @@ public class SecondFormController {
 			SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
 			SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
 			modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
-			modelAndView.addObject("applier",applier);//明确推荐单位正在编辑的推荐书是谁的
+			modelAndView.addObject("applier",applier);
 			modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
 			
 			FormUlti.isAuthenticatedToRead(person, applierUid);
@@ -161,5 +163,40 @@ public class SecondFormController {
 			modelAndView.setViewName("redirect:/noAuthentication");
 			return modelAndView;
 		}
+	}
+	
+	/**
+	 * 项目组编辑时查看推荐书，走过场
+	 * @param request
+	 * @param modelAndView
+	 * @param applierUid
+	 * @return
+	 */
+	@RequestMapping(value="/display-second-form-when-applier-editing",method=RequestMethod.GET)
+	public ModelAndView displaySecondFormWhenApplierEditing(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+		if(FormUlti.getPersonInRequest(request)==null){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("null-session"));
+			return modelAndView;
+		}
+		if(FormUlti.rightRole(request, "applier")==false){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-role"));
+			return modelAndView;
+		}
+		String applierUid=FormUlti.getPersonInRequest(request).getUid();
+		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-status"));
+			return modelAndView;
+		}
+		//main work
+		SecondRefereeUnitOpinion secondRefereeUnitOpinion=InitJdbc.initSecondRefereeUnitOpinionJdbc().getSecondRefereeUnitOpinion(applierUid);
+			modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
+		Applier applier=InitJdbc.initApplierJdbc().getApplierByUid(applierUid);
+			modelAndView.addObject("applier",applier);
+		modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
+		
+		modelAndView.setViewName("editform/displaySecondRefereeOpinionWhenApplierEditing");
+		
+		return modelAndView;
 	}
 }

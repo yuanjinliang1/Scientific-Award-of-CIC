@@ -72,7 +72,7 @@ request.setCharacterEncoding("UTF-8");
 								<a id="delete" class="form-control btn btn-danger" href="${fn:escapeXml(deleteURL)}">删除</a>
 							</td>
 							<td>
-								<input type="submit" class="form-control btn btn-primary" value="保存并查看" />
+								<input type="submit" class="form-control btn btn-primary" value="保存" />
 							</td>
 						</tr>
 					</form>

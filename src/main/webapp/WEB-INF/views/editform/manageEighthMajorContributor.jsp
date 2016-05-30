@@ -56,6 +56,17 @@ request.setCharacterEncoding("UTF-8");
 					</tr>
 				</c:forEach>
 			</table>
+			<div class="row" style="margin-left:20px">
+				<c:if test="${applier.applicationType=='科技进步类'||applier.applicationType=='技术发明类' }">
+					<spring:url value="/manage-seventh-ip-doc" var="seventhFormURL"/>
+				</c:if>
+				<c:if test="${applier.applicationType=='自然科学类' }">
+					<spring:url value="/manage-seventh-paper-cited-by-others" var="seventhFormURL"/>
+				</c:if>
+					<a class="btn btn-default" href="${fn:escapeXml(seventhFormURL)}">上一页</a>
+				<spring:url value="/manage-nineth-major-org-contributor" var="ninethFormURL"/>
+					<a class="btn btn-default" href="${fn:escapeXml(ninethFormURL)}">下一页</a>
+			</div>
         </div>
 		</div>
 	</div>

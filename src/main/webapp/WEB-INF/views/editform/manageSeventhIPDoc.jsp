@@ -78,6 +78,12 @@ request.setCharacterEncoding("UTF-8");
 					</form>
 				</c:forEach>
 			</table>
+			<div class="row" style="margin-left:20px">
+				<spring:url value="/manage-apply-unit-situation" var="sixthFormURL"/>
+					<a class="btn btn-default" href="${fn:escapeXml(sixthFormURL)}">上一页</a>
+				<spring:url value="/manage-eighth-major-contributor" var="eighthFormURL"/>
+					<a class="btn btn-default" href="${fn:escapeXml(eighthFormURL)}">下一页</a>
+			</div>
         </div>
 		</div>
 	</div>

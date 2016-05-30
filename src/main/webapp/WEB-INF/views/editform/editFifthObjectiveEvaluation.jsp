@@ -25,7 +25,7 @@ request.setCharacterEncoding("UTF-8");
 		<dicipulus:bodySidebarForEdit page="5"/>
 		<div id="page-content-wrapper">
         <div class="container-fluid">
-            <div class="row" style="margin-left: 20px"><h1>五、客观评价</h1></div>
+            <div class="row" style="margin-left: 20px"><h1>五、客观评价<small>（限两页）</small></h1></div>
             	<form id="fifthFormer" action="/app/edit-objective-evaluation" method="POST" modelAttribute="objectiveEvaluation">
 					<div class="panel panel-default">
 						<div class="panel-heading">
@@ -40,7 +40,16 @@ request.setCharacterEncoding("UTF-8");
 						</div>
 					</div>
 					<div class="row" style="margin-left:20px">
-						<input type="submit" class="btn btn-default" value="保存" />
+						<input type="submit" class="btn btn-primary" value="保存" />
+						<spring:url value="/edit-fourth-form" var="fourthFormURL"/>
+							<a class="btn btn-default" href="${fn:escapeXml(fourthFormURL)}">上一页</a>
+						<c:if test="${applier.applicationType=='科技进步类'||applier.applicationType=='技术发明类' }">
+							<spring:url value="/manage-apply-unit-situation" var="sixthFormURL"/>
+						</c:if>
+						<c:if test="${applier.applicationType=='自然科学类' }">
+							<spring:url value="/manage-paper-monograph" var="sixthFormURL"/>
+						</c:if>
+							<a class="btn btn-default" href="${fn:escapeXml(sixthFormURL)}">下一页</a>
 					</div>
 				</form>
         </div>

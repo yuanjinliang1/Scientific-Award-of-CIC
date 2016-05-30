@@ -99,6 +99,8 @@
 				</table>
 				<div class="row" style="margin-left:20px">
 					<input type="submit" class="btn btn-default" value="保存" />
+					<spring:url value="/manage-paper-monograph" var="sixthFormURL"/>
+						<a class="btn btn-default" href="${fn:escapeXml(sixthFormURL)}">返回</a>
 				</div>
 			</form>
             

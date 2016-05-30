@@ -116,7 +116,7 @@ public class ThirdFormController {
 			logger.info("edit briefIntroduction exception!");
 			return "redirect:/login";
 		}
-		return "redirect:/edit-brief-introduction";
+		return "redirect:/edit-fourth-form";
 	}
 	
 }

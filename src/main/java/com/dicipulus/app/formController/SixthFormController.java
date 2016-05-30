@@ -220,7 +220,7 @@ public class SixthFormController {
 			String applierUid=person.getUid();
 			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
 			sixthPaperMonographNTJdbc.updateSixthPaperMonographNT(sixthPaperMonographNT, idOfPaperMonograph);
-			return "redirect:/edit-sixth-paper-monograph/"+idOfPaperMonograph;
+			return "redirect:/manage-paper-monograph";
 		}
 		catch(NullPointerException e){
 			logger.info("session null pointer!");
@@ -316,7 +316,7 @@ public class SixthFormController {
 		String applierUid=person.getUid();
 		SixthEconomicAndSocialBenefitJdbc  sixthEconomicAndSocialBenefitJdbc=InitJdbc.initSixthEconomicAndSocialBenefitJdbc();
 		sixthEconomicAndSocialBenefitJdbc.updateSixthEconomicAndSocialBenefitJdbc(sixthEconomicAndSocialBenefit, applierUid);
-		return "redirect:/manage-apply-unit-situation";
+		return "redirect:/manage-seventh-ip-doc";
 		}
 		catch(NullPointerException e){
 			logger.info("session null pointer!");

@@ -134,7 +134,9 @@ request.setCharacterEncoding("UTF-8");
 					</div>
 				</div>
 				<div class="row" style="margin-left:20px">
-					<input type="submit" class="btn btn-default" value="保存" />
+					<input type="submit" class="btn btn-primary" value="保存" />
+					<spring:url value="/manage-nineth-major-org-contributor" var="ninethFormURL"/>
+						<a class="btn btn-default" href="${fn:escapeXml(ninethFormURL)}">返回</a>
 				</div>
 			</form>
             

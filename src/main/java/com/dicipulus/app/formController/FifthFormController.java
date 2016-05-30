@@ -106,7 +106,7 @@ public class FifthFormController {
 			String applierUid=person.getUid();
 			FifthObjectiveEvaluationJdbc fifthObjectiveEvaluationJdbc=InitJdbc.initFifthObjectiveEvaluationJdbc();
 			fifthObjectiveEvaluationJdbc.updateFifthObjective(fifthObjectiveEvaluation, applierUid);
-			return "redirect:/edit-objective-evaluation";
+			return "redirect:/manage-apply-unit-situation";
 		}
 		catch(NullPointerException e){
 			logger.info("session null pointer!");

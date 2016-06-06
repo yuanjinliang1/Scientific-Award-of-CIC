@@ -62,34 +62,32 @@ request.setCharacterEncoding("UTF-8");
 						<td>邮政编码</td>
 						<td><input type="text" name="zipCodeOfOrg" value="${ninethForm.zipCodeOfOrg}" /></td>
 					</tr>
-					<c:if test="${applier.applicationType!='科技进步类' }">
-						<tr>
-							<td>中国通信学会团体会员</td>
-							<td>
-								<select name="isOrgMemberOfCIC">
-									<c:choose>
-										<c:when test="${ninethForm.isOrgMemberOfCIC eq '否'}">
-											<option value="否">否</option>
-											<option value="是">是</option>
-										</c:when>	
-										<c:when test="${ninethForm.isOrgMemberOfCIC eq '是'}">
-											<option value="是">是</option>
-											<option value="否">否</option>
-										</c:when>								
-										<c:otherwise>
-											<option disabled selected value>请选择</option>
-											<option value="是">是</option>
-											<option value="否">否</option>
-										</c:otherwise>
-									</c:choose>		
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>团体会员证书号</td>
-							<td><input type="text" name="orgMemberIDOfCIC" value="${ninethForm.orgMemberIDOfCIC}" /></td>
-						</tr>
-					</c:if>
+					<tr>
+						<td>中国通信学会团体会员</td>
+						<td>
+							<select name="isOrgMemberOfCIC">
+								<c:choose>
+									<c:when test="${ninethForm.isOrgMemberOfCIC eq '否'}">
+										<option value="否">否</option>
+										<option value="是">是</option>
+									</c:when>	
+									<c:when test="${ninethForm.isOrgMemberOfCIC eq '是'}">
+										<option value="是">是</option>
+										<option value="否">否</option>
+									</c:when>								
+									<c:otherwise>
+										<option disabled selected value>请选择</option>
+										<option value="是">是</option>
+										<option value="否">否</option>
+									</c:otherwise>
+								</c:choose>		
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>团体会员证书号</td>
+						<td><input type="text" name="orgMemberIDOfCIC" value="${ninethForm.orgMemberIDOfCIC}" /></td>
+					</tr>
 					<tr>
 						<td>通讯地址</td>
 						<td><input type="text" name="addressOfOrg" value="${ninethForm.addressOfOrg}" /></td>

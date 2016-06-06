@@ -54,34 +54,32 @@ request.setCharacterEncoding("UTF-8");
 						<td>国籍</td>
 						<td><input type="text" name="nationalityOfContributor" value="${eighthForm.nationalityOfContributor}" /></td>
 					</tr>
-					<c:if test="${applier.applicationType!='科技进步类' }">
-						<tr>
-							<td>中国通信学会会员</td>
-							<td>
-								<select name="isMemberOfCIC">
-									<c:choose>
-										<c:when test="${eighthForm.isMemberOfCIC eq '否'}">
-											<option value="否">否</option>
-											<option value="是">是</option>
-										</c:when>	
-										<c:when test="${eighthForm.isMemberOfCIC eq '是'}">
-											<option value="是">是</option>
-											<option value="否">否</option>
-										</c:when>								
-										<c:otherwise>
-											<option disabled selected value>请选择</option>
-											<option value="是">是</option>
-											<option value="否">否</option>
-										</c:otherwise>
-									</c:choose>		
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>会员证号</td>
-							<td><input type="text" name="memberIdOfCIc" value="${eighthForm.memberIdOfCIc}" /></td>
-						</tr>
-					</c:if>
+					<tr>
+						<td>中国通信学会会员</td>
+						<td>
+							<select name="isMemberOfCIC">
+								<c:choose>
+									<c:when test="${eighthForm.isMemberOfCIC eq '否'}">
+										<option value="否">否</option>
+										<option value="是">是</option>
+									</c:when>	
+									<c:when test="${eighthForm.isMemberOfCIC eq '是'}">
+										<option value="是">是</option>
+										<option value="否">否</option>
+									</c:when>								
+									<c:otherwise>
+										<option disabled selected value>请选择</option>
+										<option value="是">是</option>
+										<option value="否">否</option>
+									</c:otherwise>
+								</c:choose>		
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>会员证号</td>
+						<td><input type="text" name="memberIdOfCIc" value="${eighthForm.memberIdOfCIc}" /></td>
+					</tr>
 					<tr>
 						<td>出生年月</td>
 						<td><input type="text" name="birthdayOfContributor" value="${eighthForm.birthdayOfContributor}" /></td>

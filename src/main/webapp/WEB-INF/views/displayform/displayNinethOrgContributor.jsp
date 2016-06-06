@@ -71,16 +71,14 @@ request.setCharacterEncoding("UTF-8");
 					<td>邮政编码</td>
 					<td>${ninethForm.zipCodeOfOrg}</td>
 				</tr>
-				<c:if test="${applier.applicationType!='科技进步类' }">
-					<tr>
-						<td>中国通信学会团体会员</td>
-						<td>${ninethForm.isOrgMemberOfCIC}</td>
-					</tr>
-					<tr>
-						<td>团体会员证书号</td>
-						<td>${ninethForm.orgMemberIDOfCIC}</td>
-					</tr>
-				</c:if>
+				<tr>
+					<td>中国通信学会团体会员</td>
+					<td>${ninethForm.isOrgMemberOfCIC}</td>
+				</tr>
+				<tr>
+					<td>团体会员证书号</td>
+					<td>${ninethForm.orgMemberIDOfCIC}</td>
+				</tr>
 				<tr>
 					<td>通讯地址</td>
 					<td>${ninethForm.addressOfOrg}</td>

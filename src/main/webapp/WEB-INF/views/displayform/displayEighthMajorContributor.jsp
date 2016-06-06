@@ -62,18 +62,16 @@ request.setCharacterEncoding("UTF-8");
 					<th>国籍</th>
 					<td>${eighthForm.nationalityOfContributor}</td>
 				</tr>
-				<c:if test="${applier.applicationType!='科技进步类' }">
-					<tr>
-						<th>中国通信学会会员</th>
-						<td>
-							${eighthForm.isMemberOfCIC}
-						</td>
-					</tr>
-					<tr>
-						<th>会员证号</th>
-						<td>${eighthForm.memberIdOfCIc}</td>
-					</tr>
-				</c:if>
+				<tr>
+					<th>中国通信学会会员</th>
+					<td>
+						${eighthForm.isMemberOfCIC}
+					</td>
+				</tr>
+				<tr>
+					<th>会员证号</th>
+					<td>${eighthForm.memberIdOfCIc}</td>
+				</tr>
 				<tr>
 					<th>出生年月</th>
 					<td>${eighthForm.birthdayOfContributor}</td>

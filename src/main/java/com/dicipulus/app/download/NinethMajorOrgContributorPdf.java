@@ -84,14 +84,12 @@ public class NinethMajorOrgContributorPdf {
 		table.addCell(cell);
 		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getZipCodeOfOrg(),fontChinese));
 		table.addCell(cell);
-		if(!applicationType.equals("科技进步类")){
-			cell.setPhrase(new Phrase("中国通信学会团体会员",fontChinese));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getIsOrgMemberOfCIC(),fontChinese));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase("团体会员证书号",fontChinese));
-			table.addCell(cell);
-		}
+		cell.setPhrase(new Phrase("中国通信学会团体会员",fontChinese));
+		table.addCell(cell);
+		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getIsOrgMemberOfCIC(),fontChinese));
+		table.addCell(cell);
+		cell.setPhrase(new Phrase("团体会员证书号",fontChinese));
+		table.addCell(cell);
 		cell.setColspan(3);
 		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getorgMemberIDOfCIC(),fontChinese));
 		table.addCell(cell);

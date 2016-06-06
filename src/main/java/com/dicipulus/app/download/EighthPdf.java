@@ -90,21 +90,19 @@ public class EighthPdf {
 		table=new PdfPTable(width2);
 		table.setWidthPercentage(100);
 		cell.setMinimumHeight(60f);
-		if(!applicationType.equals("科技进步类")){
-			cell.setPhrase(new Phrase("中国通信学会会员",fontChinese));
-			cell.setHorizontalAlignment(cell.ALIGN_CENTER);
-			cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(eighthMajorContributor.get(i).getIsMemberOfCIC(),fontChinese));
+		cell.setPhrase(new Phrase("中国通信学会会员",fontChinese));
+		cell.setHorizontalAlignment(cell.ALIGN_CENTER);
+		cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
+		table.addCell(cell);
+		cell.setPhrase(new Phrase(eighthMajorContributor.get(i).getIsMemberOfCIC(),fontChinese));
 
-			table.addCell(cell);
-			cell.setPhrase(new Phrase("会员证号",fontChinese));;
-			
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(eighthMajorContributor.get(i).getMemberIdOfCIc(),fontChinese));
-			cell.setColspan(3);
-			table.addCell(cell);
-		}
+		table.addCell(cell);
+		cell.setPhrase(new Phrase("会员证号",fontChinese));;
+		
+		table.addCell(cell);
+		cell.setPhrase(new Phrase(eighthMajorContributor.get(i).getMemberIdOfCIc(),fontChinese));
+		cell.setColspan(3);
+		table.addCell(cell);
 		cell=new PdfPCell();
 		cell.setMinimumHeight(30f);
 		cell.setPhrase(new Phrase("出生年月",fontChinese));

@@ -97,46 +97,16 @@ request.setCharacterEncoding("UTF-8");
 						<tr>
 							<td>所属国民经济行业</td>
 							<td  class="form-group"> 
-								<select name="economicField" class="form-control" data-error="请填写此项" required>
-									<c:choose>
-										<c:when test="${firstForm.economicField!=null&&firstForm.economicField!=''}">
-											<option value="${firstForm.economicField}">${firstForm.economicField}</option>
-										</c:when>
-										<c:otherwise>
-											<option disabled selected value>请选择</option>
-										</c:otherwise>
-									</c:choose>
-									<c:if test="${firstForm.economicField!=null&&firstForm.economicField!=''}">
-									
-									</c:if>
-									<c:forEach items="${economicFields }" var="economicField">
-										<c:if test="${firstForm.economicField!=economicField}">
-											<option value="${economicField }">${economicField }</option>
-										</c:if>
-									</c:forEach>
-								</select>
-								<div class="help-block with-errors" style="font-size:15px"></div>
+							<input class="form-control" type="text" name="economicField" value="${firstForm.economicField }" 
+							 data-error="请填写此项" maxlength="30" required/>
+							 <div class="help-block with-errors" style="font-size:15px"></div>
 							</td>
 						</tr>
 						<tr>
 							<td>所属国家重点发展领域</td>
 							<td class="form-group">
-								<select name="nationalFocusField" class="form-control" data-error="请填写此项" required>
-									<c:choose>
-										<c:when test="${firstForm.nationalFocusField!=null&&firstForm.nationalFocusField!=''}">
-											<option value="${firstForm.nationalFocusField}">${firstForm.nationalFocusField}</option>
-										</c:when>
-										<c:otherwise>
-											<option disabled selected value>请选择</option>
-										</c:otherwise>
-									</c:choose>
-									
-									<c:forEach items="${nationalFocusFields }" var="nationalFocusField">
-										<c:if test="${firstForm.nationalFocusField!=nationalFocusField}">
-											<option value="${nationalFocusField }">${nationalFocusField }</option>
-										</c:if>
-									</c:forEach>
-								</select>
+								<input class="form-control" type="text" name="nationalFocusField" value="${firstForm.nationalFocusField }" 
+							 data-error="请填写此项" maxlength="30" required/>
 								 <div class="help-block with-errors" style="font-size:15px"></div>
 							</td>
 						</tr>
@@ -146,25 +116,10 @@ request.setCharacterEncoding("UTF-8");
 						<tr>
 							<td>所属科学技术领域</td>
 							<td class="form-group">
-								<input type="hidden" name="economicField" value="NEVER" />
-								<input type="hidden" name="nationalFocusField" value="NEVER" />
-								<select name="technologicalField"  class="form-control" data-error="请填写此项" required>
-									<c:choose>
-										<c:when test="${firstForm.technologicalField!=null&&firstForm.technologicalField!=''}">
-											<option value="${firstForm.technologicalField}">${firstForm.technologicalField}</option>
-										</c:when>
-										<c:otherwise>
-											<option disabled selected value>请选择</option>
-										</c:otherwise>
-									</c:choose>
-									<c:forEach items="${technologicalFields }" var="technologicalField">
-										<c:if test="${firstForm.technologicalField!=technologicalField}">
-											<option value="${technologicalField }">${technologicalField }</option>
-										</c:if>
-									</c:forEach>
-								</select>
-								 <div class="help-block with-errors" style="font-size:15px"></div>
-							</td>
+							<input class="form-control" type="text" name="technologicalField" value="${firstForm.technologicalField }" 
+							 data-error="请填写此项" maxlength="30" required/>
+							 <div class="help-block with-errors" style="font-size:15px"></div>
+							 </td>
 						</tr>
 					</c:if>
 					<tr>

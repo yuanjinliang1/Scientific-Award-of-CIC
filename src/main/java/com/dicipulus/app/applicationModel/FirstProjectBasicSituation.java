@@ -43,7 +43,9 @@ public class FirstProjectBasicSituation {
 	protected String technologicalField;// 所属科学技术领域,NS
 	
 	
-	protected String taskSource;// 任务来源
+	protected String taskSource1;// 任务来源
+	protected String taskSource2;
+	protected String taskSource3;
 	protected String NameAndCodeOfPlansOrFundations;// 具体计划、基金的名称和编号
 	protected String technicalReportNumber;// 已呈交的科技报告编号
 	
@@ -61,6 +63,30 @@ public class FirstProjectBasicSituation {
 	protected String applierContactPhone;
 	protected String applierContactEmail;
 	
+	public String getTaskSource1() {
+		return taskSource1;
+	}
+
+	public void setTaskSource1(String taskSource1) {
+		this.taskSource1 = taskSource1;
+	}
+
+	public String getTaskSource2() {
+		return taskSource2;
+	}
+
+	public void setTaskSource2(String taskSource2) {
+		this.taskSource2 = taskSource2;
+	}
+
+	public String getTaskSource3() {
+		return taskSource3;
+	}
+
+	public void setTaskSource3(String taskSource3) {
+		this.taskSource3 = taskSource3;
+	}
+
 	public String getApplierUid() {
 		return applierUid;
 	}
@@ -189,13 +215,7 @@ public class FirstProjectBasicSituation {
 		this.technologicalField = technologicalField;
 	}
 
-	public String getTaskSource() {
-		return taskSource;
-	}
-
-	public void setTaskSource(String taskSource) {
-		this.taskSource = taskSource;
-	}
+	
 
 	public String getNameAndCodeOfPlansOrFundations() {
 		return NameAndCodeOfPlansOrFundations;
@@ -309,7 +329,9 @@ public class FirstProjectBasicSituation {
 				+ subjectCategoryName3 + ", subjectCategoryId3="
 				+ subjectCategoryId3 + ", economicField=" + economicField
 				+ ", nationalFocusField=" + nationalFocusField
-				+ ", taskSource=" + taskSource
+				+ ", taskSource1=" + taskSource1
+				+ ", taskSource2=" + taskSource2
+				+ ", taskSource3=" + taskSource3
 				+ ", NameAndCodeOfPlansOrFundations="
 				+ NameAndCodeOfPlansOrFundations + ", technicalReportNumber="
 				+ technicalReportNumber + ", numOfInventionPatent="

@@ -123,25 +123,25 @@ request.setCharacterEncoding("UTF-8");
 						</tr>
 					</c:if>
 					<tr>
-						<td>任务来源</td>
+						<td>任务来源1</td>
 						<td class="form-group">
-							<select name="taskSource"  class="form-control" data-error="请填写此项" required>
-								<c:choose>
-									<c:when test="${firstForm.taskSource!=null&&firstForm.taskSource!=''}">
-										<option value="${firstForm.taskSource}">${firstForm.taskSource}</option>
-									</c:when>
-									<c:otherwise>
-										<option disabled selected value>请选择</option>
-									</c:otherwise>
-								</c:choose>
-								
-								<c:forEach items="${taskSources }" var="taskSource">
-									<c:if test="${firstForm.taskSource!=taskSource}">
-										<option value="${taskSource }">${taskSource }</option>
-									</c:if>
-								</c:forEach>
-							</select>
+								<input class="form-control" type="text" name="taskSource1" value="${firstForm.taskSource1 }" 
+							 data-error="请填写此项" maxlength="30" required/>
 							 <div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
+					</tr>
+					<tr>
+						<td>任务来源2（选填）</td>
+						<td class="form-group">
+								<input class="form-control" type="text" name="taskSource2" value="${firstForm.taskSource2 }" 
+							 maxlength="30" required/>
+							 
+						</td>
+					</tr><tr>
+						<td>任务来源3（选填）</td>
+						<td class="form-group">
+								<input class="form-control" type="text" name="taskSource3" value="${firstForm.taskSource3 }" 
+							  maxlength="30" required/>
 						</td>
 					</tr>
 				</table>

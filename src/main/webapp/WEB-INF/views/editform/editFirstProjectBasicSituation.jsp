@@ -198,18 +198,17 @@ request.setCharacterEncoding("UTF-8");
 					</c:if>
 					<tr>
 						<td>项目开始时间</td>
-						<fmt:formatDate pattern="yyyy-MM-dd"  value="${firstForm.startDate }" var="startDateVar" />
 						<td class="form-group">
-							<input type="date" name="startDate" value="${startDateVar}" 
+							<input class="form-control" type="text" name="startDate" value="${firstForm.startDate}" 
 							class="form-control" data-error="请填写此项" required/>
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>项目完成时间</td>
-						<fmt:formatDate pattern="yyyy-MM-dd"  value="${firstForm.finishDate }" var="finishDateVar" />
+						
 						<td class="form-group">
-							<input type="date"  name="finishDate" value="${finishDateVar }"  
+							<input class="form-control" type="text"  name="finishDate" value="${firstForm.finishDate }"  
 							class="form-control" data-error="请填写此项" required/>
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>

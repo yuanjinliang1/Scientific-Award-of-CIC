@@ -25,6 +25,7 @@ public class Application {
 	@JsonView(AjaxViews.Public.class)
 	private String commentOfAdmin;
 	private String yearCreated;//用于隐藏去年的项目
+	private String resultRegistration;
 	
 	public Application(String applierUid, String projectStatus,
 			String projectName, String refereeString, String applicationType,
@@ -49,10 +50,6 @@ public class Application {
 	public Application(){
 		
 	}
-
-
-
-
 
 	public String getApplierUid() {
 		return applierUid;
@@ -143,6 +140,14 @@ public class Application {
 		this.yearCreated = yearCreated;
 	}
 
+	public String getResultRegistration() {
+		return resultRegistration;
+	}
+
+	public void setResultRegistration(String resultRegistration) {
+		this.resultRegistration = resultRegistration;
+	}
+
 	@Override
 	public String toString() {
 		return "Application [applierUid=" + applierUid + ", projectStatus="
@@ -154,8 +159,8 @@ public class Application {
 				+ ", primaryExaminationResult=" + primaryExaminationResult
 				+ ", finalExaminationResult=" + finalExaminationResult
 				+ ", commentOfAdmin=" + commentOfAdmin + ", yearCreated="
-				+ yearCreated + "]";
+				+ yearCreated + ", resultRegistration=" + resultRegistration
+				+ "]";
 	}
-	
 	
 }

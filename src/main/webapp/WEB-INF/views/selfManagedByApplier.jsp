@@ -46,6 +46,7 @@
 	<table class="table table-bordered">
 		<tr>
 			<td>项目状态</td>
+			<td>成果登记</td>
 			<td>项目名称</td>
 			<td>奖种</td>
 			<td>推荐等级</td>
@@ -61,7 +62,7 @@
 				<c:if test="${application.projectStatus=='未提交' }">
 					<spring:url value="/submit-application-by-applier" var="acceptURL">
 					</spring:url>
-					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="提交">
+					<input id="submitApplication" type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="提交">
 				</c:if>
 				<c:if test="${application.projectStatus=='已提交' }">
 					<spring:url value="/withdraw-application-by-applier" var="withdrawURL">
@@ -69,6 +70,27 @@
 					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(withdrawURL)}';" value="撤回">
 				</c:if>
 			</td>
+			<td>
+				<form action="/app/set-result-registration" method="post">
+				 	<select id="resultRegistration" name="resultRegistration" class="form-control" >
+					 	<c:choose>
+					 		<c:when test="${application.resultRegistration == '是'}" >
+					 			<option value="是">是</option>
+								<option value="否">否</option>	
+					 		</c:when>
+					 		<c:when test="${application.resultRegistration == '否'}" >
+					 			<option value="否">否</option>
+								<option value="是">是</option>	
+					 		</c:when>
+					 		<c:otherwise>
+						 		<option selected disabled>请选择</option>
+								<option value="是">是</option>
+								<option value="否">否</option>
+					 		</c:otherwise>
+					 	</c:choose>
+					</select>
+				</form>
+			 </td>
 			<td>${application.projectName }</td>
 			<td id="applicationType">${application.applicationType }</td>
 			<td>${application.referingScienceTechnologyAwardRank }</td>
@@ -162,6 +184,13 @@
 				
 			}
 		});
+		
+		$("#resultRegistration").change(function(){
+			if(!confirm("您确定修改成果登记信息吗？")){
+				return false;
+			}
+			this.form.submit();
+		})
 		
 		function enableSearchButton(flag) {
 			$(".to-edit").prop("disabled", flag);

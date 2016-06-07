@@ -139,6 +139,12 @@ public class ApplicationJdbc {
 		logger.info("batchReturn: "+batchReturn);
 	}*/
 	
+	public void setResultRegistration(String resultRegistration, String applierUid){
+		String sql="update project_major set resultRegistration=? where applierUid=?";
+		jdbcTemplateObject.update(sql,resultRegistration,applierUid);
+		logger.info("SQL:"+sql);
+	}
+	
 	public void setStatusOfApplication(String status, String applierUid){
 		String sql="update project_major set projectStatus=? where applierUid=?";
 		jdbcTemplateObject.update(sql,status,applierUid);

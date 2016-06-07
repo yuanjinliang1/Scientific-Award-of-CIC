@@ -6,6 +6,7 @@ import com.dicipulus.app.formController.FormUlti;
 import com.dicipulus.app.model.*;
 
 import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -137,6 +138,30 @@ public class SelfManagedByApplierController {
 		modelAndView.setViewName("selfManagedByApplier");
 		return modelAndView;
 		
+	}
+	
+	@RequestMapping(value="/set-result-registration", method=RequestMethod.POST)
+	public String setResultRegistration( HttpServletRequest request,String resultRegistration){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+		if(FormUlti.getPersonInRequest(request)==null){
+			return FormUlti.redirectErrorMessage("null-session");
+		}
+		if(FormUlti.rightRole(request, "applier")==false){
+			return FormUlti.redirectErrorMessage("illegal-role");
+		}
+		String applierUid=FormUlti.getPersonInRequest(request).getUid();
+		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("δ�ύ"))==false){
+			return FormUlti.redirectErrorMessage("illegal-status");
+		}
+		
+		try{
+			InitJdbc.initApplicationJdbc().setResultRegistration(resultRegistration, applierUid);
+		}
+		catch(DataAccessException e){
+			logger.info(e.getLocalizedMessage());
+			return FormUlti.redirectErrorMessage("DataAccessException");
+		}
+		return FormUlti.redirectPrevious(request);
 	}
 
 	@RequestMapping(value="/self-managed-by-applier/change-name",method=RequestMethod.POST)

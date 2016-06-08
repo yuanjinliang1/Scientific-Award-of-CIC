@@ -26,7 +26,7 @@
 			<form id="sixthPaperMonograph" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="paperMonographFormAttr">
 				<table class="table table-bordered">
 					<tr>
-						<td>是否是代表性论文专著</td>
+						<td>是否是代表性论文专著 <span style="color:red"> (限八篇)</span></td>
 						<td>
 							<select name="representativePaperMonograph" id="representativePaperMonograph">
 								<c:choose>
@@ -98,7 +98,7 @@
 					
 				</table>
 				<div class="row" style="margin-left:20px">
-					<input type="submit" class="btn btn-default" value="保存" />
+					<input type="submit" class="btn btn-primary" value="保存" />
 					<spring:url value="/manage-paper-monograph" var="sixthFormURL"/>
 						<a class="btn btn-default" href="${fn:escapeXml(sixthFormURL)}">返回</a>
 				</div>

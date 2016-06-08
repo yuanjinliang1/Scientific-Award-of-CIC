@@ -34,6 +34,7 @@ request.setCharacterEncoding("UTF-8");
             <table class="table table-bordered">
 				<tr>
 					<td>论文专著名称</td>
+					<td>备注*</td>
 					<td>操作</td>
 					<td>操作</td>
 				</tr>
@@ -41,16 +42,21 @@ request.setCharacterEncoding("UTF-8");
 					<tr>
 						<td>${sixthForm.name}</td>
 						<td>
+							<c:if test="${sixthForm.representativePaperMonograph eq '是'}">
+								代表性论文专著
+							</c:if>
+						</td>
+						<td>
 							<spring:url value="/edit-sixth-paper-monograph/{idOfPaperMonograph}" var="editFormURL">
 								<spring:param name="idOfPaperMonograph" value="${sixthForm.idOfPaperMonograph}"></spring:param>
 							</spring:url>
-							<a id="editOpinion" href="${fn:escapeXml(editFormURL)}">填写</a>
+							<a id="editOpinion" class="btn btn-primary" href="${fn:escapeXml(editFormURL)}">填写</a>
 						</td>
 						<td>
 							<c:url value="/delete-sixth-paper-monograph" var="deleteURL">
 								<c:param name="idOfPaperMonograph" value="${sixthForm.idOfPaperMonograph}"></c:param>
 							</c:url>
-							<a id="deletePaperMonograph" href="${fn:escapeXml(deleteURL)}">删除</a>
+							<a id="deletePaperMonograph" class="btn btn-danger" href="${fn:escapeXml(deleteURL)}">删除</a>
 						</td>
 					</tr>
 				</c:forEach>

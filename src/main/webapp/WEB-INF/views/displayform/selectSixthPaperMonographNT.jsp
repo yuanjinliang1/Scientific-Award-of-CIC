@@ -40,12 +40,18 @@ request.setCharacterEncoding("UTF-8");
             <div class="row" style="margin-left: 20px"><h1>六、论文专著目录</h1></div>
             <table class="table table-bordered">
             	<tr>
-					<td>论文专注名称</td>
+					<td>论文专著名称</td>
+					<td>备注*</td>
 					<td>操作</td>
 				</tr>
 				<c:forEach var="sixthForm" items="${sixthPaperMonographForms}">
 						<tr>
 							<td>${sixthForm.name}</td>
+							<td>
+								<c:if test="${sixthForm.representativePaperMonograph eq '是'}">
+									代表性论文专著
+								</c:if>
+							</td>
 							<td>
 								<spring:url value="/display-sixth-paper-monograph/{idOfPaperMonograph}" var="editFormURL">
 									<spring:param name="idOfPaperMonograph" value="${sixthForm.idOfPaperMonograph}"></spring:param>

@@ -43,17 +43,19 @@ public class FirstProjectBasicSituation {
 	protected String technologicalField;// 所属科学技术领域,NS
 	
 	
-	protected String taskSource;// 任务来源
+	protected String taskSource1;// 任务来源
+	protected String taskSource2;
+	protected String taskSource3;
 	protected String NameAndCodeOfPlansOrFundations;// 具体计划、基金的名称和编号
 	protected String technicalReportNumber;// 已呈交的科技报告编号
 	
 	protected int numOfInventionPatent;// 授权发明专利项数,TA,TI
 	protected int numOfOtherIntellectualProperty;// 授权的其它知识产权项数,TA,TI
 	
-	@DateTimeFormat(pattern = "yyy-MM-dd")
-	protected Date startDate;// 项目开始时间
-	@DateTimeFormat(pattern = "yyy-MM-dd")
-	protected Date finishDate;// 项目完成时间
+	
+	protected String startDate;// 项目开始时间
+	
+	protected String finishDate;// 项目完成时间
 	protected String refereeContactName;// 推荐单位联系人，包括姓名、电话、邮箱等
 	protected String refereeContactPhone;
 	protected String refereeContactEmail;
@@ -61,6 +63,46 @@ public class FirstProjectBasicSituation {
 	protected String applierContactPhone;
 	protected String applierContactEmail;
 	
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public void setFinishDate(String finishDate) {
+		this.finishDate = finishDate;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public String getFinishDate() {
+		return finishDate;
+	}
+
+	public String getTaskSource1() {
+		return taskSource1;
+	}
+
+	public void setTaskSource1(String taskSource1) {
+		this.taskSource1 = taskSource1;
+	}
+
+	public String getTaskSource2() {
+		return taskSource2;
+	}
+
+	public void setTaskSource2(String taskSource2) {
+		this.taskSource2 = taskSource2;
+	}
+
+	public String getTaskSource3() {
+		return taskSource3;
+	}
+
+	public void setTaskSource3(String taskSource3) {
+		this.taskSource3 = taskSource3;
+	}
+
 	public String getApplierUid() {
 		return applierUid;
 	}
@@ -189,13 +231,7 @@ public class FirstProjectBasicSituation {
 		this.technologicalField = technologicalField;
 	}
 
-	public String getTaskSource() {
-		return taskSource;
-	}
-
-	public void setTaskSource(String taskSource) {
-		this.taskSource = taskSource;
-	}
+	
 
 	public String getNameAndCodeOfPlansOrFundations() {
 		return NameAndCodeOfPlansOrFundations;
@@ -230,21 +266,7 @@ public class FirstProjectBasicSituation {
 		this.numOfOtherIntellectualProperty = numOfOtherIntellectualProperty;
 	}
 
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getFinishDate() {
-		return finishDate;
-	}
-
-	public void setFinishDate(Date finishDate) {
-		this.finishDate = finishDate;
-	}
+	
 
 	public String getRefereeContactName() {
 		return refereeContactName;
@@ -309,7 +331,9 @@ public class FirstProjectBasicSituation {
 				+ subjectCategoryName3 + ", subjectCategoryId3="
 				+ subjectCategoryId3 + ", economicField=" + economicField
 				+ ", nationalFocusField=" + nationalFocusField
-				+ ", taskSource=" + taskSource
+				+ ", taskSource1=" + taskSource1
+				+ ", taskSource2=" + taskSource2
+				+ ", taskSource3=" + taskSource3
 				+ ", NameAndCodeOfPlansOrFundations="
 				+ NameAndCodeOfPlansOrFundations + ", technicalReportNumber="
 				+ technicalReportNumber + ", numOfInventionPatent="

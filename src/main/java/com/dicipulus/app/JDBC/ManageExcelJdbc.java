@@ -21,12 +21,15 @@ public class ManageExcelJdbc {
 		this.jdbcTemplate= new JdbcTemplate(dataSource);
 	}
 	public List<Excel> getExcelByYear(int year){
-		String sql="select b.*,secondrefereeunitopinion.postAddress, secondrefereeunitopinion.referingScienceTechnologyAwardRank "
-				+ "from (select a.*,applier.applicationType from "
-				+ "(select project_major.applierUid,project_major.yearCreated,project_major.projectStatus,project_major.formalityExaminationResult,project_major.primaryExaminationResult,project_major.finalExaminationResult,project_major.projectName ,project_major.applierContactName,project_major.applierContactPhone,project_major.applierContactEmail,project_major.refereeContactName,project_major.refereeContactPhone,project_major.refereeString from "
-				+ "project_major where yearCreated= ? ) a,applier where a.applierUid=applier.Uid) b,secondrefereeunitopinion where b.applierUid=secondrefereeunitopinion.applierUid";
+		String sql="select c.*,dicipulus.major_org_contributor.addressOfOrg from "
+				+ "(select b.*,dicipulus.secondrefereeunitopinion.postAddress, dicipulus.secondrefereeunitopinion.referingScienceTechnologyAwardRank from "
+				+ "(select a.*,dicipulus.applier.applicationType from "
+				+ "(select dicipulus.project_major.applierUid, dicipulus.project_major.yearCreated, dicipulus.project_major.projectStatus, dicipulus.project_major.formalityExaminationResult,dicipulus.project_major.primaryExaminationResult,dicipulus.project_major.finalExaminationResult,dicipulus.project_major.projectName ,dicipulus.project_major.applierContactName,dicipulus.project_major.applierContactPhone,dicipulus.project_major.applierContactEmail,dicipulus.project_major.refereeContactName,dicipulus.project_major.refereeContactPhone,dicipulus.project_major.refereeString from dicipulus.project_major where dicipulus.project_major.yearCreated= ? ) a,"
+				+ "dicipulus.applier where a.applierUid=dicipulus.applier.Uid) b,dicipulus.secondrefereeunitopinion where b.applierUid=dicipulus.secondrefereeunitopinion.applierUid) c,dicipulus.major_org_contributor where dicipulus.major_org_contributor.rankOfOrg='1' group by c.applierUid";
 		List<Excel> excel=jdbcTemplate.query(sql,new Object[]{year} ,BeanPropertyRowMapper.newInstance(Excel.class));
-		logger.info(excel.toString());
+		for(Excel ex:excel){
+			System.out.print(ex.getAddressOfOrg()+"#$%#$%");
+		}
 		return excel;
 	}
 }

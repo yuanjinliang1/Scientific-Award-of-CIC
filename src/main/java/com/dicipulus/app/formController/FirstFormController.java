@@ -46,11 +46,11 @@ public class FirstFormController {
 			modelAndView.setViewName("editform/editFirstProjectBasicSituation");
 			modelAndView.addObject("applier",applierJdbc.getApplierByUid(person.getUid()));
 			modelAndView.addObject("firstForm",firstForm);
-			modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);
-			modelAndView.addObject("economicFields",Constants.ECONOMICFIELDS);
-			modelAndView.addObject("nationalFocusFields",Constants.NATIONALFOCUSFIELDS);
-			modelAndView.addObject("technologicalFields",Constants.TECHNOLOGICALFIELDS);
-			modelAndView.addObject("taskSources",Constants.TASKSOURCES);
+//			modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);
+//			modelAndView.addObject("economicFields",Constants.ECONOMICFIELDS);
+//			modelAndView.addObject("nationalFocusFields",Constants.NATIONALFOCUSFIELDS);
+//			modelAndView.addObject("technologicalFields",Constants.TECHNOLOGICALFIELDS);
+//			modelAndView.addObject("taskSources",Constants.TASKSOURCES);
 			return modelAndView;
 		}
 		catch(NullPointerException e){

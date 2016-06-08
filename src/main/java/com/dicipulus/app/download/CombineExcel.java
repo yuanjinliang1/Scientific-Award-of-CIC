@@ -98,6 +98,8 @@ public class CombineExcel {
 		sheet.addCell(label);
 		label=new Label(19,1,"推荐等级");
 		sheet.addCell(label);
+		label=new Label(20,1,"备注");
+		sheet.addCell(label);
 		int row=2;
 		for(Excel temp:manageExcel){
 			label=new Label(0,row,temp.getFormalityExaminationResult());
@@ -109,7 +111,7 @@ public class CombineExcel {
 			label=new Label(2,row,temp.getFinalExaminationResult());
 			System.out.println(temp.getFinalExaminationResult()+"FinalExamninationResult!!");
 			sheet.addCell(label);
-			label=new Label(3,row,"收序");
+			label=new Label(3,row,"");
 			sheet.addCell(label);
 			label=new Label(4,row,temp.getProjectName());
 			System.out.println(temp.getProjectName());
@@ -159,7 +161,7 @@ public class CombineExcel {
 			label=new Label(13,row,temp.getApplierContactEmail());
 			System.out.println(temp.getApplierContactEmail());
 			sheet.addCell(label);
-			label=new Label(14,row,"地址");
+			label=new Label(14,row,temp.getAddressOfOrg());
 			sheet.addCell(label);
 			label=new Label(15,row,temp.getRefereeContactName());
 			System.out.println(temp.getRefereeContactName());
@@ -170,7 +172,7 @@ public class CombineExcel {
 			label=new Label(17,row,temp.getPostAddress());
 			System.out.println(temp.getPostAddress());
 			sheet.addCell(label);
-			label=new Label(18,row,"成果登记");
+			label=new Label(18,row,"");
 			sheet.addCell(label);
 			label=new Label(19,row,temp.getReferingScienceTechnologyAwardRank());
 			System.out.println(temp.getReferingScienceTechnologyAwardRank());

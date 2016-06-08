@@ -13,7 +13,7 @@ public class Excel {
 	String applierContactName;
 	String applierContactPhone;
 	String applierContactEmail;
-//	String addressOfContributor;//表major_contributor中的
+	String addressOfOrg;//表major_contributor中的
 	String refereeContactName;
 	String refereeContactPhone;
 	String postAddress;//secondrefereeunitopinion表中的地址 
@@ -21,6 +21,13 @@ public class Excel {
 	String referingScienceTechnologyAwardRank;
 	String projectStatus;
 	
+	
+	public String getAddressOfOrg() {
+		return addressOfOrg;
+	}
+	public void setAddressOfOrg(String addressOfOrg) {
+		this.addressOfOrg = addressOfOrg;
+	}
 	public String getProjectStatus() {
 		return projectStatus;
 	}

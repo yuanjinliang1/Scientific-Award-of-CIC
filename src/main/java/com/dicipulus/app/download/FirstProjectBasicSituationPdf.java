@@ -196,13 +196,27 @@ public class FirstProjectBasicSituationPdf {
             table.addCell(cell);
             table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getNationalFocusField(),fontChinese)));//
         }
-        cell=new PdfPCell(new Phrase("任务来源",fontChinese));
+        cell=new PdfPCell(new Phrase("任务来源1",fontChinese));
         cell.setHorizontalAlignment(cell.ALIGN_CENTER);
         cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
         cell.setMinimumHeight(25f);
         table.addCell(cell);
-        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getTaskSource(),fontChinese)));//
+        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getTaskSource1(),fontChinese)));//
+ 
+        cell=new PdfPCell(new Phrase("任务来源2",fontChinese));
+        cell.setHorizontalAlignment(cell.ALIGN_CENTER);
+        cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
+        cell.setMinimumHeight(25f);
         table.addCell(cell);
+        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getTaskSource2(),fontChinese)));//
+        
+        cell=new PdfPCell(new Phrase("任务来源3",fontChinese));
+        cell.setHorizontalAlignment(cell.ALIGN_CENTER);
+        cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
+        cell.setMinimumHeight(25f);
+        table.addCell(cell);
+        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getTaskSource3(),fontChinese)));//
+       
         table.setWidthPercentage(100);
         document.add(table);
         table=new PdfPTable(1);

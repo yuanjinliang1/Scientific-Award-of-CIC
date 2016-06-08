@@ -229,13 +229,12 @@ request.setCharacterEncoding("UTF-8");
 					</tr>
 					<tr>
 						<td>参加本项目开始时间</td>
-						<fmt:formatDate pattern="yyyy-MM-dd"  value="${eighthForm.startDateOfParticipation }" var="startDateVar" />
-						<td><input type="date" name="startDateOfParticipation" value="${startDateVar}" /></td>
+					
+						<td><input class="form-control" type="text" name="startDateOfParticipation" value="${eighthForm.startDateOfParticipation}" /></td>
 					</tr>
 					<tr>
 						<td>参加本项目结束时间</td>
-						<fmt:formatDate pattern="yyyy-MM-dd"  value="${eighthForm.endDateOfParticipation }" var="endDateVar" />
-						<td><input type="date"  name="endDateOfParticipation" value="${endDateVar }" /></td>
+						<td><input class="form-control" type="text"  name="endDateOfParticipation" value="${eighthForm.startDateOfParticipation}" /></td>
 					</tr>
 				</table>
 				<div class="panel panel-default">

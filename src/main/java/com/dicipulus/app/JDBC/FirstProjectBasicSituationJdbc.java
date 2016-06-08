@@ -65,7 +65,7 @@ public class FirstProjectBasicSituationJdbc{
 		String sql="UPDATE `dicipulus`.`project_major` SET `yearCreated`=?, `refereeString`=?, `projectName`=?,"
 				+ " `secretLevel`=?, `subjectCategoryName1`=?,"
 				+ " `subjectCategoryId1`=?, `subjectCategoryName2`=?, `subjectCategoryId2`=?, `subjectCategoryName3`=?,"
-				+ " `subjectCategoryId3`=?, `economicField`=?, `nationalFocusField`=?, `technologicalField`=?, `taskSource`=?, "
+				+ " `subjectCategoryId3`=?, `economicField`=?, `nationalFocusField`=?, `technologicalField`=?, `taskSource1`=?, `taskSource2`=?,`taskSource3`=?,"
 				+ "`NameAndCodeOfPlansOrFundations`=?, `technicalReportNumber`=?, `numOfOtherIntellectualProperty`=?, "
 				+ "`numOfInventionPatent`=?, `startDate`=?, `finishDate`=?, "
 				+ "`applierContactName`=?, `applierContactPhone`=?, `applierContactEmail`=? "
@@ -76,7 +76,7 @@ public class FirstProjectBasicSituationJdbc{
 				firstForm.getSubjectCategoryName1(),firstForm.getSubjectCategoryId1(),
 				firstForm.getSubjectCategoryName2(),firstForm.getSubjectCategoryId2(),
 				firstForm.getSubjectCategoryName3(),firstForm.getSubjectCategoryId3(),
-				firstForm.getEconomicField(),firstForm.getNationalFocusField(),firstForm.getTechnologicalField(),firstForm.getTaskSource(),
+				firstForm.getEconomicField(),firstForm.getNationalFocusField(),firstForm.getTechnologicalField(),firstForm.getTaskSource1(),firstForm.getTaskSource2(),firstForm.getTaskSource3(),
 				firstForm.getNameAndCodeOfPlansOrFundations(),firstForm.getTechnicalReportNumber(),firstForm.getNumOfOtherIntellectualProperty(),
 				firstForm.getNumOfInventionPatent(),firstForm.getStartDate(),firstForm.getFinishDate(),
 				

@@ -40,12 +40,24 @@ public class EighthMajorContributor {
 	private String completeUnitOfContributor;
 	private String locationOfContributor;
 	private String typeOfUnit;//单位性质
-	@DateTimeFormat(pattern = "yyy-MM-dd")
-	private Date startDateOfParticipation;
-	@DateTimeFormat(pattern = "yyy-MM-dd")
-	private Date endDateOfParticipation;
+	private String startDateOfParticipation;
+	private String endDateOfParticipation;
 	private String contributionOfContributor;
 	private String formerRewardOfCIC;
+	
+	public void setStartDateOfParticipation(String startDateOfParticipation) {
+		this.startDateOfParticipation = startDateOfParticipation;
+	}
+	public void setEndDateOfParticipation(String endDateOfParticipation) {
+		this.endDateOfParticipation = endDateOfParticipation;
+	}
+	
+	public String getStartDateOfParticipation() {
+		return startDateOfParticipation;
+	}
+	public String getEndDateOfParticipation() {
+		return endDateOfParticipation;
+	}
 	public int getIdOfEighthForm() {
 		return idOfEighthForm;
 	}
@@ -240,18 +252,7 @@ public class EighthMajorContributor {
 	public void setTypeOfUnit(String typeOfUnit) {
 		this.typeOfUnit = typeOfUnit;
 	}
-	public Date getStartDateOfParticipation() {
-		return startDateOfParticipation;
-	}
-	public void setStartDateOfParticipation(Date startDateOfParticipation) {
-		this.startDateOfParticipation = startDateOfParticipation;
-	}
-	public Date getEndDateOfParticipation() {
-		return endDateOfParticipation;
-	}
-	public void setEndDateOfParticipation(Date endDateOfParticipation) {
-		this.endDateOfParticipation = endDateOfParticipation;
-	}
+	
 	public String getContributionOfContributor() {
 		return contributionOfContributor;
 	}

@@ -42,18 +42,19 @@ request.setCharacterEncoding("UTF-8");
 		<tr>
 			<c:set var="serial" value="${serial+1 }"></c:set>
 			<td>${serial }</td>
-			<td>${application.projectStatus }
+			<td >
+				<div id="projectStatus${serial}">${application.projectStatus }</div>
 				<c:if test="${application.projectStatus=='已提交' }">
 					<spring:url value="/submit-application-by-referee/{applierUid}" var="acceptURL">
 						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 					</spring:url>
-					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="推荐">
+					<input id="submitApplication" type="button" class="btn btn-success" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="推荐">
 				</c:if>
 				<c:if test="${application.projectStatus=='已推荐' }">
 					<spring:url value="/withdraw-application-by-referee/{applierUid}" var="withdrawURL">
 						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 					</spring:url>
-					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(withdrawURL)}';" value="撤回推荐">
+					<input id="recallApplication" type="button" class="btn btn-danger" onclick="location.href='${fn:escapeXml(withdrawURL)}';" value="撤回推荐">
 				</c:if>
 			</td>
 			<td>${application.projectName }</td>
@@ -70,12 +71,45 @@ request.setCharacterEncoding("UTF-8");
 				<spring:url value="/edit-referee-unit-opinion/{applierUid}" var="editOpinionURL">
 					<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 				</spring:url>
-				<a id="editOpinion" class="btn btn-default" href="${fn:escapeXml(editOpinionURL)}">填写推荐书</a>
+				<a id="editOpinion${serial}" data-serial="${serial}" class="btn btn-default editOpinion" href="${fn:escapeXml(editOpinionURL)}">填写推荐书</a>
 			</td>
 		</tr>
 	</c:forEach>
 	</tbody>
 </table>
 </div>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+	$(".editOpinion").each(function(){
+		var serialHere=$(this).data("serial");
+		if($("#projectStatus"+serialHere).text()!="未提交"&&$("#projectStatus"+serialHere).text()!="已提交"){
+			console.log("22");
+			$(this).click(function(event){
+				$(this).prop("disabled", false);
+				event.preventDefault();
+				window.location="#";
+				alert("您已推荐此项目，请撤回推荐后再进行修改。");
+			})
+		}
+	});
+	$("#recallApplication").click(function(){
+		if(!confirm("您确定要撤回推荐吗？")){
+			return false;
+		}
+		else {
+			window.location.href = "${fn:escapeXml(withdrawURL)}";
+		}
+	});
+	$("#submitApplication").click(function(){
+		if(!confirm("您确定要提交推荐吗？")){
+			return false;
+		}
+		else {
+			window.location.href = "${fn:escapeXml(acceptURL)}";
+		}
+	});
+})
+
+</script>
 </body>
 </html>

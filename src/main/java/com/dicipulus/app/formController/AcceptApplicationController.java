@@ -60,11 +60,11 @@ public class AcceptApplicationController {
 	public String submitApplicationByApplier(HttpServletRequest request){
 		//logger
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
-		//guard null-session
+		//guard against null-session
 		if(FormUlti.getPersonInRequest(request)==null){
 			return FormUlti.redirectErrorMessage("null-session");
 		}
-		//guard illegal-role
+		//guard against illegal-role
 		if(FormUlti.rightRole(request, "applier")==false){
 			return FormUlti.redirectErrorMessage("illegal-role");
 		}
@@ -72,9 +72,17 @@ public class AcceptApplicationController {
 		logger.info((""+FormUlti.rightRole(request, "applier")));
 		//set applierUid in different context
 		String applierUid=FormUlti.getPersonInRequest(request).getUid();
-		//guard illegal-status
+		//guard against illegal-status
 		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
 			return FormUlti.redirectErrorMessage("illegal-status");
+		}
+		
+		String resultRegistration=InitJdbc.initApplicationJdbc().getApplicationByApplier(applierUid)
+				.getResultRegistration();
+		//guard against illegal-result-registration
+		if(resultRegistration==null||
+				(!resultRegistration.equals("是")&&!resultRegistration.equals("否"))){
+			return FormUlti.redirectErrorMessage("illegal-result-registration");
 		}
 		//do the main work
 		InitJdbc.initApplicationJdbc().setStatusOfApplication("已提交", applierUid);	

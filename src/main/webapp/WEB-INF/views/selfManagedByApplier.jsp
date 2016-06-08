@@ -62,12 +62,12 @@
 				<c:if test="${application.projectStatus=='未提交' }">
 					<spring:url value="/submit-application-by-applier" var="acceptURL">
 					</spring:url>
-					<input id="submitApplication" type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="提交">
+					<input id="submitApplication" type="button" class="btn btn-default" value="提交">
 				</c:if>
 				<c:if test="${application.projectStatus=='已提交' }">
 					<spring:url value="/withdraw-application-by-applier" var="withdrawURL">
 					</spring:url>
-					<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(withdrawURL)}';" value="撤回">
+					<input id="recallApplication" type="button" class="btn btn-default" value="撤回">
 				</c:if>
 			</td>
 			<td>
@@ -190,7 +190,30 @@
 				return false;
 			}
 			this.form.submit();
-		})
+		});
+		
+		$("#submitApplication").click(function(){
+			if($("#resultRegistration option:selected").text()!='是'&&
+					$("#resultRegistration option:selected").text()!='否'){
+				alert("请您选择成果登记情况后再提交。");
+				return false;
+			}
+			if(!confirm("您确定要提交申请书吗？")){
+				return false;
+			}
+			else {
+				window.location.href = "${fn:escapeXml(acceptURL)}";
+			}
+		});
+		
+		$("#recallApplication").click(function(){
+			if(!confirm("您确定要撤回申请书吗？")){
+				return false;
+			}
+			else {
+				window.location.href = "${fn:escapeXml(withdrawURL)}";
+			}
+		});
 		
 		function enableSearchButton(flag) {
 			$(".to-edit").prop("disabled", flag);

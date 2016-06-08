@@ -39,7 +39,7 @@
 				<option value="科技进步类">科技进步类</option>
 				<option value="技术发明类">技术发明类</option>
 			</select>
-			<input type="submit" class="btn btn-success" value="确定" />
+			<input id="setAppType" type="submit" class="btn btn-success" value="确定" />
 		</form>
 	</div>
 	

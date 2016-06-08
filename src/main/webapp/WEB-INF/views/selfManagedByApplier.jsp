@@ -62,12 +62,12 @@
 				<c:if test="${application.projectStatus=='未提交' }">
 					<spring:url value="/submit-application-by-applier" var="acceptURL">
 					</spring:url>
-					<input id="submitApplication" type="button" class="btn btn-default" value="提交">
+					<input id="submitApplication" type="button" class="btn btn-success" value="提交">
 				</c:if>
 				<c:if test="${application.projectStatus=='已提交' }">
 					<spring:url value="/withdraw-application-by-applier" var="withdrawURL">
 					</spring:url>
-					<input id="recallApplication" type="button" class="btn btn-default" value="撤回">
+					<input id="recallApplication" type="button" class="btn btn-danger" value="撤回">
 				</c:if>
 			</td>
 			<td>
@@ -177,15 +177,35 @@
 					var failMessage='<div class="alert alert-danger"> <strong>请先选定申请类型</strong></div>';
 					$("#message").html(failMessage);
 					$("#message").fadeTo(2000, 500).slideUp(500, function(){
-			        $("#message").alert('close');
-			        return false;
+				        $("#message").alert('close');
+				        return false;
 					});
-				})
-				
+				});
+			}
+			else if("${application.projectStatus}"!="未提交"){
+				$(this).click(function(event){
+					enableSearchButton(false);
+					event.preventDefault();
+					window.location="#";
+					alert("您已提交，请先撤回项目再进行修改。");
+				});
 			}
 		});
 		
+		$("#setAppType").click(function(){
+			if("${application.projectStatus}"!="未提交"){
+				enableSearchButton(false);
+				event.preventDefault();
+				window.location="#";
+				alert("您已提交，请先撤回项目再进行修改。");
+			}
+		})
+		
 		$("#resultRegistration").change(function(){
+			if("${application.projectStatus}"!="未提交"){
+				alert("您已提交，请先撤回项目再进行修改。");
+				return false;
+			}
 			if(!confirm("您确定修改成果登记信息吗？")){
 				return false;
 			}
@@ -205,7 +225,6 @@
 				window.location.href = "${fn:escapeXml(acceptURL)}";
 			}
 		});
-		
 		$("#recallApplication").click(function(){
 			if(!confirm("您确定要撤回申请书吗？")){
 				return false;

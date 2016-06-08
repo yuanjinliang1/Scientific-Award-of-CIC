@@ -1,5 +1,6 @@
 package com.dicipulus.app.formController;
 
+import java.util.Arrays;
 import java.util.Calendar;
 
 import javax.security.sasl.AuthenticationException;
@@ -37,27 +38,33 @@ public class FirstFormController {
 	 */
 	@RequestMapping(value="/edit-first-project-basic-situation",method=RequestMethod.GET)
 	public ModelAndView editFirstProjectBasicSituationGet(ModelAndView modelAndView, HttpServletRequest request){
-		logger.info("editFirstProjectBasicSituationGet()");
-		try{
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
-			Person person = FormUlti.getPersonInRequest(request);
-			FirstProjectBasicSituation firstForm=firstProjectBasicSituationJdbc.getFirstProjectBasicSituation(person.getUid());
-			modelAndView.setViewName("editform/editFirstProjectBasicSituation");
-			modelAndView.addObject("applier",applierJdbc.getApplierByUid(person.getUid()));
-			modelAndView.addObject("firstForm",firstForm);
-//			modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);
-//			modelAndView.addObject("economicFields",Constants.ECONOMICFIELDS);
-//			modelAndView.addObject("nationalFocusFields",Constants.NATIONALFOCUSFIELDS);
-//			modelAndView.addObject("technologicalFields",Constants.TECHNOLOGICALFIELDS);
-//			modelAndView.addObject("taskSources",Constants.TASKSOURCES);
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+		if(FormUlti.getPersonInRequest(request)==null){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("null-session"));
 			return modelAndView;
 		}
-		catch(NullPointerException e){
-			modelAndView.setViewName("redirect:/login");
-			logger.info("null session!");
+		if(FormUlti.rightRole(request, "applier")==false){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-role"));
 			return modelAndView;
 		}
+		String applierUid=FormUlti.getPersonInRequest(request).getUid();
+		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("δ�ύ"))==false){
+			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-status"));
+			return modelAndView;
+		}
+		
+		Person person = FormUlti.getPersonInRequest(request);
+		FirstProjectBasicSituation firstForm=InitJdbc.initFirstProjectBasicSituationJdbc()
+				.getFirstProjectBasicSituation(person.getUid());
+		modelAndView.setViewName("editform/editFirstProjectBasicSituation");
+		modelAndView.addObject("applier",InitJdbc.initApplierJdbc().getApplierByUid(person.getUid()));
+		modelAndView.addObject("firstForm",firstForm);
+//		modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);
+//		modelAndView.addObject("economicFields",Constants.ECONOMICFIELDS);
+//		modelAndView.addObject("nationalFocusFields",Constants.NATIONALFOCUSFIELDS);
+//		modelAndView.addObject("technologicalFields",Constants.TECHNOLOGICALFIELDS);
+//		modelAndView.addObject("taskSources",Constants.TASKSOURCES);
+		return modelAndView;
 	}
 	
 	

@@ -101,9 +101,20 @@ request.setCharacterEncoding("UTF-8");
 					</tr>
 				</c:if>
 				<tr>
-					<td>任务来源</td>
-					<td>
-						${firstForm.taskSource}
+					<td>任务来源1</td>
+					<td class="form-group">
+						${firstForm.taskSource1 }
+					</td>
+				</tr>
+				<tr>
+					<td>任务来源2（选填）</td>
+					<td class="form-group">
+						${firstForm.taskSource2 }
+					</td>
+				</tr><tr>
+					<td>任务来源3（选填）</td>
+					<td class="form-group">
+						${firstForm.taskSource3 }
 					</td>
 				</tr>
 			</table>
@@ -146,13 +157,11 @@ request.setCharacterEncoding("UTF-8");
 				</c:if>
 				<tr>
 					<td>项目开始时间</td>
-					<fmt:formatDate pattern="yyyy-MM-dd"  value="${firstForm.startDate }" var="startDateVar" />
-					<td>${startDateVar}</td>
+					<td>${firstForm.startDate}</td>
 				</tr>
 				<tr>
 					<td>项目完成时间</td>
-					<fmt:formatDate pattern="yyyy-MM-dd"  value="${firstForm.finishDate }" var="finishDateVar" />
-					<td>${finishDateVar }</td>
+					<td>${firstForm.finishDate }</td>
 				</tr>
 				<tr>
 					<td>推荐单位联系人</td>

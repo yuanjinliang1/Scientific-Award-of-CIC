@@ -32,7 +32,7 @@ request.setCharacterEncoding("UTF-8");
             <br>
             <form action="/app/create-apply-unit-situation"  method="POST">
 				<div class="row" style="margin-left:20px">
-					<input type="submit" class="btn btn-default" value="添加新应用单位" />
+					<input type="submit" class="btn btn-primary" value="添加新应用单位" />
 				</div>
 			</form>
 			<br/>

@@ -27,7 +27,7 @@ request.setCharacterEncoding("UTF-8");
             <div class="row" style="margin-left: 20px"><h1>九、主要完成单位情况表</h1></div>
             <form action="/app/create-nineth-major-org-contributor" method="POST" >
 			<div class="row" style="margin-left:20px">
-					<input type="submit" class="btn btn-default" value="添加主要完成单位" />
+					<input type="submit" class="btn btn-primary" value="添加主要完成单位" />
 				</div>
 			</form>	
             <table class="table table-bordered">
@@ -45,13 +45,13 @@ request.setCharacterEncoding("UTF-8");
 							<spring:url value="/edit-nineth-major-org-contributor/{idOfNinethForm}" var="editFormURL">
 								<spring:param name="idOfNinethForm" value="${ninethForm.idOfNinethForm }"></spring:param>
 							</spring:url>
-							<a id="editOpinion" href="${fn:escapeXml(editFormURL)}">填写</a>
+							<a class="btn btn-primary" id="editOpinion" href="${fn:escapeXml(editFormURL)}">填写</a>
 						</td>
 						<td>
 							<c:url value="/delete-nineth-major-org-contributor" var="deleteURL">
 								<c:param name="idOfNinethForm" value="${ninethForm.idOfNinethForm }"></c:param>
 							</c:url>
-							<a id="deleteApplier" href="${fn:escapeXml(deleteURL)}">删除</a>
+							<a class="btn btn-danger" id="deleteApplier" href="${fn:escapeXml(deleteURL)}">删除</a>
 						</td>
 					</tr>
 				</c:forEach>

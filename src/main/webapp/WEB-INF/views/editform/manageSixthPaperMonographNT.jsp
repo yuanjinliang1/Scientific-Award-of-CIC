@@ -27,7 +27,7 @@ request.setCharacterEncoding("UTF-8");
             <div class="row" style="margin-left: 20px"><h1>六、论文专著目录</h1></div>
             <form action="/app/create-paper-monograph" method="POST" >
 				<div class="row" style="margin-left:20px">
-					<input type="submit" class="btn btn-default" value="添加论文专著" />
+					<input type="submit" class="btn btn-primary" value="添加论文专著" />
 				</div>
 			</form>	
 			<br/>

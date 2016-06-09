@@ -41,9 +41,8 @@ public class EighthMajorContributorJdbc{
 	
 	public void createEighthMajorContributor(String applierUid,int rankOfContributor){
 		String sql="insert into major_contributor (applierUid,nameOfContributor,rankOfContributor,contributionOfContributor,formerRewardOfCIC) values(?,'未命名单位',?,?,?);";
-		String contributionOfContributor="（不超过300字。应具体写明完成人对本项目做出的实质性贡献并注明对应《重要科学发现》中所列第几项科学发现；与他人合作完成的科学发现，要细致说明本人独立于合作者的具体贡献，"
-				+ "以及支持本人贡献成立的证明材料。提及的证明材料如存在于论文专著目目录，应写明目录编号，否则应在附件中提供并注明附件编号。）";
-		String formerRewardOfCIC="（填写完成人曾获中国通信学会科技奖励的获奖年度、等级、项目名称、排名及证书编号等内容）";//应该写到xml里面
+		String contributionOfContributor="";
+		String formerRewardOfCIC="";
 		jdbcTemplateObject.update(sql,applierUid,rankOfContributor,contributionOfContributor,formerRewardOfCIC);
 		logger.info(sql);
 	}

@@ -45,7 +45,7 @@ public class NinethMajorOrgContributorJdbc{
 	
 	public int createNinethMajorOrgContributor(String applierUid,int rankOfOrg){
 		String sql="insert into major_org_contributor (applierUid,nameOfOrg,rankOfOrg,contributionToProject) values(?,'未命名单位',?,?);";
-		jdbcTemplateObject.update(sql,applierUid,rankOfOrg,"不超过600字。");
+		jdbcTemplateObject.update(sql,applierUid,rankOfOrg,"");
 		logger.info(sql);
 		
 		String sql2="select idOfNinethForm from major_org_contributor where(applierUid=? and rankOfOrg=?)";
@@ -56,7 +56,7 @@ public class NinethMajorOrgContributorJdbc{
 	
 	public void createNinethMajorOrgContributor(String applierUid,int rankOfOrg,String nameOfOrg){
 		String sql="insert into major_org_contributor (applierUid,nameOfOrg,rankOfOrg,contributionToProject) values(?,?,?,?);";
-		jdbcTemplateObject.update(sql,applierUid,nameOfOrg,rankOfOrg,"不超过600字。");
+		jdbcTemplateObject.update(sql,applierUid,nameOfOrg,rankOfOrg,"");
 		logger.info(sql);
 	}
 	

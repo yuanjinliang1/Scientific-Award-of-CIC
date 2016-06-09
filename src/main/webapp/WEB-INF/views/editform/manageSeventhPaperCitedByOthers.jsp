@@ -28,7 +28,7 @@ request.setCharacterEncoding("UTF-8");
             <div class="row" style="margin-left: 20px"><h1>七、代表性论文专著被他人引用的情况（不超过8篇）</h1></div>
             <form action="/app/create-seventh-paper-cited-by-others" method="POST" >
 				<div class="row" style="margin-left:20px">
-					<input type="submit" class="btn btn-default" value="添加被引用论文专著" />
+					<input type="submit" class="btn btn-primary" value="添加被引用论文专著" />
 				</div>
 			</form>	
             <table class="table table-bordered" style="zoom:80%">
@@ -80,12 +80,6 @@ request.setCharacterEncoding("UTF-8");
 									<c:param name="idOfSeventhPaperForm" value="${seventhPaperForm.idOfSeventhPaperForm }"></c:param>
 								</c:url>
 								<a class="btn btn-danger" href="${fn:escapeXml(deleteURL)}">删除</a>
-							</td>
-							<td>
-							<div class="form-group">
-							    <input type="text" class="form-control" id="inputName" placeholder="Cina Saffary" required>
-							    <div class="help-block with-errors"></div>
-							</div>
 							</td>
 						</tr>
 					</form>

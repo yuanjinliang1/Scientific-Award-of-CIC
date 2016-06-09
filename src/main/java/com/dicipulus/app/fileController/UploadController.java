@@ -132,6 +132,35 @@ public class UploadController {
 		logger.info(files.toString());
 		return files;
 	}
+	
+	@RequestMapping(value = "/upload-check/{applierUid}/{index}", method = RequestMethod.POST)
+	public @ResponseBody LinkedList<FileMeta> uploadCheck(
+			MultipartHttpServletRequest request, HttpServletResponse response,
+			@PathVariable String applierUid, @PathVariable int index) throws IOException {
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+		InitUploadFolder initUploadFolder=new InitUploadFolder();
+		initUploadFolder.initUploadFolder(applierUid);
+		String pathNow = rootPath + applierUid + "/uploaded/" + index;
+		LinkedList<FileMeta> files = new LinkedList<FileMeta>();
+		FileMeta fileMeta = null;
+		
+		File folder = new File(pathNow);
+		File[] listOfFiles = folder.listFiles();
+		for (int i = 0; i < listOfFiles.length; i++) {
+			if (listOfFiles[i].isFile()) {
+				fileMeta = new FileMeta();
+				fileMeta.setFileName(listOfFiles[i].getName());
+				fileMeta.setFileSize(listOfFiles[i].getTotalSpace() / 1024 + " Kb");
+				fileMeta.setFileType(Files.probeContentType(listOfFiles[i].toPath()));
+				files.add(fileMeta);
+			} else if (listOfFiles[i].isDirectory()) {
+				// do nothing
+			}
+		}
+		logger.info(files.toString());
+		return files;
+	}
+	
 
 	@RequestMapping(value = "/delete/{applierUid}/{index}", method = RequestMethod.GET)
 	public String deleteFile(HttpServletResponse response,

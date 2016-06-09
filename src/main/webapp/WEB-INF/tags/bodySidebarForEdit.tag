@@ -63,6 +63,14 @@
 		<c:set var="a5Display" value="active"></c:set>
 		<c:set var="attachmentDisplay" value="active"></c:set>
 	</c:when>
+	<c:when test="${page eq 'a6' }">
+		<c:set var="a6Display" value="active"></c:set>
+		<c:set var="attachmentDisplay" value="active"></c:set>
+	</c:when>
+	<c:when test="${page eq 'a7' }">
+		<c:set var="a7Display" value="active"></c:set>
+		<c:set var="attachmentDisplay" value="active"></c:set>
+	</c:when>
 	<c:otherwise>
 		<c:out value="bad page"></c:out>
 	</c:otherwise>
@@ -98,6 +106,12 @@
 		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
 	</spring:url>
 	<spring:url value="/upload/{applierUid}/5" var="fifthAttachmentURL">
+		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
+	</spring:url>
+	<spring:url value="/upload/{applierUid}/6" var="sixthAttachmentURL">
+		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
+	</spring:url>
+	<spring:url value="/upload/{applierUid}/7" var="seventhAttachmentURL">
 		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
 	</spring:url>
 	<spring:url value="/download-pdf/{applierUid}" var="pdfURL">
@@ -163,6 +177,14 @@
 		                <li class="${ a5Display }">
 		                    <a href="${fn:escapeXml(fifthAttachmentURL)}">附件5</a>
 		                </li>
+		                <c:if test="${applier.applicationType=='自然科学类' }">
+			                <li class="${ a6Display }">
+			                    <a href="${fn:escapeXml(sixthAttachmentURL)}">附件6</a>
+			                </li>
+			                <li class="${ a7Display }">
+			                    <a href="${fn:escapeXml(seventhAttachmentURL)}">附件7</a>
+			                </li>
+		                </c:if>
 			        </ul>
 			    </li>
                 <li class="achtung">

@@ -73,7 +73,7 @@ public class LoginController{
 			RefereeJdbc refereeJdbc=(RefereeJdbc)context.getBean("refereeJdbc");
 			Referee referee=refereeJdbc.getRefereeByUid(person.getUid());
 			if(referee.getPassword().equals(person.getPassword())){
-				String viewName="redirect:/applier-managed-by-referee/applier-view/"+person.getUid();
+				String viewName="redirect:/application-managed-by-referee";
 				modelAndView.setViewName(viewName);
 				modelAndView.addObject("person", referee);
 			}

@@ -28,44 +28,69 @@ request.setCharacterEncoding("UTF-8");
            	<spring:url value="/save-nineth-major-org-contributor/{idOfNinethForm}" var="saveURL">
 				<spring:param name="idOfNinethForm" value="${ninethForm.idOfNinethForm}"></spring:param>
 			</spring:url>
-			<form id="ninethFormer" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="ninethFormAttr">
+			<form id="ninethFormer" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="ninethFormAttr"
+			 data-toggle="validator" role="form">
 				<table class="table table-bordered">
 					<tr>
 						<td>单位名称</td>
-						<td>
-						<input type="text" name="nameOfOrg" value="${ninethForm.nameOfOrg}" />
+						<td class="form-group">
+							<input class="form-control" type="text" name="nameOfOrg" value="${ninethForm.nameOfOrg}"   
+							data-error="请填写此项" required/>
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>排名</td>
-						<td>${ninethForm.rankOfOrg}
-						<input type="hidden" name="rankOfOrg" value="${ninethForm.rankOfOrg}" />
+						<td class="form-group">
+							<input class="form-control" type="number" name="rankOfOrg" value="${ninethForm.rankOfOrg}"   
+							data-error="请填写此项" required/>
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>法定代表人</td>
-						<td><input type="text" name="legalRepresentative" value="${ninethForm.legalRepresentative}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="legalRepresentative" value="${ninethForm.legalRepresentative}"   
+							data-error="请填写此项" required/>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>所在地</td>
-						<td><input type="text" name="locationOfOrg" value="${ninethForm.locationOfOrg}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="locationOfOrg" value="${ninethForm.locationOfOrg}"   
+							data-error="请填写此项" required/>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>单位性质</td>
-						<td><input type="text" name="typeOfOrg" value="${ninethForm.typeOfOrg}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="typeOfOrg" value="${ninethForm.typeOfOrg}"   
+							data-error="请填写此项" required/>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>传真</td>
-						<td><input type="text" name="faxOfOrg" value="${ninethForm.faxOfOrg}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="faxOfOrg" value="${ninethForm.faxOfOrg}"   
+							data-error="请填写此项" required/>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>邮政编码</td>
-						<td><input type="text" name="zipCodeOfOrg" value="${ninethForm.zipCodeOfOrg}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="zipCodeOfOrg" value="${ninethForm.zipCodeOfOrg}"   
+							data-error="请填写此项" required/>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>中国通信学会团体会员</td>
-						<td>
-							<select name="isOrgMemberOfCIC">
+						<td  class="form-group">
+							<select id="isOrgMemberOfCIC" name="isOrgMemberOfCIC" data-error="请填写此项" required>
 								<c:choose>
 									<c:when test="${ninethForm.isOrgMemberOfCIC eq '否'}">
 										<option value="否">否</option>
@@ -76,37 +101,62 @@ request.setCharacterEncoding("UTF-8");
 										<option value="否">否</option>
 									</c:when>								
 									<c:otherwise>
-										<option disabled selected value>请选择</option>
+										<option disabled selected value="">请选择</option>
 										<option value="是">是</option>
 										<option value="否">否</option>
 									</c:otherwise>
 								</c:choose>		
 							</select>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
+					</tr>
+					<tr class="toHide">
+						<td>团体会员证书号</td>
+						<td>
+							<input class="form-control" type="text" name="orgMemberIDOfCIC" value="${ninethForm.orgMemberIDOfCIC}"    
+							data-error="请填写此项" required/>
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
-						<td>团体会员证书号</td>
-						<td><input type="text" name="orgMemberIDOfCIC" value="${ninethForm.orgMemberIDOfCIC}" /></td>
-					</tr>
-					<tr>
 						<td>通讯地址</td>
-						<td><input type="text" name="addressOfOrg" value="${ninethForm.addressOfOrg}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="addressOfOrg" value="${ninethForm.addressOfOrg}"    
+							data-error="请填写此项" required/>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>联系人</td>
-						<td><input type="text" name="contactNameOfOrg" value="${ninethForm.contactNameOfOrg}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="contactNameOfOrg" value="${ninethForm.contactNameOfOrg}"   
+							data-error="请填写此项" required/>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>单位电话</td>
-						<td><input type="text" name="contactPhoneOfOrg" value="${ninethForm.contactPhoneOfOrg}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="contactPhoneOfOrg" value="${ninethForm.contactPhoneOfOrg}"   
+							data-error="请填写此项" required/>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>移动电话</td>
-						<td><input type="text" name="mobileOfOrg" value="${ninethForm.mobileOfOrg}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="mobileOfOrg" value="${ninethForm.mobileOfOrg}"   
+							data-error="请填写此项" required/>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>电子邮箱</td>
-						<td><input type="text" name="emailOfOrg" value="${ninethForm.emailOfOrg}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="emailOfOrg" value="${ninethForm.emailOfOrg}"   
+							data-error="请填写此项" required/>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 				</table>
 				<div class="panel panel-default">
@@ -127,8 +177,11 @@ request.setCharacterEncoding("UTF-8");
 						</h4>
 						</div>
 					</div>
-					<div class="row panel-body">
-						<textarea rows="16" name="contributionToProject" form="ninethFormer">${ninethForm.contributionToProject}</textarea>
+					<div class="row panel-body form-group">
+						<textarea rows="16" class="form-control" name="contributionToProject" 
+						placeholder="不超过600字。"
+						form="ninethFormer" data-error="请填写此项" required>${ninethForm.contributionToProject}</textarea>
+						<div class="help-block with-errors" style="font-size:15px"></div>
 					</div>
 				</div>
 				<div class="row" style="margin-left:20px">
@@ -142,10 +195,31 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$("#isOrgMemberOfCIC").ready(function(){
+			if($("#isOrgMemberOfCIC option:selected").text()=="是"){
+				$(".toHide").show();
+				console.log("yes");
+			}
+			if($("#isOrgMemberOfCIC option:selected").text()=="否"){
+				$(".toHide").hide();
+				console.log("no");
+			}
+		});
+		$("#isOrgMemberOfCIC").change(function(){
+			if($("#isOrgMemberOfCIC option:selected").text()=="是"){
+				$(".toHide").show();
+				console.log("yes");
+			}
+			if($("#isOrgMemberOfCIC option:selected").text()=="否"){
+				$(".toHide").hide();
+				console.log("no");
+			}
+		});
+		
+	})
+</script>
 
-
-
-
-	
 </body>
 </html>

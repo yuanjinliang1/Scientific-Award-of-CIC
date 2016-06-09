@@ -30,25 +30,46 @@ request.setCharacterEncoding("UTF-8");
            	<spring:url value="/save-sixth-apply-unit-situation/{idOfApplyUnit}" var="saveURL">
 				<spring:param name="idOfApplyUnit" value="${sixthApplyUnitSituationForm.idOfApplyUnit}"></spring:param>
 			</spring:url>
-			<form id="sixthApplyUnitSituationForm" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="sixthFormAttr">
+			<form id="sixthApplyUnitSituationForm" action="${fn:escapeXml(saveURL)}" method="POST" 
+				modelAttribute="sixthFormAttr" data-toggle="validator" role="form">
 				<table class="table table-bordered">
 					<tr><td>应用单位名称</td>
-						<td><input type="text" name="unitName" value="${sixthApplyUnitSituationForm.unitName }"></td>
+						<td class="form-group">
+							<input type="text" name="unitName" value="${sixthApplyUnitSituationForm.unitName }" 
+								data-error="请填写此项" required>
+						 	<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr><td>应用技术</td>
-						<td><input type="text" name="applyTechnology" value="${sixthApplyUnitSituationForm.applyTechnology }"></td>
+						<td class="form-group">
+							<input type="text" name="applyTechnology" value="${sixthApplyUnitSituationForm.applyTechnology }"
+							data-error="请填写此项" required>
+						 	<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>应用起止时间</td>
-						<td><input type="text" name="startDate" value="${ sixthApplyUnitSituationForm.startDate}"></td>
+						<td class="form-group">
+							<input type="text" name="startDate" value="${ sixthApplyUnitSituationForm.startDate}"
+							data-error="请填写此项" required>
+						 	<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>应用单位联系人/电话</td>
-						<td><input type="text" name="contactAndPhoneNumber" value="${sixthApplyUnitSituationForm.contactAndPhoneNumber }"></td>
+						<td class="form-group">
+							<input type="text" name="contactAndPhoneNumber" value="${sixthApplyUnitSituationForm.contactAndPhoneNumber }"
+							data-error="请填写此项" required>
+							 <div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>应用情况</td>
-						<td><input type="text" name="applySituation" value="${sixthApplyUnitSituationForm.applySituation }"></td>
+						<td class="form-group">
+							<input type="text" name="applySituation" value="${sixthApplyUnitSituationForm.applySituation }"
+							data-error="请填写此项" required>
+						 	<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 				</table>
 				<div class="row" style="margin-left:20px">

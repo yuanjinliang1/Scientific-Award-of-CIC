@@ -30,34 +30,45 @@ request.setCharacterEncoding("UTF-8");
             <spring:url value="/save-eighth-major-contributor/{idOfEighthForm}" var="saveURL">
 				<spring:param name="idOfEighthForm" value="${eighthForm.idOfEighthForm}"></spring:param>
 			</spring:url>
-			<form id="eighthFormer" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="eighthFormAttr">
+			<form id="eighthFormer" action="${fn:escapeXml(saveURL)}" method="POST" 
+				modelAttribute="eighthFormAttr"  data-toggle="validator" role="form">
 				<table class="table table-bordered">
 					<tr>
 						<td>姓名</td>
-						<td>
-						<input type="text" name="nameOfContributor" value="${eighthForm.nameOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="nameOfContributor" value="${eighthForm.nameOfContributor}"
+						 data-error="请填写此项" required />
+						<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>性别</td>
-						<td>
-						<input type="text" name="genderOfContributor" value="${eighthForm.genderOfContributor}" />
+						<td class="form-group">
+							<input class="form-control" type="text" name="genderOfContributor" value="${eighthForm.genderOfContributor}" 
+							data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>排名</td>
-						<td>${eighthForm.rankOfContributor}
-						<input type="hidden" name="rankOfContributor" value="${eighthForm.rankOfContributor}" />
+						<td  class="form-group">
+							<input class="form-control" type="number" name="rankOfContributor" value="${eighthForm.rankOfContributor}" 
+							data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>国籍</td>
-						<td><input type="text" name="nationalityOfContributor" value="${eighthForm.nationalityOfContributor}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="nationalityOfContributor" value="${eighthForm.nationalityOfContributor}" 
+							data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>中国通信学会会员</td>
-						<td>
-							<select name="isMemberOfCIC">
+						<td class="form-group">
+							<select id="isMemberOfCIC" name="isMemberOfCIC" data-error="请填写此项" required >
 								<c:choose>
 									<c:when test="${eighthForm.isMemberOfCIC eq '否'}">
 										<option value="否">否</option>
@@ -68,38 +79,59 @@ request.setCharacterEncoding("UTF-8");
 										<option value="否">否</option>
 									</c:when>								
 									<c:otherwise>
-										<option disabled selected value>请选择</option>
+										<option disabled selected value="">请选择</option>
 										<option value="是">是</option>
 										<option value="否">否</option>
 									</c:otherwise>
 								</c:choose>		
 							</select>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
+					</tr>
+					<tr  class="toHide">
+						<td>会员证号</td>
+						<td>
+							<input class="form-control"  type="text" name="memberIdOfCIc" value="${eighthForm.memberIdOfCIc}"
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
-						<td>会员证号</td>
-						<td><input type="text" name="memberIdOfCIc" value="${eighthForm.memberIdOfCIc}" /></td>
-					</tr>
-					<tr>
 						<td>出生年月</td>
-						<td><input type="text" name="birthdayOfContributor" value="${eighthForm.birthdayOfContributor}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="birthdayOfContributor" value="${eighthForm.birthdayOfContributor}"
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>出生地</td>
-						<td><input type="text" name="birthPlaceOfContributor" value="${eighthForm.birthPlaceOfContributor}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="birthPlaceOfContributor" value="${eighthForm.birthPlaceOfContributor}"
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>民族</td>
-						<td><input type="text" name="nationOfContributor" value="${eighthForm.nationOfContributor}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="nationOfContributor" value="${eighthForm.nationOfContributor}" 
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>身份证号</td>
-						<td><input type="text" name="citizenIdOfContributor" value="${eighthForm.citizenIdOfContributor}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="citizenIdOfContributor" value="${eighthForm.citizenIdOfContributor}" 
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>归国人员</td>
-						<td>
-							<select name="isReturnedFormOverseas" id="isReturnedFormOverseas">
+						<td class="form-group">
+							<select name="isReturnedFormOverseas" id="isReturnedFormOverseas" data-error="请填写此项" required >
 								<c:choose>
 									<c:when test="${eighthForm.isReturnedFormOverseas eq '否'}">
 										<option value="否">否</option>
@@ -110,131 +142,174 @@ request.setCharacterEncoding("UTF-8");
 										<option value="否">否</option>
 									</c:when>								
 									<c:otherwise>
-										<option disabled selected value>请选择</option>
+										<option disabled selected value="">请选择</option>
 										<option value="是">是</option>
 										<option value="否">否</option>
 									</c:otherwise>
 								</c:choose>						
 							</select>
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					
 					<tr>
 						<td>技术职称</td>
-						<td>
-						<input type="text" name="technicalTitleOfContributor" value="${eighthForm.technicalTitleOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="technicalTitleOfContributor" value="${eighthForm.technicalTitleOfContributor}" 
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>最高学历</td>
-						<td>
-						<input type="text" name="highestEducationOfContributor" value="${eighthForm.highestEducationOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="highestEducationOfContributor" value="${eighthForm.highestEducationOfContributor}" 
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>最高学位</td>
-						<td>
-						<input type="text" name="highestDegreeOfContributor" value="${eighthForm.highestDegreeOfContributor}" />
+						<td class="form-group">
+						<input  class="form-control"type="text" name="highestDegreeOfContributor" value="${eighthForm.highestDegreeOfContributor}" 
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>毕业学校</td>
-						<td>
-						<input type="text" name="universityOfContributor" value="${eighthForm.universityOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="universityOfContributor" value="${eighthForm.universityOfContributor}"
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>毕业时间</td>
-						<td>
-						<input type="text" name="graduateDateOfContributor" value="${eighthForm.graduateDateOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="graduateDateOfContributor" value="${eighthForm.graduateDateOfContributor}"
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>所学专业</td>
-						<td>
-						<input type="text" name="majorOfContributor" value="${eighthForm.majorOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="majorOfContributor" value="${eighthForm.majorOfContributor}"
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>电子邮箱</td>
-						<td>
-						<input type="text" name="emailOfContributor" value="${eighthForm.emailOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="emailOfContributor" value="${eighthForm.emailOfContributor}"
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>办公电话</td>
-						<td>
-						<input type="text" name="officePhoneOfContributor" value="${eighthForm.officePhoneOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="officePhoneOfContributor" value="${eighthForm.officePhoneOfContributor}" 
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>移动电话</td>
-						<td>
-						<input type="text" name="mobileOfContributor" value="${eighthForm.mobileOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="mobileOfContributor" value="${eighthForm.mobileOfContributor}"
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>通讯地址</td>
-						<td>
-						<input type="text" name="addressOfContributor" value="${eighthForm.addressOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="addressOfContributor" value="${eighthForm.addressOfContributor}"
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>邮政编码</td>
-						<td>
-						<input type="text" name="zipCodeOfContributor" value="${eighthForm.zipCodeOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="zipCodeOfContributor" value="${eighthForm.zipCodeOfContributor}"
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>工作单位</td>
-						<td>
-						<input type="text" name="workUnitOfContributor" value="${eighthForm.workUnitOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="workUnitOfContributor" value="${eighthForm.workUnitOfContributor}" 
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>行政职务</td>
-						<td>
-						<input type="text" name="administrativePositionOfContributor" value="${eighthForm.administrativePositionOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="administrativePositionOfContributor" value="${eighthForm.administrativePositionOfContributor}" 
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>二级单位</td>
-						<td>
-						<input type="text" name="subWorkUnitOfContributor" value="${eighthForm.subWorkUnitOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="subWorkUnitOfContributor" value="${eighthForm.subWorkUnitOfContributor}"
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>党派</td>
-						<td>
-						<input type="text" name="policitalPartyOfContributor" value="${eighthForm.policitalPartyOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="policitalPartyOfContributor" value="${eighthForm.policitalPartyOfContributor}"
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>完成单位</td>
-						<td>
-						<input type="text" name="completeUnitOfContributor" value="${eighthForm.completeUnitOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="completeUnitOfContributor" value="${eighthForm.completeUnitOfContributor}"
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>所在地</td>
-						<td>
-						<input type="text" name="locationOfContributor" value="${eighthForm.locationOfContributor}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="locationOfContributor" value="${eighthForm.locationOfContributor}" 
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>单位性质</td>
-						<td>
-						<input type="text" name="typeOfUnit" value="${eighthForm.typeOfUnit}" />
+						<td class="form-group">
+						<input class="form-control" type="text" name="typeOfUnit" value="${eighthForm.typeOfUnit}" 
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>参加本项目开始时间</td>
-					
-						<td><input class="form-control" type="text" name="startDateOfParticipation" value="${eighthForm.startDateOfParticipation}" /></td>
+						<td class="form-group">
+							<input class="form-control" type="text" name="startDateOfParticipation" value="${eighthForm.startDateOfParticipation}" 
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>参加本项目结束时间</td>
-						<td><input class="form-control" type="text"  name="endDateOfParticipation" value="${eighthForm.startDateOfParticipation}" /></td>
+						<td class="form-group"><input class="form-control" type="text"  name="endDateOfParticipation" value="${eighthForm.startDateOfParticipation}"
+						 	data-error="请填写此项" required />
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						 </td>
 					</tr>
 				</table>
 				<div class="panel panel-default">
@@ -255,8 +330,11 @@ request.setCharacterEncoding("UTF-8");
 						</h4>
 						</div>
 					</div>
-					<div class="row panel-body">
-						<textarea class="form-control" rows="16"  name="contributionOfContributor" form="eighthFormer">${eighthForm.contributionOfContributor}</textarea>
+					<div class="row panel-body form-group">
+						<textarea class="form-control" rows="16"  name="contributionOfContributor" 
+						placeholder="不超过300字。应具体写明完成人对本项目做出的实质性贡献并注明对应第几项科技创新；与他人合作完成的科技创新，要细致说明本人独立于合作者的具体贡献，以及支持本人贡献成立的证明材料。提及的证明材料如存在于主要知识产权证明目录，应写明目录编号，否则应在附件中提供并注明附件编号。"
+						form="eighthFormer" data-error="请填写此项" required>${eighthForm.contributionOfContributor}</textarea>
+						<div class="help-block with-errors" style="font-size:15px"></div>
 					</div>
 				</div>
 				<div class="panel panel-default">
@@ -267,8 +345,11 @@ request.setCharacterEncoding("UTF-8");
 						</h4>
 						</div>
 					</div>
-					<div class="row panel-body">
-						<textarea class="form-control" rows="16"  name="formerRewardOfCIC" form="eighthFormer">${eighthForm.formerRewardOfCIC}</textarea>
+					<div class="row panel-body form-group">
+						<textarea class="form-control" rows="16"  name="formerRewardOfCIC" form="eighthFormer"
+						placeholder="填写完成人曾获中国通信学会科技奖励的获奖年度、等级、项目名称、排名及证书编号等内容"  
+						data-error="请填写此项" required>${eighthForm.formerRewardOfCIC}</textarea>
+						<div class="help-block with-errors" style="font-size:15px"></div>
 					</div>
 				</div>
 				<div class="row" style="margin-left:20px">
@@ -283,7 +364,31 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 	</div>
 </div>
-
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$("#isMemberOfCIC").ready(function(){
+			if($("#isMemberOfCIC option:selected").text()=="是"){
+				$(".toHide").show();
+				console.log("yes");
+			}
+			if($("#isMemberOfCIC option:selected").text()=="否"){
+				$(".toHide").hide();
+				console.log("no");
+			}
+		});
+		$("#isMemberOfCIC").change(function(){
+			if($("#isMemberOfCIC option:selected").text()=="是"){
+				$(".toHide").show();
+				console.log("yes");
+			}
+			if($("#isMemberOfCIC option:selected").text()=="否"){
+				$(".toHide").hide();
+				console.log("no");
+			}
+		});
+		
+	})
+</script>
 
 
 	

@@ -23,7 +23,8 @@
             <spring:url value="/save-sixth-paper-monograph/{idOfPaperMonograph}" var="saveURL">
 				<spring:param name="idOfPaperMonograph" value="${sixthPaperMonograph.idOfPaperMonograph}"></spring:param>
 			</spring:url>
-			<form id="sixthPaperMonograph" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="paperMonographFormAttr">
+			<form id="sixthPaperMonograph" action="${fn:escapeXml(saveURL)}" method="POST" 
+			modelAttribute="paperMonographFormAttr" data-toggle="validator" role="form">
 				<table class="table table-bordered">
 					<tr>
 						<td>是否是代表性论文专著 <span style="color:red"> (限八篇)</span></td>
@@ -44,19 +45,34 @@
 					</tr>
 					<tr>
 						<td>论文专刊名称/刊名/作者</td>
-						<td><input type="text" name="name" value="${sixthPaperMonograph.name}"></td>
+						<td class="form-group">
+							<input type="text" name="name" value="${sixthPaperMonograph.name}" data-error="请填写此项" required>
+							 <div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>影响因子</td>
-						<td><input type="text" name="influenceFactor" value="${sixthPaperMonograph.influenceFactor}"></td>
+						<td class="form-group">
+							<input type="text" name="influenceFactor" value="${sixthPaperMonograph.influenceFactor}" 
+								data-error="请填写此项" required>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>年卷页码（xx年xx卷xx页）</td>
-						<td><input type="text" name="yearPage" value="${sixthPaperMonograph.yearPage}"></td>
+						<td class="form-group">
+							<input type="text" name="yearPage" value="${sixthPaperMonograph.yearPage}" 
+							data-error="请填写此项" required>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>发表时间（年、月、日）</td>
-						<td><input type="text" name="publishTime" value="${sixthPaperMonograph.publishTime}"></td>
+						<td  class="form-group">
+							<input type="text" name="publishTime" value="${sixthPaperMonograph.publishTime}"
+								data-error="请填写此项" required>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr class="toHide">
 						<td>通讯作者</td>
@@ -72,11 +88,19 @@
 					</tr>
 					<tr>
 						<td>SCI他引次数</td>
-						<td><input type="number" name="referenceBySCI" value="${sixthPaperMonograph.referenceBySCI}"></td>
+						<td class="form-group">
+							<input type="number" name="referenceBySCI" value="${sixthPaperMonograph.referenceBySCI}"
+								data-error="请填写此项" required>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>他引总次数</td>
-						<td><input type="number" name="totalReference" value="${sixthPaperMonograph.totalReference}"></td>
+						<td class="form-group">
+							<input type="number" name="totalReference" value="${sixthPaperMonograph.totalReference}"
+								data-error="请填写此项" required>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
 					</tr>
 					<tr>
 						<td>知识产权是否归国内所有</td>

@@ -50,28 +50,66 @@ request.setCharacterEncoding("UTF-8");
 					<spring:url value="/save-seventh-ip-doc/{idOfSeventhIPForm}" var="saveURL">
 						<spring:param name="idOfSeventhIPForm" value="${seventhIPForm.idOfSeventhIPForm}"></spring:param>
 					</spring:url>
-					<form id="seventhIPFormer" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="seventhIPFormAttr">
+					<form id="seventhIPFormer" action="${fn:escapeXml(saveURL)}" method="POST" 
+						modelAttribute="seventhIPFormAttr" data-toggle="validator" role="form">
 						<tr>
-							<td>
-								${seventhIPForm.rankOfIP}
-								<input type="hidden" class="form-control" name="rankOfIP" value="${seventhIPForm.rankOfIP}" />
-							</td>
-							<td><input type="text" class="form-control" name="typeOfIP" value="${seventhIPForm.typeOfIP}" /> </td>
-							<td><input type="text" class="form-control" name="nameOfIP" value="${seventhIPForm.nameOfIP}" /> </td>
-							<td><input type="text" class="form-control" name="locationOfIP" value="${seventhIPForm.locationOfIP}" /> </td>
-							<td><input type="text" class="form-control" name="authorizationCodeOfIP" value="${seventhIPForm.authorizationCodeOfIP}" /> </td>
-							<td><input type="text" class="form-control" name="authorizationDateOfIP" value="${seventhIPForm.authorizationDateOfIP}" /> </td>
-							<td><input type="text" class="form-control" name="certificateNumberOfIP" value="${seventhIPForm.certificateNumberOfIP}" /> </td>
-							<td><input type="text" class="form-control" name="holderOfIP" value="${seventhIPForm.holderOfIP}" /> </td>
-							<td><input type="text" class="form-control" name="inventorOfIP" value="${seventhIPForm.inventorOfIP}" /> </td>
-							<td><input type="text" class="form-control" name="isValidIP" value="${seventhIPForm.isValidIP}" /> </td>
+							<td class="form-group">
+								<input type="number" class="form-control" name="rankOfIP" value="${seventhIPForm.rankOfIP}"
+								data-error="请填写此项" required />
+						 		<div class="help-block with-errors" style="font-size:15px"></div>
+						 	</td>
+							<td class="form-group">
+								<input type="text" class="form-control" name="typeOfIP" value="${seventhIPForm.typeOfIP}" 
+								data-error="请填写此项" required/>
+						 		<div class="help-block with-errors" style="font-size:15px"></div>
+						 	</td>
+							<td class="form-group">
+								<input type="text" class="form-control" name="nameOfIP" value="${seventhIPForm.nameOfIP}" 
+								data-error="请填写此项" required/>
+						 		<div class="help-block with-errors" style="font-size:15px"></div>
+						 	</td>
+							<td class="form-group">
+								<input type="text" class="form-control" name="locationOfIP" value="${seventhIPForm.locationOfIP}" 
+								data-error="请填写此项" required/>
+						 		<div class="help-block with-errors" style="font-size:15px"></div>
+						 	</td>
+							<td class="form-group">
+								<input type="text" class="form-control" name="authorizationCodeOfIP" 
+								value="${seventhIPForm.authorizationCodeOfIP}" data-error="请填写此项" required/>
+						 		<div class="help-block with-errors" style="font-size:15px"></div>
+						 	</td>
+							<td class="form-group">
+								<input type="text" class="form-control" name="authorizationDateOfIP" 
+								value="${seventhIPForm.authorizationDateOfIP}" data-error="请填写此项" required/>
+						 		<div class="help-block with-errors" style="font-size:15px"></div>
+						 	</td>
+							<td class="form-group">
+								<input type="text" class="form-control" name="certificateNumberOfIP" 
+								value="${seventhIPForm.certificateNumberOfIP}" data-error="请填写此项" required/>
+						 		<div class="help-block with-errors" style="font-size:15px"></div>
+						 	</td>
+							<td class="form-group">
+								<input type="text" class="form-control" name="holderOfIP" 
+								value="${seventhIPForm.holderOfIP}" data-error="请填写此项" required/>
+						 		<div class="help-block with-errors" style="font-size:15px"></div>
+						 	</td>
+							<td class="form-group">
+								<input type="text" class="form-control" name="inventorOfIP" 
+								value="${seventhIPForm.inventorOfIP}" data-error="请填写此项" required/>
+						 		<div class="help-block with-errors" style="font-size:15px"></div>
+						 	</td>
+							<td class="form-group">
+								<input type="text" class="form-control" name="isValidIP" 
+								value="${seventhIPForm.isValidIP}" data-error="请填写此项" required/>
+						 		<div class="help-block with-errors" style="font-size:15px"></div>
+						 	</td>
 							<td>
 								<c:url value="/delete-seventh-ip-doc" var="deleteURL">
 									<c:param name="idOfSeventhIPForm" value="${seventhIPForm.idOfSeventhIPForm }"></c:param>
 								</c:url>
 								<a id="delete" class="form-control btn btn-danger" href="${fn:escapeXml(deleteURL)}">删除</a>
 							</td>
-							<td>
+							<td class="form-group">
 								<input type="submit" class="form-control btn btn-primary" value="保存" />
 							</td>
 						</tr>

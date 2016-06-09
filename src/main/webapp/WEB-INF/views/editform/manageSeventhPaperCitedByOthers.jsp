@@ -31,7 +31,7 @@ request.setCharacterEncoding("UTF-8");
 					<input type="submit" class="btn btn-default" value="添加被引用论文专著" />
 				</div>
 			</form>	
-            <table class="table table-bordered">
+            <table class="table table-bordered" style="zoom:80%">
 				<tr>
 					<td>序号</td>
 					<td>被引代表性论文专著序号</td>
@@ -45,21 +45,47 @@ request.setCharacterEncoding("UTF-8");
 					<spring:url value="/save-seventh-paper-cited-by-others/{idOfSeventhPaperForm}" var="saveURL">
 						<spring:param name="idOfSeventhPaperForm" value="${seventhPaperForm.idOfSeventhPaperForm}"></spring:param>
 					</spring:url>
-					<form id="seventhPaperFormer" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="seventhPaperFormAttr">
+					<form action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="seventhPaperFormAttr" data-toggle="validator" role="form">
 						<tr>
-							<td>${seventhPaperForm.rankOfPaper}</td>
-							<td><input type="text" name="doiOfPaper" value="${seventhPaperForm.doiOfPaper}" /> </td>
-							<td><input type="text" name="titleAndAuthorOfPaper" value="${seventhPaperForm.titleAndAuthorOfPaper}" /> </td>
-							<td><input type="text" name="journalAndIF" value="${seventhPaperForm.journalAndIF}" /> </td>
-							<td><input type="text" name="publishDate" value="${seventhPaperForm.publishDate}" /></td>
+							<td class="form-group">
+								<input class="form-control" type="number" name="rankOfPaper" value="${seventhPaperForm.rankOfPaper}"
+								data-error="请填写此项" required/>
+						 		<div class="help-block with-errors" style="font-size:15px"></div>
+						 	</td>
+							<td class="form-group">
+								<input class="form-control" type="text" name="doiOfPaper" value="${seventhPaperForm.doiOfPaper}"
+								data-error="请填写此项" required/>
+						 		<div class="help-block with-errors" style="font-size:15px"></div>
+						 	</td>
+							<td class="form-group">
+								<input class="form-control" type="text" name="titleAndAuthorOfPaper" value="${seventhPaperForm.titleAndAuthorOfPaper}"
+								data-error="请填写此项" required/>
+						 		<div class="help-block with-errors" style="font-size:15px"></div>
+						 	</td>
+							<td class="form-group">
+								<input class="form-control" type="text" name="journalAndIF" value="${seventhPaperForm.journalAndIF}"
+								data-error="请填写此项" required/>
+						 		<div class="help-block with-errors" style="font-size:15px"></div>
+						 	</td>
+							<td class="form-group">
+								<input class="form-control" type="text" name="publishDate" value="${seventhPaperForm.publishDate}"
+								data-error="请填写此项" required/>
+						 		<div class="help-block with-errors" style="font-size:15px"></div>
+						 	</td>
+							<td  class="form-group">
+								<input class="btn btn-primary" type="submit" value="保存" />
+							</td>
 							<td>
 								<c:url value="/delete-seventh-paper-cited-by-others" var="deleteURL">
 									<c:param name="idOfSeventhPaperForm" value="${seventhPaperForm.idOfSeventhPaperForm }"></c:param>
 								</c:url>
-								<a id="delete" href="${fn:escapeXml(deleteURL)}">删除</a>
+								<a class="btn btn-danger" href="${fn:escapeXml(deleteURL)}">删除</a>
 							</td>
 							<td>
-								<input type="submit" value="保存" />
+							<div class="form-group">
+							    <input type="text" class="form-control" id="inputName" placeholder="Cina Saffary" required>
+							    <div class="help-block with-errors"></div>
+							</div>
 							</td>
 						</tr>
 					</form>

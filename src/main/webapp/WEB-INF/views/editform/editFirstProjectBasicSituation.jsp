@@ -37,8 +37,10 @@ request.setCharacterEncoding("UTF-8");
 						<td>项目名称</td>
 						<td class="form-group">
 							<input class="form-control" type="text" name="projectName" value="${firstForm.projectName }" 
-							placeholder="${person.name}" data-error="请填写此项" maxlength="30" required/></td>
+							placeholder="${person.name}" data-error="请填写此项" maxlength="30" required/>
 							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
+							
 					</tr>
 					<tr>
 						
@@ -134,14 +136,14 @@ request.setCharacterEncoding("UTF-8");
 						<td>任务来源2（选填）</td>
 						<td class="form-group">
 								<input class="form-control" type="text" name="taskSource2" value="${firstForm.taskSource2 }" 
-							 maxlength="30" required/>
+							 maxlength="30" />
 							 
 						</td>
 					</tr><tr>
 						<td>任务来源3（选填）</td>
 						<td class="form-group">
 								<input class="form-control" type="text" name="taskSource3" value="${firstForm.taskSource3 }" 
-							  maxlength="30" required/>
+							  maxlength="30"/>
 						</td>
 					</tr>
 				</table>
@@ -253,7 +255,7 @@ request.setCharacterEncoding("UTF-8");
 				<div class="row" style="margin-left:20px">
 					<input type="submit" class="btn btn-primary" value="保存" />
 					<spring:url value="/display-second-form-when-applier-editing" var="secondFormURL"/>
-					<a class="btn btn-default" href="${fn:escapeXml(secondFormURL)}">下一页</a>
+					<a class="btn btn-default" href="${fn:escapeXml(secondFormURL)}">下一页<span><small>（不保存）</small></span></a>
 				</div>
 			</form>
         </div>

@@ -26,34 +26,54 @@ request.setCharacterEncoding("UTF-8");
 	<spring:url value="/edit-referee-unit-opinion-post/{applierUid}" var="editOpinionURL">
 		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
 	</spring:url>
-	<form id="secondFormer" action="${fn:escapeXml(editOpinionURL)}" method="POST" modelAttribute="secondFormAttr">
+	<form id="secondFormer" action="${fn:escapeXml(editOpinionURL)}" method="POST" modelAttribute="secondFormAttr"
+		 data-toggle="validator" role="form">
 		<table class="table table-bordered">
 		<tr>
 			<td>推荐单位名称</td>
 			<td><input type="hidden" name="refereeUnitName" value="${person.name}"/>${person.name}</td>
 		</tr>
-		<tr>
+		<tr class="form-group">
 			<td>通讯地址</td>
-			<td><input type="text" name="postAddress" value="${secondForm.postAddress}"></td>
+			<td>
+				<input class="form-control" type="text" name="postAddress" value="${secondForm.postAddress}" data-error="请填写此项" required>
+    			<div class="help-block with-errors"></div>
+    		</td>
 		</tr>
-		<tr>
+		<tr class="form-group">
 			<td>邮政编码</td>
-			<td><input type="text" name="zipCode" value="${secondForm.zipCode }"></td>
+			<td>
+				<input class="form-control" type="text" name="zipCode" value="${secondForm.zipCode }" data-error="请填写此项" required>
+    			<div class="help-block with-errors"></div>
+    		</td>
 		</tr>
-		<tr>
+		<tr class="form-group">
 			<td>联系人</td>
-			<td><input type="text" name="contact" value="${secondForm.contact }"></td>
+			<td>
+				<input class="form-control" type="text" name="contact" value="${secondForm.contact }" data-error="请填写此项" required>
+    			<div class="help-block with-errors"></div>
+    		</td>
 		</tr>
-		<tr>
+		<tr class="form-group">
 			<td>联系电话</td>
-			<td><input type="text" name="phoneNumber" value="${secondForm.phoneNumber }"></td>
+			<td>
+				<input class="form-control" type="text" name="phoneNumber" value="${secondForm.phoneNumber }" data-error="请填写此项" required>
+    			<div class="help-block with-errors"></div>
+    		</td>
 		</tr>
-		<tr><td>电子邮箱</td>
-			<td><input type="text" name="email" value="${secondForm.email }"></td>
+		<tr class="form-group">
+			<td>电子邮箱</td>
+			<td>
+				<input class="form-control" type="text" name="email" value="${secondForm.email }" data-error="请填写此项" required>
+   			 	<div class="help-block with-errors"></div>
+   			 </td>
 		</tr>
-		<tr>
+		<tr class="form-group">
 			<td>传真</td>
-			<td><input type="text" name="fax" value="${secondForm.fax}"></td>
+			<td>
+				<input class="form-control" type="text" name="fax" value="${secondForm.fax}" data-error="请填写此项" required>
+    			<div class="help-block with-errors"></div>
+    		</td>
 		</tr>
 		</table>
 	
@@ -65,13 +85,16 @@ request.setCharacterEncoding("UTF-8");
 				</h4>
 				</div>
 			</div>
-			<div class="row panel-body">
-				<textarea rows="8" name="recommendOpinion" form="secondFormer">${secondForm.recommendOpinion}</textarea>
+			<div class="row panel-body form-group">
+				<textarea  class="form-control" rows="8" name="recommendOpinion" form="secondFormer"
+				placeholder="不超过600字。文中以“该项目”“该领域”等第三人称进行表述。&#13;&#10推荐单位应认真审阅推荐书材料。科技创新点的创新性、先进性、应用效果和对行业科技进步的作用进行概述，并对照中国通信学会科学技术奖授奖条件，写明推荐理由和建议等级。"
+				 maxlength="600"  data-error="请填写此项" required>${secondForm.recommendOpinion}</textarea>
+    			<div class="help-block with-errors"></div>
 			</div>
 		</div>
-		<div class="row" style="margin-left:5px">
+		<div class="row form-group" style="margin-left:5px">
 			推荐该项目为中国通信学会科学技术奖
-			<select name="referingScienceTechnologyAwardRank">
+			<select  name="referingScienceTechnologyAwardRank" data-error="请填写此项" required>
 				<option value="${secondForm.referingScienceTechnologyAwardRank}">${secondForm.referingScienceTechnologyAwardRank}</option>
 				<c:forEach items="${nominatedAwards }" var="nominatedAward">
 					<c:if test="${secondForm.referingScienceTechnologyAwardRank!=nominatedAward}">
@@ -79,6 +102,7 @@ request.setCharacterEncoding("UTF-8");
 					</c:if>
 				</c:forEach>
 			</select>
+			<div class="help-block with-errors"></div>
 		</div>
 		<div class="row" style="margin-left:20px;margin-top:10px;">
 			<input type="submit" class="btn btn-default" value="保存" />

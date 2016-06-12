@@ -30,7 +30,8 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class FirstProjectBasicSituationPdf {
-	public static void buildFirstProjectBasicSituationPdf(String applierUid,Document document) throws DocumentException, IOException{
+	public static void buildFirstProjectBasicSituationPdf(String applierUid,Document document) 
+			throws DocumentException, IOException{
 		ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 		Applier applier=applierJdbc.getApplierByUid(applierUid);
 		String applicationType=applier.getApplicationType();

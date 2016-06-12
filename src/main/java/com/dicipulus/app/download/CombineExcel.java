@@ -51,6 +51,7 @@ public class CombineExcel {
 		
 		//表头
 		WritableWorkbook book=Workbook.createWorkbook(new File(pathOfExcel));
+		try {//HACK ugly try-catch block, try to encapsulate it with a method and throw the exception gracefully
 		WritableSheet sheet=book.createSheet("明细表", 0);
 		sheet.mergeCells(0, 0, 19, 0);
 		Label label=new Label(0,0,year+"年中国通信学会科学技术奖收集明细表");
@@ -180,7 +181,12 @@ public class CombineExcel {
 			row++;
 		}
 		book.write();
-		book.close();
-	
+		}catch (Exception e){
+			e.printStackTrace();
+		}finally {
+			//in order to prevent file-not-closing problems
+			//HACK ugly try-catch block, try to encapsulate it with a method and throw the exception gracefully
+			book.close();
+		}
 	}
 }

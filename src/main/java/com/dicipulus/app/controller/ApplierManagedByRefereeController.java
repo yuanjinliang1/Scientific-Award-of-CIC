@@ -5,6 +5,8 @@ import com.dicipulus.app.JDBC.*;
 import com.dicipulus.app.formController.FormUlti;
 import com.dicipulus.app.model.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,6 +16,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -36,7 +39,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 @Controller
 @SessionAttributes("person")
 public class ApplierManagedByRefereeController{
-	private static final Logger logger=LoggerFactory.getLogger(RefereeManagedByAdminController.class);
+	private static final Logger logger=LoggerFactory.getLogger(ApplierManagedByRefereeController.class);
 	
 	private Person getPersonInRequest(HttpServletRequest request){
 		HttpSession session= request.getSession();
@@ -97,14 +100,17 @@ public class ApplierManagedByRefereeController{
 	 * @param request
 	 * @param uid
 	 * @return
+	 * @throws IOException 
 	 */
 	@RequestMapping(value="/applier-managed-by-referee/delete-applier", method=RequestMethod.GET)
-	public String deleteApplier(HttpServletRequest request, @RequestParam String uid){
+	public String deleteApplier(HttpServletRequest request, @RequestParam String uid) throws IOException{
 		logger.info("deleteApplier()");
 		Person person =FormUlti.getPersonInRequest(request);
 		ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 		DeleteFormsJdbc deleteFormsJdbc=InitJdbc.initDeleteFormsJdbc();
 		deleteFormsJdbc.deleteAllForms(applierJdbc.getApplierByUid(uid));//先删表
+		File dictionary = new File(MyProperties.getRootPath() + uid);
+		FileUtils.cleanDirectory(dictionary);//删除文件夹内文件
 		applierJdbc.deleteApplier(uid);//再删记录
 		return "redirect:applier-view/"+person.getUid();
 	}

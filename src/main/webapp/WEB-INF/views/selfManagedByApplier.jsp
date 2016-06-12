@@ -99,7 +99,7 @@
 				<spring:url value="/display-first-project-basic-situation/{applierUid}" var="firstFormURL">
 					<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 				</spring:url>
-				<input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(firstFormURL)}';" value="查看">
+				<a type="button" class="btn btn-default to-read" href='${fn:escapeXml(firstFormURL)}'>查看</a>
 			</td>
 			<td>
 				<spring:url value="/edit-first-project-basic-situation" var="editFirstFormURL">
@@ -109,7 +109,8 @@
 				<spring:url value="/download-pdf/{applierUid}" var="pdfURL">
 					<spring:param name="applierUid" value="${application.applierUid}"></spring:param>
 				</spring:url>
-			<td><input type="button" class="btn btn-default" onclick="location.href='${fn:escapeXml(pdfURL)}';" value="下载pdf"></td>
+			<td>
+				<a type="button" class="btn btn-default to-read" href='${fn:escapeXml(pdfURL)}'>下载pdf</a>
 		</tr>
 	</table>
 	<div>
@@ -188,6 +189,22 @@
 					event.preventDefault();
 					window.location="#";
 					alert("您已提交，请先撤回项目再进行修改。");
+				});
+			}
+		});
+		
+		$(".to-read").each(function(){
+			if($("#applicationType").text()!="自然科学类"&&$("#applicationType").text()!="科技进步类"&&$("#applicationType").text()!="技术发明类"){
+				$(this).click(function(event){
+					enableSearchButton(false);
+					event.preventDefault();
+					window.location="#";
+					var failMessage='<div class="alert alert-danger"> <strong>请先选定申请类型</strong></div>';
+					$("#message").html(failMessage);
+					$("#message").fadeTo(2000, 500).slideUp(500, function(){
+				        $("#message").alert('close');
+				        return false;
+					});
 				});
 			}
 		});

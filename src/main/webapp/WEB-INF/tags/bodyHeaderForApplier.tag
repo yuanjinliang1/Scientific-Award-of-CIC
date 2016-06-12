@@ -58,7 +58,7 @@
         <spring:url value="/display-first-project-basic-situation/{applierUid}" var="displayFisrtEditURL">
 			<spring:param name="applierUid" value="${person.uid}"></spring:param>
 		</spring:url>
-        <li  class="${viewApplication }" ><a id="firstEditAddress" href="${fn:escapeXml(displayFisrtEditURL)}">查看项目</a></li>
+        <li  class="${viewApplication }" ><a id="firstEditAddress" class="to-read" href="${fn:escapeXml(displayFisrtEditURL)}">查看项目</a></li>
       </ul>
     </div>
     <div >

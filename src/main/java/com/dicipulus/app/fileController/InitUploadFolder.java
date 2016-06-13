@@ -40,7 +40,7 @@ public class InitUploadFolder {
 		logger.info("initUpload");
 
 		String applierPath = rootPath + applierUid + "/uploaded/";
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 1; i <= 7; i++) {
 			File file=new File(applierPath + i);
 			if(file.exists()==false){
 				logger.info(file.toString()+" "+file.mkdirs());

@@ -179,7 +179,7 @@ request.setCharacterEncoding("UTF-8");
 					</div>
 					<div class="row panel-body form-group">
 						<textarea rows="16" class="form-control" name="contributionToProject" 
-						placeholder="不超过600字。"
+						placeholder="不超过600字。" maxlength="600"
 						form="ninethFormer" data-error="请填写此项" required>${ninethForm.contributionToProject}</textarea>
 						<div class="help-block with-errors" style="font-size:15px"></div>
 					</div>

@@ -110,7 +110,9 @@ public class ApplierManagedByRefereeController{
 		DeleteFormsJdbc deleteFormsJdbc=InitJdbc.initDeleteFormsJdbc();
 		deleteFormsJdbc.deleteAllForms(applierJdbc.getApplierByUid(uid));//先删表
 		File dictionary = new File(MyProperties.getRootPath() + uid);
-		FileUtils.cleanDirectory(dictionary);//删除文件夹内文件
+		if(dictionary.exists()==true){
+			FileUtils.cleanDirectory(dictionary);//删除文件夹内文件
+		}
 		applierJdbc.deleteApplier(uid);//再删记录
 		return "redirect:applier-view/"+person.getUid();
 	}

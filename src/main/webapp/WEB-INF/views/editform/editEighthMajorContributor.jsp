@@ -333,7 +333,7 @@ request.setCharacterEncoding("UTF-8");
 					<div class="row panel-body form-group">
 						<textarea class="form-control" rows="16"  name="contributionOfContributor" 
 						placeholder="不超过300字。应具体写明完成人对本项目做出的实质性贡献并注明对应第几项科技创新；与他人合作完成的科技创新，要细致说明本人独立于合作者的具体贡献，以及支持本人贡献成立的证明材料。提及的证明材料如存在于主要知识产权证明目录，应写明目录编号，否则应在附件中提供并注明附件编号。"
-						form="eighthFormer" data-error="请填写此项" required>${eighthForm.contributionOfContributor}</textarea>
+						form="eighthFormer" maxlength="300" data-error="请填写此项" required>${eighthForm.contributionOfContributor}</textarea>
 						<div class="help-block with-errors" style="font-size:15px"></div>
 					</div>
 				</div>

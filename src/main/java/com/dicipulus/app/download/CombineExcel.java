@@ -178,6 +178,8 @@ public class CombineExcel {
 			label=new Label(19,row,temp.getReferingScienceTechnologyAwardRank());
 			System.out.println(temp.getReferingScienceTechnologyAwardRank());
 			sheet.addCell(label);
+			label=new Label(20,row,temp.getCommentOfAdmin() );
+			sheet.addCell(label);
 			row++;
 		}
 		book.write();

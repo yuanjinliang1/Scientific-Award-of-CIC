@@ -279,7 +279,7 @@
 				<a class="btn btn-danger" href="${deleteURL}" style="margin-right:30px">删除全部附件</a>
 				<c:if test="${applier.applicationType=='科技进步类'||applier.applicationType=='技术发明类'}">
 					<c:if test="${index>=5 }">
-						<a class="btn btn-primary" type="button"  href="/app/self-managed-by-applier/100116001">完成</a>
+						<a class="btn btn-primary" type="button"  href="/app/self-managed-by-applier/${applier.uid }">完成</a>
 					</c:if>
 					<c:if test="${index<5 }">
 							<spring:url value="/upload/{applierUid}/{index}" var="nextURL">

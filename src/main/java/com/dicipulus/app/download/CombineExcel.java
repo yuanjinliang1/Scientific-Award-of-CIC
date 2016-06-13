@@ -173,7 +173,7 @@ public class CombineExcel {
 			label=new Label(17,row,temp.getPostAddress());
 			System.out.println(temp.getPostAddress());
 			sheet.addCell(label);
-			label=new Label(18,row,"");
+			label=new Label(18,row,temp.getResultRegistration());
 			sheet.addCell(label);
 			label=new Label(19,row,temp.getReferingScienceTechnologyAwardRank());
 			System.out.println(temp.getReferingScienceTechnologyAwardRank());

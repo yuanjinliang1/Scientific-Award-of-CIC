@@ -111,7 +111,7 @@ request.setCharacterEncoding("UTF-8");
 					<div class="row panel-body form-group">
 						<textarea class="form-control" rows="10"  name="mainEconomicProfitIntroduction"
 						 placeholder="不超过300字。&#13;&#10需说明新增销售额和新增利润的数据来源，如会计报表、单位财务部门核准出具的财务证明等；以及其他证明内容。应用单位在提供应用证明时应附支撑以上说明的证据资料。" 
-						 form="sixthFormer" data-error="请填写此项" required>${sixthEconomicAndSocialBenefitForms.mainEconomicProfitIntroduction}</textarea>
+						 form="sixthFormer" data-error="请填写此项" maxlength="300" required>${sixthEconomicAndSocialBenefitForms.mainEconomicProfitIntroduction}</textarea>
 						 <div class="help-block with-errors" style="font-size:15px"></div>
 					</div>
 				</div>
@@ -126,7 +126,7 @@ request.setCharacterEncoding("UTF-8");
 					<div class="row panel-body form-group">
 						<textarea class="form-control" rows="10"  name="otherEconomicProfitIntroduction" 
 						placeholder="不超过300字。&#13;&#10如果项目申报单位认为新增销售额、新增利润两个指标不能有效反映本项目的经济效益贡献，项目单位可自行增加其他效益指标，但需说明其他经济指标的数据来源、计算方法和计算过程。包括新增税收、减少损失、降低成本、降低能耗等。" 
-						form="sixthFormer" data-error="请填写此项" required>${sixthEconomicAndSocialBenefitForms.otherEconomicProfitIntroduction}</textarea>
+						form="sixthFormer" data-error="请填写此项" maxlength="300" required>${sixthEconomicAndSocialBenefitForms.otherEconomicProfitIntroduction}</textarea>
 						 <div class="help-block with-errors" style="font-size:15px"></div>
 					</div>
 				</div>
@@ -134,7 +134,7 @@ request.setCharacterEncoding("UTF-8");
 					<div class="row panel-body form-group">
 						<textarea class="form-control" rows="10"  name="socialBenefit" 
 						placeholder="不超过600字。&#13;&#10应说明本项目在推动科学技术进步、保护自然资源和生态环境、提高国防能力、保障国家和社会安全、改善人民物质文化生活、提升健康水平、提高国民科学文化素质和培养人才等方面所起的作用。"
-						form="sixthFormer" data-error="请填写此项" required>${sixthEconomicAndSocialBenefitForms.socialBenefit}</textarea>
+						form="sixthFormer" data-error="请填写此项" maxlength="600" required>${sixthEconomicAndSocialBenefitForms.socialBenefit}</textarea>
 						<div class="help-block with-errors" style="font-size:15px"></div>
 					</div>
 				<div class="row" style="margin-left:20px">

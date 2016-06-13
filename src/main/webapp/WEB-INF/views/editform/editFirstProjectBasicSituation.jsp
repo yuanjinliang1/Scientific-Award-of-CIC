@@ -64,15 +64,35 @@ request.setCharacterEncoding("UTF-8");
 						</td>
 					</tr>
 					<tr>
-						<td>学科分类名称2</td>
+						<td>学科分类代码1</td>
+						<td  class="form-group"> 
+							<input class="form-control" type="text" name="subjectCategoryId1" value="${firstForm.subjectCategoryId1 }" 
+							 data-error="请填写此项" required/>
+							 <div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
+					</tr>
+					<tr>
+						<td>学科分类名称2（选填）</td>
 						<td  class="form-group"> 
 							<input class="form-control" type="text" name="subjectCategoryName2" value="${firstForm.subjectCategoryName2 }"/>
 						</td>
 					</tr>
 					<tr>
-						<td>学科分类名称3</td>
+						<td>学科分类代码2（选填）</td>
+						<td  class="form-group"> 
+							<input class="form-control" type="text" name="subjectCategoryId2" value="${firstForm.subjectCategoryId2 }" />
+						</td>
+					</tr>
+					<tr>
+						<td>学科分类名称3（选填）</td>
 						<td  class="form-group"> 
 							<input class="form-control" type="text" name="subjectCategoryName3" value="${firstForm.subjectCategoryName3 }"/>
+						</td>
+					</tr>
+					<tr>
+						<td>学科分类代码3（选填）</td>
+						<td  class="form-group"> 
+							<input class="form-control" type="text" name="subjectCategoryId3" value="${firstForm.subjectCategoryId3 }" />
 						</td>
 					</tr>
 					<c:if test="${applier.applicationType=='科技进步类'||applier.applicationType=='技术发明类' }">

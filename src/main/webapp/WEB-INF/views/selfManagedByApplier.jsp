@@ -117,7 +117,7 @@
 	<form action="/app/self-managed-by-applier/change-name" method="POST">
 		<div class="form-group col-md-4 panel panel-default center">
 			<div class="panel-heading row">
-				<h3 class=" panel-title ">修改名称</h3>
+				<h3 class=" panel-title ">修改用户名</h3>
 			</div>
 			<div class="panel-body">
 				<div class="row">

@@ -112,10 +112,10 @@ public class EighthFormController {
 			return FormUlti.redirectErrorMessage("illegal-status");
 		}
 		List<EighthMajorContributor>  eighthMajorContributors = InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributors(applierUid);
-		InitJdbc.initEighthMajorContributorJdbc().createEighthMajorContributor(applierUid, eighthMajorContributors.size()+1);
+		int idOfEighthForm =InitJdbc.initEighthMajorContributorJdbc().createEighthMajorContributor(applierUid, eighthMajorContributors.size()+1);
 		InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributorNamesForFirstForm(applierUid);
 		
-		return "redirect:/manage-eighth-major-contributor";
+		return "redirect:edit-eighth-major-contributor/"+idOfEighthForm;
 	}
 	
 	/**
@@ -229,6 +229,6 @@ public class EighthFormController {
 		
 		InitJdbc.initEighthMajorContributorJdbc().updateEighthMajorContributor(eighthForm);
 		InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributorNamesForFirstForm(applierUid);
-		return "redirect:/edit-eighth-major-contributor/"+eighthForm.getIdOfEighthForm();
+		return "redirect:/manage-eighth-major-contributor";
 	}
 }

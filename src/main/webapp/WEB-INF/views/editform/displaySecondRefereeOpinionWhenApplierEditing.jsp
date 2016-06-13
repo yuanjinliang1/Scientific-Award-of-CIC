@@ -76,7 +76,7 @@ request.setCharacterEncoding("UTF-8");
 				<spring:url value="/edit-first-project-basic-situation" var="firstFormURL"/>
 					<a class="btn btn-default" href="${fn:escapeXml(firstFormURL)}">上一页</a>
 				<spring:url value="/edit-brief-introduction" var="thirdFormURL"/>
-					<a class="btn btn-default" href="${fn:escapeXml(thirdFormURL)}">下一页</a>
+					<a class="btn btn-primary" href="${fn:escapeXml(thirdFormURL)}">下一页</a>
 			</div>
         </div>
 		</div>

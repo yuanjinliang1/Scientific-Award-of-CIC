@@ -65,7 +65,7 @@ request.setCharacterEncoding("UTF-8");
 				</c:if>
 					<a class="btn btn-default" href="${fn:escapeXml(seventhFormURL)}">上一页</a>
 				<spring:url value="/manage-nineth-major-org-contributor" var="ninethFormURL"/>
-					<a class="btn btn-default" href="${fn:escapeXml(ninethFormURL)}">下一页</a>
+					<a class="btn btn-primary" href="${fn:escapeXml(ninethFormURL)}">下一页</a>
 			</div>
         </div>
 		</div>

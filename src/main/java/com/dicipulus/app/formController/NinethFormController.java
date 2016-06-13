@@ -232,7 +232,7 @@ public class NinethFormController {
 			ninethMajorOrgContributorJdbc.updateNinethMajorOrgContributor(ninethForm);
 			ApplicationJdbc applicationJdbc=InitJdbc.initApplicationJdbc();
 			InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributingOrgNamesForFirstForm(applierUid);
-			return "redirect:/edit-nineth-major-org-contributor/"+ninethForm.getIdOfNinethForm();
+			return "redirect:/manage-nineth-major-org-contributor";
 		}
 		catch(NullPointerException e){
 			logger.info("session null pointer!");

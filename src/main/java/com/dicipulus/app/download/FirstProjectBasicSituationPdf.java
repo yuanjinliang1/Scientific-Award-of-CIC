@@ -143,32 +143,32 @@ public class FirstProjectBasicSituationPdf {
        
         table.addCell(cell);
         table.addCell("  1");
-        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getSubjectCategoryName1().replaceAll("[-0-9]", ""),fontChinese)));//
+        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getSubjectCategoryName1(),fontChinese)));//
         cell=new PdfPCell(new Phrase("代码",fontChinese));
         cell.setHorizontalAlignment(cell.ALIGN_CENTER);
         cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
         cell.setMinimumHeight(25f);
         table.addCell(cell);
-        cell.setPhrase(new Phrase(firstProjectBasicSituation.getSubjectCategoryName1().replaceAll("[^0-9]", "")));
+        cell.setPhrase(new Phrase(firstProjectBasicSituation.getSubjectCategoryId1()));
         table.addCell(cell);
         table.addCell("  2");
-        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getSubjectCategoryName2().replaceAll("[-0-9]", ""),fontChinese)));//
+        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getSubjectCategoryName2(),fontChinese)));//
         cell=new PdfPCell(new Phrase("代码",fontChinese));
         cell.setHorizontalAlignment(cell.ALIGN_CENTER);
         cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
         cell.setMinimumHeight(25f);
         table.addCell(cell);
-        cell.setPhrase(new Phrase(firstProjectBasicSituation.getSubjectCategoryName2().replaceAll("[^0-9]", "")));
+        cell.setPhrase(new Phrase(firstProjectBasicSituation.getSubjectCategoryId2()));
         table.addCell(cell);
         table.addCell("  3");
-        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getSubjectCategoryName3().replaceAll("[-0-9]", ""),fontChinese)));//
+        table.addCell(new PdfPCell(new Phrase(firstProjectBasicSituation.getSubjectCategoryName3(),fontChinese)));//
         
         cell=new PdfPCell(new Phrase("代码",fontChinese));
         cell.setHorizontalAlignment(cell.ALIGN_CENTER);
         cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
         cell.setMinimumHeight(25f);
         table.addCell(cell);
-        cell.setPhrase(new Phrase(firstProjectBasicSituation.getSubjectCategoryName3().replaceAll("[^0-9]", "")));
+        cell.setPhrase(new Phrase(firstProjectBasicSituation.getSubjectCategoryId3()));
         table.addCell(cell);
         table.setWidthPercentage(100);
         document.add(table);
@@ -251,13 +251,13 @@ public class FirstProjectBasicSituationPdf {
         cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
         cell.setMinimumHeight(25f);
         table.addCell(cell);
-        //cell=new PdfPCell(new Phrase("起始：    "+String.valueOf(firstProjectBasicSituation.getStartDate()),fontChinese));
-        cell=new PdfPCell(new Phrase("起始：    "+DateFormat.getDateInstance().format(firstProjectBasicSituation.getStartDate()),fontChinese));
+        cell=new PdfPCell(new Phrase("起始：    "+String.valueOf(firstProjectBasicSituation.getStartDate()),fontChinese));
+        //cell=new PdfPCell(new Phrase("起始：    "+DateFormat.getDateInstance().format(firstProjectBasicSituation.getStartDate()),fontChinese));
         
         cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
         table.addCell(cell);//
-        //cell=new PdfPCell(new Phrase("起始：    "+String.valueOf(firstProjectBasicSituation.getFinishDate()),fontChinese));
-        cell=new PdfPCell(new Phrase("完成：    "+DateFormat.getDateInstance().format(firstProjectBasicSituation.getFinishDate()),fontChinese));
+        cell=new PdfPCell(new Phrase("完成：    "+String.valueOf(firstProjectBasicSituation.getFinishDate()),fontChinese));
+        //cell=new PdfPCell(new Phrase("完成：    "+DateFormat.getDateInstance().format(firstProjectBasicSituation.getFinishDate()),fontChinese));
         cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
         table.addCell(cell);//
         table.setWidthPercentage(100);

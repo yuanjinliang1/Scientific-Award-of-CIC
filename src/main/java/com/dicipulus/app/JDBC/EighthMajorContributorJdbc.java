@@ -39,12 +39,16 @@ public class EighthMajorContributorJdbc{
 		return eighthMajorContributors;
 	}
 	
-	public void createEighthMajorContributor(String applierUid,int rankOfContributor){
+	public int createEighthMajorContributor(String applierUid,int rankOfContributor){
 		String sql="insert into major_contributor (applierUid,nameOfContributor,rankOfContributor,contributionOfContributor,formerRewardOfCIC) values(?,'Î´ÃüÃûµ¥Î»',?,?,?);";
 		String contributionOfContributor="";
 		String formerRewardOfCIC="";
 		jdbcTemplateObject.update(sql,applierUid,rankOfContributor,contributionOfContributor,formerRewardOfCIC);
-		logger.info(sql);
+		
+		String sql2="select idOfEighthForm from major_contributor where(applierUid=? and rankOfContributor=?)";
+		int idOfEighthForm= jdbcTemplateObject.queryForObject(sql2, new Object[]{applierUid,rankOfContributor},Integer.class);
+		logger.info(sql2);
+		return idOfEighthForm;
 	}
 	
 	public void updateEighthMajorContributor(EighthMajorContributor eighthForm){

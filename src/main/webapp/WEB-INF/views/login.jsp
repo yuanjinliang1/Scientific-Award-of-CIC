@@ -9,12 +9,11 @@
 </head>
 <body>
 <div class="container" style="margin-top:5%">
-	<div class="panel panel-default pull-left" style="width:35%">
+	<div class=" pull-left">
+	<div class="panel panel-default" style="width:100%">
 		<div class="panel-heading">
 			<div class="row">
-			<h4>
-				文档下载
-			</h4>
+				<h4>文档下载</h4>
 			</div>
 		</div>
 		<div class="row panel-body">
@@ -24,8 +23,20 @@
 			<tr><td><a href="/app/download-word/3">5-2016年度学会科技奖各奖种推荐书式样-科技进步类.docx</a></td></tr>
 		</table>
 		</div>
-		
-		
+	</div>
+	<div class="panel panel-default" style="width:100%">
+		<div class="panel-heading">
+			<div class="row">
+				<h4>联系方式</h4>
+			</div>
+		</div>
+		<div class="row panel-body">
+		<table class=" table table-bordered" style="font-size:15px">
+			<tr><td>技术支持电话：15600931101</td></tr>
+			<tr><td>学会工作电话：010-68209086</td></tr>
+		</table>
+		</div>
+	</div>
 	</div>
 <div style="margin:auto;width:60%" class="pull-right" >
 	<div id="message"></div>

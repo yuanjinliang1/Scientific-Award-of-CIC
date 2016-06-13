@@ -103,14 +103,15 @@ request.setCharacterEncoding("UTF-8");
 								value="${seventhIPForm.isValidIP}" data-error="请填写此项" required/>
 						 		<div class="help-block with-errors" style="font-size:15px"></div>
 						 	</td>
+						 	<td class="form-group">
+								<input type="submit" class="form-control btn btn-primary" value="保存" />
+							</td>
 							<td>
 								<c:url value="/delete-seventh-ip-doc" var="deleteURL">
 									<c:param name="idOfSeventhIPForm" value="${seventhIPForm.idOfSeventhIPForm }"></c:param>
 								</c:url>
-								<a id="delete" class="form-control btn btn-danger" href="${fn:escapeXml(deleteURL)}">删除</a>
-							</td>
-							<td class="form-group">
-								<input type="submit" class="form-control btn btn-primary" value="保存" />
+								<a id="delete" class="form-control btn btn-danger" href="${fn:escapeXml(deleteURL)}"
+								 onclick="return confirm('您确定删除该条目吗？')">删除</a>
 							</td>
 						</tr>
 					</form>
@@ -120,11 +121,12 @@ request.setCharacterEncoding("UTF-8");
 				<spring:url value="/manage-apply-unit-situation" var="sixthFormURL"/>
 					<a class="btn btn-default" href="${fn:escapeXml(sixthFormURL)}">上一页</a>
 				<spring:url value="/manage-eighth-major-contributor" var="eighthFormURL"/>
-					<a class="btn btn-default" href="${fn:escapeXml(eighthFormURL)}">下一页</a>
+					<a class="btn btn-primary" href="${fn:escapeXml(eighthFormURL)}">下一页</a>
 			</div>
         </div>
 		</div>
 	</div>
 </div>
+
 </body>
 </html>

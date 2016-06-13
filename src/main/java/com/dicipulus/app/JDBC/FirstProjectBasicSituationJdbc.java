@@ -119,6 +119,9 @@ public class FirstProjectBasicSituationJdbc{
         for(EighthMajorContributor Contributors:eighthMajorContributor){
         	majorContributors.append(",").append(Contributors.getNameOfContributor());
         }
+        if(majorContributors==null||majorContributors.toString().isEmpty()){
+        	return "";
+        }
         return majorContributors.toString().substring(1);
 	}
 	
@@ -134,6 +137,9 @@ public class FirstProjectBasicSituationJdbc{
 		StringBuffer majorOrgContributors=new StringBuffer();
         for(NinethMajorOrgContributor orgContributors:ninethMajorOrgContributor){
         	majorOrgContributors.append(",").append(orgContributors.getNameOfOrg());
+        }
+        if(majorOrgContributors==null||majorOrgContributors.toString().isEmpty()){
+        	return "";
         }
 		return majorOrgContributors.toString().substring(1);
 	}

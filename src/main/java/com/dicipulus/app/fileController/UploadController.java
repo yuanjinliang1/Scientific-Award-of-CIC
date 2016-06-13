@@ -119,7 +119,7 @@ public class UploadController {
 			if (listOfFiles[i].isFile()) {
 				fileMeta = new FileMeta();
 				fileMeta.setFileName(listOfFiles[i].getName());
-				fileMeta.setFileSize(listOfFiles[i].getTotalSpace() / 1024 + " Kb");
+				fileMeta.setFileSize(listOfFiles[i].length()/1024 + " Kb");
 				fileMeta.setFileType(Files.probeContentType(listOfFiles[i].toPath()));
 				files.add(fileMeta);
 			} else if (listOfFiles[i].isDirectory()) {
@@ -150,7 +150,7 @@ public class UploadController {
 			if (listOfFiles[i].isFile()) {
 				fileMeta = new FileMeta();
 				fileMeta.setFileName(listOfFiles[i].getName());
-				fileMeta.setFileSize(listOfFiles[i].getTotalSpace() / 1024 + " Kb");
+				fileMeta.setFileSize(listOfFiles[i].length() / 1024 + " Kb");
 				fileMeta.setFileType(Files.probeContentType(listOfFiles[i].toPath()));
 				files.add(fileMeta);
 			} else if (listOfFiles[i].isDirectory()) {

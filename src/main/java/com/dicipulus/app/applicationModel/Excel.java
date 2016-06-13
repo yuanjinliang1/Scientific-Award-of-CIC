@@ -17,7 +17,7 @@ public class Excel {
 	String refereeContactName;
 	String refereeContactPhone;
 	String postAddress;//secondrefereeunitopinion表中的地址 
-	//成果登记
+	String resultRegistration;
 	String referingScienceTechnologyAwardRank;
 	String projectStatus;
 	String commentOfAdmin;
@@ -120,6 +120,12 @@ public class Excel {
 	}
 	public void setPostAddress(String postAddress) {
 		this.postAddress = postAddress;
+	}
+	public String getResultRegistration() {
+		return resultRegistration;
+	}
+	public void setResultRegistration(String resultRegistration) {
+		this.resultRegistration = resultRegistration;
 	}
 	public String getReferingScienceTechnologyAwardRank() {
 		return referingScienceTechnologyAwardRank;

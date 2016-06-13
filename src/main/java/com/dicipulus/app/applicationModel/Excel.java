@@ -20,6 +20,7 @@ public class Excel {
 	//³É¹ûµÇ¼Ç
 	String referingScienceTechnologyAwardRank;
 	String projectStatus;
+	String commentOfAdmin;
 	
 	
 	public String getAddressOfOrg() {
@@ -126,6 +127,12 @@ public class Excel {
 	public void setReferingScienceTechnologyAwardRank(
 			String referingScienceTechnologyAwardRank) {
 		this.referingScienceTechnologyAwardRank = referingScienceTechnologyAwardRank;
+	}
+	public String getCommentOfAdmin() {
+		return commentOfAdmin;
+	}
+	public void setCommentOfAdmin(String commentOfAdmin) {
+		this.commentOfAdmin = commentOfAdmin;
 	}
 	
 	

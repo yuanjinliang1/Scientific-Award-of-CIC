@@ -57,42 +57,22 @@ request.setCharacterEncoding("UTF-8");
 					</tr>
 					<tr>
 						<td>学科分类名称1</td>
-						<td class="form-group">
-							<select name="subjectCategoryName1"  class="form-control" data-error="请填写此项" required>
-								<option value="${firstForm.subjectCategoryName1}">${firstForm.subjectCategoryName1}</option>
-								<c:forEach items="${subjectCategories }" var="subjectCategory">
-									<c:if test="${firstForm.subjectCategoryName1!=subjectCategory}">
-										<option value="${subjectCategory }">${subjectCategory }</option>
-									</c:if>
-								</c:forEach>
-							</select>
-							<div class="help-block with-errors" style="font-size:15px"></div>
+						<td  class="form-group"> 
+							<input class="form-control" type="text" name="subjectCategoryName1" value="${firstForm.subjectCategoryName1 }" 
+							 data-error="请填写此项" required/>
+							 <div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
 					<tr>
 						<td>学科分类名称2</td>
-						<td >
-							<select name="subjectCategoryName2" class="form-control">
-								<option value="${firstForm.subjectCategoryName2}">${firstForm.subjectCategoryName2}</option>
-								<c:forEach items="${subjectCategories }" var="subjectCategory">
-									<c:if test="${firstForm.subjectCategoryName2!=subjectCategory}">
-										<option value="${subjectCategory }">${subjectCategory }</option>
-									</c:if>
-								</c:forEach>
-							</select>
+						<td  class="form-group"> 
+							<input class="form-control" type="text" name="subjectCategoryName2" value="${firstForm.subjectCategoryName2 }"/>
 						</td>
 					</tr>
 					<tr>
 						<td>学科分类名称3</td>
-						<td>
-							<select name="subjectCategoryName3" class="form-control">
-								<option value="${firstForm.subjectCategoryName3}">${firstForm.subjectCategoryName3}</option>
-								<c:forEach items="${subjectCategories }" var="subjectCategory">
-									<c:if test="${firstForm.subjectCategoryName3!=subjectCategory}">
-										<option value="${subjectCategory }">${subjectCategory }</option>
-									</c:if>
-								</c:forEach>
-							</select>
+						<td  class="form-group"> 
+							<input class="form-control" type="text" name="subjectCategoryName3" value="${firstForm.subjectCategoryName3 }"/>
 						</td>
 					</tr>
 					<c:if test="${applier.applicationType=='科技进步类'||applier.applicationType=='技术发明类' }">

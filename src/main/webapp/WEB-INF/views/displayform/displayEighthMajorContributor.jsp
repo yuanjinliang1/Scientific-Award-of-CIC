@@ -203,13 +203,11 @@ request.setCharacterEncoding("UTF-8");
 				</tr>
 				<tr>
 					<th>参加本项目开始时间</th>
-					<fmt:formatDate pattern="yyyy-MM-dd"  value="${eighthForm.startDateOfParticipation }" var="startDateVar" />
-					<td>${startDateVar}</td>
+					<td>${eighthForm.startDateOfParticipation }</td>
 				</tr>
 				<tr>
 					<th>参加本项目结束时间</th>
-					<fmt:formatDate pattern="yyyy-MM-dd"  value="${eighthForm.endDateOfParticipation }" var="endDateVar" />
-					<td>${endDateVar }</td>
+					<td>${eighthForm.endDateOfParticipation }</td>
 				</tr>
 			</table>
 			

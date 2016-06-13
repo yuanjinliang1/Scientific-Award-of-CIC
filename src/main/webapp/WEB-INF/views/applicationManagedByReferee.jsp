@@ -48,13 +48,13 @@ request.setCharacterEncoding("UTF-8");
 					<spring:url value="/submit-application-by-referee/{applierUid}" var="acceptURL">
 						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 					</spring:url>
-					<input id="submitApplication" type="button" class="btn btn-success" onclick="location.href='${fn:escapeXml(acceptURL)}';" value="推荐">
+					<input id="submitApplication" type="button" class="btn btn-success" value="推荐">
 				</c:if>
 				<c:if test="${application.projectStatus=='已推荐' }">
 					<spring:url value="/withdraw-application-by-referee/{applierUid}" var="withdrawURL">
 						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 					</spring:url>
-					<input id="recallApplication" type="button" class="btn btn-danger" onclick="location.href='${fn:escapeXml(withdrawURL)}';" value="撤回推荐">
+					<input id="recallApplication" type="button" class="btn btn-danger" value="撤回推荐">
 				</c:if>
 			</td>
 			<td>${application.projectName }</td>

@@ -66,7 +66,8 @@ public class SecondFormController {
 			secondRefereeUnitOpinionJdbc.updateSecondRefereeUnitOpinion(secondRefereeUnitOpinion, applierUid);
 			
 			InitJdbc.initFirstProjectBasicSituationJdbc().setRefereeInformation(secondRefereeUnitOpinion, applierUid);
-			return "redirect:/edit-referee-unit-opinion/"+applier.getUid();
+			//return "redirect:/edit-referee-unit-opinion/"+applier.getUid();
+			return "redirect:/application-managed-by-referee";
 		}
 		catch(NullPointerException e){
 			logger.info("null session!");

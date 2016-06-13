@@ -62,7 +62,7 @@ request.setCharacterEncoding("UTF-8");
 				<spring:url value="/upload/{applierUid}/1" var="firstAttachmentURL">
 					<spring:param name="applierUid" value="${applier.uid}"></spring:param>
 				</spring:url>
-					<a class="btn btn-default" href="${fn:escapeXml(firstAttachmentURL)}">下一页</a>
+					<a class="btn btn-primary" href="${fn:escapeXml(firstAttachmentURL)}">下一页</a>
 			</div>
         </div>
 		</div>

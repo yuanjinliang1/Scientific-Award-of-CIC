@@ -291,7 +291,7 @@
 				</c:if>
 				<c:if test="${applier.applicationType=='自然科学类'}">
 					<c:if test="${index>=7 }">
-						<a class="btn btn-primary" type="button"  href="/app/self-managed-by-applier/100116001">完成</a>
+						<a class="btn btn-primary" type="button"  href="/app/self-managed-by-applier/${applier.uid }">完成</a>
 					</c:if>
 					<c:if test="${index<7 }">
 							<spring:url value="/upload/{applierUid}/{index}" var="nextURL">

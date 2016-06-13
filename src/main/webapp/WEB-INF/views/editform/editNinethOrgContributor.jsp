@@ -113,9 +113,7 @@ request.setCharacterEncoding("UTF-8");
 					<tr class="toHide">
 						<td>团体会员证书号</td>
 						<td>
-							<input class="form-control" type="text" name="orgMemberIDOfCIC" value="${ninethForm.orgMemberIDOfCIC}"    
-							data-error="请填写此项" required/>
-							<div class="help-block with-errors" style="font-size:15px"></div>
+							<input class="form-control" type="text" name="orgMemberIDOfCIC" value="${ninethForm.orgMemberIDOfCIC}"/>
 						</td>
 					</tr>
 					<tr>

@@ -16,7 +16,7 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 	<jsp:include page="fragments/header.jsp"></jsp:include>
-	<title>Application Manaapplication-managed-by-admingement</title>
+	<title>项目管理</title>
 	<style>
 		table { font-size:small}
 	</style>

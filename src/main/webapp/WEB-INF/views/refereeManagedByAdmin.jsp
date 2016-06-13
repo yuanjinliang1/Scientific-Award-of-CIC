@@ -15,7 +15,7 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 	<jsp:include page="fragments/header.jsp"></jsp:include>
-	<title>UserManagement</title>
+	<title>推荐单位管理</title>
 </head>
 <body>
 <div class="container" style>

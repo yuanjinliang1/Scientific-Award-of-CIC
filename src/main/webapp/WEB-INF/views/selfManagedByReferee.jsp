@@ -16,7 +16,7 @@
 <html>
 <head>
 	<jsp:include page="fragments/header.jsp"></jsp:include>
-	<title>SelfManagement</title>
+	<title>个人管理</title>
 </head>
 <body>
 <div class="container">

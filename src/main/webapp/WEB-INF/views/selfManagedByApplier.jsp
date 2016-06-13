@@ -17,7 +17,7 @@
 <html>
 <head>
 	<jsp:include page="fragments/header.jsp"></jsp:include>
-	<title>SelfManagement</title>
+	<title>项目与个人管理</title>
 	<style type="text/css">
 		.center {
 				     float: none;

@@ -115,5 +115,4 @@
 	})
 </script>
 </body>
-<footer class="footer">Copyright © 中国通信学会与北京邮电大学联合研制, 2016</footer>
 </html>

@@ -63,7 +63,7 @@ request.setCharacterEncoding("UTF-8");
 	</spring:url>
 	<input type="button" class="btn btn-success" onclick="location.href='${fn:escapeXml(excelURL)}';" value="下载总表（今年）">
 </div>
-
+<br>
 <div class="col-md-12">
 <table class="table table-bordered" style="width:100%">
 	<thead>

@@ -26,7 +26,32 @@
 </head>
 <body>
 <div class="container" style="margin-top:5%">
-	<div class=" pull-left">
+<div style="margin:auto;width:60%" >
+	<div id="message"></div>
+	<form class="form-horizontal" action="/app/login" method="POST" modelAttribute="loginAttr">
+		<div class="form-group " >
+			<div class="row"><h1 style="text-align: center">中国通信学会报奖系统</h1></div>
+			<div class="row">
+	    	<div style="width:300;margin:auto">
+    			<label for="uidGet">用户名</label>
+    			<input type="text" class="form-control" name="uid" id="uidGet"/>
+	    	</div>
+			</div>
+			<div class="row">
+	    	<div style="width:300;margin:auto">
+    			<label for="passwordGet" >密码</label>
+    			<input type="password" class="form-control" name="password" id="passwordGet" />
+	    	</div>
+			</div>
+			<br/>
+			<div class="row">
+	    	<div style="width:300;margin:auto">
+    			<button type="submit" class="btn btn-primary" name="Submit" onClick="return loginPreCheck()">登陆</button>
+    			<button type="reset" class="btn btn-danger" name="Reset" id="reset">取消</button>
+	    	</div>
+			</div>
+		</div>
+	</form>
 	<div class="panel panel-default" style="width:100%">
 		<div class="panel-heading">
 			<div class="row">
@@ -54,33 +79,6 @@
 		</table>
 		</div>
 	</div>
-	</div>
-<div style="margin:auto;width:60%" class="pull-right" >
-	<div id="message"></div>
-	<form class="form-horizontal" action="/app/login" method="POST" modelAttribute="loginAttr">
-		<div class="form-group " style="margin-right:10%">
-			<div class="row"><h1 style="text-align: center">中国通信学会报奖系统</h1></div>
-			<div class="row">
-	    	<div style="width:300;margin:auto">
-    			<label for="uidGet">用户名</label>
-    			<input type="text" class="form-control" name="uid" id="uidGet"/>
-	    	</div>
-			</div>
-			<div class="row">
-	    	<div style="width:300;margin:auto">
-    			<label for="passwordGet" >密码</label>
-    			<input type="password" class="form-control" name="password" id="passwordGet"/>
-	    	</div>
-			</div>
-			<br/>
-			<div class="row">
-	    	<div style="width:300;margin:auto">
-    			<button type="submit" class="btn btn-primary" name="Submit" onClick="return loginPreCheck()">登陆</button>
-    			<button type="reset" class="btn btn-danger" name="Reset" id="reset">取消</button>
-	    	</div>
-			</div>
-		</div>
-	</form>
 </div>
 </div>
 <c:set var="message" value="${param.message }"></c:set>
@@ -115,5 +113,4 @@
 	})
 </script>
 </body>
-<footer class="footer">Copyright © 中国通信学会与北京邮电大学联合研制, 2016</footer>
 </html>

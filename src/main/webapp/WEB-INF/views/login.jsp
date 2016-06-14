@@ -6,6 +6,23 @@
 <head>
 	<jsp:include page="fragments/header.jsp"></jsp:include>
 	<title>登陆报奖系统</title>
+	<style type="text/css">
+		.footer {
+		  text-align:center;
+		  clear: both;
+		  border: 0px groove #aaaaaa;
+		  background: white;
+		  color: black;
+		  padding: 0;
+		  text-align: center;
+		  vertical-align: middle;
+		  line-height: normal;
+		  margin: 0;
+		  position: fixed;
+		  bottom: 0px;
+		  width: 100%;
+		} 
+	</style>
 </head>
 <body>
 <div class="container" style="margin-top:5%">
@@ -98,4 +115,5 @@
 	})
 </script>
 </body>
+<footer class="footer">Copyright © 中国通信学会与北京邮电大学联合研制, 2016</footer>
 </html>

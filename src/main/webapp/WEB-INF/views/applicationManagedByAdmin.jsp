@@ -164,6 +164,9 @@ request.setCharacterEncoding("UTF-8");
 <c:url var="ajaxAccept" value="/accept-application-by-admin-via-ajax" scope="request" />
 <script>
 	jQuery(document).ready(function($) {
+		$(window).on('resize load', function() {
+		    $('body').css({"padding-top": $(".navbar").height() + "px"});
+		})
 		
 		$(".projectStatus").each(function(){
 			var serial=$(this).attr("data-serial");

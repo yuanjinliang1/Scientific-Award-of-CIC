@@ -20,7 +20,7 @@ request.setCharacterEncoding("UTF-8");
 <body>
 <div class="container" style>
 <dicipulus:bodyHeaderForAdmin menuName="manageReferee" />
-<br/><br/><br/>
+<br/>
 <div class="row" style="margin-left: 20px">
 	<h1>推荐单位管理</h1>
 </div>

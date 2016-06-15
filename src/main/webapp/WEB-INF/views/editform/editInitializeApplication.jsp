@@ -20,7 +20,7 @@ request.setCharacterEncoding("UTF-8");
 <body>
 <div class="container">
 	<dicipulus:bodyHeaderForApplier menuName="createApplication"/>
-	<br/><br/><br/>
+	<br/>
 	<div class="row" style="margin-left: 20px"><h1>TO BE MERGED</h1></div>
 	<br/>
 	<form action="/app/edit-initialize-application" method="post">

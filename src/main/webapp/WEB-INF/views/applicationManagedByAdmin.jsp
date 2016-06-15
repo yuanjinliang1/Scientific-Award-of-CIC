@@ -24,7 +24,7 @@ request.setCharacterEncoding("UTF-8");
 <body>
 <div class="container" style="width:100%; zoom:75%">
 <dicipulus:bodyHeaderForAdmin menuName="manageApplication" />
-<br/><br/><br/>
+<br/>
 <div class="row" style="margin-left: 20px"><h1>项目管理</h1></div>
 <div id="feedback"></div>
 <div id="message"></div>
@@ -64,7 +64,6 @@ request.setCharacterEncoding("UTF-8");
 	<input type="button" class="btn btn-success" onclick="location.href='${fn:escapeXml(excelURL)}';" value="下载总表（今年）">
 </div>
 <br>
-<div class="col-md-12">
 <table class="table table-bordered" style="width:100%">
 	<thead>
 	<tr>
@@ -158,7 +157,6 @@ request.setCharacterEncoding("UTF-8");
 
 
 
-</div>
 </div>
 <c:url var="ajaxTest" value="/ajax-test" scope="request" />
 <c:url var="ajaxAccept" value="/accept-application-by-admin-via-ajax" scope="request" />

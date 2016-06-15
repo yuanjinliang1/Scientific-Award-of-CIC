@@ -29,7 +29,7 @@
 <body>
 <div class="container">
 	<dicipulus:bodyHeaderForApplier menuName="manageSelf"/>
-	<br/><br/><br/>
+	<br/>
 	<div id="message"></div>
 	<div class="row" id="selectAppType">
 		<form action="/app/edit-initialize-application" method="post">

@@ -21,7 +21,7 @@ request.setCharacterEncoding("UTF-8");
 <body>
 <div class="container">
 <dicipulus:bodyHeaderForReferee menuName="manageApplier"/>
-<br/><br/><br/>
+<br/>
 <div class="row" style="margin-left: 20px"><h1>项目组管理</h1></div>
 
 

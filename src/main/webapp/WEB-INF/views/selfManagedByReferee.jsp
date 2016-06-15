@@ -21,7 +21,7 @@
 <body>
 <div class="container">
 	<dicipulus:bodyHeaderForReferee menuName="manageSelf"/>
-	<br/><br/><br/>
+	<br/>
 	<div class="row" ><h3>修改密码</h3></div>
 	<br/><br/>
 	<form action="/app/self-managed-by-referee/change-password"

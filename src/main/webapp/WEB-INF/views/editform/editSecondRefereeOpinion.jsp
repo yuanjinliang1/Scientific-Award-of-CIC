@@ -93,7 +93,7 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 		</div>
 		<div class="row form-group" style="margin-left:5px">
-			推荐该项目为中国通信学会科学技术奖
+			推荐该项目为中国通信学会${applier.applicationType}
 			<select  name="referingScienceTechnologyAwardRank" data-error="请填写此项" required>
 				<option value="${secondForm.referingScienceTechnologyAwardRank}">${secondForm.referingScienceTechnologyAwardRank}</option>
 				<c:forEach items="${nominatedAwards }" var="nominatedAward">

@@ -81,7 +81,7 @@ request.setCharacterEncoding("UTF-8");
 				</div>
 			</div>
 			<div class="row">
-				<h4>推荐该项目为中国通信学会科学技术奖${secondForm.referingScienceTechnologyAwardRank}。</h4>
+				<h4>推荐该项目为中国通信学会${applier.applicationType}${secondForm.referingScienceTechnologyAwardRank}。</h4>
 			</div>
 			<div class="row" style="margin-left:20px">
 				<spring:url value="/display-first-project-basic-situation/{applierUid}" var="firstFormURL">

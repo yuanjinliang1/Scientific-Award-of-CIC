@@ -26,10 +26,17 @@ public class ErrorController {
 			modelAndView.setViewName(FormUlti.redirectLogin());
 			return modelAndView;
 		}
-		else{
-			modelAndView.addObject("message",message);
-			modelAndView.setViewName("error");
-			return modelAndView;
+		if(message.equals("illegal-status")){
+			message="状态错误，您无权进行此操作！";
 		}
+		if(message.equals("null-session")){
+			message="您尚未登陆，请先登录！";
+		}
+		if(message.equals("illegal-role")){
+			message="您的角色无权进行此操作！";
+		}
+		modelAndView.addObject("message",message);
+		modelAndView.setViewName("error");
+		return modelAndView;
 	}
 }

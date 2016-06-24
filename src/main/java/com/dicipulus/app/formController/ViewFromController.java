@@ -58,6 +58,8 @@ public class ViewFromController {
 		logger.info("displayFirstProjectBasicSituationGet");
 		
 		if(notValid(modelAndView, request, applierUid)){
+			//TODO Maybe I should throw an exception? In order to eliminate those duplicate code 
+			//blocks with annoying return values.
 			return modelAndView;
 		}
 		addApplier(modelAndView, applierUid);

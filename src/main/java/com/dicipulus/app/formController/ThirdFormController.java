@@ -32,33 +32,33 @@ public class ThirdFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/edit-brief-introduction",method=RequestMethod.GET)
-	public ModelAndView initThirdProjectBriefIntroduction(HttpServletRequest request,ModelAndView modelAndView){
-		logger.info("initThirdProjectBriefIntroduction");
-		try{
-			Person person=(Person) request.getSession().getAttribute("person");
-			String applierUid=person.getUid();
-			if(applierUid.equals("")){
-				modelAndView.setViewName("redirect:/login");
-				return modelAndView;
-			}
-			logger.info("applierUid confirm!");
-			ThirdProjectBriefIntroductionJdbc thirdProjectBriefIntroductionJdbc=InitJdbc.initThirdProjectBriefIntroductionJdbc();
-			ThirdProjectBriefIntroduction thirdProjectBriefIntroduction=thirdProjectBriefIntroductionJdbc.getThirdProjectBriefIntroduction(person.getUid());
-			modelAndView.setViewName("editform/editThirdBriefIntroduction");
-			modelAndView.addObject("briefIntroductionForm", thirdProjectBriefIntroduction);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier", applier);
-		}
-		catch(NullPointerException e){
-			logger.info("get exception!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-		return modelAndView;
-	}
+//	@RequestMapping(value="/edit-brief-introduction",method=RequestMethod.GET)
+//	public ModelAndView initThirdProjectBriefIntroduction(HttpServletRequest request,ModelAndView modelAndView){
+//		logger.info("initThirdProjectBriefIntroduction");
+//		try{
+//			Person person=(Person) request.getSession().getAttribute("person");
+//			String applierUid=person.getUid();
+//			if(applierUid.equals("")){
+//				modelAndView.setViewName("redirect:/login");
+//				return modelAndView;
+//			}
+//			logger.info("applierUid confirm!");
+//			ThirdProjectBriefIntroductionJdbc thirdProjectBriefIntroductionJdbc=InitJdbc.initThirdProjectBriefIntroductionJdbc();
+//			ThirdProjectBriefIntroduction thirdProjectBriefIntroduction=thirdProjectBriefIntroductionJdbc.getThirdProjectBriefIntroduction(person.getUid());
+//			modelAndView.setViewName("editform/editThirdBriefIntroduction");
+//			modelAndView.addObject("briefIntroductionForm", thirdProjectBriefIntroduction);
+//			
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier", applier);
+//		}
+//		catch(NullPointerException e){
+//			logger.info("get exception!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//		return modelAndView;
+//	}
 	
 	/**
 	 * 浏览第三个表GET

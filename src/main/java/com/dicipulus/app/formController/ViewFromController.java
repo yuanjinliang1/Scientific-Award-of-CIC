@@ -238,7 +238,7 @@ public class ViewFromController {
 		return modelAndView;
 	}
 	
-	/**View eighth form list*/
+	/**View the eighth form list*/
 	@RequestMapping(value="/select-eighth-major-contributor/{applierUid}",method=RequestMethod.GET)
 	public ModelAndView selectEighthMajorContributor(HttpServletRequest request,
 			ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
@@ -254,7 +254,7 @@ public class ViewFromController {
 		return modelAndView;
 	}
 	
-	/**View eighth form*/
+	/**View the eighth form*/
 	@RequestMapping(value="/display-eighth-major-contributor/{idOfEighthForm}",method=RequestMethod.GET)
 	public ModelAndView displayEighthMajorContributor(HttpServletRequest request,
 			ModelAndView modelAndView,@PathVariable("idOfEighthForm") int idOfEighthForm){
@@ -270,7 +270,7 @@ public class ViewFromController {
 		return modelAndView;
 	}
 	
-	/**View ninth form list*/
+	/**View the ninth form list*/
 	@RequestMapping(value="/select-nineth-major-org-contributor/{applierUid}",method=RequestMethod.GET)
 	public ModelAndView selectNinethMajorOrgContributor(HttpServletRequest request,
 			ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
@@ -285,7 +285,7 @@ public class ViewFromController {
 		return modelAndView;
 	}
 	
-	/**View ninth form*/
+	/**View the ninth form*/
 	@RequestMapping(value="/display-nineth-major-org-contributor/{idOfNinethForm}",method=RequestMethod.GET)
 	public ModelAndView displayNinethMajorOrgContributor(HttpServletRequest request,
 			ModelAndView modelAndView,@PathVariable("idOfNinethForm") int idOfNinethForm){

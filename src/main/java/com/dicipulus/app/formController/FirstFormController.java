@@ -36,36 +36,36 @@ public class FirstFormController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="/edit-first-project-basic-situation",method=RequestMethod.GET)
-	public ModelAndView editFirstProjectBasicSituationGet(ModelAndView modelAndView, HttpServletRequest request){
-		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
-		if(FormUlti.getPersonInRequest(request)==null){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("null-session"));
-			return modelAndView;
-		}
-		if(FormUlti.rightRole(request, "applier")==false){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-role"));
-			return modelAndView;
-		}
-		String applierUid=FormUlti.getPersonInRequest(request).getUid();
-		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-status"));
-			return modelAndView;
-		}
-		
-		Person person = FormUlti.getPersonInRequest(request);
-		FirstProjectBasicSituation firstForm=InitJdbc.initFirstProjectBasicSituationJdbc()
-				.getFirstProjectBasicSituation(person.getUid());
-		modelAndView.setViewName("editform/editFirstProjectBasicSituation");
-		modelAndView.addObject("applier",InitJdbc.initApplierJdbc().getApplierByUid(person.getUid()));
-		modelAndView.addObject("firstForm",firstForm);
-		modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);
-		modelAndView.addObject("economicFields",Constants.ECONOMICFIELDS);
-		modelAndView.addObject("nationalFocusFields",Constants.NATIONALFOCUSFIELDS);
-		modelAndView.addObject("technologicalFields",Constants.TECHNOLOGICALFIELDS);
-		modelAndView.addObject("taskSources",Constants.TASKSOURCES);
-		return modelAndView;
-	}
+//	@RequestMapping(value="/edit-first-project-basic-situation",method=RequestMethod.GET)
+//	public ModelAndView editFirstProjectBasicSituationGet(ModelAndView modelAndView, HttpServletRequest request){
+//		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+//		if(FormUlti.getPersonInRequest(request)==null){
+//			modelAndView.setViewName(FormUlti.redirectErrorMessage("null-session"));
+//			return modelAndView;
+//		}
+//		if(FormUlti.rightRole(request, "applier")==false){
+//			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-role"));
+//			return modelAndView;
+//		}
+//		String applierUid=FormUlti.getPersonInRequest(request).getUid();
+//		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
+//			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-status"));
+//			return modelAndView;
+//		}
+//		
+//		Person person = FormUlti.getPersonInRequest(request);
+//		FirstProjectBasicSituation firstForm=InitJdbc.initFirstProjectBasicSituationJdbc()
+//				.getFirstProjectBasicSituation(person.getUid());
+//		modelAndView.setViewName("editform/editFirstProjectBasicSituation");
+//		modelAndView.addObject("applier",InitJdbc.initApplierJdbc().getApplierByUid(person.getUid()));
+//		modelAndView.addObject("firstForm",firstForm);
+//		modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);
+//		modelAndView.addObject("economicFields",Constants.ECONOMICFIELDS);
+//		modelAndView.addObject("nationalFocusFields",Constants.NATIONALFOCUSFIELDS);
+//		modelAndView.addObject("technologicalFields",Constants.TECHNOLOGICALFIELDS);
+//		modelAndView.addObject("taskSources",Constants.TASKSOURCES);
+//		return modelAndView;
+//	}
 	
 	
 	

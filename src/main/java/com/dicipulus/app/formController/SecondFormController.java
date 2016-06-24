@@ -83,44 +83,44 @@ public class SecondFormController {
 	 * @param ownerUid
 	 * @return
 	 */
-	@RequestMapping(value="/edit-referee-unit-opinion/{applierUid}",method=RequestMethod.GET)
-	public ModelAndView initSecondRefereeUnitOpinionForm(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
-		logger.info("initSecondRefereeUnitOpinionForm");
-		try{
-			Person person=FormUlti.getPersonInRequest(request);
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			if(isAuthenticated(applier, person)==false){
-				modelAndView.setViewName("redirect:/login");
-				logger.info("No authentication to this applier!");
-				return modelAndView;
-			}
-			ApplicationJdbc applicatoinJdbc=InitJdbc.initApplicationJdbc();
-			if(applicatoinJdbc.getStatusOfApplication(applierUid).equals("已接收")){
-				String previousPage =request.getHeader("Referer");
-				modelAndView.setViewName("redirect:"+previousPage+"?message=prerequisite-status-wrong");
-				return modelAndView;
-			}
-			SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
-			SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
-			modelAndView.setViewName("editform/editSecondRefereeOpinion");
-			modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
-			modelAndView.addObject("applier",applier);//明确推荐单位正在编辑的推荐书是谁的
-			modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			modelAndView.setViewName("redirect:/login");
-			logger.info("null session!");
-			return modelAndView;
-		}
-		catch(EmptyResultDataAccessException e2){
-			logger.info("forms have not been created!");
-			Person person=FormUlti.getPersonInRequest(request);
-			modelAndView.setViewName("redirect:/applier-managed-by-referee/applier-view/"+person.getUid());
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/edit-referee-unit-opinion/{applierUid}",method=RequestMethod.GET)
+//	public ModelAndView initSecondRefereeUnitOpinionForm(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
+//		logger.info("initSecondRefereeUnitOpinionForm");
+//		try{
+//			Person person=FormUlti.getPersonInRequest(request);
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			if(isAuthenticated(applier, person)==false){
+//				modelAndView.setViewName("redirect:/login");
+//				logger.info("No authentication to this applier!");
+//				return modelAndView;
+//			}
+//			ApplicationJdbc applicatoinJdbc=InitJdbc.initApplicationJdbc();
+//			if(applicatoinJdbc.getStatusOfApplication(applierUid).equals("已接收")){
+//				String previousPage =request.getHeader("Referer");
+//				modelAndView.setViewName("redirect:"+previousPage+"?message=prerequisite-status-wrong");
+//				return modelAndView;
+//			}
+//			SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
+//			SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
+//			modelAndView.setViewName("editform/editSecondRefereeOpinion");
+//			modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
+//			modelAndView.addObject("applier",applier);//明确推荐单位正在编辑的推荐书是谁的
+//			modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			modelAndView.setViewName("redirect:/login");
+//			logger.info("null session!");
+//			return modelAndView;
+//		}
+//		catch(EmptyResultDataAccessException e2){
+//			logger.info("forms have not been created!");
+//			Person person=FormUlti.getPersonInRequest(request);
+//			modelAndView.setViewName("redirect:/applier-managed-by-referee/applier-view/"+person.getUid());
+//			return modelAndView;
+//		}
+//	}
 	
 	/**
 	 * 浏览某一项目的推荐书GET

@@ -31,29 +31,29 @@ public class FifthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/edit-objective-evaluation",method=RequestMethod.GET)
-	public ModelAndView initFifthObjectiveEvaluation(HttpServletRequest request,ModelAndView modelAndView){
-		logger.info("enter initFIfthObjectiveEvaluation");
-		try{
-			Person person=(Person) request.getSession().getAttribute("person");
-			String applierUid=person.getUid();
-			FifthObjectiveEvaluationJdbc fifthObjectiveEvaluationJdbc=InitJdbc.initFifthObjectiveEvaluationJdbc();
-			FifthObjectiveEvaluation fifthObjectiveEvaluation=fifthObjectiveEvaluationJdbc.getFifthObjectiveEvaluation(applierUid);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier", applier);
-			
-			modelAndView.setViewName("editform/editFifthObjectiveEvaluation");
-			modelAndView.addObject("objectiveEvaluationForm", fifthObjectiveEvaluation);
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/edit-objective-evaluation",method=RequestMethod.GET)
+//	public ModelAndView initFifthObjectiveEvaluation(HttpServletRequest request,ModelAndView modelAndView){
+//		logger.info("enter initFIfthObjectiveEvaluation");
+//		try{
+//			Person person=(Person) request.getSession().getAttribute("person");
+//			String applierUid=person.getUid();
+//			FifthObjectiveEvaluationJdbc fifthObjectiveEvaluationJdbc=InitJdbc.initFifthObjectiveEvaluationJdbc();
+//			FifthObjectiveEvaluation fifthObjectiveEvaluation=fifthObjectiveEvaluationJdbc.getFifthObjectiveEvaluation(applierUid);
+//			
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier", applier);
+//			
+//			modelAndView.setViewName("editform/editFifthObjectiveEvaluation");
+//			modelAndView.addObject("objectiveEvaluationForm", fifthObjectiveEvaluation);
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//	}
 	
 	/**
 	 * 项目组浏览第五个表GET

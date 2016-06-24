@@ -38,28 +38,28 @@ public class EighthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/manage-eighth-major-contributor",method=RequestMethod.GET)
-	public ModelAndView manageEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView){
-		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
-		
-		//TODO test this code
-		if(false==(Validator.validateSession(request, modelAndView)&&
-				Validator.validateRole(request, modelAndView, "applier")&&
-				Validator.validateStatus(request, modelAndView, Arrays.asList("未提交")))){	
-			return modelAndView;
-		}
-		//main work
-
-		String applierUid=FormUlti.getPersonInRequest(request).getUid();
-		Applier applier=InitJdbc.initApplierJdbc().getApplierByUid(applierUid);
-		modelAndView.addObject("applier",applier);
-		
-		List<EighthMajorContributor> eighthMajorContributors=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributors(applierUid);
-		modelAndView.addObject("eighthForms", eighthMajorContributors);
-		
-		modelAndView.setViewName("editform/manageEighthMajorContributor");
-		return modelAndView;
-	}
+//	@RequestMapping(value="/manage-eighth-major-contributor",method=RequestMethod.GET)
+//	public ModelAndView manageEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView){
+//		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+//		
+//		//TODO test this code
+//		if(false==(Validator.validateSession(request, modelAndView)&&
+//				Validator.validateRole(request, modelAndView, "applier")&&
+//				Validator.validateStatus(request, modelAndView, Arrays.asList("未提交")))){	
+//			return modelAndView;
+//		}
+//		//main work
+//
+//		String applierUid=FormUlti.getPersonInRequest(request).getUid();
+//		Applier applier=InitJdbc.initApplierJdbc().getApplierByUid(applierUid);
+//		modelAndView.addObject("applier",applier);
+//		
+//		List<EighthMajorContributor> eighthMajorContributors=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributors(applierUid);
+//		modelAndView.addObject("eighthForms", eighthMajorContributors);
+//		
+//		modelAndView.setViewName("editform/manageEighthMajorContributor");
+//		return modelAndView;
+//	}
 	
 	/**
 	 * 项目组浏览第八个表LIST GET 
@@ -140,24 +140,24 @@ public class EighthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/edit-eighth-major-contributor/{idOfEighthForm}",method=RequestMethod.GET)
-	public ModelAndView editEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfEighthForm") int idOfEighthForm){
-		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
-		String applierUid=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributor(idOfEighthForm).getApplierUid();
-		if(false==(Validator.validateSession(request, modelAndView)&&Validator.validateUid(request, modelAndView, applierUid)&&
-				Validator.validateStatus(request, modelAndView, Arrays.asList("未提交")))){
-			return modelAndView;
-		}
-		//main work
-		Applier applier=InitJdbc.initApplierJdbc().getApplierByUid(applierUid);
-		modelAndView.addObject("applier",applier);
-
-		EighthMajorContributor eighthMajorContributor=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributor(idOfEighthForm);
-		modelAndView.addObject("eighthForm",eighthMajorContributor);
-		
-		modelAndView.setViewName("editform/editEighthMajorContributor");
-		return modelAndView;
-	}
+//	@RequestMapping(value="/edit-eighth-major-contributor/{idOfEighthForm}",method=RequestMethod.GET)
+//	public ModelAndView editEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfEighthForm") int idOfEighthForm){
+//		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+//		String applierUid=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributor(idOfEighthForm).getApplierUid();
+//		if(false==(Validator.validateSession(request, modelAndView)&&Validator.validateUid(request, modelAndView, applierUid)&&
+//				Validator.validateStatus(request, modelAndView, Arrays.asList("未提交")))){
+//			return modelAndView;
+//		}
+//		//main work
+//		Applier applier=InitJdbc.initApplierJdbc().getApplierByUid(applierUid);
+//		modelAndView.addObject("applier",applier);
+//
+//		EighthMajorContributor eighthMajorContributor=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributor(idOfEighthForm);
+//		modelAndView.addObject("eighthForm",eighthMajorContributor);
+//		
+//		modelAndView.setViewName("editform/editEighthMajorContributor");
+//		return modelAndView;
+//	}
 	
 	/**
 	 * 项目组浏览第八个表 GET

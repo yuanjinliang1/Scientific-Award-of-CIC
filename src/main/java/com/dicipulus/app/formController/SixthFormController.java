@@ -37,29 +37,29 @@ public class SixthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/manage-paper-monograph",method=RequestMethod.GET)
-	public ModelAndView manageSixthPaperMonographNT(HttpServletRequest request,ModelAndView modelAndView){
-		logger.info("manageSixthPaperMonograph");
-		try{
-			Person person=(Person)request.getSession().getAttribute("person");
-			String applierUid=person.getUid();
-			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
-			List<SixthPaperMonographNT> sixthPaperMonographNT=sixthPaperMonographNTJdbc.getAllSixthPaperMonographNT(applierUid);
-			modelAndView.setViewName("editform/manageSixthPaperMonographNT");
-			modelAndView.addObject("sixthPaperMonographForms", sixthPaperMonographNT);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier", applier);
-			
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/manage-paper-monograph",method=RequestMethod.GET)
+//	public ModelAndView manageSixthPaperMonographNT(HttpServletRequest request,ModelAndView modelAndView){
+//		logger.info("manageSixthPaperMonograph");
+//		try{
+//			Person person=(Person)request.getSession().getAttribute("person");
+//			String applierUid=person.getUid();
+//			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
+//			List<SixthPaperMonographNT> sixthPaperMonographNT=sixthPaperMonographNTJdbc.getAllSixthPaperMonographNT(applierUid);
+//			modelAndView.setViewName("editform/manageSixthPaperMonographNT");
+//			modelAndView.addObject("sixthPaperMonographForms", sixthPaperMonographNT);
+//			
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier", applier);
+//			
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//	}
 	
 	/**
 	 * 选择第六个表NT（List+其他） GET
@@ -145,29 +145,29 @@ public class SixthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/edit-sixth-paper-monograph/{idOfPaperMonograph}",method=RequestMethod.GET)
-	public ModelAndView editSixthPaperMonographNT(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfPaperMonograph")int idOfPaperMonograph){
-		logger.info("editSixthPaperMonographNT");
-		try{
-			Person person=(Person)request.getSession().getAttribute("person");
-			String applierUid=person.getUid();
-			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
-			SixthPaperMonographNT sixthPaperMonographNT=sixthPaperMonographNTJdbc.getSixthPaperMonographNT(idOfPaperMonograph);
-			modelAndView.setViewName("editform/editSixthPaperMonographNT");
-			modelAndView.addObject("sixthPaperMonograph", sixthPaperMonographNT);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier", applier);
-			
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/edit-sixth-paper-monograph/{idOfPaperMonograph}",method=RequestMethod.GET)
+//	public ModelAndView editSixthPaperMonographNT(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfPaperMonograph")int idOfPaperMonograph){
+//		logger.info("editSixthPaperMonographNT");
+//		try{
+//			Person person=(Person)request.getSession().getAttribute("person");
+//			String applierUid=person.getUid();
+//			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
+//			SixthPaperMonographNT sixthPaperMonographNT=sixthPaperMonographNTJdbc.getSixthPaperMonographNT(idOfPaperMonograph);
+//			modelAndView.setViewName("editform/editSixthPaperMonographNT");
+//			modelAndView.addObject("sixthPaperMonograph", sixthPaperMonographNT);
+//			
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier", applier);
+//			
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//	}
 	
 	/**
 	 * 浏览第六个表NT GET
@@ -233,35 +233,35 @@ public class SixthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/manage-apply-unit-situation",method=RequestMethod.GET)
-	public ModelAndView manageSixthAppliedUnitSituation(HttpServletRequest request,ModelAndView modelAndView){
-		logger.info("manageApplyUnitSituation");
-		try{
-			Person person=(Person)request.getSession().getAttribute("person");
-			String applierUid=person.getUid();
-			
-			
-			SixthApplyUnitSituationJdbc sixthApplyUnitSituationJdbc=InitJdbc.initSixthApplyUnitSituationJdbc();
-			SixthEconomicAndSocialBenefitJdbc sixthEconomicAndSocialBenefitJdbc=InitJdbc.initSixthEconomicAndSocialBenefitJdbc();
-			List<SixthApplyUnitSituation> sixthApplyUnitSituation=sixthApplyUnitSituationJdbc.getAllSixthApplyUnitSituation(applierUid);
-			SixthEconomicAndSocialBenefit sixthEconomicAndSocialBenefit=sixthEconomicAndSocialBenefitJdbc.getSixthEconomicAndSocialBenefit(applierUid);
-			modelAndView.addObject("sixthEconomicAndSocialBenefitForms", sixthEconomicAndSocialBenefit);
-			modelAndView.addObject("sixthApplyUnitSituationForms", sixthApplyUnitSituation);
-			modelAndView.addObject("person", person);
-			modelAndView.setViewName("editform/manageSixthApplyUnitSituation");
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier", applier);
-			
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/manage-apply-unit-situation",method=RequestMethod.GET)
+//	public ModelAndView manageSixthAppliedUnitSituation(HttpServletRequest request,ModelAndView modelAndView){
+//		logger.info("manageApplyUnitSituation");
+//		try{
+//			Person person=(Person)request.getSession().getAttribute("person");
+//			String applierUid=person.getUid();
+//			
+//			
+//			SixthApplyUnitSituationJdbc sixthApplyUnitSituationJdbc=InitJdbc.initSixthApplyUnitSituationJdbc();
+//			SixthEconomicAndSocialBenefitJdbc sixthEconomicAndSocialBenefitJdbc=InitJdbc.initSixthEconomicAndSocialBenefitJdbc();
+//			List<SixthApplyUnitSituation> sixthApplyUnitSituation=sixthApplyUnitSituationJdbc.getAllSixthApplyUnitSituation(applierUid);
+//			SixthEconomicAndSocialBenefit sixthEconomicAndSocialBenefit=sixthEconomicAndSocialBenefitJdbc.getSixthEconomicAndSocialBenefit(applierUid);
+//			modelAndView.addObject("sixthEconomicAndSocialBenefitForms", sixthEconomicAndSocialBenefit);
+//			modelAndView.addObject("sixthApplyUnitSituationForms", sixthApplyUnitSituation);
+//			modelAndView.addObject("person", person);
+//			modelAndView.setViewName("editform/manageSixthApplyUnitSituation");
+//			
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier", applier);
+//			
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//	}
 	
 	/**
 	 * 浏览第六个表（List+其他） GET
@@ -373,29 +373,29 @@ public class SixthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/edit-sixth-apply-unit-situation/{idOfApplyUnit}",method=RequestMethod.GET)
-	public ModelAndView editSixthApplyUnitSituation(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfApplyUnit")int idOfApplyUnit){
-		logger.info("editSixthApplyUnitSituation");
-		try{
-			Person person=(Person) request.getSession().getAttribute("person");
-			String applierUid=person.getUid();
-			SixthApplyUnitSituationJdbc sixthApplyUnitSituationJdbc=InitJdbc.initSixthApplyUnitSituationJdbc();
-			SixthApplyUnitSituation sixthApplyUnitSituation=sixthApplyUnitSituationJdbc.getSixthApplyUnitSituation(idOfApplyUnit);
-			modelAndView.addObject("sixthApplyUnitSituationForm", sixthApplyUnitSituation);
-			modelAndView.setViewName("editform/editSixthApplyUnitSituation");
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier", applier);
-			
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/edit-sixth-apply-unit-situation/{idOfApplyUnit}",method=RequestMethod.GET)
+//	public ModelAndView editSixthApplyUnitSituation(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfApplyUnit")int idOfApplyUnit){
+//		logger.info("editSixthApplyUnitSituation");
+//		try{
+//			Person person=(Person) request.getSession().getAttribute("person");
+//			String applierUid=person.getUid();
+//			SixthApplyUnitSituationJdbc sixthApplyUnitSituationJdbc=InitJdbc.initSixthApplyUnitSituationJdbc();
+//			SixthApplyUnitSituation sixthApplyUnitSituation=sixthApplyUnitSituationJdbc.getSixthApplyUnitSituation(idOfApplyUnit);
+//			modelAndView.addObject("sixthApplyUnitSituationForm", sixthApplyUnitSituation);
+//			modelAndView.setViewName("editform/editSixthApplyUnitSituation");
+//			
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier", applier);
+//			
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//	}
 	
 	/**
 	 * 浏览第六个表(应用单位情况表) GET

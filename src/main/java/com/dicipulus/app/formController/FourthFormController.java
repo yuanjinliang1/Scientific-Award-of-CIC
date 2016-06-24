@@ -31,29 +31,29 @@ public class FourthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/edit-fourth-form",method=RequestMethod.GET)
-	public ModelAndView getFourthForm(HttpServletRequest request, ModelAndView modelAndView){
-		logger.info("initFourthForm");
-		try{
-			Person person= FormUlti.getPersonInRequest(request);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(person.getUid());
-			modelAndView.addObject("applier",applier);
-			
-			FourthFormJdbc fourthFormJdbc=InitJdbc.initFourthFormJdbc();
-			FourthForm fourthForm=fourthFormJdbc.getFourthForm(person.getUid());
-			modelAndView.addObject("fourthForm",fourthForm);
-			
-			modelAndView.setViewName("editform/editFourthForm");
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			logger.info("get exception!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/edit-fourth-form",method=RequestMethod.GET)
+//	public ModelAndView getFourthForm(HttpServletRequest request, ModelAndView modelAndView){
+//		logger.info("initFourthForm");
+//		try{
+//			Person person= FormUlti.getPersonInRequest(request);
+//			
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(person.getUid());
+//			modelAndView.addObject("applier",applier);
+//			
+//			FourthFormJdbc fourthFormJdbc=InitJdbc.initFourthFormJdbc();
+//			FourthForm fourthForm=fourthFormJdbc.getFourthForm(person.getUid());
+//			modelAndView.addObject("fourthForm",fourthForm);
+//			
+//			modelAndView.setViewName("editform/editFourthForm");
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			logger.info("get exception!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//	}
 	
 	/**
 	 * 项目组浏览第四个表GET

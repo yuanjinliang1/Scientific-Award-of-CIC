@@ -145,11 +145,11 @@ public final class InitJdbc{
 		return eighthMajorContributorJdbc;
 	}
 	
-	public static NinethMajorOrgContributorJdbc initNinethMajorOrgContributorJdbc(){
+	public static NinthMajorOrgContributorJdbc initNinthMajorOrgContributorJdbc(){
 		AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
-		NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=(NinethMajorOrgContributorJdbc) context.getBean("ninethMajorOrgContributorJdbc");
+		NinthMajorOrgContributorJdbc ninthMajorOrgContributorJdbc=(NinthMajorOrgContributorJdbc) context.getBean("ninthMajorOrgContributorJdbc");
 		context.registerShutdownHook();
-		return ninethMajorOrgContributorJdbc;
+		return ninthMajorOrgContributorJdbc;
 	}
 	
 	public static ApplicationJdbc initApplicationJdbc(){

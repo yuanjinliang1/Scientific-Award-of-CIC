@@ -40,7 +40,7 @@ public class DeleteFormsJdbc{
 		deleteSeventhPaperCitedByOthers(applier);
 		deleteSeventhIntellectualPropertyDoc(applier);
 		deleteEighthMajorContributor(applier);
-		deleteNinethMajorOrgContributor(applier);
+		deleteNinthMajorOrgContributor(applier);
 	}
 	
 	public void deleteProjectMajor(Applier applier){
@@ -85,7 +85,7 @@ public class DeleteFormsJdbc{
 		logger.info(sql);
 	}
 	
-	public void deleteNinethMajorOrgContributor(Applier applier){
+	public void deleteNinthMajorOrgContributor(Applier applier){
 		String sql="delete from major_org_contributor where applierUid=? ";
 		jdbcTemplateObject.update(sql,applier.getUid());
 		logger.info(sql);

@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 
 import com.dicipulus.app.applicationModel.EighthMajorContributor;
 import com.dicipulus.app.applicationModel.FirstProjectBasicSituation;
-import com.dicipulus.app.applicationModel.NinethMajorOrgContributor;
+import com.dicipulus.app.applicationModel.NinthMajorOrgContributor;
 import com.dicipulus.app.applicationModel.SecondRefereeUnitOpinion;
 import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Referee;
@@ -126,16 +126,16 @@ public class FirstProjectBasicSituationJdbc{
 	}
 	
 	private String getMajorContributorOrgNames(String applierUid){
-		NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
-		List<NinethMajorOrgContributor> ninethMajorOrgContributor=ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(applierUid);
-		Collections.sort(ninethMajorOrgContributor, new Comparator<NinethMajorOrgContributor>(){
-			public int compare(NinethMajorOrgContributor ninethMajorOrgContributor1,NinethMajorOrgContributor ninethMajorOrgContributor2){
-				return ninethMajorOrgContributor1.getRankOfOrg()-(ninethMajorOrgContributor2.getRankOfOrg());
+		NinthMajorOrgContributorJdbc ninthMajorOrgContributorJdbc=InitJdbc.initNinthMajorOrgContributorJdbc();
+		List<NinthMajorOrgContributor> ninthMajorOrgContributor=ninthMajorOrgContributorJdbc.getNinthMajorOrgContributors(applierUid);
+		Collections.sort(ninthMajorOrgContributor, new Comparator<NinthMajorOrgContributor>(){
+			public int compare(NinthMajorOrgContributor ninthMajorOrgContributor1,NinthMajorOrgContributor ninthMajorOrgContributor2){
+				return ninthMajorOrgContributor1.getRankOfOrg()-(ninthMajorOrgContributor2.getRankOfOrg());
 			}
 		});
 		
 		StringBuffer majorOrgContributors=new StringBuffer();
-        for(NinethMajorOrgContributor orgContributors:ninethMajorOrgContributor){
+        for(NinthMajorOrgContributor orgContributors:ninthMajorOrgContributor){
         	majorOrgContributors.append(",").append(orgContributors.getNameOfOrg());
         }
         if(majorOrgContributors==null||majorOrgContributors.toString().isEmpty()){

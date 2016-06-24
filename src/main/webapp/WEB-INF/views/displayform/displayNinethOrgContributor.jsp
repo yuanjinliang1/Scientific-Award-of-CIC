@@ -42,62 +42,62 @@ request.setCharacterEncoding("UTF-8");
 				<tr>
 					<td>单位名称</td>
 					<td>
-					${ninethForm.nameOfOrg}
+					${ninthForm.nameOfOrg}
 					</td>
 				</tr>
 				<tr>
 					<td>排名</td>
 					<td>
-					${ninethForm.rankOfOrg}
+					${ninthForm.rankOfOrg}
 					</td>
 				</tr>
 				<tr>
 					<td>法定代表人</td>
-					<td>${ninethForm.legalRepresentative}</td>
+					<td>${ninthForm.legalRepresentative}</td>
 				</tr>
 				<tr>
 					<td>所在地</td>
-					<td>${ninethForm.locationOfOrg}</td>
+					<td>${ninthForm.locationOfOrg}</td>
 				</tr>
 				<tr>
 					<td>单位性质</td>
-					<td>${ninethForm.typeOfOrg}</td>
+					<td>${ninthForm.typeOfOrg}</td>
 				</tr>
 				<tr>
 					<td>传真</td>
-					<td>${ninethForm.faxOfOrg}</td>
+					<td>${ninthForm.faxOfOrg}</td>
 				</tr>
 				<tr>
 					<td>邮政编码</td>
-					<td>${ninethForm.zipCodeOfOrg}</td>
+					<td>${ninthForm.zipCodeOfOrg}</td>
 				</tr>
 				<tr>
 					<td>中国通信学会团体会员</td>
-					<td>${ninethForm.isOrgMemberOfCIC}</td>
+					<td>${ninthForm.isOrgMemberOfCIC}</td>
 				</tr>
 				<tr>
 					<td>团体会员证书号</td>
-					<td>${ninethForm.orgMemberIDOfCIC}</td>
+					<td>${ninthForm.orgMemberIDOfCIC}</td>
 				</tr>
 				<tr>
 					<td>通讯地址</td>
-					<td>${ninethForm.addressOfOrg}</td>
+					<td>${ninthForm.addressOfOrg}</td>
 				</tr>
 				<tr>
 					<td>联系人</td>
-					<td>${ninethForm.contactNameOfOrg}</td>
+					<td>${ninthForm.contactNameOfOrg}</td>
 				</tr>
 				<tr>
 					<td>单位电话</td>
-					<td>${ninethForm.contactPhoneOfOrg}</td>
+					<td>${ninthForm.contactPhoneOfOrg}</td>
 				</tr>
 				<tr>
 					<td>移动电话</td>
-					<td>${ninethForm.mobileOfOrg}</td>
+					<td>${ninthForm.mobileOfOrg}</td>
 				</tr>
 				<tr>
 					<td>电子邮箱</td>
-					<td>${ninethForm.emailOfOrg}</td>
+					<td>${ninthForm.emailOfOrg}</td>
 				</tr>
 			</table>
 			<div class="panel panel-default">
@@ -119,14 +119,14 @@ request.setCharacterEncoding("UTF-8");
 					</div>
 				</div>
 				<div class="row panel-body">
-					<pre>${ninethForm.contributionToProject}</pre>
+					<pre>${ninthForm.contributionToProject}</pre>
 				</div>
 			</div>
 			<div class="row" style="margin-left:20px">
-				<spring:url value="/select-nineth-major-org-contributor/{applierUid}" var="ninethFormURL">
+				<spring:url value="/select-ninth-major-org-contributor/{applierUid}" var="ninthFormURL">
 					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
 				</spring:url>
-				<a class="btn btn-default" href="${fn:escapeXml(ninethFormURL)}">返回</a>
+				<a class="btn btn-default" href="${fn:escapeXml(ninthFormURL)}">返回</a>
 			</div>
         </div>
 		</div>

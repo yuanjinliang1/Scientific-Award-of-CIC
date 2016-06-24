@@ -64,7 +64,7 @@
 	   <bean id="eighthMajorContributorJdbc" class="com.dicipulus.app.JDBC.EighthMajorContributorJdbc">
 	   	<property name="dataSource" ref="dataSource"></property>
 	   </bean>
-	   <bean id="ninethMajorOrgContributorJdbc" class="com.dicipulus.app.JDBC.NinethMajorOrgContributorJdbc">
+	   <bean id="ninthMajorOrgContributorJdbc" class="com.dicipulus.app.JDBC.NinthMajorOrgContributorJdbc">
 	   	<property name="dataSource" ref="dataSource"></property>
 	   </bean>
 	   <bean id="sixthApplyUnitSituationJdbc" class="com.dicipulus.app.JDBC.SixthApplyUnitSituationJdbc">

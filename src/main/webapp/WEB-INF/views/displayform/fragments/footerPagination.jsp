@@ -40,7 +40,7 @@
 				<spring:url value="/select-eighth-major-contributor/{applierUid}" var="eighthFormURL">
 					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
 				</spring:url>
-				<spring:url value="/select-nineth-major-org-contributor/{applierUid}" var="ninethFormURL">
+				<spring:url value="/select-ninth-major-org-contributor/{applierUid}" var="ninthFormURL">
 					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
 				</spring:url>
 				<input type="button" onclick="location.href='${fn:escapeXml(firstFormURL)}';" value="第一页">
@@ -51,4 +51,4 @@
 				<input type="button" onclick="location.href='${fn:escapeXml(sixthFormURL)}';" value="第六页">
 				<input type="button" onclick="location.href='${fn:escapeXml(seventhFormURL)}';" value="第七页">
 				<input type="button" onclick="location.href='${fn:escapeXml(eighthFormURL)}';" value="第八页">
-				<input type="button" onclick="location.href='${fn:escapeXml(ninethFormURL)}';" value="第九页">
+				<input type="button" onclick="location.href='${fn:escapeXml(ninthFormURL)}';" value="第九页">

@@ -70,10 +70,10 @@ request.setCharacterEncoding("UTF-8");
 					</spring:url>
 				</c:if>
 				<a class="btn btn-default" href="${fn:escapeXml(seventhFormURL)}">上一页</a>
-				<spring:url value="/select-nineth-major-org-contributor/{applierUid}" var="ninethFormURL">
+				<spring:url value="/select-ninth-major-org-contributor/{applierUid}" var="ninthFormURL">
 					<spring:param name="applierUid" value="${applier.uid }"></spring:param>
 				</spring:url>
-				<a class="btn btn-default" href="${fn:escapeXml(ninethFormURL)}">下一页</a>
+				<a class="btn btn-default" href="${fn:escapeXml(ninthFormURL)}">下一页</a>
 			</div>
         </div>
 		</div>

@@ -11,10 +11,10 @@ import com.dicipulus.app.JDBC.ApplierJdbc;
 import com.dicipulus.app.JDBC.EighthMajorContributorJdbc;
 import com.dicipulus.app.JDBC.FirstProjectBasicSituationJdbc;
 import com.dicipulus.app.JDBC.InitJdbc;
-import com.dicipulus.app.JDBC.NinethMajorOrgContributorJdbc;
+import com.dicipulus.app.JDBC.NinthMajorOrgContributorJdbc;
 import com.dicipulus.app.applicationModel.EighthMajorContributor;
 import com.dicipulus.app.applicationModel.FirstProjectBasicSituation;
-import com.dicipulus.app.applicationModel.NinethMajorOrgContributor;
+import com.dicipulus.app.applicationModel.NinthMajorOrgContributor;
 import com.dicipulus.app.model.Applier;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -47,11 +47,11 @@ public class FirstProjectBasicSituationPdf {
 			}
 		});
 		
-		NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
-		List<NinethMajorOrgContributor> ninethMajorOrgContributor=ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(applierUid);
-		Collections.sort(ninethMajorOrgContributor, new Comparator<NinethMajorOrgContributor>(){
-			public int compare(NinethMajorOrgContributor ninethMajorOrgContributor1,NinethMajorOrgContributor ninethMajorOrgContributor2){
-				return ninethMajorOrgContributor1.getRankOfOrg()-(ninethMajorOrgContributor2.getRankOfOrg());
+		NinthMajorOrgContributorJdbc ninthMajorOrgContributorJdbc=InitJdbc.initNinthMajorOrgContributorJdbc();
+		List<NinthMajorOrgContributor> ninthMajorOrgContributor=ninthMajorOrgContributorJdbc.getNinthMajorOrgContributors(applierUid);
+		Collections.sort(ninthMajorOrgContributor, new Comparator<NinthMajorOrgContributor>(){
+			public int compare(NinthMajorOrgContributor ninthMajorOrgContributor1,NinthMajorOrgContributor ninthMajorOrgContributor2){
+				return ninthMajorOrgContributor1.getRankOfOrg()-(ninthMajorOrgContributor2.getRankOfOrg());
 			}
 		});
 		
@@ -114,7 +114,7 @@ public class FirstProjectBasicSituationPdf {
             cell.setMinimumHeight(50f);
             table.addCell(cell);
             StringBuffer majorOrgContributors=new StringBuffer();
-            for(NinethMajorOrgContributor orgContributors:ninethMajorOrgContributor){
+            for(NinthMajorOrgContributor orgContributors:ninthMajorOrgContributor){
             	majorOrgContributors.append(",").append(orgContributors.getNameOfOrg());
             }
             cell.setHorizontalAlignment(cell.ALIGN_LEFT);

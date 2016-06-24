@@ -44,13 +44,13 @@ request.setCharacterEncoding("UTF-8");
 					<td>单位名称</td>
 					<td>操作</td>
 				</tr>
-				<c:forEach var="ninethForm" items="${ninethForms }">
+				<c:forEach var="ninthForm" items="${ninthForms }">
 					<tr>
-						<td>${ninethForm.rankOfOrg } </td>
-						<td>${ninethForm.nameOfOrg }</td>
+						<td>${ninthForm.rankOfOrg } </td>
+						<td>${ninthForm.nameOfOrg }</td>
 						<td>
-							<spring:url value="/display-nineth-major-org-contributor/{idOfNinethForm}" var="editFormURL">
-								<spring:param name="idOfNinethForm" value="${ninethForm.idOfNinethForm }"></spring:param>
+							<spring:url value="/display-ninth-major-org-contributor/{idOfNinthForm}" var="editFormURL">
+								<spring:param name="idOfNinthForm" value="${ninthForm.idOfNinthForm }"></spring:param>
 							</spring:url>
 							<a id="editOpinion"  class="btn btn-default" href="${fn:escapeXml(editFormURL)}">浏览</a>
 						</td>

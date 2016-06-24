@@ -8,8 +8,8 @@ import java.util.List;
 
 import com.dicipulus.app.JDBC.ApplierJdbc;
 import com.dicipulus.app.JDBC.InitJdbc;
-import com.dicipulus.app.JDBC.NinethMajorOrgContributorJdbc;
-import com.dicipulus.app.applicationModel.NinethMajorOrgContributor;
+import com.dicipulus.app.JDBC.NinthMajorOrgContributorJdbc;
+import com.dicipulus.app.applicationModel.NinthMajorOrgContributor;
 import com.dicipulus.app.model.Applier;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -24,17 +24,17 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 /////有问题 关于取多个记录还是一个
-public class NinethMajorOrgContributorPdf {
-	public static void buildNinethMajorOrgContributorPdf(String applierUid,Document document) throws DocumentException, IOException{
+public class NinthMajorOrgContributorPdf {
+	public static void buildNinthMajorOrgContributorPdf(String applierUid,Document document) throws DocumentException, IOException{
 		ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
 		Applier applier=applierJdbc.getApplierByUid(applierUid);
 		String applicationType=applier.getApplicationType();
 		
-		NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
-		List<NinethMajorOrgContributor> ninethMajorOrgContributor=ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(applierUid);
-		Collections.sort(ninethMajorOrgContributor, new Comparator<NinethMajorOrgContributor>(){
-			public int compare(NinethMajorOrgContributor ninethMajorOrgContributor1,NinethMajorOrgContributor ninethMajorOrgContributor2){
-				return ninethMajorOrgContributor1.getRankOfOrg()-(ninethMajorOrgContributor2.getRankOfOrg());
+		NinthMajorOrgContributorJdbc ninthMajorOrgContributorJdbc=InitJdbc.initNinthMajorOrgContributorJdbc();
+		List<NinthMajorOrgContributor> ninthMajorOrgContributor=ninthMajorOrgContributorJdbc.getNinthMajorOrgContributors(applierUid);
+		Collections.sort(ninthMajorOrgContributor, new Comparator<NinthMajorOrgContributor>(){
+			public int compare(NinthMajorOrgContributor ninthMajorOrgContributor1,NinthMajorOrgContributor ninthMajorOrgContributor2){
+				return ninthMajorOrgContributor1.getRankOfOrg()-(ninthMajorOrgContributor2.getRankOfOrg());
 			}
 		});
 		BaseFont baseFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
@@ -45,7 +45,7 @@ public class NinethMajorOrgContributorPdf {
 		paragraph.setSpacingBefore(5f);
 		paragraph.setSpacingAfter(5f);
 		document.add(paragraph);
-	for(int i=0;i<ninethMajorOrgContributor.size();i++){
+	for(int i=0;i<ninthMajorOrgContributor.size();i++){
 		float[] width1={0.15f,0.25f,0.15f,0.15f,0.15f,0.15f}; 
 		PdfPTable table=new PdfPTable(width1);
 		table.setWidthPercentage(100);
@@ -57,65 +57,65 @@ public class NinethMajorOrgContributorPdf {
 		cell.setPhrase(new Phrase("单位名称",fontChinese));
 		table.addCell(cell);
 		cell.setColspan(5);
-		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getNameOfOrg(),fontChinese));
+		cell.setPhrase(new Phrase(ninthMajorOrgContributor.get(i).getNameOfOrg(),fontChinese));
 		table.addCell(cell);
 		cell.setColspan(1);
 		cell.setPhrase(new Phrase("排名",fontChinese));
 		table.addCell(cell);
-		cell.setPhrase(new Phrase(String.valueOf(ninethMajorOrgContributor.get(i).getRankOfOrg()),fontChinese));
+		cell.setPhrase(new Phrase(String.valueOf(ninthMajorOrgContributor.get(i).getRankOfOrg()),fontChinese));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("法定代表人",fontChinese));
 		table.addCell(cell);
-		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getLegalRepresentative(),fontChinese));
+		cell.setPhrase(new Phrase(ninthMajorOrgContributor.get(i).getLegalRepresentative(),fontChinese));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("所在地",fontChinese));
 		table.addCell(cell);
-		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getLocationOfOrg(),fontChinese));
+		cell.setPhrase(new Phrase(ninthMajorOrgContributor.get(i).getLocationOfOrg(),fontChinese));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("单位性质",fontChinese));
 		table.addCell(cell);
-		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getTypeOfOrg(),fontChinese));
+		cell.setPhrase(new Phrase(ninthMajorOrgContributor.get(i).getTypeOfOrg(),fontChinese));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("传真",fontChinese));
 		table.addCell(cell);
-		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getFaxOfOrg(),fontChinese));
+		cell.setPhrase(new Phrase(ninthMajorOrgContributor.get(i).getFaxOfOrg(),fontChinese));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("邮政编码",fontChinese));
 		table.addCell(cell);
-		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getZipCodeOfOrg(),fontChinese));
+		cell.setPhrase(new Phrase(ninthMajorOrgContributor.get(i).getZipCodeOfOrg(),fontChinese));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("中国通信学会团体会员",fontChinese));
 		table.addCell(cell);
-		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getIsOrgMemberOfCIC(),fontChinese));
+		cell.setPhrase(new Phrase(ninthMajorOrgContributor.get(i).getIsOrgMemberOfCIC(),fontChinese));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("团体会员证书号",fontChinese));
 		table.addCell(cell);
 		cell.setColspan(3);
-		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getorgMemberIDOfCIC(),fontChinese));
+		cell.setPhrase(new Phrase(ninthMajorOrgContributor.get(i).getorgMemberIDOfCIC(),fontChinese));
 		table.addCell(cell);
 		cell.setColspan(1);
 		cell.setPhrase(new Phrase("通讯地址",fontChinese));
 		table.addCell(cell);
 		cell.setColspan(5);
-		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getAddressOfOrg(),fontChinese));
+		cell.setPhrase(new Phrase(ninthMajorOrgContributor.get(i).getAddressOfOrg(),fontChinese));
 		table.addCell(cell);
 		cell.setColspan(1);
 		cell.setPhrase(new Phrase("联系人",fontChinese));
 		table.addCell(cell);
-		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getContactNameOfOrg(),fontChinese));
+		cell.setPhrase(new Phrase(ninthMajorOrgContributor.get(i).getContactNameOfOrg(),fontChinese));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("单位电话",fontChinese));
 		table.addCell(cell);
-		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getContactPhoneOfOrg(),fontChinese));
+		cell.setPhrase(new Phrase(ninthMajorOrgContributor.get(i).getContactPhoneOfOrg(),fontChinese));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("移动电话",fontChinese));
 		table.addCell(cell);
-		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getMobileOfOrg(),fontChinese));
+		cell.setPhrase(new Phrase(ninthMajorOrgContributor.get(i).getMobileOfOrg(),fontChinese));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("电子邮箱",fontChinese));
 		table.addCell(cell);
 		cell.setColspan(5);
-		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getEmailOfOrg(),fontChinese));
+		cell.setPhrase(new Phrase(ninthMajorOrgContributor.get(i).getEmailOfOrg(),fontChinese));
 		table.addCell(cell);
 		cell.setColspan(6);
 		cell.setHorizontalAlignment(cell.ALIGN_LEFT);
@@ -124,7 +124,7 @@ public class NinethMajorOrgContributorPdf {
 		
 		cell.setVerticalAlignment(cell.ALIGN_TOP);
 		cell.setMinimumHeight(250f);
-		cell.setPhrase(new Phrase(ninethMajorOrgContributor.get(i).getContributionToProject(),fontChinese));
+		cell.setPhrase(new Phrase(ninthMajorOrgContributor.get(i).getContributionToProject(),fontChinese));
 		table.addCell(cell);
 		cell.setMinimumHeight(80f);
 		cell.addElement(new Paragraph("          声明：本单位同意完成单位排名，遵守国家有关部门及中国通信学会关于科技奖励的相关规定和对推荐工作的具体要求，承诺遵守评审工作纪律，保证所提供的有关材料真实有效，且不存在任何违反《中华人民共和国保守国家秘密法》和《科学技术保密规定》等相关法律法规及侵犯他人知识产权的情形。如有材料虚假或违纪行为，愿意承担相应责任并接受相应处理。如产生争议，保证积极配合调查处理工作。",fontChinese));

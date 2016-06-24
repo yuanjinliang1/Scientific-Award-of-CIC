@@ -14,7 +14,7 @@
 <c:set var="sixthDisplay" value=""></c:set>
 <c:set var="seventhDisplay" value=""></c:set>
 <c:set var="eighthDisplay" value=""></c:set>
-<c:set var="ninethDisplay" value=""></c:set>
+<c:set var="ninthDisplay" value=""></c:set>
 <c:choose>
 	<c:when test="${page eq '1' }">
 		<c:set var="firstDisplay" value="active"></c:set>
@@ -41,7 +41,7 @@
 		<c:set var="eighthDisplay" value="active"></c:set>
 	</c:when>
 	<c:when test="${page eq '9' }">
-		<c:set var="ninethDisplay" value="active"></c:set>
+		<c:set var="ninthDisplay" value="active"></c:set>
 	</c:when>
 	<c:otherwise>
 		<c:out value="bad page"></c:out>
@@ -84,7 +84,7 @@
 	<spring:url value="/select-eighth-major-contributor/{applierUid}" var="eighthFormURL">
 		<spring:param name="applierUid" value="${applier.uid }"></spring:param>
 	</spring:url>
-	<spring:url value="/select-nineth-major-org-contributor/{applierUid}" var="ninethFormURL">
+	<spring:url value="/select-ninth-major-org-contributor/{applierUid}" var="ninthFormURL">
 		<spring:param name="applierUid" value="${applier.uid }"></spring:param>
 	</spring:url>
 </div>
@@ -125,8 +125,8 @@
                 <li class="${ eighthDisplay }">
                     <a  href="${fn:escapeXml(eighthFormURL)}">第八页</a>
                 </li>
-                <li class="${ ninethDisplay }">
-                    <a href="${fn:escapeXml(ninethFormURL)}">第九页</a>
+                <li class="${ ninthDisplay }">
+                    <a href="${fn:escapeXml(ninthFormURL)}">第九页</a>
                 </li>
                 
             </ul>

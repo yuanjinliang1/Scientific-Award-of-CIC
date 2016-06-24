@@ -61,35 +61,35 @@ public class FifthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/display-objective-evaluation/{applierUid}",method=RequestMethod.GET)
-	public ModelAndView displayFifthObjectiveEvaluation(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
-		logger.info("displayFIfthObjectiveEvaluation");
-		try{
-			Person person=(Person) request.getSession().getAttribute("person");
-			FifthObjectiveEvaluationJdbc fifthObjectiveEvaluationJdbc=InitJdbc.initFifthObjectiveEvaluationJdbc();
-			FifthObjectiveEvaluation fifthObjectiveEvaluation=fifthObjectiveEvaluationJdbc.getFifthObjectiveEvaluation(applierUid);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier", applier);
-			
-			FormUlti.isAuthenticatedToRead(person, applierUid);
-			
-			modelAndView.setViewName("displayform/displayFifthObjectiveEvaluation");
-			modelAndView.addObject("objectiveEvaluationForm", fifthObjectiveEvaluation);
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-		catch(AuthenticationException e){
-			logger.info(e.toString());
-			modelAndView.setViewName("redirect:/noAuthentication");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/display-objective-evaluation/{applierUid}",method=RequestMethod.GET)
+//	public ModelAndView displayFifthObjectiveEvaluation(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
+//		logger.info("displayFIfthObjectiveEvaluation");
+//		try{
+//			Person person=(Person) request.getSession().getAttribute("person");
+//			FifthObjectiveEvaluationJdbc fifthObjectiveEvaluationJdbc=InitJdbc.initFifthObjectiveEvaluationJdbc();
+//			FifthObjectiveEvaluation fifthObjectiveEvaluation=fifthObjectiveEvaluationJdbc.getFifthObjectiveEvaluation(applierUid);
+//			
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier", applier);
+//			
+//			FormUlti.isAuthenticatedToRead(person, applierUid);
+//			
+//			modelAndView.setViewName("displayform/displayFifthObjectiveEvaluation");
+//			modelAndView.addObject("objectiveEvaluationForm", fifthObjectiveEvaluation);
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//		catch(AuthenticationException e){
+//			logger.info(e.toString());
+//			modelAndView.setViewName("redirect:/noAuthentication");
+//			return modelAndView;
+//		}
+//	}
 	
 	
 	/**

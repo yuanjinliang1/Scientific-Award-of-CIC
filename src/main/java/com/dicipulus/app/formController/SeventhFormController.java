@@ -65,36 +65,36 @@ public class SeventhFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/select-seventh-paper-cited-by-others/{applierUid}",method=RequestMethod.GET)
-	public ModelAndView selectSeventhPaperCitedByOthers(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
-		logger.info("selectSeventhPaperCitedByOthers");
-		try{
-			Person person=FormUlti.getPersonInRequest(request);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier= applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier",applier);
-			
-			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
-			List<SeventhPaperCitedByOthers>  seventhPaperCitedByOtherss = seventhPaperCitedByOthersJdbc.getSeventhPaperCitedByOtherss(applierUid);
-			modelAndView.addObject("seventhPaperForms", seventhPaperCitedByOtherss);
-			
-			FormUlti.isAuthenticatedToRead(person, applierUid);
-			
-			modelAndView.setViewName("displayform/selectSeventhPaperCitedByOthers");
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-		catch(AuthenticationException e){
-			logger.info(e.toString());
-			modelAndView.setViewName("redirect:/noAuthentication");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/select-seventh-paper-cited-by-others/{applierUid}",method=RequestMethod.GET)
+//	public ModelAndView selectSeventhPaperCitedByOthers(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
+//		logger.info("selectSeventhPaperCitedByOthers");
+//		try{
+//			Person person=FormUlti.getPersonInRequest(request);
+//			
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier= applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier",applier);
+//			
+//			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
+//			List<SeventhPaperCitedByOthers>  seventhPaperCitedByOtherss = seventhPaperCitedByOthersJdbc.getSeventhPaperCitedByOtherss(applierUid);
+//			modelAndView.addObject("seventhPaperForms", seventhPaperCitedByOtherss);
+//			
+//			FormUlti.isAuthenticatedToRead(person, applierUid);
+//			
+//			modelAndView.setViewName("displayform/selectSeventhPaperCitedByOthers");
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//		catch(AuthenticationException e){
+//			logger.info(e.toString());
+//			modelAndView.setViewName("redirect:/noAuthentication");
+//			return modelAndView;
+//		}
+//	}
 	
 	/**
 	 * 项目组建立第七论文被引用表 POST
@@ -202,36 +202,36 @@ public class SeventhFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/select-seventh-ip-doc/{applierUid}",method=RequestMethod.GET)
-	public ModelAndView selectSeventhIntellectualPropertyDoc(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
-		logger.info("selectSeventhIntellectualPropertyDoc");
-		try{
-			Person person=FormUlti.getPersonInRequest(request);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier= applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier",applier);
-			
-			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
-			List<SeventhIntellectualPropertyDoc>  seventhIntellectualPropertyDocs = seventhIntellectualPropertyDocJdbc.getSeventhIntellectualPropertyDocs(applierUid);
-			modelAndView.addObject("seventhIPForms", seventhIntellectualPropertyDocs);
-			
-			FormUlti.isAuthenticatedToRead(person, applierUid);
-			
-			modelAndView.setViewName("displayform/selectSeventhIPDoc");
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-		catch(AuthenticationException e){
-			logger.info(e.toString());
-			modelAndView.setViewName("redirect:/noAuthentication");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/select-seventh-ip-doc/{applierUid}",method=RequestMethod.GET)
+//	public ModelAndView selectSeventhIntellectualPropertyDoc(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
+//		logger.info("selectSeventhIntellectualPropertyDoc");
+//		try{
+//			Person person=FormUlti.getPersonInRequest(request);
+//			
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier= applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier",applier);
+//			
+//			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
+//			List<SeventhIntellectualPropertyDoc>  seventhIntellectualPropertyDocs = seventhIntellectualPropertyDocJdbc.getSeventhIntellectualPropertyDocs(applierUid);
+//			modelAndView.addObject("seventhIPForms", seventhIntellectualPropertyDocs);
+//			
+//			FormUlti.isAuthenticatedToRead(person, applierUid);
+//			
+//			modelAndView.setViewName("displayform/selectSeventhIPDoc");
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//		catch(AuthenticationException e){
+//			logger.info(e.toString());
+//			modelAndView.setViewName("redirect:/noAuthentication");
+//			return modelAndView;
+//		}
+//	}
 	
 	/**
 	 * 项目组建立第七知识产权表 POST

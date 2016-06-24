@@ -66,36 +66,36 @@ public class ThirdFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/display-brief-introduction/{applierUid}",method=RequestMethod.GET)
-	public ModelAndView displayuThirdProjectBriefIntroduction(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
-		logger.info("displayThirdProjectBriefIntroduction");
-		try{
-			Person person=(Person) request.getSession().getAttribute("person");
-			
-			ThirdProjectBriefIntroductionJdbc thirdProjectBriefIntroductionJdbc=InitJdbc.initThirdProjectBriefIntroductionJdbc();
-			ThirdProjectBriefIntroduction thirdProjectBriefIntroduction=thirdProjectBriefIntroductionJdbc.getThirdProjectBriefIntroduction(applierUid);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier", applier);
-			
-			FormUlti.isAuthenticatedToRead(person, applierUid);
-			
-			modelAndView.setViewName("displayform/displayThirdBriefIntroduction");
-			modelAndView.addObject("briefIntroductionForm", thirdProjectBriefIntroduction);
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			logger.info("get exception!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-		catch(AuthenticationException e){
-			logger.info(e.toString());
-			modelAndView.setViewName("redirect:/noAuthentication");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/display-brief-introduction/{applierUid}",method=RequestMethod.GET)
+//	public ModelAndView displayuThirdProjectBriefIntroduction(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
+//		logger.info("displayThirdProjectBriefIntroduction");
+//		try{
+//			Person person=(Person) request.getSession().getAttribute("person");
+//			
+//			ThirdProjectBriefIntroductionJdbc thirdProjectBriefIntroductionJdbc=InitJdbc.initThirdProjectBriefIntroductionJdbc();
+//			ThirdProjectBriefIntroduction thirdProjectBriefIntroduction=thirdProjectBriefIntroductionJdbc.getThirdProjectBriefIntroduction(applierUid);
+//			
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier", applier);
+//			
+//			FormUlti.isAuthenticatedToRead(person, applierUid);
+//			
+//			modelAndView.setViewName("displayform/displayThirdBriefIntroduction");
+//			modelAndView.addObject("briefIntroductionForm", thirdProjectBriefIntroduction);
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			logger.info("get exception!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//		catch(AuthenticationException e){
+//			logger.info(e.toString());
+//			modelAndView.setViewName("redirect:/noAuthentication");
+//			return modelAndView;
+//		}
+//	}
 	
 	/**
 	 * 项目组编辑第三个表POST

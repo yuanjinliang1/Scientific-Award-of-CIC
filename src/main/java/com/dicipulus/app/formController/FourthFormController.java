@@ -61,36 +61,36 @@ public class FourthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/display-fourth-form/{applierUid}",method=RequestMethod.GET)
-	public ModelAndView displayFourthForm(HttpServletRequest request, ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
-		logger.info("initFourthForm");
-		try{
-			Person person= FormUlti.getPersonInRequest(request);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier",applier);
-			
-			FormUlti.isAuthenticatedToRead(person, applierUid);
-			
-			FourthFormJdbc fourthFormJdbc=InitJdbc.initFourthFormJdbc();
-			FourthForm fourthForm=fourthFormJdbc.getFourthForm(applierUid);
-			modelAndView.addObject("fourthForm",fourthForm);
-			
-			modelAndView.setViewName("displayform/displayFourthForm");
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			logger.info("get exception!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-		catch(AuthenticationException e){
-			logger.info(e.toString());
-			modelAndView.setViewName("redirect:/noAuthentication");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/display-fourth-form/{applierUid}",method=RequestMethod.GET)
+//	public ModelAndView displayFourthForm(HttpServletRequest request, ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
+//		logger.info("initFourthForm");
+//		try{
+//			Person person= FormUlti.getPersonInRequest(request);
+//			
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier",applier);
+//			
+//			FormUlti.isAuthenticatedToRead(person, applierUid);
+//			
+//			FourthFormJdbc fourthFormJdbc=InitJdbc.initFourthFormJdbc();
+//			FourthForm fourthForm=fourthFormJdbc.getFourthForm(applierUid);
+//			modelAndView.addObject("fourthForm",fourthForm);
+//			
+//			modelAndView.setViewName("displayform/displayFourthForm");
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			logger.info("get exception!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//		catch(AuthenticationException e){
+//			logger.info(e.toString());
+//			modelAndView.setViewName("redirect:/noAuthentication");
+//			return modelAndView;
+//		}
+//	}
 	
 	/**
 	 * 项目组编辑第四个表POST

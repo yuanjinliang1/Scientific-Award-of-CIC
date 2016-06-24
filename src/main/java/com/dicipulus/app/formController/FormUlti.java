@@ -115,10 +115,4 @@ public final class FormUlti {
 		}
 	}
 	
-	//HACK Factory?
-	public static Validator getValidator(String expectedRole, String expectedUid,
-			List<String> expectedStatuses,String ownerUid){
-		return new Validator(expectedUid, expectedRole,expectedStatuses,ownerUid);
-	}
-	
 }

@@ -129,42 +129,42 @@ public class SecondFormController {
 	 * @param ownerUid
 	 * @return
 	 */
-	@RequestMapping(value="/display-referee-unit-opinion/{applierUid}",method=RequestMethod.GET)
-	public ModelAndView displaySecondRefereeUnitOpinionForm(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
-		logger.info("displaySecondRefereeUnitOpinionForm");
-		try{
-			Person person=FormUlti.getPersonInRequest(request);
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			
-			SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
-			SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
-			modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
-			modelAndView.addObject("applier",applier);
-			modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
-			
-			FormUlti.isAuthenticatedToRead(person, applierUid);
-
-			modelAndView.setViewName("displayform/displaySecondRefereeOpinion");
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			modelAndView.setViewName("redirect:/login");
-			logger.info("null session!");
-			return modelAndView;
-		}
-		catch(EmptyResultDataAccessException e2){
-			logger.info("forms have not been created!");
-			Person person=FormUlti.getPersonInRequest(request);
-			modelAndView.setViewName("redirect:/applier-managed-by-referee/applier-view/"+person.getUid());
-			return modelAndView;
-		}
-		catch(AuthenticationException e){
-			logger.info(e.toString());
-			modelAndView.setViewName("redirect:/noAuthentication");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/display-referee-unit-opinion/{applierUid}",method=RequestMethod.GET)
+//	public ModelAndView displaySecondRefereeUnitOpinionForm(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
+//		logger.info("displaySecondRefereeUnitOpinionForm");
+//		try{
+//			Person person=FormUlti.getPersonInRequest(request);
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			
+//			SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
+//			SecondRefereeUnitOpinion secondRefereeUnitOpinion=secondRefereeUnitOpinionJdbc.getSecondRefereeUnitOpinion(applierUid);
+//			modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
+//			modelAndView.addObject("applier",applier);
+//			modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
+//			
+//			FormUlti.isAuthenticatedToRead(person, applierUid);
+//
+//			modelAndView.setViewName("displayform/displaySecondRefereeOpinion");
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			modelAndView.setViewName("redirect:/login");
+//			logger.info("null session!");
+//			return modelAndView;
+//		}
+//		catch(EmptyResultDataAccessException e2){
+//			logger.info("forms have not been created!");
+//			Person person=FormUlti.getPersonInRequest(request);
+//			modelAndView.setViewName("redirect:/applier-managed-by-referee/applier-view/"+person.getUid());
+//			return modelAndView;
+//		}
+//		catch(AuthenticationException e){
+//			logger.info(e.toString());
+//			modelAndView.setViewName("redirect:/noAuthentication");
+//			return modelAndView;
+//		}"未提交""未提交"
+//	}
 	
 	/**
 	 * 项目组编辑时查看推荐书，走过场
@@ -173,31 +173,31 @@ public class SecondFormController {
 	 * @param applierUid
 	 * @return
 	 */
-	@RequestMapping(value="/display-second-form-when-applier-editing",method=RequestMethod.GET)
-	public ModelAndView displaySecondFormWhenApplierEditing(HttpServletRequest request,ModelAndView modelAndView){
-		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
-		if(FormUlti.getPersonInRequest(request)==null){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("null-session"));
-			return modelAndView;
-		}
-		if(FormUlti.rightRole(request, "applier")==false){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-role"));
-			return modelAndView;
-		}
-		String applierUid=FormUlti.getPersonInRequest(request).getUid();
-		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-status"));
-			return modelAndView;
-		}
-		//main work
-		SecondRefereeUnitOpinion secondRefereeUnitOpinion=InitJdbc.initSecondRefereeUnitOpinionJdbc().getSecondRefereeUnitOpinion(applierUid);
-			modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
-		Applier applier=InitJdbc.initApplierJdbc().getApplierByUid(applierUid);
-			modelAndView.addObject("applier",applier);
-		modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
-		
-		modelAndView.setViewName("editform/displaySecondRefereeOpinionWhenApplierEditing");
-		
-		return modelAndView;
-	}
+//	@RequestMapping(value="/display-second-form-when-applier-editing",method=RequestMethod.GET)
+//	public ModelAndView displaySecondFormWhenApplierEditing(HttpServletRequest request,ModelAndView modelAndView){
+//		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+//		if(FormUlti.getPersonInRequest(request)==null){
+//			modelAndView.setViewName(FormUlti.redirectErrorMessage("null-session"));
+//			return modelAndView;
+//		}
+//		if(FormUlti.rightRole(request, "applier")==false){
+//			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-role"));
+//			return modelAndView;
+//		}
+//		String applierUid=FormUlti.getPersonInRequest(request).getUid();
+//		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
+//			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-status"));
+//			return modelAndView;
+//		}
+//		//main work
+//		SecondRefereeUnitOpinion secondRefereeUnitOpinion=InitJdbc.initSecondRefereeUnitOpinionJdbc().getSecondRefereeUnitOpinion(applierUid);
+//			modelAndView.addObject("secondForm",secondRefereeUnitOpinion);
+//		Applier applier=InitJdbc.initApplierJdbc().getApplierByUid(applierUid);
+//			modelAndView.addObject("applier",applier);
+//		modelAndView.addObject("nominatedAwards",Constants.NOMINATEDAWARDS);
+//		
+//		modelAndView.setViewName("editform/displaySecondRefereeOpinionWhenApplierEditing");
+//		
+//		return modelAndView;
+//	}
 }

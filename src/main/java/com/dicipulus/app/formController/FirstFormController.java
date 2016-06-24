@@ -102,39 +102,39 @@ public class FirstFormController {
 		return "redirect:/display-second-form-when-applier-editing";
 	}
 	
-	@RequestMapping(value="/display-first-project-basic-situation/{applierUid}",method=RequestMethod.GET)
-	public ModelAndView displayFirstProjectBasicSituationGet(ModelAndView modelAndView, HttpServletRequest request,@PathVariable("applierUid") String applierUid){
-		logger.info("displayFirstProjectBasicSituationGet()");
-		try{
-			FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
-			Person person = FormUlti.getPersonInRequest(request);
-			FirstProjectBasicSituation firstForm=firstProjectBasicSituationJdbc.getFirstProjectBasicSituation(applierUid);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier", applier);
-			
-			FormUlti.isAuthenticatedToRead(person, applierUid);
-			
-			modelAndView.addObject("firstForm",firstForm);
-			modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);
-			modelAndView.addObject("economicFields",Constants.ECONOMICFIELDS);
-			modelAndView.addObject("nationalFocusFields",Constants.NATIONALFOCUSFIELDS);
-			modelAndView.addObject("technologicalFields",Constants.TECHNOLOGICALFIELDS);
-			modelAndView.addObject("taskSources",Constants.TASKSOURCES);
-			
-			modelAndView.setViewName("displayform/displayFirstProjectBasicSituation");
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			modelAndView.setViewName("redirect:/login");
-			logger.info("null session!");
-			return modelAndView;
-		}
-		catch(AuthenticationException e){
-			logger.info(e.toString());
-			modelAndView.setViewName("redirect:/noAuthentication");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/display-first-project-basic-situation/{applierUid}",method=RequestMethod.GET)
+//	public ModelAndView displayFirstProjectBasicSituationGet(ModelAndView modelAndView, HttpServletRequest request,@PathVariable("applierUid") String applierUid){
+//		logger.info("displayFirstProjectBasicSituationGet()");
+//		try{
+//			FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
+//			Person person = FormUlti.getPersonInRequest(request);
+//			FirstProjectBasicSituation firstForm=firstProjectBasicSituationJdbc.getFirstProjectBasicSituation(applierUid);
+//			
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier", applier);
+//			
+//			FormUlti.isAuthenticatedToRead(person, applierUid);
+//			
+//			modelAndView.addObject("firstForm",firstForm);
+//			modelAndView.addObject("subjectCategories",Constants.SUBJECTCATEGORIES);
+//			modelAndView.addObject("economicFields",Constants.ECONOMICFIELDS);
+//			modelAndView.addObject("nationalFocusFields",Constants.NATIONALFOCUSFIELDS);
+//			modelAndView.addObject("technologicalFields",Constants.TECHNOLOGICALFIELDS);
+//			modelAndView.addObject("taskSources",Constants.TASKSOURCES);
+//			
+//			modelAndView.setViewName("displayform/displayFirstProjectBasicSituation");
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			modelAndView.setViewName("redirect:/login");
+//			logger.info("null session!");
+//			return modelAndView;
+//		}
+//		catch(AuthenticationException e){
+//			logger.info(e.toString());
+//			modelAndView.setViewName("redirect:/noAuthentication");
+//			return modelAndView;
+//		}
+//	}
 }

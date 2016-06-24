@@ -67,35 +67,35 @@ public class SixthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/select-paper-monograph/{applierUid}",method=RequestMethod.GET)
-	public ModelAndView selectSixthPaperMonographNT(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
-		logger.info("selectSixthPaperMonograph");
-		try{
-			Person person=(Person)request.getSession().getAttribute("person");
-			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
-			List<SixthPaperMonographNT> sixthPaperMonographNT=sixthPaperMonographNTJdbc.getAllSixthPaperMonographNT(applierUid);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier", applier);
-			
-			FormUlti.isAuthenticatedToRead(person, applierUid);
-			
-			modelAndView.setViewName("displayform/selectSixthPaperMonographNT");
-			modelAndView.addObject("sixthPaperMonographForms", sixthPaperMonographNT);
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-		catch(AuthenticationException e){
-			logger.info(e.toString());
-			modelAndView.setViewName("redirect:/noAuthentication");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/select-paper-monograph/{applierUid}",method=RequestMethod.GET)
+//	public ModelAndView selectSixthPaperMonographNT(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
+//		logger.info("selectSixthPaperMonograph");
+//		try{
+//			Person person=(Person)request.getSession().getAttribute("person");
+//			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
+//			List<SixthPaperMonographNT> sixthPaperMonographNT=sixthPaperMonographNTJdbc.getAllSixthPaperMonographNT(applierUid);
+//			
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier", applier);
+//			
+//			FormUlti.isAuthenticatedToRead(person, applierUid);
+//			
+//			modelAndView.setViewName("displayform/selectSixthPaperMonographNT");
+//			modelAndView.addObject("sixthPaperMonographForms", sixthPaperMonographNT);
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//		catch(AuthenticationException e){
+//			logger.info(e.toString());
+//			modelAndView.setViewName("redirect:/noAuthentication");
+//			return modelAndView;
+//		}
+//	}
 	
 	/**
 	 * 项目组建立第六个表NT POST(点击添加新论文专著)
@@ -175,36 +175,36 @@ public class SixthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/display-sixth-paper-monograph/{idOfPaperMonograph}",method=RequestMethod.GET)
-	public ModelAndView displaySixthPaperMonographNT(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfPaperMonograph")int idOfPaperMonograph){
-		logger.info("displaySixthPaperMonographNT");
-		try{
-			Person person=(Person)request.getSession().getAttribute("person");
-			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
-			SixthPaperMonographNT sixthPaperMonographNT=sixthPaperMonographNTJdbc.getSixthPaperMonographNT(idOfPaperMonograph);
-			
-			String applierUid=sixthPaperMonographNT.getApplierUid();
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier", applier);
-			
-			FormUlti.isAuthenticatedToRead(person, applierUid);	
-			
-			modelAndView.setViewName("displayform/displaySixthPaperMonographNT");
-			modelAndView.addObject("sixthPaperMonograph", sixthPaperMonographNT);
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-		catch(AuthenticationException e){
-			logger.info(e.toString());
-			modelAndView.setViewName("redirect:/noAuthentication");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/display-sixth-paper-monograph/{idOfPaperMonograph}",method=RequestMethod.GET)
+//	public ModelAndView displaySixthPaperMonographNT(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfPaperMonograph")int idOfPaperMonograph){
+//		logger.info("displaySixthPaperMonographNT");
+//		try{
+//			Person person=(Person)request.getSession().getAttribute("person");
+//			SixthPaperMonographNTJdbc sixthPaperMonographNTJdbc=InitJdbc.initSixthPaperMonographNTJdbc();
+//			SixthPaperMonographNT sixthPaperMonographNT=sixthPaperMonographNTJdbc.getSixthPaperMonographNT(idOfPaperMonograph);
+//			
+//			String applierUid=sixthPaperMonographNT.getApplierUid();
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier", applier);
+//			
+//			FormUlti.isAuthenticatedToRead(person, applierUid);	
+//			
+//			modelAndView.setViewName("displayform/displaySixthPaperMonographNT");
+//			modelAndView.addObject("sixthPaperMonograph", sixthPaperMonographNT);
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//		catch(AuthenticationException e){
+//			logger.info(e.toString());
+//			modelAndView.setViewName("redirect:/noAuthentication");
+//			return modelAndView;
+//		}
+//	}
 	
 	/**
 	 * 项目组编辑第六个表NT POST
@@ -269,40 +269,40 @@ public class SixthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/select-apply-unit-situation/{applierUid}",method=RequestMethod.GET)
-	public ModelAndView selectSixthAppliedUnitSituation(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
-		logger.info("selectApplyUnitSituation");
-		try{
-			Person person=(Person)request.getSession().getAttribute("person");
-			
-			SixthApplyUnitSituationJdbc sixthApplyUnitSituationJdbc=InitJdbc.initSixthApplyUnitSituationJdbc();
-			SixthEconomicAndSocialBenefitJdbc sixthEconomicAndSocialBenefitJdbc=InitJdbc.initSixthEconomicAndSocialBenefitJdbc();
-			List<SixthApplyUnitSituation> sixthApplyUnitSituation=sixthApplyUnitSituationJdbc.getAllSixthApplyUnitSituation(applierUid);
-			SixthEconomicAndSocialBenefit sixthEconomicAndSocialBenefit=sixthEconomicAndSocialBenefitJdbc.getSixthEconomicAndSocialBenefit(applierUid);
-			modelAndView.addObject("sixthEconomicAndSocialBenefitForms", sixthEconomicAndSocialBenefit);
-			modelAndView.addObject("sixthApplyUnitSituationForms", sixthApplyUnitSituation);
-			modelAndView.addObject("person", person);
-			
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier", applier);
-			
-			FormUlti.isAuthenticatedToRead(person, applierUid);
-			
-			modelAndView.setViewName("displayform/selectSixthApplyUnitSituation");
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-		catch(AuthenticationException e){
-			logger.info(e.toString());
-			modelAndView.setViewName("redirect:/noAuthentication");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/select-apply-unit-situation/{applierUid}",method=RequestMethod.GET)
+//	public ModelAndView selectSixthAppliedUnitSituation(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
+//		logger.info("selectApplyUnitSituation");
+//		try{
+//			Person person=(Person)request.getSession().getAttribute("person");
+//			
+//			SixthApplyUnitSituationJdbc sixthApplyUnitSituationJdbc=InitJdbc.initSixthApplyUnitSituationJdbc();
+//			SixthEconomicAndSocialBenefitJdbc sixthEconomicAndSocialBenefitJdbc=InitJdbc.initSixthEconomicAndSocialBenefitJdbc();
+//			List<SixthApplyUnitSituation> sixthApplyUnitSituation=sixthApplyUnitSituationJdbc.getAllSixthApplyUnitSituation(applierUid);
+//			SixthEconomicAndSocialBenefit sixthEconomicAndSocialBenefit=sixthEconomicAndSocialBenefitJdbc.getSixthEconomicAndSocialBenefit(applierUid);
+//			modelAndView.addObject("sixthEconomicAndSocialBenefitForms", sixthEconomicAndSocialBenefit);
+//			modelAndView.addObject("sixthApplyUnitSituationForms", sixthApplyUnitSituation);
+//			modelAndView.addObject("person", person);
+//			
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier", applier);
+//			
+//			FormUlti.isAuthenticatedToRead(person, applierUid);
+//			
+//			modelAndView.setViewName("displayform/selectSixthApplyUnitSituation");
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//		catch(AuthenticationException e){
+//			logger.info(e.toString());
+//			modelAndView.setViewName("redirect:/noAuthentication");
+//			return modelAndView;
+//		}
+//	}
 	
 	/**
 	 * 项目组编辑第六个经济社会效益表POST
@@ -403,37 +403,37 @@ public class SixthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/display-sixth-apply-unit-situation/{idOfApplyUnit}",method=RequestMethod.GET)
-	public ModelAndView displaySixthApplyUnitSituation(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfApplyUnit")int idOfApplyUnit){
-		logger.info("displaySixthApplyUnitSituation");
-		try{
-			Person person=(Person) request.getSession().getAttribute("person");
-			
-			SixthApplyUnitSituationJdbc sixthApplyUnitSituationJdbc=InitJdbc.initSixthApplyUnitSituationJdbc();
-			SixthApplyUnitSituation sixthApplyUnitSituation=sixthApplyUnitSituationJdbc.getSixthApplyUnitSituation(idOfApplyUnit);
-			modelAndView.addObject("sixthApplyUnitSituationForm", sixthApplyUnitSituation);		
-			
-			String applierUid=sixthApplyUnitSituation.getApplierUid();
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			modelAndView.addObject("applier", applier);
-			
-			FormUlti.isAuthenticatedToRead(person, applierUid);
-			
-			modelAndView.setViewName("displayform/displaySixthApplyUnitSituation");
-			return modelAndView;
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			modelAndView.setViewName("redirect:/login");
-			return modelAndView;
-		}
-		catch(AuthenticationException e){
-			logger.info(e.toString());
-			modelAndView.setViewName("redirect:/noAuthentication");
-			return modelAndView;
-		}
-	}
+//	@RequestMapping(value="/display-sixth-apply-unit-situation/{idOfApplyUnit}",method=RequestMethod.GET)
+//	public ModelAndView displaySixthApplyUnitSituation(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfApplyUnit")int idOfApplyUnit){
+//		logger.info("displaySixthApplyUnitSituation");
+//		try{
+//			Person person=(Person) request.getSession().getAttribute("person");
+//			
+//			SixthApplyUnitSituationJdbc sixthApplyUnitSituationJdbc=InitJdbc.initSixthApplyUnitSituationJdbc();
+//			SixthApplyUnitSituation sixthApplyUnitSituation=sixthApplyUnitSituationJdbc.getSixthApplyUnitSituation(idOfApplyUnit);
+//			modelAndView.addObject("sixthApplyUnitSituationForm", sixthApplyUnitSituation);		
+//			
+//			String applierUid=sixthApplyUnitSituation.getApplierUid();
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			modelAndView.addObject("applier", applier);
+//			
+//			FormUlti.isAuthenticatedToRead(person, applierUid);
+//			
+//			modelAndView.setViewName("displayform/displaySixthApplyUnitSituation");
+//			return modelAndView;
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			modelAndView.setViewName("redirect:/login");
+//			return modelAndView;
+//		}
+//		catch(AuthenticationException e){
+//			logger.info(e.toString());
+//			modelAndView.setViewName("redirect:/noAuthentication");
+//			return modelAndView;
+//		}
+//	}
 	
 	/**
 	 * 项目组编辑第六个表(应用单位情况表) POST

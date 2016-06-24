@@ -24,10 +24,12 @@ import com.dicipulus.app.JDBC.InitJdbc;
 import com.dicipulus.app.applicationModel.EighthMajorContributor;
 import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Person;
-import com.dicipulus.app.formController.*;
+import com.dicipulus.app.validator.Validator;
+import static com.dicipulus.app.validator.LeValidator.*;
 
 @Controller
 @SessionAttributes("person")
+//TODO I think I need an abstract controller
 public class EighthFormController {
 	private static final Logger logger = LoggerFactory.getLogger(EighthFormController.class);
 	
@@ -40,20 +42,16 @@ public class EighthFormController {
 	@RequestMapping(value="/manage-eighth-major-contributor",method=RequestMethod.GET)
 	public ModelAndView manageEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
-		if(FormUlti.getPersonInRequest(request)==null){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("null-session"));
-			return modelAndView;
-		}
-		if(FormUlti.rightRole(request, "applier")==false){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-role"));
-			return modelAndView;
-		}
-		String applierUid=FormUlti.getPersonInRequest(request).getUid();
-		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-status"));
+		
+		//TODO test this code
+		if(false==(validateSession(request, modelAndView)&&
+				validateRole(request, modelAndView, "applier")&&
+				validateStatus(request, modelAndView, Arrays.asList("未提交")))){	
 			return modelAndView;
 		}
 		//main work
+
+		String applierUid=FormUlti.getPersonInRequest(request).getUid();
 		Applier applier=InitJdbc.initApplierJdbc().getApplierByUid(applierUid);
 		modelAndView.addObject("applier",applier);
 		
@@ -73,12 +71,9 @@ public class EighthFormController {
 	@RequestMapping(value="/select-eighth-major-contributor/{applierUid}",method=RequestMethod.GET)
 	public ModelAndView selectEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
-		if(FormUlti.getPersonInRequest(request)==null){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("null-session"));
-			return modelAndView;
-		}
-		if(FormUlti.isAuthenticatedToRead(request, applierUid)==false){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("no-authority"));
+		
+		//TODO extract validate session into super class: FormController-> FromEditController/ FromDisplayController
+		if(false==(validateSession(request, modelAndView)&&validateRead(request, modelAndView, applierUid))){
 			return modelAndView;
 		}
 		//main work
@@ -101,16 +96,15 @@ public class EighthFormController {
 	@RequestMapping(value="/create-eighth-major-contributor",method=RequestMethod.POST)
 	public String createEighthMajorContributor(HttpServletRequest request){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
-		if(FormUlti.getPersonInRequest(request)==null){
-			return FormUlti.redirectErrorMessage("null-session");
-		}
-		if(FormUlti.rightRole(request, "applier")==false){
-			return FormUlti.redirectErrorMessage("illegal-role");
-		}
 		String applierUid=FormUlti.getPersonInRequest(request).getUid();
-		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
-			return FormUlti.redirectErrorMessage("illegal-status");
+		
+		//TODO create validateData interface to encapsulate arguments, and practice polymorphism
+		String view="";
+		if(false==(validateSession(request,view )&&validateRole(request, view, "applier")&&
+				validateStatus(request, view, Arrays.asList("未提交")))){
+			return view;
 		}
+		
 		List<EighthMajorContributor>  eighthMajorContributors = InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributors(applierUid);
 		int idOfEighthForm =InitJdbc.initEighthMajorContributorJdbc().createEighthMajorContributor(applierUid, eighthMajorContributors.size()+1);
 		InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributorNamesForFirstForm(applierUid);
@@ -127,15 +121,12 @@ public class EighthFormController {
 	@RequestMapping(value="/delete-eighth-major-contributor",method=RequestMethod.GET)
 	public String deleteEighthMajorContributor(HttpServletRequest request, int idOfEighthForm){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
-		if(FormUlti.getPersonInRequest(request)==null){
-			return FormUlti.redirectErrorMessage("null-session");
-		}
 		String applierUid=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributor(idOfEighthForm).getApplierUid();
-		if(FormUlti.isIdenticalPerson(request, applierUid)==false){
-			return FormUlti.redirectErrorMessage("no-authority");
-		}
-		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
-			return FormUlti.redirectErrorMessage("illegal-status");
+		String view="";
+		if(false==(validateSession(request, view)&&validateRole(request, view, "applier")&&
+				validateUid(request, view, applierUid)&&
+				validateStatus(request, view, Arrays.asList("未提交")))){
+			return view;
 		}
 		//main work
 		InitJdbc.initEighthMajorContributorJdbc().deleteEighthMajorContributor(idOfEighthForm);
@@ -153,17 +144,9 @@ public class EighthFormController {
 	@RequestMapping(value="/edit-eighth-major-contributor/{idOfEighthForm}",method=RequestMethod.GET)
 	public ModelAndView editEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfEighthForm") int idOfEighthForm){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
-		if(FormUlti.getPersonInRequest(request)==null){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("null-session"));
-			return modelAndView;
-		}
 		String applierUid=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributor(idOfEighthForm).getApplierUid();
-		if(FormUlti.isIdenticalPerson(request, applierUid)==false){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("no-authority"));
-			return modelAndView;
-		}
-		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("illegal-status"));
+		if(false==(validateSession(request, modelAndView)&&validateUid(request, modelAndView, applierUid)&&
+				validateStatus(request, modelAndView, Arrays.asList("未提交")))){
 			return modelAndView;
 		}
 		//main work
@@ -186,13 +169,8 @@ public class EighthFormController {
 	@RequestMapping(value="/display-eighth-major-contributor/{idOfEighthForm}",method=RequestMethod.GET)
 	public ModelAndView displayEighthMajorContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfEighthForm") int idOfEighthForm){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
-		if(FormUlti.getPersonInRequest(request)==null){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("null-session"));
-			return modelAndView;
-		}
 		String applierUid=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributor(idOfEighthForm).getApplierUid();
-		if(FormUlti.isAuthenticatedToRead(request, applierUid)==false){
-			modelAndView.setViewName(FormUlti.redirectErrorMessage("no-authority"));
+		if(false==(validateSession(request, modelAndView)&&validateRead(request, modelAndView, applierUid))){
 			return modelAndView;
 		}
 		//main work
@@ -216,17 +194,13 @@ public class EighthFormController {
 	public String saveEighthMajorContributor(HttpServletRequest request,@ModelAttribute("eighthFormAttr") EighthMajorContributor eighthForm,
 			@PathVariable("idOfEighthForm") int idOfEighthForm){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
-		if(FormUlti.getPersonInRequest(request)==null){
-			return FormUlti.redirectErrorMessage("null-session");
-		}
 		String applierUid=InitJdbc.initEighthMajorContributorJdbc().getEighthMajorContributor(idOfEighthForm).getApplierUid();
-		if(FormUlti.isIdenticalPerson(request, applierUid)==false){
-			return FormUlti.redirectErrorMessage("no-authority");
-		}
-		if(FormUlti.rightProjectStatus(applierUid, Arrays.asList("未提交"))==false){
-			return FormUlti.redirectErrorMessage("illegal-status");
-		}
-		
+		String view="";
+		if(false==(validateSession(request, view)&&validateRole(request, view, "applier")&&
+				validateUid(request, view, applierUid)&&
+				validateStatus(request, view, Arrays.asList("未提交")))){
+			return view;
+		}		
 		InitJdbc.initEighthMajorContributorJdbc().updateEighthMajorContributor(eighthForm);
 		InitJdbc.initFirstProjectBasicSituationJdbc().setMajorContributorNamesForFirstForm(applierUid);
 		return "redirect:/manage-eighth-major-contributor";

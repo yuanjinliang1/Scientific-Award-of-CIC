@@ -19,6 +19,7 @@ import com.dicipulus.app.applicationModel.NinethMajorOrgContributor;
 import com.dicipulus.app.applicationModel.SecondRefereeUnitOpinion;
 import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Person;
+import com.dicipulus.app.validator.Validator;
 
 public final class FormUlti {
 	public static Person getPersonInRequest(HttpServletRequest request) {
@@ -112,6 +113,12 @@ public final class FormUlti {
 		else{
 			return false;
 		}
+	}
+	
+	//HACK Factory?
+	public static Validator getValidator(String expectedRole, String expectedUid,
+			List<String> expectedStatuses,String ownerUid){
+		return new Validator(expectedUid, expectedRole,expectedStatuses,ownerUid);
 	}
 	
 }

@@ -1,8 +1,6 @@
 package com.dicipulus.app.formController;
 
 import java.util.Arrays;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -14,18 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.dicipulus.app.JDBC.ApplierJdbc;
 import com.dicipulus.app.JDBC.InitJdbc;
-import com.dicipulus.app.JDBC.NinthMajorOrgContributorJdbc;
-import com.dicipulus.app.JDBC.SeventhIntellectualPropertyDocJdbc;
-import com.dicipulus.app.JDBC.SeventhPaperCitedByOthersJdbc;
 import com.dicipulus.app.applicationModel.Constants;
-import com.dicipulus.app.applicationModel.EighthMajorContributor;
-import com.dicipulus.app.applicationModel.NinthMajorOrgContributor;
-import com.dicipulus.app.applicationModel.SeventhIntellectualPropertyDoc;
-import com.dicipulus.app.applicationModel.SeventhPaperCitedByOthers;
 import com.dicipulus.app.model.Applier;
-import com.dicipulus.app.model.Person;
 import com.dicipulus.app.validator.Validator;
 
 @Controller

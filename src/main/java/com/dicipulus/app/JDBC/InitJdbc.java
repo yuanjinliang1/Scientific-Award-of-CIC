@@ -1,23 +1,9 @@
 package com.dicipulus.app.JDBC;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.Random;
-
-import javax.sql.DataSource;
-
-import com.dicipulus.app.applicationModel.*;
-import com.dicipulus.app.model.Applier;
-import com.dicipulus.app.model.Referee;
-import com.dicipulus.app.model.*;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 

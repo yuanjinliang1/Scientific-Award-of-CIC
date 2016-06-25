@@ -19,11 +19,11 @@ import com.dicipulus.app.JDBC.EighthMajorContributorJdbc;
 import com.dicipulus.app.JDBC.FirstProjectBasicSituationJdbc;
 import com.dicipulus.app.JDBC.InitJdbc;
 import com.dicipulus.app.JDBC.ManageExcelJdbc;
-import com.dicipulus.app.JDBC.NinthMajorOrgContributorJdbc;
+import com.dicipulus.app.JDBC.NinethMajorOrgContributorJdbc;
 import com.dicipulus.app.applicationModel.EighthMajorContributor;
 import com.dicipulus.app.applicationModel.Excel;
 import com.dicipulus.app.applicationModel.FirstProjectBasicSituation;
-import com.dicipulus.app.applicationModel.NinthMajorOrgContributor;
+import com.dicipulus.app.applicationModel.NinethMajorOrgContributor;
 import com.dicipulus.app.model.MyProperties;
 
 public class CombineExcel {
@@ -117,20 +117,20 @@ public class CombineExcel {
 			label=new Label(4,row,temp.getProjectName());
 			System.out.println(temp.getProjectName());
 			sheet.addCell(label);
-			NinthMajorOrgContributorJdbc ninthMajorOrgContributorJdbc=InitJdbc.initNinthMajorOrgContributorJdbc();
-			List<NinthMajorOrgContributor> ninthMajorOrgContributor=ninthMajorOrgContributorJdbc.getNinthMajorOrgContributors(temp.getApplierUid());
-			Collections.sort(ninthMajorOrgContributor, new Comparator<NinthMajorOrgContributor>(){
-				public int compare(NinthMajorOrgContributor ninthMajorOrgContributor1,NinthMajorOrgContributor ninthMajorOrgContributor2){
-					return ninthMajorOrgContributor1.getRankOfOrg()-(ninthMajorOrgContributor2.getRankOfOrg());
+			NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
+			List<NinethMajorOrgContributor> ninethMajorOrgContributor=ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(temp.getApplierUid());
+			Collections.sort(ninethMajorOrgContributor, new Comparator<NinethMajorOrgContributor>(){
+				public int compare(NinethMajorOrgContributor ninethMajorOrgContributor1,NinethMajorOrgContributor ninethMajorOrgContributor2){
+					return ninethMajorOrgContributor1.getRankOfOrg()-(ninethMajorOrgContributor2.getRankOfOrg());
 				}
 			});
 			String MajorOrgContributor="";
-			for(NinthMajorOrgContributor org:ninthMajorOrgContributor){
+			for(NinethMajorOrgContributor org:ninethMajorOrgContributor){
 				MajorOrgContributor=MajorOrgContributor+" "+org.getNameOfOrg();
 			}
 			label=new Label(5,row,MajorOrgContributor);
 			sheet.addCell(label);
-			label=new Label(6,row,ninthMajorOrgContributor.get(0).getNameOfOrg());
+			label=new Label(6,row,ninethMajorOrgContributor.get(0).getNameOfOrg());
 			sheet.addCell(label);
 			label=new Label(7,row,temp.getApplicationType());
 			System.out.println(temp.getApplicationType());

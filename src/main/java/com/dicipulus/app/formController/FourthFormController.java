@@ -20,6 +20,7 @@ import com.dicipulus.app.applicationModel.FourthForm;
 import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Person;
 
+@Deprecated
 @Controller
 @SessionAttributes("person")
 public class FourthFormController {
@@ -98,19 +99,19 @@ public class FourthFormController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="/edit-fourth-form",method=RequestMethod.POST)
-	public String editFourthForm(@ModelAttribute("fourthFormAttr")FourthForm fourthForm,HttpServletRequest request){
-		logger.info("editFourthForm");
-		try{
-			Person person=(Person)request.getSession().getAttribute("person");
-			FourthFormJdbc fourthFormJdbc=InitJdbc.initFourthFormJdbc();
-			fourthFormJdbc.setFourthForm(fourthForm, person.getUid());
-			return "redirect:/edit-objective-evaluation";
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			return "redirect:/login";
-		}
-	}
+//	@RequestMapping(value="/edit-fourth-form",method=RequestMethod.POST)
+//	public String editFourthForm(@ModelAttribute("fourthFormAttr")FourthForm fourthForm,HttpServletRequest request){
+//		logger.info("editFourthForm");
+//		try{
+//			Person person=(Person)request.getSession().getAttribute("person");
+//			FourthFormJdbc fourthFormJdbc=InitJdbc.initFourthFormJdbc();
+//			fourthFormJdbc.setFourthForm(fourthForm, person.getUid());
+//			return "redirect:/edit-objective-evaluation";
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			return "redirect:/login";
+//		}
+//	}
 	
 }

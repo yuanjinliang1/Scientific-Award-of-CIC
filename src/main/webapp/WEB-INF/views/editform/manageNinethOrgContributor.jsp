@@ -25,7 +25,7 @@ request.setCharacterEncoding("UTF-8");
 		<div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row" style="margin-left: 20px"><h1>九、主要完成单位情况表</h1></div>
-            <form action="/app/create-ninth-major-org-contributor" method="POST" >
+            <form action="/app/create-nineth-major-org-contributor" method="POST" >
 			<div class="row" style="margin-left:20px">
 					<input type="submit" class="btn btn-primary" value="添加主要完成单位" />
 				</div>
@@ -37,19 +37,19 @@ request.setCharacterEncoding("UTF-8");
 					<td>操作</td>
 					<td>操作</td>
 				</tr>
-				<c:forEach var="ninthForm" items="${ninthForms }">
+				<c:forEach var="ninethForm" items="${ninethForms }">
 					<tr>
-						<td>${ninthForm.rankOfOrg } </td>
-						<td>${ninthForm.nameOfOrg }</td>
+						<td>${ninethForm.rankOfOrg } </td>
+						<td>${ninethForm.nameOfOrg }</td>
 						<td>
-							<spring:url value="/edit-ninth-major-org-contributor/{idOfNinthForm}" var="editFormURL">
-								<spring:param name="idOfNinthForm" value="${ninthForm.idOfNinthForm }"></spring:param>
+							<spring:url value="/edit-nineth-major-org-contributor/{idOfNinethForm}" var="editFormURL">
+								<spring:param name="idOfNinethForm" value="${ninethForm.idOfNinethForm }"></spring:param>
 							</spring:url>
 							<a class="btn btn-primary" id="editOpinion" href="${fn:escapeXml(editFormURL)}">填写</a>
 						</td>
 						<td>
-							<c:url value="/delete-ninth-major-org-contributor" var="deleteURL">
-								<c:param name="idOfNinthForm" value="${ninthForm.idOfNinthForm }"></c:param>
+							<c:url value="/delete-nineth-major-org-contributor" var="deleteURL">
+								<c:param name="idOfNinethForm" value="${ninethForm.idOfNinethForm }"></c:param>
 							</c:url>
 							<a class="btn btn-danger" id="deleteApplier" href="${fn:escapeXml(deleteURL)}">删除</a>
 						</td>

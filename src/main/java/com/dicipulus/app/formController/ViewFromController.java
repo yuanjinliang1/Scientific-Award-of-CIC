@@ -21,7 +21,7 @@ import com.dicipulus.app.JDBC.FifthObjectiveEvaluationJdbc;
 import com.dicipulus.app.JDBC.FirstProjectBasicSituationJdbc;
 import com.dicipulus.app.JDBC.FourthFormJdbc;
 import com.dicipulus.app.JDBC.InitJdbc;
-import com.dicipulus.app.JDBC.NinthMajorOrgContributorJdbc;
+import com.dicipulus.app.JDBC.NinethMajorOrgContributorJdbc;
 import com.dicipulus.app.JDBC.SecondRefereeUnitOpinionJdbc;
 import com.dicipulus.app.JDBC.SeventhIntellectualPropertyDocJdbc;
 import com.dicipulus.app.JDBC.SeventhPaperCitedByOthersJdbc;
@@ -34,7 +34,7 @@ import com.dicipulus.app.applicationModel.EighthMajorContributor;
 import com.dicipulus.app.applicationModel.FifthObjectiveEvaluation;
 import com.dicipulus.app.applicationModel.FirstProjectBasicSituation;
 import com.dicipulus.app.applicationModel.FourthForm;
-import com.dicipulus.app.applicationModel.NinthMajorOrgContributor;
+import com.dicipulus.app.applicationModel.NinethMajorOrgContributor;
 import com.dicipulus.app.applicationModel.SecondRefereeUnitOpinion;
 import com.dicipulus.app.applicationModel.SeventhIntellectualPropertyDoc;
 import com.dicipulus.app.applicationModel.SeventhPaperCitedByOthers;
@@ -272,35 +272,35 @@ public class ViewFromController {
 		return modelAndView;
 	}
 	
-	/**View the ninth form list*/
-	@RequestMapping(value="/select-ninth-major-org-contributor/{applierUid}",method=RequestMethod.GET)
-	public ModelAndView selectNinthMajorOrgContributor(HttpServletRequest request,
+	/**View the nineth form list*/
+	@RequestMapping(value="/select-nineth-major-org-contributor/{applierUid}",method=RequestMethod.GET)
+	public ModelAndView selectNinethMajorOrgContributor(HttpServletRequest request,
 			ModelAndView modelAndView,@PathVariable("applierUid") String applierUid){
-		logger.info("manageNinthMajorOrgContributor");
+		logger.info("manageNinethMajorOrgContributor");
 		if(notValid(modelAndView, request, applierUid)){
 			return modelAndView;
 		}
 		addApplier(modelAndView, applierUid);
-		modelAndView.addObject("ninthForms", 
-				InitJdbc.initNinthMajorOrgContributorJdbc().getNinthMajorOrgContributors(applierUid));
-		modelAndView.setViewName("displayform/selectNinthOrgContributor");
+		modelAndView.addObject("ninethForms", 
+				InitJdbc.initNinethMajorOrgContributorJdbc().getNinethMajorOrgContributors(applierUid));
+		modelAndView.setViewName("displayform/selectNinethOrgContributor");
 		return modelAndView;
 	}
 	
-	/**View the ninth form*/
-	@RequestMapping(value="/display-ninth-major-org-contributor/{idOfNinthForm}",method=RequestMethod.GET)
-	public ModelAndView displayNinthMajorOrgContributor(HttpServletRequest request,
-			ModelAndView modelAndView,@PathVariable("idOfNinthForm") int idOfNinthForm){
-		logger.info("editNinthMajorOrgContributor");
-		NinthMajorOrgContributor ninthMajorOrgContributor=
-				InitJdbc.initNinthMajorOrgContributorJdbc().getNinthMajorOrgContributor(idOfNinthForm);
-		String applierUid=ninthMajorOrgContributor.getApplierUid();
+	/**View the nineth form*/
+	@RequestMapping(value="/display-nineth-major-org-contributor/{idOfNinethForm}",method=RequestMethod.GET)
+	public ModelAndView displayNinethMajorOrgContributor(HttpServletRequest request,
+			ModelAndView modelAndView,@PathVariable("idOfNinethForm") int idOfNinethForm){
+		logger.info("editNinethMajorOrgContributor");
+		NinethMajorOrgContributor ninethMajorOrgContributor=
+				InitJdbc.initNinethMajorOrgContributorJdbc().getNinethMajorOrgContributor(idOfNinethForm);
+		String applierUid=ninethMajorOrgContributor.getApplierUid();
 		if(notValid(modelAndView, request, applierUid)){
 			return modelAndView;
 		}
 		addApplier(modelAndView, applierUid);
-		modelAndView.addObject("ninthForm", ninthMajorOrgContributor);
-		modelAndView.setViewName("displayform/displayNinthOrgContributor");
+		modelAndView.addObject("ninethForm", ninethMajorOrgContributor);
+		modelAndView.setViewName("displayform/displayNinethOrgContributor");
 		return modelAndView;
 	}
 	

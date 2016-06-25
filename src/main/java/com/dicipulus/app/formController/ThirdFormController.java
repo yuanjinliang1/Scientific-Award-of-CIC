@@ -104,19 +104,19 @@ public class ThirdFormController {
 	 * @param nodel
 	 * @return
 	 */
-	@RequestMapping(value="/edit-brief-introduction",method=RequestMethod.POST)
-	public String editThirdProjectBriefIntroduction(@ModelAttribute("briefIntroduction")ThirdProjectBriefIntroduction thirdProjectBriefIntroduction,HttpServletRequest request,Model nodel){
-		try{
-			Person person=FormUlti.getPersonInRequest(request);
-			ThirdProjectBriefIntroductionJdbc thirdProjectBriefInroductionJdbc=InitJdbc.initThirdProjectBriefIntroductionJdbc();
-			logger.info(thirdProjectBriefIntroduction.getBriefIntroduction()+"!!!");
-			thirdProjectBriefInroductionJdbc.updateThirdProjectBriefIntroduction(thirdProjectBriefIntroduction, person.getUid());
-		}
-		catch(NullPointerException e){
-			logger.info("edit briefIntroduction exception!");
-			return "redirect:/login";
-		}
-		return "redirect:/edit-fourth-form";
-	}
+//	@RequestMapping(value="/edit-brief-introduction",method=RequestMethod.POST)
+//	public String editThirdProjectBriefIntroduction(@ModelAttribute("briefIntroduction")ThirdProjectBriefIntroduction thirdProjectBriefIntroduction,HttpServletRequest request,Model nodel){
+//		try{
+//			Person person=FormUlti.getPersonInRequest(request);
+//			ThirdProjectBriefIntroductionJdbc thirdProjectBriefInroductionJdbc=InitJdbc.initThirdProjectBriefIntroductionJdbc();
+//			logger.info(thirdProjectBriefIntroduction.getBriefIntroduction()+"!!!");
+//			thirdProjectBriefInroductionJdbc.updateThirdProjectBriefIntroduction(thirdProjectBriefIntroduction, person.getUid());
+//		}
+//		catch(NullPointerException e){
+//			logger.info("edit briefIntroduction exception!");
+//			return "redirect:/login";
+//		}
+//		return "redirect:/edit-fourth-form";
+//	}
 	
 }

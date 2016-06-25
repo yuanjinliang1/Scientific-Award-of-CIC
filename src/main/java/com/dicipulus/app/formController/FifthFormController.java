@@ -20,6 +20,7 @@ import com.dicipulus.app.applicationModel.FifthObjectiveEvaluation;
 import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Person;
 
+@Deprecated
 @Controller
 @SessionAttributes("person")
 public class FifthFormController {
@@ -98,19 +99,19 @@ public class FifthFormController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="/edit-objective-evaluation",method=RequestMethod.POST)
-	public String editFifthObjectiveEvaluation(@ModelAttribute("objectiveEvaluation")FifthObjectiveEvaluation fifthObjectiveEvaluation,HttpServletRequest request){
-		logger.info("editFifthObjectiveEvaluation");
-		try{
-			Person person=(Person)request.getSession().getAttribute("person");
-			String applierUid=person.getUid();
-			FifthObjectiveEvaluationJdbc fifthObjectiveEvaluationJdbc=InitJdbc.initFifthObjectiveEvaluationJdbc();
-			fifthObjectiveEvaluationJdbc.updateFifthObjective(fifthObjectiveEvaluation, applierUid);
-			return "redirect:/manage-apply-unit-situation";
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			return "redirect:/login";
-		}
-	}
+//	@RequestMapping(value="/edit-objective-evaluation",method=RequestMethod.POST)
+//	public String editFifthObjectiveEvaluation(@ModelAttribute("objectiveEvaluation")FifthObjectiveEvaluation fifthObjectiveEvaluation,HttpServletRequest request){
+//		logger.info("editFifthObjectiveEvaluation");
+//		try{
+//			Person person=(Person)request.getSession().getAttribute("person");
+//			String applierUid=person.getUid();
+//			FifthObjectiveEvaluationJdbc fifthObjectiveEvaluationJdbc=InitJdbc.initFifthObjectiveEvaluationJdbc();
+//			fifthObjectiveEvaluationJdbc.updateFifthObjective(fifthObjectiveEvaluation, applierUid);
+//			return "redirect:/manage-apply-unit-situation";
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			return "redirect:/login";
+//		}
+//	}
 }

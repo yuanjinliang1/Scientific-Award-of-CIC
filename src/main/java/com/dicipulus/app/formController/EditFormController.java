@@ -226,32 +226,32 @@ public class EditFormController {
 		return modelAndView;
 	}
 	
-	/**Edit ninth form list*/
-	@RequestMapping(value="/manage-ninth-major-org-contributor",method=RequestMethod.GET)
-	public ModelAndView manageNinthMajorOrgContributor(HttpServletRequest request,ModelAndView modelAndView){
-		logger.info("manageNinthMajorOrgContributor");
+	/**Edit nineth form list*/
+	@RequestMapping(value="/manage-nineth-major-org-contributor",method=RequestMethod.GET)
+	public ModelAndView manageNinethMajorOrgContributor(HttpServletRequest request,ModelAndView modelAndView){
+		logger.info("manageNinethMajorOrgContributor");
 		if(notValid(modelAndView, request)){
 			return modelAndView;
 		}
 		String applierUid=getApplierUid(request);
 		addApplier(modelAndView, applierUid);
-		modelAndView.addObject("ninthForms", 
-				InitJdbc.initNinthMajorOrgContributorJdbc().getNinthMajorOrgContributors(applierUid));
-		modelAndView.setViewName("editform/manageNinthOrgContributor");
+		modelAndView.addObject("ninethForms", 
+				InitJdbc.initNinethMajorOrgContributorJdbc().getNinethMajorOrgContributors(applierUid));
+		modelAndView.setViewName("editform/manageNinethOrgContributor");
 		return modelAndView;
 	}
 	
-	/**Edit ninth form*/
-	@RequestMapping(value="/edit-ninth-major-org-contributor/{idOfNinthForm}",method=RequestMethod.GET)
-	public ModelAndView editNinthMajorOrgContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfNinthForm") int idOfNinthForm){
-		logger.info("editNinthMajorOrgContributor");
+	/**Edit nineth form*/
+	@RequestMapping(value="/edit-nineth-major-org-contributor/{idOfNinethForm}",method=RequestMethod.GET)
+	public ModelAndView editNinethMajorOrgContributor(HttpServletRequest request,ModelAndView modelAndView,@PathVariable("idOfNinethForm") int idOfNinethForm){
+		logger.info("editNinethMajorOrgContributor");
 		if(notValid(modelAndView, request)){
 			return modelAndView;
 		}
 		String applierUid=getApplierUid(request);
 		addApplier(modelAndView, applierUid);
-		modelAndView.addObject("ninthForm",InitJdbc.initNinthMajorOrgContributorJdbc().getNinthMajorOrgContributor(idOfNinthForm));
-		modelAndView.setViewName("editform/editNinthOrgContributor");
+		modelAndView.addObject("ninethForm",InitJdbc.initNinethMajorOrgContributorJdbc().getNinethMajorOrgContributor(idOfNinethForm));
+		modelAndView.setViewName("editform/editNinethOrgContributor");
 		return modelAndView;
 	}
 	

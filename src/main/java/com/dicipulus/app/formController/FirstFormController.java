@@ -26,6 +26,7 @@ import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Person;
 import com.dicipulus.app.model.Referee;
 
+@Deprecated
 @Controller
 @SessionAttributes("person")
 public class FirstFormController {
@@ -74,33 +75,33 @@ public class FirstFormController {
 	 * @param request
 	 * @param firstForm
 	 * @return
-	 */
-	@RequestMapping(value="/save-first-project-basic-situation",method=RequestMethod.POST)
-	public String saveFirstProjectBasicSituation(HttpServletRequest request,
-			@ModelAttribute("firstFormAttr") FirstProjectBasicSituation firstForm){
-		logger.info("saveFirstProjectBasicSituation()");
-		/*
-		 * 准备工作
-		 */
-		Person personSession =FormUlti.getPersonInRequest(request);
-		ApplierJdbc applierJdbc= InitJdbc.initApplierJdbc();
-		Applier applier=applierJdbc.getApplierByUid(personSession.getUid());
-		FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
-		RefereeJdbc refereeJdbc=InitJdbc.initRefereeJdbc();
-		Referee referee=refereeJdbc.getRefereeByUid(applier.getOwner());
-		/*
-		 * 为Form补全属性
-		 */
-		firstForm.setApplierUid(personSession.getUid());
-		firstForm.setYearCreated(Calendar.getInstance().get(Calendar.YEAR));
-		firstForm.setRefereeString(referee.getName());
-		/*
-		 * 调用JDBC将Form写入数据库
-		 */
-		firstProjectBasicSituationJdbc.setFirstProjectBasicSituation(firstForm, personSession.getUid());
-		//return "redirect:/edit-first-project-basic-situation";
-		return "redirect:/display-second-form-when-applier-editing";
-	}
+//	 */
+//	@RequestMapping(value="/save-first-project-basic-situation",method=RequestMethod.POST)
+//	public String saveFirstProjectBasicSituation(HttpServletRequest request,
+//			@ModelAttribute("firstFormAttr") FirstProjectBasicSituation firstForm){
+//		logger.info("saveFirstProjectBasicSituation()");
+//		/*
+//		 * 准备工作
+//		 */
+//		Person personSession =FormUlti.getPersonInRequest(request);
+//		ApplierJdbc applierJdbc= InitJdbc.initApplierJdbc();
+//		Applier applier=applierJdbc.getApplierByUid(personSession.getUid());
+//		FirstProjectBasicSituationJdbc firstProjectBasicSituationJdbc=InitJdbc.initFirstProjectBasicSituationJdbc();
+//		RefereeJdbc refereeJdbc=InitJdbc.initRefereeJdbc();
+//		Referee referee=refereeJdbc.getRefereeByUid(applier.getOwner());
+//		/*
+//		 * 为Form补全属性
+//		 */
+//		firstForm.setApplierUid(personSession.getUid());
+//		firstForm.setYearCreated(Calendar.getInstance().get(Calendar.YEAR));
+//		firstForm.setRefereeString(referee.getName());
+//		/*
+//		 * 调用JDBC将Form写入数据库
+//		 */
+//		firstProjectBasicSituationJdbc.setFirstProjectBasicSituation(firstForm, personSession.getUid());
+//		//return "redirect:/edit-first-project-basic-situation";
+//		return "redirect:/display-second-form-when-applier-editing";
+//	}
 	
 //	@RequestMapping(value="/display-first-project-basic-situation/{applierUid}",method=RequestMethod.GET)
 //	public ModelAndView displayFirstProjectBasicSituationGet(ModelAndView modelAndView, HttpServletRequest request,@PathVariable("applierUid") String applierUid){

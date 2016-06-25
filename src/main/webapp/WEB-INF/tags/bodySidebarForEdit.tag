@@ -92,7 +92,7 @@
 		<spring:url value="/manage-seventh-paper-cited-by-others" var="seventhFormURL"/>
 	</c:if>
 	<spring:url value="/manage-eighth-major-contributor" var="eighthFormURL"/>
-	<spring:url value="/manage-ninth-major-org-contributor" var="ninthFormURL"/>
+	<spring:url value="/manage-nineth-major-org-contributor" var="ninthFormURL"/>
 	<spring:url value="/upload/{applierUid}/1" var="firstAttachmentURL">
 		<spring:param name="applierUid" value="${applier.uid}"></spring:param>
 	</spring:url>

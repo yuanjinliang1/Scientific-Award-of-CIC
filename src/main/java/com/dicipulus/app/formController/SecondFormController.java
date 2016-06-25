@@ -27,6 +27,7 @@ import com.dicipulus.app.model.Person;
 
 @Controller
 @SessionAttributes("person")
+@Deprecated
 public class SecondFormController {
 	private static final Logger logger = LoggerFactory.getLogger(SecondFormController.class);
 	
@@ -45,35 +46,35 @@ public class SecondFormController {
 	 * @param applierUid
 	 * @return
 	 */
-	@RequestMapping(value="/edit-referee-unit-opinion-post/{applierUid}",method=RequestMethod.POST)
-	public String editSecondRefereeUnitOpinion(HttpServletRequest request,
-			@ModelAttribute("secondFormAttri")SecondRefereeUnitOpinion secondRefereeUnitOpinion,@PathVariable("applierUid") String applierUid){
-		logger.info("editSecondRefereeUnitOpinionPost()");
-		
-		try{
-			Person person=FormUlti.getPersonInRequest(request);
-			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
-			Applier applier=applierJdbc.getApplierByUid(applierUid);
-			if(isAuthenticated(applier, person)==false){
-				logger.info("No authentication to this applier!");
-				return "redirect:/login";
-			}
-			ApplicationJdbc applicatoinJdbc=InitJdbc.initApplicationJdbc();
-			if(applicatoinJdbc.getStatusOfApplication(applierUid)=="已接收"){
-				return "redirect:/error?message=prerequisite-status-wrong";
-			}
-			SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
-			secondRefereeUnitOpinionJdbc.updateSecondRefereeUnitOpinion(secondRefereeUnitOpinion, applierUid);
-			
-			InitJdbc.initFirstProjectBasicSituationJdbc().setRefereeInformation(secondRefereeUnitOpinion, applierUid);
-			//return "redirect:/edit-referee-unit-opinion/"+applier.getUid();
-			return "redirect:/application-managed-by-referee";
-		}
-		catch(NullPointerException e){
-			logger.info("null session!");
-			return "redirect:/login";
-		}
-	}
+//	@RequestMapping(value="/edit-referee-unit-opinion-post/{applierUid}",method=RequestMethod.POST)
+//	public String editSecondRefereeUnitOpinion(HttpServletRequest request,
+//			@ModelAttribute("secondFormAttri")SecondRefereeUnitOpinion secondRefereeUnitOpinion,@PathVariable("applierUid") String applierUid){
+//		logger.info("editSecondRefereeUnitOpinionPost()");
+//		
+//		try{
+//			Person person=FormUlti.getPersonInRequest(request);
+//			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+//			Applier applier=applierJdbc.getApplierByUid(applierUid);
+//			if(isAuthenticated(applier, person)==false){
+//				logger.info("No authentication to this applier!");
+//				return "redirect:/login";
+//			}
+//			ApplicationJdbc applicatoinJdbc=InitJdbc.initApplicationJdbc();
+//			if(applicatoinJdbc.getStatusOfApplication(applierUid)=="已接收"){
+//				return "redirect:/error?message=prerequisite-status-wrong";
+//			}
+//			SecondRefereeUnitOpinionJdbc secondRefereeUnitOpinionJdbc=InitJdbc.initSecondRefereeUnitOpinionJdbc();
+//			secondRefereeUnitOpinionJdbc.updateSecondRefereeUnitOpinion(secondRefereeUnitOpinion, applierUid);
+//			
+//			InitJdbc.initFirstProjectBasicSituationJdbc().setRefereeInformation(secondRefereeUnitOpinion, applierUid);
+//			//return "redirect:/edit-referee-unit-opinion/"+applier.getUid();
+//			return "redirect:/application-managed-by-referee";
+//		}
+//		catch(NullPointerException e){
+//			logger.info("null session!");
+//			return "redirect:/login";
+//		}
+//	}
 	
 	
 	/**

@@ -37,7 +37,7 @@ public class CombinePdf {
 			SixthPdf.buildSixthPdf(applierUid, document);
 			SeventhPdf.buildSeventhPdf(applierUid, document);
 			EighthPdf.buildEighthPdf(applierUid, document);
-			NinthMajorOrgContributorPdf.buildNinthMajorOrgContributorPdf(applierUid, document);
+			NinethMajorOrgContributorPdf.buildNinethMajorOrgContributorPdf(applierUid, document);
 		}catch(StringIndexOutOfBoundsException e){
 			e.printStackTrace();
 		}

@@ -25,16 +25,16 @@ request.setCharacterEncoding("UTF-8");
 		<div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row" style="margin-left: 20px"><h1>九、主要完成单位情况表</h1></div>
-           	<spring:url value="/save-ninth-major-org-contributor/{idOfNinthForm}" var="saveURL">
-				<spring:param name="idOfNinthForm" value="${ninthForm.idOfNinthForm}"></spring:param>
+           	<spring:url value="/save-nineth-major-org-contributor/{idOfNinethForm}" var="saveURL">
+				<spring:param name="idOfNinethForm" value="${ninethForm.idOfNinethForm}"></spring:param>
 			</spring:url>
-			<form id="ninthFormer" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="ninthFormAttr"
+			<form id="ninethFormer" action="${fn:escapeXml(saveURL)}" method="POST" modelAttribute="ninethFormAttr"
 			 data-toggle="validator" role="form">
 				<table class="table table-bordered">
 					<tr>
 						<td>单位名称</td>
 						<td class="form-group">
-							<input class="form-control" type="text" name="nameOfOrg" value="${ninthForm.nameOfOrg}"   
+							<input class="form-control" type="text" name="nameOfOrg" value="${ninethForm.nameOfOrg}"   
 							data-error="请填写此项" required/>
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
@@ -42,7 +42,7 @@ request.setCharacterEncoding("UTF-8");
 					<tr>
 						<td>排名</td>
 						<td class="form-group">
-							<input class="form-control" type="number" name="rankOfOrg" value="${ninthForm.rankOfOrg}"   
+							<input class="form-control" type="number" name="rankOfOrg" value="${ninethForm.rankOfOrg}"   
 							data-error="请填写此项" required/>
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
@@ -50,7 +50,7 @@ request.setCharacterEncoding("UTF-8");
 					<tr>
 						<td>法定代表人</td>
 						<td class="form-group">
-							<input class="form-control" type="text" name="legalRepresentative" value="${ninthForm.legalRepresentative}"   
+							<input class="form-control" type="text" name="legalRepresentative" value="${ninethForm.legalRepresentative}"   
 							data-error="请填写此项" required/>
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
@@ -58,7 +58,7 @@ request.setCharacterEncoding("UTF-8");
 					<tr>
 						<td>所在地</td>
 						<td class="form-group">
-							<input class="form-control" type="text" name="locationOfOrg" value="${ninthForm.locationOfOrg}"   
+							<input class="form-control" type="text" name="locationOfOrg" value="${ninethForm.locationOfOrg}"   
 							data-error="请填写此项" required/>
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
@@ -66,7 +66,7 @@ request.setCharacterEncoding("UTF-8");
 					<tr>
 						<td>单位性质</td>
 						<td class="form-group">
-							<input class="form-control" type="text" name="typeOfOrg" value="${ninthForm.typeOfOrg}"   
+							<input class="form-control" type="text" name="typeOfOrg" value="${ninethForm.typeOfOrg}"   
 							data-error="请填写此项" required/>
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
@@ -74,7 +74,7 @@ request.setCharacterEncoding("UTF-8");
 					<tr>
 						<td>传真</td>
 						<td class="form-group">
-							<input class="form-control" type="text" name="faxOfOrg" value="${ninthForm.faxOfOrg}"   
+							<input class="form-control" type="text" name="faxOfOrg" value="${ninethForm.faxOfOrg}"   
 							data-error="请填写此项" required/>
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
@@ -82,7 +82,7 @@ request.setCharacterEncoding("UTF-8");
 					<tr>
 						<td>邮政编码</td>
 						<td class="form-group">
-							<input class="form-control" type="text" name="zipCodeOfOrg" value="${ninthForm.zipCodeOfOrg}"   
+							<input class="form-control" type="text" name="zipCodeOfOrg" value="${ninethForm.zipCodeOfOrg}"   
 							data-error="请填写此项" required/>
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
@@ -92,11 +92,11 @@ request.setCharacterEncoding("UTF-8");
 						<td  class="form-group">
 							<select id="isOrgMemberOfCIC" name="isOrgMemberOfCIC" data-error="请填写此项" required>
 								<c:choose>
-									<c:when test="${ninthForm.isOrgMemberOfCIC eq '否'}">
+									<c:when test="${ninethForm.isOrgMemberOfCIC eq '否'}">
 										<option value="否">否</option>
 										<option value="是">是</option>
 									</c:when>	
-									<c:when test="${ninthForm.isOrgMemberOfCIC eq '是'}">
+									<c:when test="${ninethForm.isOrgMemberOfCIC eq '是'}">
 										<option value="是">是</option>
 										<option value="否">否</option>
 									</c:when>								
@@ -113,13 +113,13 @@ request.setCharacterEncoding("UTF-8");
 					<tr class="toHide">
 						<td>团体会员证书号</td>
 						<td>
-							<input class="form-control" type="text" name="orgMemberIDOfCIC" value="${ninthForm.orgMemberIDOfCIC}"/>
+							<input class="form-control" type="text" name="orgMemberIDOfCIC" value="${ninethForm.orgMemberIDOfCIC}"/>
 						</td>
 					</tr>
 					<tr>
 						<td>通讯地址</td>
 						<td class="form-group">
-							<input class="form-control" type="text" name="addressOfOrg" value="${ninthForm.addressOfOrg}"    
+							<input class="form-control" type="text" name="addressOfOrg" value="${ninethForm.addressOfOrg}"    
 							data-error="请填写此项" required/>
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
@@ -127,7 +127,7 @@ request.setCharacterEncoding("UTF-8");
 					<tr>
 						<td>联系人</td>
 						<td class="form-group">
-							<input class="form-control" type="text" name="contactNameOfOrg" value="${ninthForm.contactNameOfOrg}"   
+							<input class="form-control" type="text" name="contactNameOfOrg" value="${ninethForm.contactNameOfOrg}"   
 							data-error="请填写此项" required/>
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
@@ -135,7 +135,7 @@ request.setCharacterEncoding("UTF-8");
 					<tr>
 						<td>单位电话</td>
 						<td class="form-group">
-							<input class="form-control" type="text" name="contactPhoneOfOrg" value="${ninthForm.contactPhoneOfOrg}"   
+							<input class="form-control" type="text" name="contactPhoneOfOrg" value="${ninethForm.contactPhoneOfOrg}"   
 							data-error="请填写此项" required/>
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
@@ -143,7 +143,7 @@ request.setCharacterEncoding("UTF-8");
 					<tr>
 						<td>移动电话</td>
 						<td class="form-group">
-							<input class="form-control" type="text" name="mobileOfOrg" value="${ninthForm.mobileOfOrg}"   
+							<input class="form-control" type="text" name="mobileOfOrg" value="${ninethForm.mobileOfOrg}"   
 							data-error="请填写此项" required/>
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
@@ -151,7 +151,7 @@ request.setCharacterEncoding("UTF-8");
 					<tr>
 						<td>电子邮箱</td>
 						<td class="form-group">
-							<input class="form-control" type="text" name="emailOfOrg" value="${ninthForm.emailOfOrg}"   
+							<input class="form-control" type="text" name="emailOfOrg" value="${ninethForm.emailOfOrg}"   
 							data-error="请填写此项" required/>
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
@@ -178,14 +178,14 @@ request.setCharacterEncoding("UTF-8");
 					<div class="row panel-body form-group">
 						<textarea rows="16" class="form-control" name="contributionToProject" 
 						placeholder="不超过600字。" maxlength="600"
-						form="ninthFormer" data-error="请填写此项" required>${ninthForm.contributionToProject}</textarea>
+						form="ninethFormer" data-error="请填写此项" required>${ninethForm.contributionToProject}</textarea>
 						<div class="help-block with-errors" style="font-size:15px"></div>
 					</div>
 				</div>
 				<div class="row" style="margin-left:20px">
 					<input type="submit" class="btn btn-primary" value="保存" />
-					<spring:url value="/manage-ninth-major-org-contributor" var="ninthFormURL"/>
-						<a class="btn btn-default" href="${fn:escapeXml(ninthFormURL)}">返回</a>
+					<spring:url value="/manage-nineth-major-org-contributor" var="ninethFormURL"/>
+						<a class="btn btn-default" href="${fn:escapeXml(ninethFormURL)}">返回</a>
 				</div>
 			</form>
             

@@ -24,6 +24,7 @@ import com.dicipulus.app.applicationModel.SeventhPaperCitedByOthers;
 import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Person;
 
+@Deprecated
 @Controller
 @SessionAttributes("person")
 public class SeventhFormController {
@@ -102,24 +103,24 @@ public class SeventhFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/create-seventh-paper-cited-by-others",method=RequestMethod.POST)
-	public String createSeventhPaperCitedByOthers(HttpServletRequest request,SeventhPaperCitedByOthers seventhPaperCitedByOthers){
-		logger.info("createSeventhPaperCitedByOthers");
-		try{
-			Person person=FormUlti.getPersonInRequest(request);
-			
-			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
-			List<SeventhPaperCitedByOthers>  seventhPaperCitedByOtherss = seventhPaperCitedByOthersJdbc.getSeventhPaperCitedByOtherss(person.getUid());
-			int rankOfOrg =seventhPaperCitedByOtherss.size()+1;
-			seventhPaperCitedByOthersJdbc.createSeventhPaperCitedByOthers(person.getUid(), rankOfOrg);
-			
-			return "redirect:/manage-seventh-paper-cited-by-others";
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			return "redirect:/login";
-		}
-	}
+//	@RequestMapping(value="/create-seventh-paper-cited-by-others",method=RequestMethod.POST)
+//	public String createSeventhPaperCitedByOthers(HttpServletRequest request,SeventhPaperCitedByOthers seventhPaperCitedByOthers){
+//		logger.info("createSeventhPaperCitedByOthers");
+//		try{
+//			Person person=FormUlti.getPersonInRequest(request);
+//			
+//			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
+//			List<SeventhPaperCitedByOthers>  seventhPaperCitedByOtherss = seventhPaperCitedByOthersJdbc.getSeventhPaperCitedByOtherss(person.getUid());
+//			int rankOfOrg =seventhPaperCitedByOtherss.size()+1;
+//			seventhPaperCitedByOthersJdbc.createSeventhPaperCitedByOthers(person.getUid(), rankOfOrg);
+//			
+//			return "redirect:/manage-seventh-paper-cited-by-others";
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			return "redirect:/login";
+//		}
+//	}
 	
 	/**
 	 * 项目组删除第七论文被引用表LIST GET
@@ -127,21 +128,21 @@ public class SeventhFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/delete-seventh-paper-cited-by-others",method=RequestMethod.GET)
-	public String deleteSeventhPaperCitedByOthers(HttpServletRequest request, int idOfSeventhPaperForm){
-		logger.info("deleteSeventhPaperCitedByOthers");
-		try{
-			Person person=FormUlti.getPersonInRequest(request);
-			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
-			seventhPaperCitedByOthersJdbc.deleteSeventhPaperCitedByOthers(idOfSeventhPaperForm);
-			
-			return "redirect:/manage-seventh-paper-cited-by-others";
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			return "redirect:/login";
-		}
-	}
+//	@RequestMapping(value="/delete-seventh-paper-cited-by-others",method=RequestMethod.GET)
+//	public String deleteSeventhPaperCitedByOthers(HttpServletRequest request, int idOfSeventhPaperForm){
+//		logger.info("deleteSeventhPaperCitedByOthers");
+//		try{
+//			Person person=FormUlti.getPersonInRequest(request);
+//			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
+//			seventhPaperCitedByOthersJdbc.deleteSeventhPaperCitedByOthers(idOfSeventhPaperForm);
+//			
+//			return "redirect:/manage-seventh-paper-cited-by-others";
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			return "redirect:/login";
+//		}
+//	}
 	
 	/**
 	 * 项目组编辑第七论文被引用表POST
@@ -149,21 +150,21 @@ public class SeventhFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/save-seventh-paper-cited-by-others/{idOfSeventhPaperForm}",method=RequestMethod.POST)
-	public String saveSeventhPaperCitedByOthers(HttpServletRequest request,@ModelAttribute("seventhPaperFormAttr") SeventhPaperCitedByOthers seventhPaperForm,
-			@PathVariable("idOfSeventhPaperForm") int idOfSeventhPaperForm){
-		logger.info("saveSeventhPaperCitedByOthers");
-		try{
-			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
-			seventhPaperCitedByOthersJdbc.updateSeventhPaperCitedByOthers(seventhPaperForm);
-			
-			return "redirect:/manage-seventh-paper-cited-by-others";
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			return "redirect:/login";
-		}
-	}
+//	@RequestMapping(value="/save-seventh-paper-cited-by-others/{idOfSeventhPaperForm}",method=RequestMethod.POST)
+//	public String saveSeventhPaperCitedByOthers(HttpServletRequest request,@ModelAttribute("seventhPaperFormAttr") SeventhPaperCitedByOthers seventhPaperForm,
+//			@PathVariable("idOfSeventhPaperForm") int idOfSeventhPaperForm){
+//		logger.info("saveSeventhPaperCitedByOthers");
+//		try{
+//			SeventhPaperCitedByOthersJdbc seventhPaperCitedByOthersJdbc=InitJdbc.initSeventhPaperCitedByOthersJdbc();
+//			seventhPaperCitedByOthersJdbc.updateSeventhPaperCitedByOthers(seventhPaperForm);
+//			
+//			return "redirect:/manage-seventh-paper-cited-by-others";
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			return "redirect:/login";
+//		}
+//	}
 	
 	///////////////////////////////////////////////////////////////////
 	/**
@@ -239,24 +240,24 @@ public class SeventhFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/create-seventh-ip-doc",method=RequestMethod.POST)
-	public String createSeventhIntellectualPropertyDoc(HttpServletRequest request,SeventhIntellectualPropertyDoc seventhIntellectualPropertyDoc){
-		logger.info("createSeventhIntellectualPropertyDoc");
-		try{
-			Person person=FormUlti.getPersonInRequest(request);
-			
-			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
-			List<SeventhIntellectualPropertyDoc>  seventhIntellectualPropertyDocs = seventhIntellectualPropertyDocJdbc.getSeventhIntellectualPropertyDocs(person.getUid());
-			int rankOfOrg =seventhIntellectualPropertyDocs.size()+1;
-			seventhIntellectualPropertyDocJdbc.createSeventhIntellectualPropertyDoc(person.getUid(), rankOfOrg);
-			
-			return "redirect:/manage-seventh-ip-doc";
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			return "redirect:/login";
-		}
-	}
+//	@RequestMapping(value="/create-seventh-ip-doc",method=RequestMethod.POST)
+//	public String createSeventhIntellectualPropertyDoc(HttpServletRequest request,SeventhIntellectualPropertyDoc seventhIntellectualPropertyDoc){
+//		logger.info("createSeventhIntellectualPropertyDoc");
+//		try{
+//			Person person=FormUlti.getPersonInRequest(request);
+//			
+//			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
+//			List<SeventhIntellectualPropertyDoc>  seventhIntellectualPropertyDocs = seventhIntellectualPropertyDocJdbc.getSeventhIntellectualPropertyDocs(person.getUid());
+//			int rankOfOrg =seventhIntellectualPropertyDocs.size()+1;
+//			seventhIntellectualPropertyDocJdbc.createSeventhIntellectualPropertyDoc(person.getUid(), rankOfOrg);
+//			
+//			return "redirect:/manage-seventh-ip-doc";
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			return "redirect:/login";
+//		}
+//	}
 	
 	/**
 	 * 项目组删除第七知识产权表LIST GET
@@ -264,21 +265,21 @@ public class SeventhFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/delete-seventh-ip-doc",method=RequestMethod.GET)
-	public String deleteSeventhIntellectualPropertyDoc(HttpServletRequest request, int idOfSeventhIPForm){
-		logger.info("deleteSeventhIntellectualPropertyDoc");
-		try{
-			Person person=FormUlti.getPersonInRequest(request);
-			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
-			seventhIntellectualPropertyDocJdbc.deleteSeventhIntellectualPropertyDoc(idOfSeventhIPForm);
-			
-			return "redirect:/manage-seventh-ip-doc";
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			return "redirect:/login";
-		}
-	}
+//	@RequestMapping(value="/delete-seventh-ip-doc",method=RequestMethod.GET)
+//	public String deleteSeventhIntellectualPropertyDoc(HttpServletRequest request, int idOfSeventhIPForm){
+//		logger.info("deleteSeventhIntellectualPropertyDoc");
+//		try{
+//			Person person=FormUlti.getPersonInRequest(request);
+//			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
+//			seventhIntellectualPropertyDocJdbc.deleteSeventhIntellectualPropertyDoc(idOfSeventhIPForm);
+//			
+//			return "redirect:/manage-seventh-ip-doc";
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			return "redirect:/login";
+//		}
+//	}
 	
 	/**
 	 * 项目组编辑第七知识产权表POST
@@ -286,20 +287,20 @@ public class SeventhFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/save-seventh-ip-doc/{idOfSeventhIPForm}",method=RequestMethod.POST)
-	public String saveSeventhIntellectualPropertyDoc(HttpServletRequest request,@ModelAttribute("seventhIPFormAttr") SeventhIntellectualPropertyDoc seventhIPForm,
-			@PathVariable("idOfSeventhIPForm") int idOfSeventhIPForm){
-		logger.info("saveSeventhIntellectualPropertyDoc");
-		try{
-			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
-			seventhIntellectualPropertyDocJdbc.updateSeventhIntellectualPropertyDoc(seventhIPForm);
-			
-			return "redirect:/manage-seventh-ip-doc";
-		}
-		catch(NullPointerException e){
-			logger.info("session null pointer!");
-			return "redirect:/login";
-		}
-	}
+//	@RequestMapping(value="/save-seventh-ip-doc/{idOfSeventhIPForm}",method=RequestMethod.POST)
+//	public String saveSeventhIntellectualPropertyDoc(HttpServletRequest request,@ModelAttribute("seventhIPFormAttr") SeventhIntellectualPropertyDoc seventhIPForm,
+//			@PathVariable("idOfSeventhIPForm") int idOfSeventhIPForm){
+//		logger.info("saveSeventhIntellectualPropertyDoc");
+//		try{
+//			SeventhIntellectualPropertyDocJdbc seventhIntellectualPropertyDocJdbc=InitJdbc.initSeventhIntellectualPropertyDocJdbc();
+//			seventhIntellectualPropertyDocJdbc.updateSeventhIntellectualPropertyDoc(seventhIPForm);
+//			
+//			return "redirect:/manage-seventh-ip-doc";
+//		}
+//		catch(NullPointerException e){
+//			logger.info("session null pointer!");
+//			return "redirect:/login";
+//		}
+//	}
 	
 }

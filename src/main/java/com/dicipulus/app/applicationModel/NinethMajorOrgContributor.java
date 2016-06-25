@@ -1,8 +1,8 @@
 package com.dicipulus.app.applicationModel;
 
 
-public class NinthMajorOrgContributor{
-	private int idOfNinthForm;//primary key
+public class NinethMajorOrgContributor{
+	private int idOfNinethForm;//primary key
 	private String applierUid;// retrieving key
 	
 	private String nameOfOrg;
@@ -24,11 +24,11 @@ public class NinthMajorOrgContributor{
 	private String contributionToProject;
 	
 	
-	public int getIdOfNinthForm() {
-		return idOfNinthForm;
+	public int getIdOfNinethForm() {
+		return idOfNinethForm;
 	}
-	public void setIdOfNinthForm(int idOfNinthForm) {
-		this.idOfNinthForm = idOfNinthForm;
+	public void setIdOfNinethForm(int idOfNinethForm) {
+		this.idOfNinethForm = idOfNinethForm;
 	}
 	public String getApplierUid() {
 		return applierUid;
@@ -128,8 +128,8 @@ public class NinthMajorOrgContributor{
 	}
 	@Override
 	public String toString() {
-		return "NinthMajorOrganizationContributor [idOfNinthForm="
-				+ idOfNinthForm + ", applierUid=" + applierUid + ", nameOfOrg="
+		return "NinethMajorOrganizationContributor [idOfNinethForm="
+				+ idOfNinethForm + ", applierUid=" + applierUid + ", nameOfOrg="
 				+ nameOfOrg + ", rankOfOrg=" + rankOfOrg
 				+ ", legalRepresentative=" + legalRepresentative
 				+ ", locationOfOrg=" + locationOfOrg + ", typeOfOrg="

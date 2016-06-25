@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 
 import com.dicipulus.app.applicationModel.EighthMajorContributor;
 import com.dicipulus.app.applicationModel.FirstProjectBasicSituation;
-import com.dicipulus.app.applicationModel.NinthMajorOrgContributor;
+import com.dicipulus.app.applicationModel.NinethMajorOrgContributor;
 import com.dicipulus.app.applicationModel.SecondRefereeUnitOpinion;
 import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Referee;
@@ -61,9 +61,9 @@ public class FirstProjectBasicSituationJdbc{
 		return FirstProjectBasicSituations;
 	}
 
-	public void setFirstProjectBasicSituation(FirstProjectBasicSituation firstForm, String applierUid){
-		String sql="UPDATE `dicipulus`.`project_major` SET `yearCreated`=?, `refereeString`=?, `projectName`=?,"
-				+ " `secretLevel`=?, `subjectCategoryName1`=?,"
+	public void setFirstProjectBasicSituation(FirstProjectBasicSituation firstForm, String editThirdProjectBriefIntroductioneditThirdProjectBriefIntroduction){
+		String sql="UPDATE `dicipulus`.`project_major` SET `projectName`=?,"
+				+ " `subjectCategoryName1`=?,"
 				+ " `subjectCategoryId1`=?, `subjectCategoryName2`=?, `subjectCategoryId2`=?, `subjectCategoryName3`=?,"
 				+ " `subjectCategoryId3`=?, `economicField`=?, `nationalFocusField`=?, `technologicalField`=?, `taskSource1`=?, `taskSource2`=?,`taskSource3`=?,"
 				+ "`NameAndCodeOfPlansOrFundations`=?, `technicalReportNumber`=?, `numOfOtherIntellectualProperty`=?, "
@@ -71,8 +71,7 @@ public class FirstProjectBasicSituationJdbc{
 				+ "`applierContactName`=?, `applierContactPhone`=?, `applierContactEmail`=? "
 				+ "WHERE `applierUid`=?;";
 		
-		jdbcTemplateObject.update(sql,firstForm.getYearCreated(),firstForm.getRefereeString(),firstForm.getProjectName(),
-				firstForm.getSecretLevel(),
+		jdbcTemplateObject.update(sql,firstForm.getProjectName(),
 				firstForm.getSubjectCategoryName1(),firstForm.getSubjectCategoryId1(),
 				firstForm.getSubjectCategoryName2(),firstForm.getSubjectCategoryId2(),
 				firstForm.getSubjectCategoryName3(),firstForm.getSubjectCategoryId3(),
@@ -126,16 +125,16 @@ public class FirstProjectBasicSituationJdbc{
 	}
 	
 	private String getMajorContributorOrgNames(String applierUid){
-		NinthMajorOrgContributorJdbc ninthMajorOrgContributorJdbc=InitJdbc.initNinthMajorOrgContributorJdbc();
-		List<NinthMajorOrgContributor> ninthMajorOrgContributor=ninthMajorOrgContributorJdbc.getNinthMajorOrgContributors(applierUid);
-		Collections.sort(ninthMajorOrgContributor, new Comparator<NinthMajorOrgContributor>(){
-			public int compare(NinthMajorOrgContributor ninthMajorOrgContributor1,NinthMajorOrgContributor ninthMajorOrgContributor2){
-				return ninthMajorOrgContributor1.getRankOfOrg()-(ninthMajorOrgContributor2.getRankOfOrg());
+		NinethMajorOrgContributorJdbc ninethMajorOrgContributorJdbc=InitJdbc.initNinethMajorOrgContributorJdbc();
+		List<NinethMajorOrgContributor> ninethMajorOrgContributor=ninethMajorOrgContributorJdbc.getNinethMajorOrgContributors(applierUid);
+		Collections.sort(ninethMajorOrgContributor, new Comparator<NinethMajorOrgContributor>(){
+			public int compare(NinethMajorOrgContributor ninethMajorOrgContributor1,NinethMajorOrgContributor ninethMajorOrgContributor2){
+				return ninethMajorOrgContributor1.getRankOfOrg()-(ninethMajorOrgContributor2.getRankOfOrg());
 			}
 		});
 		
 		StringBuffer majorOrgContributors=new StringBuffer();
-        for(NinthMajorOrgContributor orgContributors:ninthMajorOrgContributor){
+        for(NinethMajorOrgContributor orgContributors:ninethMajorOrgContributor){
         	majorOrgContributors.append(",").append(orgContributors.getNameOfOrg());
         }
         if(majorOrgContributors==null||majorOrgContributors.toString().isEmpty()){

@@ -12,10 +12,10 @@ import com.dicipulus.app.JDBC.ApplierJdbc;
 import com.dicipulus.app.JDBC.EighthMajorContributorJdbc;
 import com.dicipulus.app.JDBC.FirstProjectBasicSituationJdbc;
 import com.dicipulus.app.JDBC.InitJdbc;
-import com.dicipulus.app.JDBC.NinthMajorOrgContributorJdbc;
+import com.dicipulus.app.JDBC.NinethMajorOrgContributorJdbc;
 import com.dicipulus.app.JDBC.SecondRefereeUnitOpinionJdbc;
 import com.dicipulus.app.applicationModel.EighthMajorContributor;
-import com.dicipulus.app.applicationModel.NinthMajorOrgContributor;
+import com.dicipulus.app.applicationModel.NinethMajorOrgContributor;
 import com.dicipulus.app.applicationModel.SecondRefereeUnitOpinion;
 import com.dicipulus.app.model.Applier;
 import com.dicipulus.app.model.Person;
@@ -24,6 +24,10 @@ import com.dicipulus.app.validator.Validator;
 public final class FormUlti {
 	public static Person getPersonInRequest(HttpServletRequest request) {
 		return (Person)request.getSession().getAttribute("person");
+	}
+	
+	public static String getPersonUidInRequest(HttpServletRequest request){
+		return getPersonInRequest(request).getUid();
 	}
 	
 	public static boolean isAuthenticatedToRead(Person self,Applier applier ) throws AuthenticationException {

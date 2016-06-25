@@ -64,8 +64,8 @@ request.setCharacterEncoding("UTF-8");
 					<spring:url value="/manage-seventh-paper-cited-by-others" var="seventhFormURL"/>
 				</c:if>
 					<a class="btn btn-default" href="${fn:escapeXml(seventhFormURL)}">上一页</a>
-				<spring:url value="/manage-ninth-major-org-contributor" var="ninthFormURL"/>
-					<a class="btn btn-primary" href="${fn:escapeXml(ninthFormURL)}">下一页</a>
+				<spring:url value="/manage-nineth-major-org-contributor" var="ninethFormURL"/>
+					<a class="btn btn-primary" href="${fn:escapeXml(ninethFormURL)}">下一页</a>
 			</div>
         </div>
 		</div>

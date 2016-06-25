@@ -9,7 +9,7 @@ import java.util.Random;
 import javax.sql.DataSource;
 
 import com.dicipulus.app.applicationModel.FirstProjectBasicSituation;
-import com.dicipulus.app.applicationModel.NinthMajorOrgContributor;
+import com.dicipulus.app.applicationModel.NinethMajorOrgContributor;
 import com.dicipulus.app.applicationModel.SecondRefereeUnitOpinion;
 import com.dicipulus.app.model.Application;
 import com.dicipulus.app.model.Applications;

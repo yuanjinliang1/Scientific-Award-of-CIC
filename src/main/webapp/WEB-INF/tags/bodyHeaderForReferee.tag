@@ -51,6 +51,10 @@
         <li  class="${manageSelf }" >
        		<a id="selfManage" href="${fn:escapeXml(selfManageURL)}">个人管理</a>
         </li>
+        <spring:url value="/download-instruction" var="instructionURL"></spring:url>
+        <li  class="" style="text-decoration: none;color: #fff;background: #ffd9b3;">
+       		<a id="instruction" href="${fn:escapeXml(instructionURL)}">用户手册</a>
+        </li>
     	<li>
 	    	<a href="/app/login">
 	    	<span class="glyphicon glyphicon-log-out"></span>

@@ -30,7 +30,7 @@
 	<div id="message"></div>
 	<form class="form-horizontal" action="/app/login" method="POST" modelAttribute="loginAttr">
 		<div class="form-group " >
-			<div class="row"><h1 style="text-align: center">中国通信学会报奖系统</h1></div>
+			<div class="row"><h1 style="text-align: center">中国通信学会报奖系统（试行版）</h1></div>
 			<div class="row">
 	    	<div style="width:300;margin:auto">
     			<label for="uidGet">用户名</label>

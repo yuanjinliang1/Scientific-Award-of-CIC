@@ -46,6 +46,22 @@ public class DownloadPdf {
 		return new FileSystemResource(fileOfPdf);
 	}
 	
+	@RequestMapping(value="/download-instruction",produces = "application/pdf",method=RequestMethod.GET)
+	@ResponseBody
+	public FileSystemResource  downloadInstruction(HttpServletRequest request) throws DocumentException, IOException{
+		logger.info("downloadPdf");
+
+		
+		String folderPathOfWord=MyProperties.getRootPath()+"system/";
+		File dir = new File(folderPathOfWord);
+		FileFilter fileFilter = new WildcardFileFilter("中国通信学会奖项申请系统操作手册.pdf");
+		File[] files = dir.listFiles(fileFilter);
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+	    responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + URLEncoder.encode(files[0].getName().replace(" ", "_"), "UTF-8"));
+		return new FileSystemResource(files[0]);
+	}
+	
 	@RequestMapping(value="/download-excel/{year}",produces = "application/vnd.ms-excel",method=RequestMethod.GET)
 	@ResponseBody
 	public FileSystemResource  downloadExcel(HttpServletRequest request, @PathVariable("year") int year) throws DocumentException, IOException, RowsExceededException, WriteException{

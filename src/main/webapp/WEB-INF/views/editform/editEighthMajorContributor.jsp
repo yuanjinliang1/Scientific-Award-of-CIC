@@ -304,7 +304,7 @@ request.setCharacterEncoding("UTF-8");
 					</tr>
 					<tr>
 						<td>参加本项目结束时间</td>
-						<td class="form-group"><input class="form-control" type="text"  name="endDateOfParticipation" value="${eighthForm.startDateOfParticipation}"
+						<td class="form-group"><input class="form-control" type="text"  name="endDateOfParticipation" value="${eighthForm.endDateOfParticipation}"
 						 	data-error="请填写此项" required />
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						 </td>

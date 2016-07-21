@@ -56,7 +56,7 @@ request.setCharacterEncoding("UTF-8");
 					</tr>
 				</c:forEach>	
 			</table>
-			
+			<div class="row" style="margin-left: 20px"><h3>2．近三年经济效益（万元）</h3></div>	
 			<table class="table table-bordered">
 				<tr>
 					<td>自然年</td>
@@ -101,7 +101,7 @@ request.setCharacterEncoding("UTF-8");
 				<tr><td>其他经济效益指标的有关说明</td></tr>
 				<tr><td><pre>${ sixthEconomicAndSocialBenefitForms.otherEconomicProfitIntroduction}</pre></td></tr>
 			</table>
-			<div class="row" style="margin-left: 20px"><h3>2.社会效益</h3></div>
+			<div class="row" style="margin-left: 20px"><h3>3.社会效益</h3></div>
 			<table class="table table-bordered">
 				<tr><td><pre>${ sixthEconomicAndSocialBenefitForms.socialBenefit}</pre></td></tr>
 			</table>

@@ -91,9 +91,7 @@ request.setCharacterEncoding("UTF-8");
 					<tr  class="toHide">
 						<td>会员证号</td>
 						<td>
-							<input class="form-control"  type="text" name="memberIdOfCIc" value="${eighthForm.memberIdOfCIc}"
-						 	data-error="请填写此项" required />
-							<div class="help-block with-errors" style="font-size:15px"></div>
+							<input class="form-control"  type="text" name="memberIdOfCIc" value="${eighthForm.memberIdOfCIc}" />
 						</td>
 					</tr>
 					<tr>

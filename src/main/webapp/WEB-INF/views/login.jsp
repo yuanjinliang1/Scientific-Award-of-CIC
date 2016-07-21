@@ -61,8 +61,8 @@
 		<div class="row panel-body">
 		<table class=" table table-bordered" style="font-size:15px">
 			<tr><td><a href="/app/download-word/3">3-2016年度学会科技奖各奖种推荐书式样-自然科学类.docx</a></td></tr>
-			<tr><td><a href="/app/download-word/3">4-2016年度学会科技奖各奖种推荐书式样-技术发明类.docx</a></td></tr>
-			<tr><td><a href="/app/download-word/3">5-2016年度学会科技奖各奖种推荐书式样-科技进步类.docx</a></td></tr>
+			<tr><td><a href="/app/download-word/4">4-2016年度学会科技奖各奖种推荐书式样-技术发明类.docx</a></td></tr>
+			<tr><td><a href="/app/download-word/5">5-2016年度学会科技奖各奖种推荐书式样-科技进步类.docx</a></td></tr>
 		</table>
 		</div>
 	</div>

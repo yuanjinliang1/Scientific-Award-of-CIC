@@ -111,7 +111,7 @@ public class FirstProjectBasicSituationJdbc{
 		List<EighthMajorContributor> eighthMajorContributor=eighthMajorContributorJdbc.getEighthMajorContributors(applierUid);	
 		Collections.sort(eighthMajorContributor,new Comparator<EighthMajorContributor>(){
 			public int compare(EighthMajorContributor eighthMajorContributor1, EighthMajorContributor eighthMajorContributor2){
-				return eighthMajorContributor1.getRankOfContributor().compareTo(eighthMajorContributor2.getRankOfContributor());
+				return eighthMajorContributor1.getRankOfContributor()-(eighthMajorContributor2.getRankOfContributor());
 			}
 		});
 		

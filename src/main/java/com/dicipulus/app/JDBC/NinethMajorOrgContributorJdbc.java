@@ -36,7 +36,7 @@ public class NinethMajorOrgContributorJdbc{
 	}
 	
 	public List<NinethMajorOrgContributor> getNinethMajorOrgContributors(String applierUid){
-		String sql="select * from major_org_contributor where applierUid=?;";
+		String sql="select * from major_org_contributor where applierUid=? order by rankOfOrg;";
 		List<NinethMajorOrgContributor> ninethMajorContributors= 
 				jdbcTemplateObject.query(sql, new Object[]{applierUid},BeanPropertyRowMapper.newInstance(NinethMajorOrgContributor.class));
 		logger.info(sql);

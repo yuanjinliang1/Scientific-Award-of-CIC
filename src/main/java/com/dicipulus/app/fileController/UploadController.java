@@ -159,7 +159,29 @@ public class UploadController {
 		logger.info(files.toString());
 		return files;
 	}
-	
+	private LinkedList<FileMeta> getFileList(String applierUid,int index) throws IOException{
+		InitUploadFolder initUploadFolder=new InitUploadFolder();
+		initUploadFolder.initUploadFolder(applierUid);
+		String pathNow = rootPath + applierUid + "/uploaded/" + index;
+		LinkedList<FileMeta> files = new LinkedList<FileMeta>();
+		FileMeta fileMeta = null;
+		
+		File folder = new File(pathNow);
+		File[] listOfFiles = folder.listFiles();
+		for (int i = 0; i < listOfFiles.length; i++) {
+			if (listOfFiles[i].isFile()) {
+				fileMeta = new FileMeta();
+				fileMeta.setFileName(listOfFiles[i].getName());
+				fileMeta.setFileSize(listOfFiles[i].length() / 1024 + " Kb");
+				fileMeta.setFileType(Files.probeContentType(listOfFiles[i].toPath()));
+				files.add(fileMeta);
+			} else if (listOfFiles[i].isDirectory()) {
+				// do nothing
+			}
+		}
+		logger.info(files.toString());
+		return files;
+	}
 
 	@RequestMapping(value = "/delete/{applierUid}/{index}", method = RequestMethod.GET)
 	public String deleteFile(HttpServletResponse response,
@@ -172,12 +194,14 @@ public class UploadController {
 	}
 	
 	@RequestMapping(value = "/delete/{applierUid}/{index}/{fileLead}", method = RequestMethod.GET)
-	public String deleteSingleFile(HttpServletResponse response,
-			@PathVariable String applierUid, @PathVariable int index,@PathVariable int fileLead) {
+	public @ResponseBody LinkedList<FileMeta> deleteSingleFile(HttpServletResponse response,
+			@PathVariable String applierUid, @PathVariable int index,@PathVariable int fileLead) throws IOException {
 		logger.info("deleteSingleFile");
 		String pathNow = rootPath + applierUid + "/uploaded/" + index;
 		DelteFiles.deleteSingleFiles(pathNow,fileLead);
 		String uploadURL="redirect:/upload/"+applierUid+"/"+index;
-		return uploadURL;
+		return getFileList(applierUid,index);
 	}
+	
+
 }

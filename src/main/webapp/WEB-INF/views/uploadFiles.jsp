@@ -329,7 +329,7 @@
 		                        .append($('<td/>').text(file.fileName))
 		                        .append($('<td/>').text(file.fileSize))
 		                        .append($('<td/>').text(file.fileType))
-		                        .append($('<td/>').html("<a class='btn btn-danger' href='/app/delete/"+"${person.uid}/${index}/"+index+"'>删除</a>"))
+		                        .append($('<td/>').html("<a class='btn btn-danger single-delete' data-url='/app/delete/"+"${person.uid}/${index}/"+index+"'>删除</a>"))
 		                        )//end $("#uploaded-files").append()
 		            }); 
 		        },
@@ -365,7 +365,29 @@
 		                        .append($('<td/>').text(file.fileName))
 		                        .append($('<td/>').text(file.fileSize))
 		                        .append($('<td/>').text(file.fileType))
-		                        .append($('<td/>').html("<a class='btn btn-danger' href='/app/delete/"+"${person.uid}/${index}/"+index+"'>删除</a>"))
+		                        .append($('<td/>').html("<a class='btn btn-danger single-delete' data-url='/app/delete/"+"${person.uid}/${index}/"+index+"'>删除</a>"))
+		                        )//end $("#uploaded-files").append()
+		            }); 
+		        }
+	        });
+		});
+		$("#uploaded-files").on("click","tr>td>a.single-delete",function(event){
+			console.log("delete single file");
+			$.ajax({ 
+	            type: 'GET', 
+	            url: $(this).attr("data-url"), 
+	            data: {}, 
+	            dataType:'json',
+	            complete: function (data) {
+		            console.log(data);
+		            $("tr:has(td)").remove();
+		            $.each(data.responseJSON, function (index, file) {
+		                $("#uploaded-files").append(
+		                        $('<tr/>')
+		                        .append($('<td/>').text(file.fileName))
+		                        .append($('<td/>').text(file.fileSize))
+		                        .append($('<td/>').text(file.fileType))
+		                        .append($('<td/>').html("<a class='btn btn-danger single-delete' data-url='/app/delete/"+"${person.uid}/${index}/"+index+"'>删除</a>"))
 		                        )//end $("#uploaded-files").append()
 		            }); 
 		        }

@@ -164,9 +164,19 @@ public class UploadController {
 	@RequestMapping(value = "/delete/{applierUid}/{index}", method = RequestMethod.GET)
 	public String deleteFile(HttpServletResponse response,
 			@PathVariable String applierUid, @PathVariable int index) {
-		logger.info("deleteFile");
+		logger.info("deleteAllFile");
 		String pathNow = rootPath + applierUid + "/uploaded/" + index;
 		DelteFiles.deleteFiles(pathNow);
+		String uploadURL="redirect:/upload/"+applierUid+"/"+index;
+		return uploadURL;
+	}
+	
+	@RequestMapping(value = "/delete/{applierUid}/{index}/{fileLead}", method = RequestMethod.GET)
+	public String deleteSingleFile(HttpServletResponse response,
+			@PathVariable String applierUid, @PathVariable int index,@PathVariable int fileLead) {
+		logger.info("deleteSingleFile");
+		String pathNow = rootPath + applierUid + "/uploaded/" + index;
+		DelteFiles.deleteSingleFiles(pathNow,fileLead);
 		String uploadURL="redirect:/upload/"+applierUid+"/"+index;
 		return uploadURL;
 	}

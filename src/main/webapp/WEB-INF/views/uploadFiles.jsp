@@ -267,6 +267,7 @@
 						<th>文件名</th>
 						<th>文件大小</th>
 						<th>文件类型</th>
+						<th>操作</th>
 					</tr>
 				</table>
             </div>
@@ -328,6 +329,7 @@
 		                        .append($('<td/>').text(file.fileName))
 		                        .append($('<td/>').text(file.fileSize))
 		                        .append($('<td/>').text(file.fileType))
+		                        .append($('<td/>').html("<a class='btn btn-danger' href='/app/delete/"+"${person.uid}/${index}/"+index+"'>删除</a>"))
 		                        )//end $("#uploaded-files").append()
 		            }); 
 		        },
@@ -363,6 +365,7 @@
 		                        .append($('<td/>').text(file.fileName))
 		                        .append($('<td/>').text(file.fileSize))
 		                        .append($('<td/>').text(file.fileType))
+		                        .append($('<td/>').html("<a class='btn btn-danger' href='/app/delete/"+"${person.uid}/${index}/"+index+"'>删除</a>"))
 		                        )//end $("#uploaded-files").append()
 		            }); 
 		        }

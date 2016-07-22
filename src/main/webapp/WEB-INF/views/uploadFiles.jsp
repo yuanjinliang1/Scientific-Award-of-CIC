@@ -276,7 +276,7 @@
 					<spring:param name="applierUid" value="${person.uid}"></spring:param>
 					<spring:param name="index" value="${index}"></spring:param>
 				</spring:url>
-				<a id="upload-check" class="btn btn-danger" style="margin-right:30px">查看附件</a>
+				<a id="upload-check" class="btn btn-default" style="margin-right:30px">查看已上传附件列表</a>
             	<spring:url value="/delete/{applierUid}/{index}" var="deleteURL">
 					<spring:param name="applierUid" value="${person.uid}"></spring:param>
 					<spring:param name="index" value="${index}"></spring:param>

@@ -35,7 +35,7 @@ public class EighthPdf {
 		List<EighthMajorContributor> eighthMajorContributor=eighthMajorContributorJdbc.getEighthMajorContributors(applierUid);	
 		Collections.sort(eighthMajorContributor,new Comparator<EighthMajorContributor>(){
 			public int compare(EighthMajorContributor eighthMajorContributor1, EighthMajorContributor eighthMajorContributor2){
-				return eighthMajorContributor1.getRankOfContributor().compareTo(eighthMajorContributor2.getRankOfContributor());
+				return eighthMajorContributor1.getRankOfContributor()-(eighthMajorContributor2.getRankOfContributor());
 			}
 		});
 		BaseFont baseFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
@@ -72,7 +72,7 @@ public class EighthPdf {
 		cell.setHorizontalAlignment(cell.ALIGN_CENTER);
         cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
         table.addCell(cell);
-        cell=new PdfPCell(new Phrase(eighthMajorContributor.get(i).getRankOfContributor(),fontChinese));///
+        cell=new PdfPCell(new Phrase(String.valueOf(eighthMajorContributor.get(i).getRankOfContributor()),fontChinese));///
 		cell.setHorizontalAlignment(cell.ALIGN_CENTER);
         cell.setVerticalAlignment(cell.ALIGN_MIDDLE);
         table.addCell(cell);

@@ -32,7 +32,7 @@ public class EighthMajorContributorJdbc{
 	}
 	
 	public List<EighthMajorContributor> getEighthMajorContributors(String applierUid){
-		String sql="select * from major_contributor where applierUid=?;";
+		String sql="select * from major_contributor where applierUid=? order by rankOfContributor;";
 		List<EighthMajorContributor> eighthMajorContributors= 
 				jdbcTemplateObject.query(sql, new Object[]{applierUid},BeanPropertyRowMapper.newInstance(EighthMajorContributor.class));
 		logger.info(sql);

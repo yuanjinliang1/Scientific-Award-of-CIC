@@ -18,4 +18,16 @@ public final class DelteFiles {
 			}
 		}
 	}
+	
+	public static void deleteSingleFiles(String pathNow,int fileLead){
+		File folder = new File(pathNow);
+		File[] listOfFiles = folder.listFiles();
+		File fileToDelete=listOfFiles[fileLead];
+			if (fileToDelete.isFile()) {
+				boolean isSuccess = org.springframework.util.FileSystemUtils
+						.deleteRecursively(fileToDelete.getAbsoluteFile());
+			} else if (fileToDelete.isDirectory()) {
+				// do nothing
+			}
+	}
 }

@@ -267,6 +267,7 @@
 						<th>文件名</th>
 						<th>文件大小</th>
 						<th>文件类型</th>
+						<th>操作</th>
 					</tr>
 				</table>
             </div>
@@ -276,7 +277,7 @@
 					<spring:param name="applierUid" value="${person.uid}"></spring:param>
 					<spring:param name="index" value="${index}"></spring:param>
 				</spring:url>
-				<a id="upload-check" class="btn btn-default" style="margin-right:30px">查看已上传附件列表</a>
+				<!--  <a id="upload-check" class="btn btn-default" style="margin-right:30px">查看已上传附件列表</a>-->
             	<spring:url value="/delete/{applierUid}/{index}" var="deleteURL">
 					<spring:param name="applierUid" value="${person.uid}"></spring:param>
 					<spring:param name="index" value="${index}"></spring:param>
@@ -328,6 +329,7 @@
 		                        .append($('<td/>').text(file.fileName))
 		                        .append($('<td/>').text(file.fileSize))
 		                        .append($('<td/>').text(file.fileType))
+		                        .append($('<td/>').html("<a class='btn btn-danger single-delete' data-url='/app/delete/"+"${person.uid}/${index}/"+index+"'>删除</a>"))
 		                        )//end $("#uploaded-files").append()
 		            }); 
 		        },
@@ -347,11 +349,30 @@
 	</script>
 	<script>
 	jQuery(document).ready(function($) {
-		$("#upload-check").click(function(){
-            console.log("click");
+		$.ajax({ 
+            type: 'GET', 
+            url: "${checkURL}", 
+            data: {}, 
+            dataType:'json',
+            complete: function (data) {
+	            console.log(data);
+	            $("tr:has(td)").remove();
+	            $.each(data.responseJSON, function (index, file) {
+	                $("#uploaded-files").append(
+	                        $('<tr/>')
+	                        .append($('<td/>').text(file.fileName))
+	                        .append($('<td/>').text(file.fileSize))
+	                        .append($('<td/>').text(file.fileType))
+	                        .append($('<td/>').html("<a class='btn btn-danger single-delete' data-url='/app/delete/"+"${person.uid}/${index}/"+index+"'>删除</a>"))
+	                        )//end $("#uploaded-files").append()
+	            }); 
+	        }
+        });
+		$("#uploaded-files").on("click","tr>td>a.single-delete",function(event){
+			console.log("delete single file");
 			$.ajax({ 
 	            type: 'GET', 
-	            url: "${checkURL}", 
+	            url: $(this).attr("data-url"), 
 	            data: {}, 
 	            dataType:'json',
 	            complete: function (data) {
@@ -363,6 +384,7 @@
 		                        .append($('<td/>').text(file.fileName))
 		                        .append($('<td/>').text(file.fileSize))
 		                        .append($('<td/>').text(file.fileType))
+		                        .append($('<td/>').html("<a class='btn btn-danger single-delete' data-url='/app/delete/"+"${person.uid}/${index}/"+index+"'>删除</a>"))
 		                        )//end $("#uploaded-files").append()
 		            }); 
 		        }

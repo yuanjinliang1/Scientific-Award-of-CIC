@@ -272,6 +272,11 @@
             </div>
             <br><br>
             <div class="row">
+            	<spring:url value="/upload-check/{applierUid}/{index}" var="checkURL">
+					<spring:param name="applierUid" value="${person.uid}"></spring:param>
+					<spring:param name="index" value="${index}"></spring:param>
+				</spring:url>
+				<a id="upload-check" class="btn btn-danger" style="margin-right:30px">查看附件</a>
             	<spring:url value="/delete/{applierUid}/{index}" var="deleteURL">
 					<spring:param name="applierUid" value="${person.uid}"></spring:param>
 					<spring:param name="index" value="${index}"></spring:param>
@@ -308,8 +313,6 @@
    		</div>
    	</div>
 </div>
-
-	
 	
 	<script type="text/javascript">
 		$(function () {
@@ -341,6 +344,32 @@
 		    })
 		}
 		);
+	</script>
+	<script>
+	jQuery(document).ready(function($) {
+		$("#upload-check").click(function(){
+            console.log("click");
+			$.ajax({ 
+	            type: 'GET', 
+	            url: "${checkURL}", 
+	            data: {}, 
+	            dataType:'json',
+	            complete: function (data) {
+		            console.log(data);
+		            $("tr:has(td)").remove();
+		            $.each(data.responseJSON, function (index, file) {
+		                $("#uploaded-files").append(
+		                        $('<tr/>')
+		                        .append($('<td/>').text(file.fileName))
+		                        .append($('<td/>').text(file.fileSize))
+		                        .append($('<td/>').text(file.fileType))
+		                        )//end $("#uploaded-files").append()
+		            }); 
+		        }
+	        });
+		});
+		
+	});
 	</script>
 </body>
 </html>

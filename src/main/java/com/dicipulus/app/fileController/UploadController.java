@@ -133,9 +133,8 @@ public class UploadController {
 		return files;
 	}
 	
-	@RequestMapping(value = "/upload-check/{applierUid}/{index}", method = RequestMethod.POST)
-	public @ResponseBody LinkedList<FileMeta> uploadCheck(
-			MultipartHttpServletRequest request, HttpServletResponse response,
+	@RequestMapping(value = "/upload-check/{applierUid}/{index}", method = RequestMethod.GET)
+	public @ResponseBody LinkedList<FileMeta> uploadCheck( HttpServletResponse response,
 			@PathVariable String applierUid, @PathVariable int index) throws IOException {
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
 		InitUploadFolder initUploadFolder=new InitUploadFolder();

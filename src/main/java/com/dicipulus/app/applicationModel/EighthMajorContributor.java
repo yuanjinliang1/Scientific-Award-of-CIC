@@ -10,7 +10,7 @@ public class EighthMajorContributor {
 	
 	private String nameOfContributor;
 	private String genderOfContributor;
-	private String rankOfContributor;
+	private int rankOfContributor;
 	private String nationalityOfContributor;
 	
 	private String isMemberOfCIC;//TI,NS
@@ -82,10 +82,10 @@ public class EighthMajorContributor {
 	public void setGenderOfContributor(String genderOfContributor) {
 		this.genderOfContributor = genderOfContributor;
 	}
-	public String getRankOfContributor() {
+	public int getRankOfContributor() {
 		return rankOfContributor;
 	}
-	public void setRankOfContributor(String rankOfContributor) {
+	public void setRankOfContributor(int rankOfContributor) {
 		this.rankOfContributor = rankOfContributor;
 	}
 	public String getNationalityOfContributor() {

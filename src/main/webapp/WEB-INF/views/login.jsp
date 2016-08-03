@@ -24,7 +24,7 @@
 		} 
 	</style>
 </head>
-<body>
+<body onload="detectBrowser()">
 <div class="container" style="margin-top:5%">
 <div style="margin:auto;width:60%" >
 	<div id="message"></div>
@@ -48,6 +48,7 @@
 	    	<div style="width:300;margin:auto">
     			<button type="submit" class="btn btn-primary" name="Submit" onClick="return loginPreCheck()">登陆</button>
     			<button type="reset" class="btn btn-danger" name="Reset" id="reset">取消</button>
+    			<button type="reset" class="btn btn-default" name="Reset" id="getPass" onclick="alert('请联系上级推荐单位  或  拨打学会工作电话：010-68209086')">我没有用户名和密码</button>
 	    	</div>
 			</div>
 		</div>
@@ -113,6 +114,28 @@
 			console.log("heh");
 		})
 	})
+</script>
+<script type="text/javascript">
+	
+	function detectBrowser()
+	{
+	var browser=navigator.appName;
+	var b_version=navigator.appVersion;
+	var version=parseFloat(b_version);
+	var isChromium = window.chrome,
+    winNav = window.navigator,
+    vendorName = winNav.vendor,
+    isOpera = winNav.userAgent.indexOf("OPR") > -1,
+    isIEedge = winNav.userAgent.indexOf("Edge") > -1,
+    isIOSChrome = winNav.userAgent.match("CriOS");
+   	if(isIOSChrome){
+   	   // is Google Chrome on IOS
+   	} else if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
+   	   // is Google Chrome
+   	} else { 
+   		alert("温馨提示：奖项申请系统在Chrome浏览器上最为稳定，建议使用Chrome浏览器填报！")
+   	}
+   	}
 </script>
 </body>
 </html>

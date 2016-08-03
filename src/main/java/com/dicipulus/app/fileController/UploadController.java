@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -115,6 +116,7 @@ public class UploadController {
 		
 		File folder = new File(pathNow);
 		File[] listOfFiles = folder.listFiles();
+		Arrays.sort(listOfFiles);
 		for (int i = 0; i < listOfFiles.length; i++) {
 			if (listOfFiles[i].isFile()) {
 				fileMeta = new FileMeta();
@@ -145,6 +147,7 @@ public class UploadController {
 		
 		File folder = new File(pathNow);
 		File[] listOfFiles = folder.listFiles();
+		Arrays.sort(listOfFiles);
 		for (int i = 0; i < listOfFiles.length; i++) {
 			if (listOfFiles[i].isFile()) {
 				fileMeta = new FileMeta();
@@ -168,6 +171,7 @@ public class UploadController {
 		
 		File folder = new File(pathNow);
 		File[] listOfFiles = folder.listFiles();
+		Arrays.sort(listOfFiles);
 		for (int i = 0; i < listOfFiles.length; i++) {
 			if (listOfFiles[i].isFile()) {
 				fileMeta = new FileMeta();

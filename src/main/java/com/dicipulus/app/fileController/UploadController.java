@@ -42,6 +42,9 @@ public class UploadController {
 			.getLogger(UploadController.class);
 	String rootPath = MyProperties.getRootPath();
 
+	/**
+	 * get the view of uploading page
+	 */
 	@RequestMapping(value = "/upload/{applierUid}/{index}", method = RequestMethod.GET)
 	public ModelAndView uploadView(HttpServletRequest request,
 			ModelAndView modelAndView, @PathVariable String applierUid,
@@ -65,7 +68,9 @@ public class UploadController {
 		modelAndView.setViewName("uploadFiles");
 		return modelAndView;
 	}
-
+	/**
+	 * post the uploaded files to server
+	 */
 	@RequestMapping(value = "/upload/{applierUid}/{index}", headers = "content-type=multipart/*", method = RequestMethod.POST)
 	public @ResponseBody LinkedList<FileMeta> upload(
 			MultipartHttpServletRequest request, HttpServletResponse response,
@@ -128,13 +133,81 @@ public class UploadController {
 				// do nothing
 			}
 		}
-		
-		
-		
 		logger.info(files.toString());
 		return files;
 	}
 	
+	/**
+	 * post the attached picture to server
+	 */
+	@RequestMapping(value = "/attached/{applierUid}/{index}", headers = "content-type=multipart/*", method = RequestMethod.POST)
+	public @ResponseBody String attach(
+			MultipartHttpServletRequest request, HttpServletResponse response,
+			@PathVariable String applierUid, @PathVariable int index) throws IOException {
+		logger.info("attach");
+		InitUploadFolder initUploadFolder=new InitUploadFolder();
+		initUploadFolder.initUploadFolder(applierUid);
+		String pathNow = rootPath + applierUid + "/attached/" + index;
+		String fileName;
+		LinkedList<FileMeta> files = new LinkedList<FileMeta>();
+		FileMeta fileMeta = null;
+		// 1. build an iterator
+		Iterator<String> itr = request.getFileNames();
+		MultipartFile mpf = null;
+
+		// 2. get each file
+			// 2.1 get next MultipartFile
+			mpf = request.getFile(itr.next());
+			fileName=mpf.getOriginalFilename();
+			System.out.println(mpf.getOriginalFilename() + " uploaded! "
+					+ files.size());
+
+			// 2.2 if files > 10 remove the first from the list
+			if (files.size() >= 10)
+				files.pop();
+
+			// 2.3 create new fileMeta
+			fileMeta = new FileMeta();
+			fileMeta.setFileName(mpf.getOriginalFilename());
+			fileMeta.setFileSize(mpf.getSize() / 1024 + " Kb");
+			fileMeta.setFileType(mpf.getContentType());
+
+			try {
+				fileMeta.setBytes(mpf.getBytes());
+
+				// copy file to local disk (make sure the path
+				// "e.g. D:/temp/files" exists)
+				FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(pathNow
+						+ "/" + mpf.getOriginalFilename()));
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			// 2.4 add to files
+		// result will be like this
+		// [{"fileName":"app_engine-85x77.png","fileSize":"8 Kb","fileType":"image/png"},...]
+		
+		File folder = new File(pathNow);
+		File[] listOfFiles = folder.listFiles();
+		Arrays.sort(listOfFiles);
+		for (int i = 0; i < listOfFiles.length; i++) {
+			if (listOfFiles[i].isFile()) {
+				fileMeta = new FileMeta();
+				fileMeta.setFileName(listOfFiles[i].getName());
+				fileMeta.setFileSize(listOfFiles[i].length()/1024 + " Kb");
+				fileMeta.setFileType(Files.probeContentType(listOfFiles[i].toPath()));
+				files.add(fileMeta);
+			} else if (listOfFiles[i].isDirectory()) {
+				// do nothing
+			}
+		}
+		logger.info(files.toString());
+		return "http://localhost:8080/app/attached/"+applierUid+"/"+index+"/"+fileName;
+	}
+	
+	/**
+	 * return the uploaded file list to viewer
+	 */
 	@RequestMapping(value = "/upload-check/{applierUid}/{index}", method = RequestMethod.GET)
 	public @ResponseBody LinkedList<FileMeta> uploadCheck( HttpServletResponse response,
 			@PathVariable String applierUid, @PathVariable int index) throws IOException {
@@ -186,7 +259,10 @@ public class UploadController {
 		logger.info(files.toString());
 		return files;
 	}
-
+	
+	/**
+	 * delete all the files in this page
+	 */
 	@RequestMapping(value = "/delete/{applierUid}/{index}", method = RequestMethod.GET)
 	public String deleteFile(HttpServletResponse response,
 			@PathVariable String applierUid, @PathVariable int index) {
@@ -197,6 +273,9 @@ public class UploadController {
 		return uploadURL;
 	}
 	
+	/**
+	 * delete one of the file in this page
+	 */
 	@RequestMapping(value = "/delete/{applierUid}/{index}/{fileLead}", method = RequestMethod.GET)
 	public @ResponseBody LinkedList<FileMeta> deleteSingleFile(HttpServletResponse response,
 			@PathVariable String applierUid, @PathVariable int index,@PathVariable int fileLead) throws IOException {

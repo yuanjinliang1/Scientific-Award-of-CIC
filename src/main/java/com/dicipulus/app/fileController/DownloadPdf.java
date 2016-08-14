@@ -87,4 +87,20 @@ public class DownloadPdf {
 		return new  ResponseEntity<FileSystemResource>(new FileSystemResource(files[0]),responseHeaders,HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/attached/{applierUid}/{index}/{fileName}.{extensions}",method=RequestMethod.GET)
+	@ResponseBody
+	public FileSystemResource  downloadAttached(HttpServletRequest request, @PathVariable String applierUid, 
+			@PathVariable("index") int index,  @PathVariable String fileName, @PathVariable String extensions,HttpServletResponse response) throws UnsupportedEncodingException{
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() );
+		String folderPathOfAttached = MyProperties.getRootPath() + applierUid + "/attached/" + index;
+		File dir = new File(folderPathOfAttached);
+		FileFilter fileFilter = new WildcardFileFilter(fileName+"."+extensions);
+		File[] files = dir.listFiles(fileFilter);
+
+		logger.info(folderPathOfAttached+", "+fileName+","+files.length);
+		HttpHeaders responseHeaders = new HttpHeaders();
+	    responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + URLEncoder.encode(files[0].getName().replace(" ", "_"), "UTF-8"));
+		return new FileSystemResource(files[0]);
+	}
+	
 }

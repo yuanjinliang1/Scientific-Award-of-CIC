@@ -161,7 +161,7 @@
                 
                 <li class="dropdown ${attachmentDisplay }">
 			        <a class="dropdown-toggle " data-toggle="dropdown" href="#">附件  <span class="caret"></span></a>
-			        <ul class="dropdown-menu ">
+			        <ul class="dropdown-menu " style="height: auto;max-height: 100px;overflow-x: hidden;">
 					    <li class="${ a1Display }">
 		                    <a href="${fn:escapeXml(firstAttachmentURL)}">附件1</a>
 		                </li>

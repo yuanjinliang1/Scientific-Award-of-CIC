@@ -19,6 +19,16 @@ pre {
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
+pre table, td, th {
+    border: 1px solid black;
+}
+
+pre table {
+    border-collapse: collapse;
+}
+pre td {
+    vertical-align: bottom;
+}
 
 .no-link {
     color:inherit;

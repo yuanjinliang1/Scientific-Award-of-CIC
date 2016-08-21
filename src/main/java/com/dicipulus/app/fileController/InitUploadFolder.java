@@ -49,4 +49,16 @@ public class InitUploadFolder {
 		String uploadURL="redirect:/upload/"+applierUid+"/1";
 		return uploadURL;
 	}
+	public void initAttachedFolder(String applierUid) {
+		logger.info("initAttached");
+
+		String applierPath = rootPath + applierUid + "/attached/";
+		for (int i = 3; i <= 4; i++) {
+			File file=new File(applierPath + i);
+			if(file.exists()==false){
+				logger.info(file.toString()+" "+file.mkdirs());
+			}
+		}
+	}
+	
 }

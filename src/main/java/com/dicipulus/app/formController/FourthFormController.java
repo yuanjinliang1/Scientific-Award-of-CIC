@@ -31,7 +31,7 @@ public class FourthFormController {
 	 * @param modelAndView
 	 * @return
 	 */
-	@RequestMapping(value="/edit-fourth-form",method=RequestMethod.GET)
+	@RequestMapping(value="/edit-fourth-form-plain",method=RequestMethod.GET)
 	public ModelAndView getFourthForm(HttpServletRequest request, ModelAndView modelAndView){
 		logger.info("initFourthForm");
 		try{
@@ -46,6 +46,35 @@ public class FourthFormController {
 			modelAndView.addObject("fourthForm",fourthForm);
 			
 			modelAndView.setViewName("editform/editFourthForm");
+			return modelAndView;
+		}
+		catch(NullPointerException e){
+			logger.info("get exception!");
+			modelAndView.setViewName("redirect:/login");
+			return modelAndView;
+		}
+	}
+	/**
+	 * （富文本）项目组编辑第四个表GET
+	 * @param request
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/edit-fourth-form",method=RequestMethod.GET)
+	public ModelAndView getDemoFourthForm(HttpServletRequest request, ModelAndView modelAndView){
+		logger.info("initFourthForm");
+		try{
+			Person person= FormUlti.getPersonInRequest(request);
+			
+			ApplierJdbc applierJdbc=InitJdbc.initApplierJdbc();
+			Applier applier=applierJdbc.getApplierByUid(person.getUid());
+			modelAndView.addObject("applier",applier);
+			
+			FourthFormJdbc fourthFormJdbc=InitJdbc.initFourthFormJdbc();
+			FourthForm fourthForm=fourthFormJdbc.getFourthForm(person.getUid());
+			modelAndView.addObject("fourthForm",fourthForm);
+			
+			modelAndView.setViewName("editform/editFourthFormMultipart");
 			return modelAndView;
 		}
 		catch(NullPointerException e){
@@ -105,7 +134,7 @@ public class FourthFormController {
 			Person person=(Person)request.getSession().getAttribute("person");
 			FourthFormJdbc fourthFormJdbc=InitJdbc.initFourthFormJdbc();
 			fourthFormJdbc.setFourthForm(fourthForm, person.getUid());
-			return "redirect:/edit-objective-evaluation";
+			return "redirect:/edit-fourth-form";
 		}
 		catch(NullPointerException e){
 			logger.info("session null pointer!");

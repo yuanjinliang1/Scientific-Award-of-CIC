@@ -147,6 +147,7 @@ public class UploadController {
 		logger.info("attach");
 		InitUploadFolder initUploadFolder=new InitUploadFolder();
 		initUploadFolder.initUploadFolder(applierUid);
+		initUploadFolder.initAttachedFolder(applierUid);
 		String pathNow = rootPath + applierUid + "/attached/" + index;
 		String fileName;
 		LinkedList<FileMeta> files = new LinkedList<FileMeta>();

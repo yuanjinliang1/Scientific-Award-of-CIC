@@ -14,6 +14,7 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 	<jsp:include page="../fragments/header.jsp"></jsp:include>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/wangEditor/dist/css/wangEditor.min.css" />">
 	<title>三、项目简介</title>
 </head>
 <body>
@@ -41,9 +42,11 @@ request.setCharacterEncoding("UTF-8");
 						<c:if test="${applier.applicationType=='自然科学类'}">
 							<c:set var="placeholder" value="（应包含项目主要研究内容、科学发现点、科学价值、同行引用及评价等）"></c:set>
 						</c:if>
-						<textarea rows="40" name="briefIntroduction" form="thirdFormer"
+						<!--  <textarea rows="40" name="briefIntroduction" form="thirdFormer"
 						class="form-control" placeholder="${placeholder }" maxlength="1200"
-						 data-error="请检查此项" required>${briefIntroductionForm.briefIntroduction}</textarea>
+						 data-error="请检查此项" required>${briefIntroductionForm.briefIntroduction}</textarea>-->
+						 <textarea id="editor-trigger" style="height:400px;display:none;" name="briefIntroduction"  placeholder="${placeholder }" 
+							form="thirdFormer" data-error="请填写此项" required>${briefIntroductionForm.briefIntroduction}</textarea>
 						 <div class="help-block with-errors" style="font-size:15px"></div>
 					</div>
 					
@@ -60,5 +63,52 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 	</div>
 </div>
+<spring:url value="/attached/{applierUid}/3" var="uploadURL">
+	<spring:param name="applierUid" value="${person.uid}"></spring:param>
+</spring:url>
+<script type="text/javascript" src="<c:url value="/resources/wangEditor/dist/js/lib/jquery-1.10.2.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/wangEditor/dist/js/wangEditor.js" />"></script>
+<script type="text/javascript">
+    // 阻止输出log
+    // wangEditor.config.printLog = false;
+	 
+    var editor = new wangEditor('editor-trigger');
+    editor.config.menus = [
+			'source',
+			'|',
+			'bold',
+			'underline',
+			'italic',
+			'strikethrough',
+			'eraser',
+			'forecolor',
+			'|',
+			'quote',
+			'fontfamily',
+			'fontsize',
+			'head',
+			'unorderlist',
+			'orderlist',
+			'alignleft',
+			'aligncenter',
+			'alignright',
+			'|',
+			'table',
+			'|',
+			'img',
+			'|',
+			'undo',
+			'redo',
+			'fullscreen'
+                        ];
+    // 上传图片
+    editor.config.uploadImgUrl = '${uploadURL}';
+    
+    editor.config.uploadParams = {};
+    editor.config.uploadHeaders = {
+        // 'Accept' : 'text/x-json'
+    }
+    editor.create();
+</script>
 </body>
 </html>

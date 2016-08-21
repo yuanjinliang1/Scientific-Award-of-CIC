@@ -76,6 +76,10 @@ request.setCharacterEncoding("UTF-8");
 								</c:when>
 							</c:choose>
 						</h4>
+						<p>注意：请不要直接粘贴图片和表格，若要上传图片，请在富文本辅助栏中选择上传图片按钮手动上传。若要上传表格，可转换为图片后上传，也可以利用编辑器内置表格工具<br/>
+						不推荐直接从word中粘贴格式化文本，网页格式与word格式会有兼容性问题<br/>
+						若要彻底删除所有内容，请点击左上角按钮（源码）然后清空所显示出的所有html代码
+						</p>
 						</div>
 					</div>
 					<div id="editor-container" class="row panel-body form-group">
@@ -117,11 +121,11 @@ request.setCharacterEncoding("UTF-8");
 					</div>
 				</div>
 				<div class="row" style="margin-left:20px">
-					<input type="submit" class="btn btn-primary" value="保存" />
+					<input type="submit" class="btn btn-primary" value="保存（不跳转）" />
 					<spring:url value="/edit-brief-introduction" var="thirdFormURL"/>
 						<a class="btn btn-default" href="${fn:escapeXml(thirdFormURL)}">上一页</a>
 					<spring:url value="/edit-objective-evaluation" var="fifthFormURL"/>
-						<a class="btn btn-default" href="${fn:escapeXml(fifthFormURL)}">下一页</a>
+						<a class="btn btn-default" href="${fn:escapeXml(fifthFormURL)}">下一页（不保存）</a>
 				</div>
 			</form>
         </div>

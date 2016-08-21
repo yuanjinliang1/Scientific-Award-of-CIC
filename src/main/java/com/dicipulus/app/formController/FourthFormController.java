@@ -134,7 +134,7 @@ public class FourthFormController {
 			Person person=(Person)request.getSession().getAttribute("person");
 			FourthFormJdbc fourthFormJdbc=InitJdbc.initFourthFormJdbc();
 			fourthFormJdbc.setFourthForm(fourthForm, person.getUid());
-			return "redirect:/edit-objective-evaluation";
+			return "redirect:/edit-fourth-form";
 		}
 		catch(NullPointerException e){
 			logger.info("session null pointer!");

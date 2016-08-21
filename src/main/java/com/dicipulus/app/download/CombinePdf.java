@@ -31,8 +31,8 @@ public class CombinePdf {
 		try{
 			FirstProjectBasicSituationPdf.buildFirstProjectBasicSituationPdf(applierUid, document);
 			SecondRefereeUnitOpinionPdf.buildSecondRefereeUnitOpinionPdf(applierUid, document);
-			ThirdProjectBriefIntroductionPdf.buildThirdProjectBriefIntroductionPdf(applierUid, document);
-			ForthPdf.buildForthPdf(applierUid, document);
+			ThirdProjectBriefIntroductionPdf.buildThirdProjectBriefIntroductionPdf(applierUid, document,writer);
+			ForthPdf.buildForthPdf(applierUid, document,writer);
 			FifthObjectEvaluationPdf.buildFifthObjectEvaluationPdf(applierUid, document);
 			SixthPdf.buildSixthPdf(applierUid, document);
 			SeventhPdf.buildSeventhPdf(applierUid, document);

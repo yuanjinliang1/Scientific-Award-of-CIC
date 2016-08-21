@@ -84,7 +84,6 @@ request.setCharacterEncoding("UTF-8");
 			'forecolor',
 			'|',
 			'quote',
-			'fontfamily',
 			'fontsize',
 			'head',
 			'unorderlist',

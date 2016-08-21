@@ -33,6 +33,8 @@ request.setCharacterEncoding("UTF-8");
 						<h4 >
 							项目简介（限1200字）
 						</h4>
+						<p>由于系统增加了富文本功能，纯文本格式在富文本框内显示不佳。<u><i>若要兼容以前纯文本格式的内容</i></u>，
+						或者不需要富文本功能，则请点击富文本框左上角按钮（源码），在纯文本模式下编辑。</p>
 						</div>
 					</div>
 					<div class="row panel-body form-group">

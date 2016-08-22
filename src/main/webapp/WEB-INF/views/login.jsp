@@ -75,8 +75,8 @@
 		</div>
 		<div class="row panel-body">
 		<table class=" table table-bordered" style="font-size:15px">
-			<tr><td>技术支持QQ(推荐)：992073183 / 271627058</td></tr>
-			<tr><td>技术支持微信：daisongtai / chenyouqi1990</td></tr>
+			<tr><td>技术支持QQ(推荐)：992073183</td></tr>
+			<tr><td>技术支持微信：daisongtai </td></tr>
 			<tr><td>学会工作电话：010-68209086</td></tr>
 			<tr><td>或发送邮件至：jlb@china-cic.cn </td></tr>
 		</table>

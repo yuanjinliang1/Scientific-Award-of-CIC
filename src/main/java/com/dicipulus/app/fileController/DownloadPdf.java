@@ -97,7 +97,7 @@ public class DownloadPdf {
 		FileFilter fileFilter = new WildcardFileFilter(fileName+"."+extensions);
 		File[] files = dir.listFiles(fileFilter);
 
-		logger.info(folderPathOfAttached+", "+fileName+","+files.length);
+		//logger.info(folderPathOfAttached+", "+fileName+","+files.length);
 		HttpHeaders responseHeaders = new HttpHeaders();
 	    responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + URLEncoder.encode(files[0].getName().replace(" ", "_"), "UTF-8"));
 		return new FileSystemResource(files[0]);

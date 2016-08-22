@@ -203,7 +203,8 @@ public class UploadController {
 			}
 		}
 		logger.info(files.toString());
-		return "http://localhost:8080/app/attached/"+applierUid+"/"+index+"/"+fileName;
+		String host=MyProperties.getHost();
+		return "http://"+host+"/app/attached/"+applierUid+"/"+index+"/"+fileName;
 	}
 	
 	/**

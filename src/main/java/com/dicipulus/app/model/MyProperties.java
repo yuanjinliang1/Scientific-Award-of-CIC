@@ -13,7 +13,9 @@ import org.springframework.core.io.ClassPathResource;
 
 public final class MyProperties {	
 	private static final Logger logger =LoggerFactory.getLogger(MyProperties.class);
-	private static String rootPath;
+	private static String rootPath=null;
+	private static String host=null;
+	
 	
 	public final static String getRootPath(){
 		Properties  prop = new Properties();
@@ -37,6 +39,28 @@ public final class MyProperties {
 			}
 		}
 		return rootPath;
+	}
+	
+	public final static String getHost(){
+		Properties prop =new Properties();
+		InputStream input=null;
+		try{
+			input=new ClassPathResource("config.properties").getInputStream();
+			prop.load(input);
+			host=prop.getProperty("host");
+			logger.info(host);
+		}catch(IOException ex){
+			ex.printStackTrace();
+		}finally {
+			if (input!=null){
+				try{
+					input.close();
+				}catch(IOException e){
+					e.printStackTrace();
+				}
+			}
+		}
+		return host;
 	}
 	
 }

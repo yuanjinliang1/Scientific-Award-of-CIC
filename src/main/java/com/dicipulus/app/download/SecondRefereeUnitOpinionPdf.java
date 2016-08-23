@@ -9,6 +9,7 @@ import com.dicipulus.app.JDBC.SecondRefereeUnitOpinionJdbc;
 import com.dicipulus.app.applicationModel.SecondRefereeUnitOpinion;
 import com.dicipulus.app.model.MyProperties;
 import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -120,7 +121,10 @@ public class SecondRefereeUnitOpinionPdf {
 		cell.setMinimumHeight(400f);
 		cell.addElement(new Phrase("推荐意见：",fontChinese));
 		cell.addElement(new Paragraph(secondRefereeUnitOpinion.getRecommendOpinion(),fontChinese));///
-		cell.addElement(new Paragraph("\n\n\n\n推荐该项目为中国通信学会技术奖"+secondRefereeUnitOpinion.getReferingScienceTechnologyAwardRank(),fontChinese));///
+		//cell.addElement(new Paragraph("\n\n\n\n推荐该项目为中国通信学会技术奖"+secondRefereeUnitOpinion.getReferingScienceTechnologyAwardRank(),fontChinese));///
+		Paragraph recomLine= new Paragraph("\n\n推荐该项目为中国通信学会技术奖"+secondRefereeUnitOpinion.getReferingScienceTechnologyAwardRank(),fontChinese);
+		recomLine.setAlignment(Element.ALIGN_BOTTOM);
+		cell.addElement(recomLine);
 		table.addCell(cell);
 		document.add(table);
 		table=new PdfPTable(1);
@@ -130,7 +134,8 @@ public class SecondRefereeUnitOpinionPdf {
 		Paragraph p=new Paragraph("           声明：本单位遵守国家有关部门及中国通信学会关于科技奖励的相关规定和对推荐工作的具体要求，承诺遵守评审工作纪律，所提供的推荐材料真实有效，且不存在任何违反《中华人民共和国保守国家秘密法》和《科学技术保密规定》等相关法律法规及侵犯他人知识产权的情形。如有材料虚假或违纪行为，愿意承担相应责任并接受相应处理。如产生争议，保证积极调查处理。",fontChinese);
 		cell.addElement(p);
 		cell.addElement(new Phrase("        法人代表签名：                                "+"推荐单位（盖章）：",fontChinese));
-		cell.addElement(new Phrase("                   年    月    日                                   "+"    年    月    日",fontChinese));
+		cell.addElement(new Phrase("\n\n",fontChinese));
+		cell.addElement(new Phrase("                 年    月    日                        "+"    年    月    日",fontChinese));
 		table.addCell(cell);
 		document.add(table);
 		document.newPage();

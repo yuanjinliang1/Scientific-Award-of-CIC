@@ -116,7 +116,7 @@ public class SecondRefereeUnitOpinionPdf {
 		cell.setMinimumHeight(400f);
 		cell.addElement(new Phrase("推荐意见：",fontChinese));
 		cell.addElement(new Paragraph(secondRefereeUnitOpinion.getRecommendOpinion(),fontChinese));///
-		cell.addElement(new Paragraph("\n\n\n\n推荐该项目为中国通信学会技术奖"+secondRefereeUnitOpinion.getReferingScienceTechnologyAwardRank()+" 等奖",fontChinese));///
+		cell.addElement(new Paragraph("\n\n\n\n推荐该项目为中国通信学会技术奖"+secondRefereeUnitOpinion.getReferingScienceTechnologyAwardRank(),fontChinese));///
 		table.addCell(cell);
 		document.add(table);
 		table=new PdfPTable(1);

@@ -11,6 +11,7 @@ import com.dicipulus.app.JDBC.InitJdbc;
 import com.dicipulus.app.JDBC.NinethMajorOrgContributorJdbc;
 import com.dicipulus.app.applicationModel.NinethMajorOrgContributor;
 import com.dicipulus.app.model.Applier;
+import com.dicipulus.app.model.MyProperties;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -37,7 +38,9 @@ public class NinethMajorOrgContributorPdf {
 				return ninethMajorOrgContributor1.getRankOfOrg()-(ninethMajorOrgContributor2.getRankOfOrg());
 			}
 		});
-		BaseFont baseFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
+		String fontPath=MyProperties.getRootPath()+"/system/fonts/simsun.ttf";
+		BaseFont baseFont = BaseFont.createFont(fontPath,BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);  
+		//BaseFont baseFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
 		Font subTitle =  new  Font(baseFont  ,16, Font.BOLD, BaseColor.BLACK);
 		Font fontChinese =  new  Font(baseFont  ,  12 , Font.NORMAL, BaseColor.BLACK);
 		Paragraph paragraph=new Paragraph("九、主要完成单位情况表",subTitle);

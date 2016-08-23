@@ -46,8 +46,9 @@ public class ForthPdf {
 		
 		FourthFormJdbc fourthFormJdbc=InitJdbc.initFourthFormJdbc();
 		FourthForm fourthForm=fourthFormJdbc.getFourthForm(applierUid);
-
-		BaseFont baseFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
+		String fontPath=MyProperties.getRootPath()+"/system/fonts/simsun.ttf";
+		BaseFont baseFont = BaseFont.createFont(fontPath,BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);  
+		//BaseFont baseFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
 		Font subTitle =  new  Font(baseFont  ,16, Font.BOLD, BaseColor.BLACK);
 		Font fontChinese =  new  Font(baseFont  ,  14 , Font.NORMAL, BaseColor.BLACK);
 	if(applicationType.equals("自然科学类")){

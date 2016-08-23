@@ -270,7 +270,7 @@ public class EighthPdf {
 		cell.addElement(new Paragraph("          完成单位声明：本单位确认该完成人情况表内容真实有效，且不存在任何违反《中华人民共和国保守国家秘密法》和《科学技术保密规定》等相关法律法规及侵犯他人知识产权的情形。如产生争议，愿意积极配合调查处理工作。",fontChinese));
 		cell.addElement(new Paragraph("          工作单位声明：本单位对该完成人报奖无异议。",fontChinese));
 		cell.addElement(new Paragraph("               单位（盖章）",fontChinese));
-		
+		cell.addElement(new Phrase("\n\n",fontChinese));
 		cell.addElement(dateLine);
 		table.addCell(cell);
 		document.add(table);

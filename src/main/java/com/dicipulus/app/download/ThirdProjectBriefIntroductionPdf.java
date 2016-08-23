@@ -80,9 +80,10 @@ public class ThirdProjectBriefIntroductionPdf {
 		CSSResolver cssResolver = new StyleAttrCSSResolver();
 		CssFile cssFile=XMLWorkerHelper.getCSS(new FileInputStream(MyProperties.getRootPath()+"/system/fonts/bootstrap.min.css"));
 		cssResolver.addCss(cssFile);
-        cssFile = XMLWorkerHelper.getCSS(new ByteArrayInputStream(
+		 cssFile = XMLWorkerHelper.getCSS(new ByteArrayInputStream(
         		("body {font-family:SimSun}"+" table, td, th { border: 1px solid black;}"+
-        		" table {border-collapse: collapse;}"+" td {vertical-align: bottom;}")
+        		" table {border-collapse: collapse;}"+" td {vertical-align: bottom;}"+
+        		"p {line-height:100%;padding:3px;margin:0px}")
         		.getBytes()));
         cssResolver.addCss(cssFile);
  

@@ -58,9 +58,10 @@ public class ForthPdf {
 		paragraph=new Paragraph("1.重要科学发现（限5页）",fontChinese);
 		paragraph.setSpacingBefore(5f);
 		document.add(paragraph);
-		paragraph=new Paragraph(fourthForm.getFourthForm1(),fontChinese);////
-		paragraph.setSpacingBefore(5f);
-		document.add(paragraph);
+		addHTML(applierUid, document, writer, fourthForm);
+//		paragraph=new Paragraph(fourthForm.getFourthForm1(),fontChinese);////
+//		paragraph.setSpacingBefore(5f);
+//		document.add(paragraph);
 		document.newPage();
 		paragraph=new Paragraph("2.研究局限性（限1页）",fontChinese);
 		paragraph.setSpacingBefore(5f);
@@ -79,9 +80,10 @@ public class ForthPdf {
 		paragraph=new Paragraph("1.重要科技创新（限5页）",fontChinese);
 		paragraph.setSpacingBefore(5f);
 		document.add(paragraph);
-		paragraph=new Paragraph(fourthForm.getFourthForm1(),fontChinese);////
-		paragraph.setSpacingBefore(5f);
-		document.add(paragraph);
+//		paragraph=new Paragraph(fourthForm.getFourthForm1(),fontChinese);////
+//		paragraph.setSpacingBefore(5f);
+//		document.add(paragraph);
+		addHTML(applierUid, document, writer, fourthForm);
 		document.newPage();
 		paragraph=new Paragraph("2.科技局限性（限1页）",fontChinese);
 		paragraph.setSpacingBefore(5f);
@@ -100,7 +102,52 @@ public class ForthPdf {
 		paragraph=new Paragraph("1.主要技术发明（限5页）",fontChinese);
 		paragraph.setSpacingBefore(5f);
 		document.add(paragraph);
+		addHTML(applierUid, document, writer, fourthForm);
+//		 // CSS
+//		CSSResolver cssResolver = new StyleAttrCSSResolver();
+//		CssFile cssFile=XMLWorkerHelper.getCSS(new FileInputStream(MyProperties.getRootPath()+"/system/fonts/bootstrap.min.css"));
+//		cssResolver.addCss(cssFile);
+//        cssFile = XMLWorkerHelper.getCSS(new ByteArrayInputStream(
+//        		("body {font-family:SimSun}"+" table, td, th { border: 1px solid black;}"+
+//        		" table {border-collapse: collapse;}"+" td {vertical-align: bottom;}")
+//        		.getBytes()));
+//        cssResolver.addCss(cssFile);
+// 
+//        // HTML
+//        XMLWorkerFontProvider fontProvider = new XMLWorkerFontProvider(XMLWorkerFontProvider.DONTLOOKFORFONTS);
+//        String pathOfFont=MyProperties.getRootPath()+"/system/fonts/";
+//        fontProvider.register(pathOfFont+"simsun.ttf");
+//        CssAppliers cssAppliers = new CssAppliersImpl(fontProvider);
+//        HtmlPipelineContext htmlContext = new HtmlPipelineContext(cssAppliers);
+//        htmlContext.setTagFactory(Tags.getHtmlTagProcessorFactory());
+//        // Pipelines
+//        PdfWriterPipeline pdf = new PdfWriterPipeline(document, writer);
+//        HtmlPipeline html = new HtmlPipeline(htmlContext, pdf);
+//        CssResolverPipeline css = new CssResolverPipeline(cssResolver, html);
+//        //XML Worker
+//        XMLWorker worker = new XMLWorker(css, true);
+//        XMLParser p = new XMLParser(worker);
+       
+//        String str="<body>"+fourthForm.getFourthForm1()+"</body>";
+//        String xhtml=ThirdProjectBriefIntroductionPdf.toXHTML(str);
+//        p.parse(new ByteArrayInputStream(xhtml.getBytes(StandardCharsets.UTF_8)), Charset.forName("UTF-8"));
 		
+//		paragraph=new Paragraph(fourthForm.getFourthForm1(),fontChinese);////
+//		paragraph.setSpacingBefore(5f);
+//		document.add(paragraph);
+		document.newPage();
+		paragraph=new Paragraph("2.技术局限性（限1页）",fontChinese);
+		paragraph.setSpacingBefore(5f);
+		document.add(paragraph);
+		paragraph=new Paragraph(fourthForm.getFourthForm2(),fontChinese);////
+		paragraph.setSpacingBefore(5f);
+		document.add(paragraph);
+		document.newPage();
+	
+		
+	}
+	}
+	private static void addHTML(String applierUid,Document document,PdfWriter writer,FourthForm fourthForm) throws IOException{
 		 // CSS
 		CSSResolver cssResolver = new StyleAttrCSSResolver();
 		CssFile cssFile=XMLWorkerHelper.getCSS(new FileInputStream(MyProperties.getRootPath()+"/system/fonts/bootstrap.min.css"));
@@ -129,22 +176,5 @@ public class ForthPdf {
         String str="<body>"+fourthForm.getFourthForm1()+"</body>";
         String xhtml=ThirdProjectBriefIntroductionPdf.toXHTML(str);
         p.parse(new ByteArrayInputStream(xhtml.getBytes(StandardCharsets.UTF_8)), Charset.forName("UTF-8"));
-		
-//		paragraph=new Paragraph(fourthForm.getFourthForm1(),fontChinese);////
-//		paragraph.setSpacingBefore(5f);
-//		document.add(paragraph);
-		document.newPage();
-		paragraph=new Paragraph("2.技术局限性（限1页）",fontChinese);
-		paragraph.setSpacingBefore(5f);
-		document.add(paragraph);
-		paragraph=new Paragraph(fourthForm.getFourthForm2(),fontChinese);////
-		paragraph.setSpacingBefore(5f);
-		document.add(paragraph);
-		document.newPage();
-	
-		
-	}
-
-	
 	}
 }

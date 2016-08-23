@@ -17,11 +17,13 @@ import com.dicipulus.app.applicationModel.EighthMajorContributor;
 import com.dicipulus.app.applicationModel.FirstProjectBasicSituation;
 import com.dicipulus.app.applicationModel.NinethMajorOrgContributor;
 import com.dicipulus.app.model.Applier;
+import com.dicipulus.app.model.MyProperties;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
@@ -55,8 +57,9 @@ public class FirstProjectBasicSituationPdf {
 				return ninethMajorOrgContributor1.getRankOfOrg()-(ninethMajorOrgContributor2.getRankOfOrg());
 			}
 		});
-		
-	    BaseFont baseFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);  
+		String fontPath=MyProperties.getRootPath()+"/system/fonts/simsun.ttf";
+		BaseFont baseFont = BaseFont.createFont(fontPath,BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);  
+//	    BaseFont baseFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED); 
         Font fontChinese =  new  Font(baseFont  ,  12 , Font.NORMAL, BaseColor.BLACK); 
         
         Font title =  new  Font(baseFont  ,18, Font.BOLD, BaseColor.BLACK); 

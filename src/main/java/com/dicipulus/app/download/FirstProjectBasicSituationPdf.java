@@ -67,12 +67,12 @@ public class FirstProjectBasicSituationPdf {
         paragraph1.setAlignment(Element.ALIGN_CENTER);//生成文本在中间
         document.add(paragraph1);
         int year = Calendar.getInstance().get(Calendar.YEAR);
-        paragraph1=new Paragraph("( "+year+"年份)",fontChinese); 
+        paragraph1=new Paragraph("( "+year+"年度)",fontChinese); 
         paragraph1.setAlignment(Element.ALIGN_CENTER);
         paragraph1.setSpacingBefore(10f);
         document.add(paragraph1);
         Font subTitle =  new  Font(baseFont  ,16, Font.BOLD, BaseColor.BLACK);
-        paragraph1=new Paragraph("一、项目进本情况",subTitle); 
+        paragraph1=new Paragraph("一、项目基本情况",subTitle); 
         paragraph1.setAlignment(Element.ALIGN_CENTER);
         paragraph1.setSpacingBefore(15f);
         paragraph1.setSpacingAfter(15f);

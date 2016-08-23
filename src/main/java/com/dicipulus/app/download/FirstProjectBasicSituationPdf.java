@@ -3,6 +3,7 @@ package com.dicipulus.app.download;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -65,7 +66,8 @@ public class FirstProjectBasicSituationPdf {
         else if(applicationType.equals("技术发明类")) paragraph1 = new Paragraph("中国通信学会科学技术奖（技术发明类）推荐书",title);
         paragraph1.setAlignment(Element.ALIGN_CENTER);//生成文本在中间
         document.add(paragraph1);
-        paragraph1=new Paragraph("( 年份)",fontChinese); 
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        paragraph1=new Paragraph("( "+year+"年份)",fontChinese); 
         paragraph1.setAlignment(Element.ALIGN_CENTER);
         paragraph1.setSpacingBefore(10f);
         document.add(paragraph1);

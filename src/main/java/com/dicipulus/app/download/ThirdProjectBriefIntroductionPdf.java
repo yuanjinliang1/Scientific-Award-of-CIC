@@ -64,7 +64,7 @@ public class ThirdProjectBriefIntroductionPdf {
 		BaseFont baseFont = BaseFont.createFont(fontPath,BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);  
 		//BaseFont baseFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
 		Font subTitle =  new  Font(baseFont  ,16, Font.BOLD, BaseColor.BLACK);
-		Font fontChinese =  new  Font(baseFont  ,  14 , Font.NORMAL, BaseColor.BLACK);
+		Font fontChinese =  new  Font(baseFont  ,  12 , Font.NORMAL, BaseColor.BLACK);
 		Paragraph paragraph=new Paragraph("Èý¡¢ÏîÄ¿¼ò½é",subTitle);
 		paragraph.setAlignment(Element.ALIGN_CENTER);
 		paragraph.setSpacingBefore(5f);
@@ -86,7 +86,7 @@ public class ThirdProjectBriefIntroductionPdf {
 		 cssFile = XMLWorkerHelper.getCSS(new ByteArrayInputStream(
         		("body {font-family:SimSun}"+" table, td, th { border: 1px solid black;}"+
         		" table {border-collapse: collapse;}"+" td {vertical-align: bottom;}"+
-        		"p {line-height:100%;padding:3px;margin:0px}")
+        		"p {font-size:12pt}")
         		.getBytes()));
         cssResolver.addCss(cssFile);
  

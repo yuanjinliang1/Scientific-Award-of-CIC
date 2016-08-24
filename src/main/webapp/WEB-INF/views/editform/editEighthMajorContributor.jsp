@@ -128,7 +128,7 @@ request.setCharacterEncoding("UTF-8");
 					</tr>
 					<tr>
 						<td>归国人员</td>
-						<td class="form-group">
+						<td class="form-group ">
 							<select name="isReturnedFormOverseas" id="isReturnedFormOverseas" data-error="请填写此项" required >
 								<c:choose>
 									<c:when test="${eighthForm.isReturnedFormOverseas eq '否'}">
@@ -146,6 +146,14 @@ request.setCharacterEncoding("UTF-8");
 									</c:otherwise>
 								</c:choose>						
 							</select>
+							<div class="help-block with-errors" style="font-size:15px"></div>
+						</td>
+					</tr>
+					<tr class="returnHide">
+						<td>归国时间</td>
+						<td class="form-group ">
+						<input class="form-control" type="text" name="returnDate" value="${eighthForm.returnDate}" 
+						 	 />
 							<div class="help-block with-errors" style="font-size:15px"></div>
 						</td>
 					</tr>
@@ -381,6 +389,26 @@ request.setCharacterEncoding("UTF-8");
 			}
 			if($("#isMemberOfCIC option:selected").text()=="否"){
 				$(".toHide").hide();
+				console.log("no");
+			}
+		});
+		$("#isReturnedFormOverseas").ready(function(){
+			if($("#isReturnedFormOverseas option:selected").text()=="是"){
+				$(".returnHide").show();
+				console.log("yes");
+			}
+			if($("#isReturnedFormOverseas option:selected").text()=="否"){
+				$(".returnHide").hide();
+				console.log("no");
+			}
+		});
+		$("#isReturnedFormOverseas").change(function(){
+			if($("#isReturnedFormOverseas option:selected").text()=="是"){
+				$(".returnHide").show();
+				console.log("yes");
+			}
+			if($("#isReturnedFormOverseas option:selected").text()=="否"){
+				$(".returnHide").hide();
 				console.log("no");
 			}
 		});

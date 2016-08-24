@@ -50,7 +50,7 @@ public class ForthPdf {
 		BaseFont baseFont = BaseFont.createFont(fontPath,BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);  
 		//BaseFont baseFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
 		Font subTitle =  new  Font(baseFont  ,16, Font.BOLD, BaseColor.BLACK);
-		Font fontChinese =  new  Font(baseFont  ,  14 , Font.NORMAL, BaseColor.BLACK);
+		Font fontChinese =  new  Font(baseFont  ,  12 , Font.NORMAL, BaseColor.BLACK);
 	if(applicationType.equals("自然科学类")){
 		Paragraph paragraph=new Paragraph("四、重要科学发现",subTitle);
 		paragraph.setAlignment(Element.ALIGN_CENTER);
@@ -153,9 +153,10 @@ public class ForthPdf {
 		CSSResolver cssResolver = new StyleAttrCSSResolver();
 		CssFile cssFile=XMLWorkerHelper.getCSS(new FileInputStream(MyProperties.getRootPath()+"/system/fonts/bootstrap.min.css"));
 		cssResolver.addCss(cssFile);
-        cssFile = XMLWorkerHelper.getCSS(new ByteArrayInputStream(
+		cssFile = XMLWorkerHelper.getCSS(new ByteArrayInputStream(
         		("body {font-family:SimSun}"+" table, td, th { border: 1px solid black;}"+
-        		" table {border-collapse: collapse;}"+" td {vertical-align: bottom;}")
+        		" table {border-collapse: collapse;}"+" td {vertical-align: bottom;}"+
+        		"p {font-size:12pt}")
         		.getBytes()));
         cssResolver.addCss(cssFile);
  

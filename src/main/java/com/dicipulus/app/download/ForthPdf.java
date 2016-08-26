@@ -151,12 +151,12 @@ public class ForthPdf {
 	private static void addHTML(String applierUid,Document document,PdfWriter writer,FourthForm fourthForm) throws IOException{
 		 // CSS
 		CSSResolver cssResolver = new StyleAttrCSSResolver();
-		CssFile cssFile=XMLWorkerHelper.getCSS(new FileInputStream(MyProperties.getRootPath()+"/system/fonts/bootstrap.min.css"));
-		cssResolver.addCss(cssFile);
-		cssFile = XMLWorkerHelper.getCSS(new ByteArrayInputStream(
+//		CssFile cssFile=XMLWorkerHelper.getCSS(new FileInputStream(MyProperties.getRootPath()+"/system/fonts/bootstrap.min.css"));
+//		cssResolver.addCss(cssFile);
+		CssFile cssFile = XMLWorkerHelper.getCSS(new ByteArrayInputStream(
         		("body {font-family:SimSun}"+" table, td, th { border: 1px solid black;}"+
-        		" table {border-collapse: collapse;}"+" td {vertical-align: bottom;}"+
-        		"p {font-size:12pt}")
+        		" table {border-collapse: collapse;width:}"+" td {vertical-align: bottom;}"+
+        		"p {font-size:12pt;line-height:1.4} span {font-size:12pt;line-height:1.4}")
         		.getBytes()));
         cssResolver.addCss(cssFile);
  
@@ -176,6 +176,7 @@ public class ForthPdf {
         XMLParser p = new XMLParser(worker);
        
         String str="<body>"+fourthForm.getFourthForm1()+"</body>";
+        str=ThirdProjectBriefIntroductionPdf.excludeLineHeight(str);
         String xhtml=ThirdProjectBriefIntroductionPdf.toXHTML(str);
         p.parse(new ByteArrayInputStream(xhtml.getBytes(StandardCharsets.UTF_8)), Charset.forName("UTF-8"));
 	}

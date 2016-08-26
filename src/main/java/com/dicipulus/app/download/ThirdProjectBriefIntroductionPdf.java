@@ -54,8 +54,6 @@ public class ThirdProjectBriefIntroductionPdf {
 	private static final Logger logger = LoggerFactory.getLogger(ThirdProjectBriefIntroductionPdf.class);
 	@SuppressWarnings("deprecation")
 	public static void buildThirdProjectBriefIntroductionPdf(String applierUid,Document document,PdfWriter writer) throws DocumentException, IOException{
-//		Document document=new Document(PageSize.A4,50,50,50,50);
-//		PdfWriter.getInstance(document, new FileOutputStream("/Users/cyq/Desktop/PDFtest.pdf"));
 //		document.open();
 		ThirdProjectBriefIntroductionJdbc thirdProjectBriefIntroductionJdbc=InitJdbc.initThirdProjectBriefIntroductionJdbc();
 		ThirdProjectBriefIntroduction thirdProjectBriefIntroduction=thirdProjectBriefIntroductionJdbc.getThirdProjectBriefIntroduction(applierUid);
@@ -81,12 +79,12 @@ public class ThirdProjectBriefIntroductionPdf {
 		
 		 // CSS
 		CSSResolver cssResolver = new StyleAttrCSSResolver();
-		CssFile cssFile=XMLWorkerHelper.getCSS(new FileInputStream(MyProperties.getRootPath()+"/system/fonts/bootstrap.min.css"));
-		cssResolver.addCss(cssFile);
-		 cssFile = XMLWorkerHelper.getCSS(new ByteArrayInputStream(
+//		CssFile cssFile=XMLWorkerHelper.getCSS(new FileInputStream(MyProperties.getRootPath()+"/system/fonts/bootstrap.min.css"));
+//		cssResolver.addCss(cssFile);
+		CssFile cssFile = XMLWorkerHelper.getCSS(new ByteArrayInputStream(
         		("body {font-family:SimSun}"+" table, td, th { border: 1px solid black;}"+
         		" table {border-collapse: collapse;}"+" td {vertical-align: bottom;}"+
-        		"p {font-size:12pt}")
+        		"p {font-size:12pt;line-height:1.4} span {font-size:12pt;line-height:1.4}")
         		.getBytes()));
         cssResolver.addCss(cssFile);
  
@@ -106,6 +104,7 @@ public class ThirdProjectBriefIntroductionPdf {
         XMLParser p = new XMLParser(worker);
        
         String str="<body>"+thirdProjectBriefIntroduction.getBriefIntroduction()+"</body>";
+        str=excludeLineHeight(str);
         String xhtml=toXHTML(str);
         p.parse(new ByteArrayInputStream(xhtml.getBytes(StandardCharsets.UTF_8)), Charset.forName("UTF-8"));
         //XMLWorkerHelper.getInstance().parseXHtml(writer, document,new ByteArrayInputStream(xhtml.getBytes(StandardCharsets.UTF_8)), Charset.forName("UTF-8"));
@@ -119,6 +118,10 @@ public class ThirdProjectBriefIntroductionPdf {
 	    document.outputSettings().syntax( org.jsoup.nodes.Document.OutputSettings.Syntax.xml );
 
 	    return document.html();
+	}
+	
+	protected static String excludeLineHeight(String inStr){
+		return inStr.replaceAll("(style=\"line-height.*?\")", "");
 	}
 	
 	protected static class Base64ImageProvider extends AbstractImageProvider {

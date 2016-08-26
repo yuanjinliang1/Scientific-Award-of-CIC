@@ -153,15 +153,8 @@ request.setCharacterEncoding("UTF-8");
 			'bold',
 			'underline',
 			'italic',
-			'strikethrough',
 			'eraser',
-			'forecolor',
 			'|',
-			'quote',
-			'fontsize',
-			'head',
-			'unorderlist',
-			'orderlist',
 			'alignleft',
 			'aligncenter',
 			'alignright',
@@ -169,10 +162,6 @@ request.setCharacterEncoding("UTF-8");
 			'table',
 			'|',
 			'img',
-			'|',
-			'undo',
-			'redo',
-			'fullscreen'
                         ];
     // 上传图片
     editor.config.uploadImgUrl = '${uploadURL1}';
@@ -181,6 +170,7 @@ request.setCharacterEncoding("UTF-8");
     editor.config.uploadHeaders = {
         // 'Accept' : 'text/x-json'
     }
+    editor.config.pasteText = true
     editor.create();
 </script>
 </body>

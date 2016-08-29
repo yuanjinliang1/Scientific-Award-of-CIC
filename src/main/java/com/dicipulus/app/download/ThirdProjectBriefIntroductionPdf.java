@@ -84,7 +84,7 @@ public class ThirdProjectBriefIntroductionPdf {
 		CssFile cssFile = XMLWorkerHelper.getCSS(new ByteArrayInputStream(
         		("body {font-family:SimSun}"+" table, td, th { border: 1px solid black;}"+
         		" table {border-collapse: collapse;}"+" td {vertical-align: bottom;}"+
-        		"p {font-size:12pt;line-height:1.4} span {font-size:12pt;line-height:1.4}")
+        		"p,span,b,l,u {font-size:12pt;line-height:1.4}")
         		.getBytes()));
         cssResolver.addCss(cssFile);
  
@@ -121,7 +121,9 @@ public class ThirdProjectBriefIntroductionPdf {
 	}
 	
 	protected static String excludeLineHeight(String inStr){
-		return inStr.replaceAll("(style=\"line-height.*?\")", "");
+		inStr=inStr.replaceAll("(line-height:.*?;)", "");
+		
+		return inStr.replaceAll("(font-size:.*?;)", "");
 	}
 	
 	protected static class Base64ImageProvider extends AbstractImageProvider {

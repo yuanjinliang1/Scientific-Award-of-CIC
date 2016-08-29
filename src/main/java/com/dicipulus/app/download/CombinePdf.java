@@ -40,6 +40,8 @@ public class CombinePdf {
 			NinethMajorOrgContributorPdf.buildNinethMajorOrgContributorPdf(applierUid, document);
 		}catch(StringIndexOutOfBoundsException e){
 			e.printStackTrace();
+		}catch(IOException e){
+			e.printStackTrace();
 		}
 		finally {
 			document.close();

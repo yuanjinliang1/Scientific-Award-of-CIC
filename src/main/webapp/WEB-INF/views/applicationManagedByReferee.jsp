@@ -48,13 +48,13 @@ request.setCharacterEncoding("UTF-8");
 					<spring:url value="/submit-application-by-referee/{applierUid}" var="acceptURL">
 						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 					</spring:url>
-					<input id="submitApplication" type="button" class="btn btn-success submitApplication" value="推荐">
+					<input id="submitApplication" type="button" data-url="${acceptURL}" class="btn btn-success submitApplication" value="推荐">
 				</c:if>
 				<c:if test="${application.projectStatus=='已推荐' }">
 					<spring:url value="/withdraw-application-by-referee/{applierUid}" var="withdrawURL">
 						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 					</spring:url>
-					<input id="recallApplication" type="button" class="btn btn-danger recallApplication" value="撤回推荐">
+					<input id="recallApplication" type="button" data-url="${withdrawURL}" class="btn btn-danger recallApplication" value="撤回推荐">
 				</c:if>
 			</td>
 			<td>${application.projectName }</td>
@@ -97,7 +97,7 @@ jQuery(document).ready(function($){
 			return false;
 		}
 		else {
-			window.location.href = "${fn:escapeXml(withdrawURL)}";
+			window.location.href = $(this).data("url");
 		}
 	});
 	$(".submitApplication").click(function(){
@@ -105,7 +105,7 @@ jQuery(document).ready(function($){
 			return false;
 		}
 		else {
-			window.location.href = "${fn:escapeXml(acceptURL)}";
+			window.location.href = $(this).data("url");
 		}
 	});
 })

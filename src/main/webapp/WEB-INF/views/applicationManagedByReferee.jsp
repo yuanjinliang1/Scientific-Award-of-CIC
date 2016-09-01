@@ -48,13 +48,13 @@ request.setCharacterEncoding("UTF-8");
 					<spring:url value="/submit-application-by-referee/{applierUid}" var="acceptURL">
 						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 					</spring:url>
-					<input id="submitApplication" type="button" class="btn btn-success" value="推荐">
+					<input id="submitApplication" type="button" class="btn btn-success submitApplication" value="推荐">
 				</c:if>
 				<c:if test="${application.projectStatus=='已推荐' }">
 					<spring:url value="/withdraw-application-by-referee/{applierUid}" var="withdrawURL">
 						<spring:param name="applierUid" value="${application.applierUid }"></spring:param>
 					</spring:url>
-					<input id="recallApplication" type="button" class="btn btn-danger" value="撤回推荐">
+					<input id="recallApplication" type="button" class="btn btn-danger recallApplication" value="撤回推荐">
 				</c:if>
 			</td>
 			<td>${application.projectName }</td>
@@ -92,7 +92,7 @@ jQuery(document).ready(function($){
 			})
 		}
 	});
-	$("#recallApplication").click(function(){
+	$(".recallApplication").click(function(){
 		if(!confirm("您确定要撤回推荐吗？")){
 			return false;
 		}
@@ -100,7 +100,7 @@ jQuery(document).ready(function($){
 			window.location.href = "${fn:escapeXml(withdrawURL)}";
 		}
 	});
-	$("#submitApplication").click(function(){
+	$(".submitApplication").click(function(){
 		if(!confirm("您确定要提交推荐吗？")){
 			return false;
 		}

@@ -130,11 +130,22 @@ public class CombineExcel {
 			}
 			label=new Label(5,row,MajorOrgContributor);
 			sheet.addCell(label);
-			label=new Label(6,row,ninethMajorOrgContributor.get(0).getNameOfOrg());
+			//
+			if(ninethMajorOrgContributor.size()==0){
+				label=new Label(6,row,"");
+			}else{
+				label=new Label(6,row,ninethMajorOrgContributor.get(0).getNameOfOrg());
+			}
 			sheet.addCell(label);
-			label=new Label(7,row,temp.getApplicationType());
+			//
+			if(temp.getApplicationType()==null){
+				label=new Label(7,row,"");
+			}else{
+				label=new Label(7,row,temp.getApplicationType());
+			}
 			System.out.println(temp.getApplicationType());
 			sheet.addCell(label);
+			//
 			label=new Label(8,row,temp.getRefereeString());
 			System.out.println(temp.getRefereeString());
 			sheet.addCell(label);

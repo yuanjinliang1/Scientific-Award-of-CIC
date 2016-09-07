@@ -47,7 +47,7 @@ public class DownloadZip {
 	@ResponseBody
 	public FileSystemResource downloadZip(HttpServletRequest request, @PathVariable("applierUid") String applierUid) throws ZipException{
 		logger.info("downloadZip");
-		String source =MyProperties.getRootPath()+applierUid+"/uploaded/";
+		String source =MyProperties.getRootPath()+applierUid+"/";
 		String destination= MyProperties.getRootPath()+applierUid+"/zip/";
 		File destinationFile= new File(destination+applierUid+".zip");
 		File destinationFolder = new File(destination);

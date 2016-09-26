@@ -16,7 +16,7 @@ public class Excel {
 	String addressOfOrg;//表major_contributor中的
 	String refereeContactName;
 	String refereeContactPhone;
-	String postAddress;//secondrefereeunitopinion表中的地址 
+	String postAddress;//secondrefereeunitopinion表中的地址
 	String resultRegistration;
 	String referingScienceTechnologyAwardRank;
 	String projectStatus;

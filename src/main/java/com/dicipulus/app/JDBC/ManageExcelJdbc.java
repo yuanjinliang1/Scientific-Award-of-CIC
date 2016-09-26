@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -21,6 +22,7 @@ public class ManageExcelJdbc {
 		this.jdbcTemplate= new JdbcTemplate(dataSource);
 	}
 	public List<Excel> getExcelByYear(int year){
+		//select c.*,dicipulus.major_org_contributor.addressOfOrg 这句有bug，它找出来的address不是我们想要的，偷懒在后面做workaround
 		String sql="select c.*,dicipulus.major_org_contributor.addressOfOrg from "
 				+ "(select b.*,dicipulus.secondrefereeunitopinion.postAddress, dicipulus.secondrefereeunitopinion.referingScienceTechnologyAwardRank from "
 				+ "(select a.*,dicipulus.applier.applicationType from "
@@ -38,7 +40,18 @@ public class ManageExcelJdbc {
 				+" where dicipulus.major_org_contributor.rankOfOrg='1' group by c.applierUid";
 		List<Excel> excel=jdbcTemplate.query(sql,new Object[]{year} ,BeanPropertyRowMapper.newInstance(Excel.class));
 		for(Excel ex:excel){
-			System.out.print(ex.getAddressOfOrg()+"#$%#$%");
+			logger.info(ex.getApplierUid()+"will be tested");
+			String sql2="select dicipulus.major_org_contributor.addressOfOrg from dicipulus.major_org_contributor where (rankOfOrg=1 and applierUid=?)";
+			String addressOfOrg=null;
+			try {
+				addressOfOrg=jdbcTemplate.queryForObject(sql2,new Object[]{ex.getApplierUid()},String.class);
+			}catch (EmptyResultDataAccessException e){
+				logger.info(ex.getApplierUid()+" has no first_org_contributor");
+			}
+			finally {
+				ex.setAddressOfOrg(addressOfOrg);
+			}
+
 		}
 		return excel;
 	}

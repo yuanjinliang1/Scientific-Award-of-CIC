@@ -36,7 +36,6 @@ public class CombineExcel {
 			folder.mkdirs();
 		}
 		
-		
 		ManageExcelJdbc manageExcelJdbc=InitJdbc.initManageExcelJdbc();
 		List<Excel> manageExcelAll=manageExcelJdbc.getExcelByYear(year);
 		List<Excel> manageExcel=new ArrayList<Excel>();
@@ -46,8 +45,6 @@ public class CombineExcel {
 				manageExcel.add(ex);
 			}
 		}
-		
-		
 		
 		//±íÍ·
 		WritableWorkbook book=Workbook.createWorkbook(new File(pathOfExcel));
@@ -130,24 +127,15 @@ public class CombineExcel {
 			}
 			label=new Label(5,row,MajorOrgContributor);
 			sheet.addCell(label);
-			//
 			if(ninethMajorOrgContributor.size()==0){
 				label=new Label(6,row,"");
 			}else{
 				label=new Label(6,row,ninethMajorOrgContributor.get(0).getNameOfOrg());
 			}
 			sheet.addCell(label);
-			//
-			if(temp.getApplicationType()==null){
-				label=new Label(7,row,"");
-			}else{
-				label=new Label(7,row,temp.getApplicationType());
-			}
-			System.out.println(temp.getApplicationType());
+			label=new Label(7,row,temp.getApplicationType());
 			sheet.addCell(label);
-			//
 			label=new Label(8,row,temp.getRefereeString());
-			System.out.println(temp.getRefereeString());
 			sheet.addCell(label);
 			EighthMajorContributorJdbc eighthMajorContributorJdbc=InitJdbc.initEighthMajorContributorJdbc();
 			List<EighthMajorContributor> eighthMajorContributor=eighthMajorContributorJdbc.getEighthMajorContributors(temp.getApplierUid());

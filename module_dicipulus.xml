@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_dicipulus" default="compile.module.dicipulus">
+  <dirname property="module.dicipulus.basedir" file="${ant.file.module_dicipulus}"/>
+  
+  <property name="module.jdk.home.dicipulus" value="${jdk.home.1.8}"/>
+  <property name="module.jdk.bin.dicipulus" value="${jdk.bin.1.8}"/>
+  <property name="module.jdk.classpath.dicipulus" value="jdk.classpath.1.8"/>
+  
+  <property name="compiler.args.dicipulus" value="-encoding GBK -source 1.6 -target 1.6 ${compiler.args}"/>
+  
+  <property name="dicipulus.output.dir" value="${module.dicipulus.basedir}/target/classes"/>
+  <property name="dicipulus.testoutput.dir" value="${module.dicipulus.basedir}/target/test-classes"/>
+  
+  <path id="dicipulus.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="dicipulus.module.production.classpath">
+    <path refid="${module.jdk.classpath.dicipulus}"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc-portlet:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.aspectj:aspectjrt:1.8.1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.12.classpath"/>
+    <path refid="library.maven:_javax.inject:javax.inject:1.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat:tomcat-servlet-api:7.0.30.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:jsp-api:2.1.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp.jstl:jstl-api:1.2.classpath"/>
+    <path refid="library.maven:_org.glassfish.web:jstl-impl:1.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.5.3.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.5.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.5.3.classpath"/>
+    <path refid="library.maven:_com.rometools:rome:1.5.0.classpath"/>
+    <path refid="library.maven:_com.rometools:rome-utils:1.5.0.classpath"/>
+    <path refid="library.maven:_org.jdom:jdom:2.0.2.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:1.0.0.ga.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-validator:4.1.0.final.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:2.3.classpath"/>
+    <path refid="library.maven:_commons-fileupload:commons-fileupload:1.2.2.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.0.1.classpath"/>
+    <path refid="library.maven:_org.springframework.security:spring-security-web:4.0.1.release.classpath"/>
+    <path refid="library.maven:_aopalliance:aopalliance:1.0.classpath"/>
+    <path refid="library.maven:_org.springframework.security:spring-security-core:4.0.1.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jdbc:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-tx:4.2.6.release.classpath"/>
+    <path refid="library.maven:_com.itextpdf:itextpdf:5.4.3.classpath"/>
+    <path refid="library.maven:_com.itextpdf.tool:xmlworker:5.4.3.classpath"/>
+    <path refid="library.maven:_com.itextpdf:itext-asian:5.2.0.classpath"/>
+    <path refid="library.maven:_net.lingala.zip4j:zip4j:1.3.2.classpath"/>
+    <path refid="library.maven:_org.jsoup:jsoup:1.9.2.classpath"/>
+    <path refid="library.maven:_net.sourceforge.jexcelapi:jxl:2.6.12.classpath"/>
+  </path>
+  
+  <path id="dicipulus.runtime.production.module.classpath">
+    <pathelement location="${dicipulus.output.dir}"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc-portlet:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.aspectj:aspectjrt:1.8.1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.12.classpath"/>
+    <path refid="library.maven:_org.slf4j:jcl-over-slf4j:1.7.12.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-log4j12:1.7.12.classpath"/>
+    <path refid="library.maven:_log4j:log4j:1.2.16.classpath"/>
+    <path refid="library.maven:_javax.inject:javax.inject:1.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp.jstl:jstl-api:1.2.classpath"/>
+    <path refid="library.maven:_org.glassfish.web:jstl-impl:1.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.5.3.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.5.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.5.3.classpath"/>
+    <path refid="library.maven:_com.rometools:rome:1.5.0.classpath"/>
+    <path refid="library.maven:_com.rometools:rome-utils:1.5.0.classpath"/>
+    <path refid="library.maven:_org.jdom:jdom:2.0.2.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:1.0.0.ga.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-validator:4.1.0.final.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:2.3.classpath"/>
+    <path refid="library.maven:_commons-fileupload:commons-fileupload:1.2.2.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.0.1.classpath"/>
+    <path refid="library.maven:_org.springframework.security:spring-security-web:4.0.1.release.classpath"/>
+    <path refid="library.maven:_aopalliance:aopalliance:1.0.classpath"/>
+    <path refid="library.maven:_org.springframework.security:spring-security-core:4.0.1.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jdbc:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-tx:4.2.6.release.classpath"/>
+    <path refid="library.maven:_com.itextpdf:itextpdf:5.4.3.classpath"/>
+    <path refid="library.maven:_com.itextpdf.tool:xmlworker:5.4.3.classpath"/>
+    <path refid="library.maven:_com.itextpdf:itext-asian:5.2.0.classpath"/>
+    <path refid="library.maven:_net.lingala.zip4j:zip4j:1.3.2.classpath"/>
+    <path refid="library.maven:_org.jsoup:jsoup:1.9.2.classpath"/>
+    <path refid="library.maven:_net.sourceforge.jexcelapi:jxl:2.6.12.classpath"/>
+  </path>
+  
+  <path id="dicipulus.module.classpath">
+    <pathelement location="${dicipulus.output.dir}"/>
+    <path refid="${module.jdk.classpath.dicipulus}"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc-portlet:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.aspectj:aspectjrt:1.8.1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.12.classpath"/>
+    <path refid="library.maven:_org.slf4j:jcl-over-slf4j:1.7.12.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-log4j12:1.7.12.classpath"/>
+    <path refid="library.maven:_log4j:log4j:1.2.16.classpath"/>
+    <path refid="library.maven:_javax.inject:javax.inject:1.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat:tomcat-servlet-api:7.0.30.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:jsp-api:2.1.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp.jstl:jstl-api:1.2.classpath"/>
+    <path refid="library.maven:_org.glassfish.web:jstl-impl:1.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.5.3.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.5.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.5.3.classpath"/>
+    <path refid="library.maven:_com.rometools:rome:1.5.0.classpath"/>
+    <path refid="library.maven:_com.rometools:rome-utils:1.5.0.classpath"/>
+    <path refid="library.maven:_org.jdom:jdom:2.0.2.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:1.0.0.ga.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-validator:4.1.0.final.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:2.3.classpath"/>
+    <path refid="library.maven:_commons-fileupload:commons-fileupload:1.2.2.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.0.1.classpath"/>
+    <path refid="library.maven:_org.springframework.security:spring-security-web:4.0.1.release.classpath"/>
+    <path refid="library.maven:_aopalliance:aopalliance:1.0.classpath"/>
+    <path refid="library.maven:_org.springframework.security:spring-security-core:4.0.1.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jdbc:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-tx:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-test:4.2.6.release.classpath"/>
+    <path refid="library.maven:_junit:junit:4.11.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_xmlunit:xmlunit:1.2.classpath"/>
+    <path refid="library.maven:_com.jayway.jsonpath:json-path:0.8.1.classpath"/>
+    <path refid="library.maven:_net.minidev:json-smart:1.1.1.classpath"/>
+    <path refid="library.maven:_commons-lang:commons-lang:2.6.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-library:1.3.classpath"/>
+    <path refid="library.maven:_com.itextpdf:itextpdf:5.4.3.classpath"/>
+    <path refid="library.maven:_com.itextpdf.tool:xmlworker:5.4.3.classpath"/>
+    <path refid="library.maven:_com.itextpdf:itext-asian:5.2.0.classpath"/>
+    <path refid="library.maven:_net.lingala.zip4j:zip4j:1.3.2.classpath"/>
+    <path refid="library.maven:_org.jsoup:jsoup:1.9.2.classpath"/>
+    <path refid="library.maven:_net.sourceforge.jexcelapi:jxl:2.6.12.classpath"/>
+  </path>
+  
+  <path id="dicipulus.runtime.module.classpath">
+    <pathelement location="${dicipulus.testoutput.dir}"/>
+    <pathelement location="${dicipulus.output.dir}"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-web:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-webmvc-portlet:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.aspectj:aspectjrt:1.8.1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.12.classpath"/>
+    <path refid="library.maven:_org.slf4j:jcl-over-slf4j:1.7.12.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-log4j12:1.7.12.classpath"/>
+    <path refid="library.maven:_log4j:log4j:1.2.16.classpath"/>
+    <path refid="library.maven:_javax.inject:javax.inject:1.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat:tomcat-servlet-api:7.0.30.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:jsp-api:2.1.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp.jstl:jstl-api:1.2.classpath"/>
+    <path refid="library.maven:_org.glassfish.web:jstl-impl:1.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.5.3.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.5.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.5.3.classpath"/>
+    <path refid="library.maven:_com.rometools:rome:1.5.0.classpath"/>
+    <path refid="library.maven:_com.rometools:rome-utils:1.5.0.classpath"/>
+    <path refid="library.maven:_org.jdom:jdom:2.0.2.classpath"/>
+    <path refid="library.maven:_javax.validation:validation-api:1.0.0.ga.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-validator:4.1.0.final.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:2.3.classpath"/>
+    <path refid="library.maven:_commons-fileupload:commons-fileupload:1.2.2.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.0.1.classpath"/>
+    <path refid="library.maven:_org.springframework.security:spring-security-web:4.0.1.release.classpath"/>
+    <path refid="library.maven:_aopalliance:aopalliance:1.0.classpath"/>
+    <path refid="library.maven:_org.springframework.security:spring-security-core:4.0.1.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jdbc:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-tx:4.2.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-test:4.2.6.release.classpath"/>
+    <path refid="library.maven:_junit:junit:4.11.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_xmlunit:xmlunit:1.2.classpath"/>
+    <path refid="library.maven:_com.jayway.jsonpath:json-path:0.8.1.classpath"/>
+    <path refid="library.maven:_net.minidev:json-smart:1.1.1.classpath"/>
+    <path refid="library.maven:_commons-lang:commons-lang:2.6.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-library:1.3.classpath"/>
+    <path refid="library.maven:_com.itextpdf:itextpdf:5.4.3.classpath"/>
+    <path refid="library.maven:_com.itextpdf.tool:xmlworker:5.4.3.classpath"/>
+    <path refid="library.maven:_com.itextpdf:itext-asian:5.2.0.classpath"/>
+    <path refid="library.maven:_net.lingala.zip4j:zip4j:1.3.2.classpath"/>
+    <path refid="library.maven:_org.jsoup:jsoup:1.9.2.classpath"/>
+    <path refid="library.maven:_net.sourceforge.jexcelapi:jxl:2.6.12.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.dicipulus">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.dicipulus">
+    <patternset refid="excluded.from.module.dicipulus"/>
+  </patternset>
+  
+  <path id="dicipulus.module.sourcepath">
+    <dirset dir="${module.dicipulus.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="dicipulus.module.test.sourcepath">
+    <dirset dir="${module.dicipulus.basedir}">
+      <include name="src/test/java"/>
+      <include name="src/test/resources"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.dicipulus" depends="compile.module.dicipulus.production,compile.module.dicipulus.tests" description="Compile module Dicipulus"/>
+  
+  <target name="compile.module.dicipulus.production" depends="register.custom.compilers" description="Compile module Dicipulus; production classes">
+    <mkdir dir="${dicipulus.output.dir}"/>
+    <javac2 destdir="${dicipulus.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.dicipulus}/javac">
+      <compilerarg line="${compiler.args.dicipulus}"/>
+      <bootclasspath refid="dicipulus.module.bootclasspath"/>
+      <classpath refid="dicipulus.module.production.classpath"/>
+      <src refid="dicipulus.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.dicipulus"/>
+    </javac2>
+    
+    <copy todir="${dicipulus.output.dir}">
+      <fileset dir="${module.dicipulus.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.dicipulus.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.dicipulus.tests" depends="register.custom.compilers,compile.module.dicipulus.production" description="compile module Dicipulus; test classes" unless="skip.tests">
+    <mkdir dir="${dicipulus.testoutput.dir}"/>
+    <javac2 destdir="${dicipulus.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.dicipulus}/javac">
+      <compilerarg line="${compiler.args.dicipulus}"/>
+      <bootclasspath refid="dicipulus.module.bootclasspath"/>
+      <classpath refid="dicipulus.module.classpath"/>
+      <src refid="dicipulus.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.dicipulus"/>
+    </javac2>
+    
+    <copy todir="${dicipulus.testoutput.dir}">
+      <fileset dir="${module.dicipulus.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.dicipulus.basedir}/src/test/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.dicipulus" description="cleanup module">
+    <delete dir="${dicipulus.output.dir}"/>
+    <delete dir="${dicipulus.testoutput.dir}"/>
+  </target>
+</project>

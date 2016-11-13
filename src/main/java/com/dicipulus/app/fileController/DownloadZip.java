@@ -1,6 +1,7 @@
 package com.dicipulus.app.fileController;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.dicipulus.app.download.CombinePdf;
 import com.dicipulus.app.model.MyProperties;
+import com.itextpdf.text.DocumentException;
 
 @Controller
 @SessionAttributes("person")
@@ -45,7 +48,7 @@ public class DownloadZip {
 	
 	@RequestMapping(value="/download-zip/{applierUid}",produces="application/zip",method=RequestMethod.GET)
 	@ResponseBody
-	public FileSystemResource downloadZip(HttpServletRequest request, @PathVariable("applierUid") String applierUid) throws ZipException{
+	public FileSystemResource downloadZip(HttpServletRequest request, @PathVariable("applierUid") String applierUid) throws ZipException, StringIndexOutOfBoundsException, DocumentException, IOException{
 		logger.info("downloadZip");
 		String source =MyProperties.getRootPath()+applierUid+"/";
 		String destination= MyProperties.getRootPath()+applierUid+"/zip/";
@@ -58,6 +61,7 @@ public class DownloadZip {
 			//return new FileSystemResource(destinationFile);
 			org.springframework.util.FileSystemUtils.deleteRecursively(destinationFile.getAbsoluteFile());
 		}
+		CombinePdf.buildPdf(applierUid);
 		return new FileSystemResource(compressZip(source,destination,applierUid));
 	}
 
